@@ -31,12 +31,12 @@
     <body id="app-layout">
         @include('includes.partials.logged-in-as')
         @include('frontend.includes.nav')
-
-        <div class="container">
-            @include('includes.partials.messages')
-            @yield('content')
-        </div><!-- container -->
-
+        <div class="jumbotron">
+            <div class="container">
+                @include('includes.partials.messages')
+                @yield('content')
+            </div><!-- container -->
+        </div>
         <!-- Scripts -->
         {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js') }}
         <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery/jquery-2.1.4.min.js')}}"><\/script>')</script>
