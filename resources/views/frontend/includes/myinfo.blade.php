@@ -9,11 +9,11 @@
             <td>{{ $user->title }}</td>
         </tr>
         <tr>
-            <th>{{ trans('labels.frontend.user.profile.name') }}</th>
+            <th>First Name</th>
             <td>{{ $user->name }}</td>
         </tr>
         <tr>
-            <th>{{ trans('labels.frontend.user.profile.name') }}</th>
+            <th>Last Name</th>
             <td>{{ $user->lastname }}</td>
         </tr>
         <tr>
