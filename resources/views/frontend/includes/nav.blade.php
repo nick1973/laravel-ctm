@@ -54,7 +54,7 @@
                     </li>
                 @endif
             </ul>
-            @if(access()->guest)
+            @if(access()->guest())
                 <div id="navbar" class="navbar-collapse collapse">
                         {{ Form::open(['route' => 'auth.login', 'class' => 'navbar-form navbar-right']) }}
                         <div class="form-group">
