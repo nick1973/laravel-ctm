@@ -34,13 +34,13 @@
 
         <!-- Fonts -->
         {{ Html::style('https://fonts.googleapis.com/css?family=Lato:100,300,400,700') }}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css.map">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+
         <script>
             $( document ).ready(function() {
                 $('.datepicker').datepicker();
             });
-
         </script>
 
     </head>
