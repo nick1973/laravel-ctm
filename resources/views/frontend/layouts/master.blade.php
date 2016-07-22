@@ -33,10 +33,16 @@
         @include('frontend.includes.nav')
         <div class="jumbotron">
             <div class="container">
+                <h1>Hello, world!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+            </div>
+        </div>
+            <div class="container">
                 @include('includes.partials.messages')
                 @yield('content')
             </div><!-- container -->
-        </div>
+
         <!-- Scripts -->
         {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js') }}
         <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery/jquery-2.1.4.min.js')}}"><\/script>')</script>
