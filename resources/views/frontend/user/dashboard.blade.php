@@ -20,7 +20,7 @@
                                 <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address</a>
                             </li>
                             <li role="presentation">
-                                <a href="#reference" aria-controls="address" role="tab" data-toggle="tab">Reference Details</a>
+                                <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details</a>
                             </li>
                         </ul>
 
@@ -95,6 +95,11 @@
                                     </tr>
                                 </table>
                             </div><!--tab panel address-->
+
+                            <div role="tabpanel" class="tab-pane" id="reference">
+
+
+                            </div><!--tab panel reference-->
 
                         </div><!--tab content-->
 
