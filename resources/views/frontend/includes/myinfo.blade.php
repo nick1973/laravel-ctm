@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane active" id="profile">
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
-            <th>{{ trans('labels.frontend.user.profile.avatar') }}</th>
+            <th>Photo</th>
             <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
         </tr>
         <tr>
@@ -15,6 +15,10 @@
         <tr>
             <th>Last Name</th>
             <td>{{ $user->lastname }}</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>{{ $user->dob }}</td>
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.email') }}</th>

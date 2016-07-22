@@ -236,8 +236,10 @@ class EloquentUserRepository implements UserRepositoryContract
     public function updateProfile($id, $input)
     {
         $user = $this->find($id);
+        $user->title = $input['title'];
         $user->name = $input['name'];
         $user->lastname = $input['lastname'];
+        $user->dob = $input['dob'];
 
         if ($user->canChangeEmail()) {
             //Address is not current address
