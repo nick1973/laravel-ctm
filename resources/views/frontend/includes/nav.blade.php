@@ -55,7 +55,6 @@
                 @endif
             </ul>
             <div id="navbar" class="navbar-collapse collapse">
-                {{--<form class="navbar-form navbar-right" action="/auth/login">--}}
                     {{ Form::open(['route' => 'auth.login', 'class' => 'navbar-form navbar-right']) }}
                     <div class="form-group">
                         <input name="email" type="text" placeholder="Email" class="form-control">

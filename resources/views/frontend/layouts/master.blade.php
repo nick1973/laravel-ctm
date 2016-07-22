@@ -46,6 +46,14 @@
                     <p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>
                 </div>
             </div>
+            @else
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Welcome back {{ Auth::user }}.</h1>
+                    <p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>
+                    <p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>
+                </div>
+            </div>
         @endif
             <div class="container">
                 @include('includes.partials.messages')
