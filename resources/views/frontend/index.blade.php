@@ -5,6 +5,7 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
+            {{ Form::open(['route' => 'auth.register', 'class' => 'form-horizontal']) }}
             {{--Col 1--}}
             <div class="col-md-4">
                 <div class="form-group">
@@ -89,6 +90,7 @@
                 </div><!--form-group-->
 
             </div>
+            {{ Form::close() }}
         </div>
 
 
