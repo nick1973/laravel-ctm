@@ -40,9 +40,8 @@
         @include('frontend.includes.nav')
         <div class="jumbotron">
             <div class="container">
-                <h1>Welcome to CTM.</h1>
+                <h1>Create Your New CTM Account.</h1>
                 <p>New to CTM?</p>
-                <p>Create Your New CTM Account.</p>
                 <p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>
                 <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
             </div>
