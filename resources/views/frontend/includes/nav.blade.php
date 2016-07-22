@@ -54,17 +54,19 @@
                     </li>
                 @endif
             </ul>
-            <div id="navbar" class="navbar-collapse collapse">
-                    {{ Form::open(['route' => 'auth.login', 'class' => 'navbar-form navbar-right']) }}
-                    <div class="form-group">
-                        <input name="email" type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input name="password" type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
-            </div><!--/.navbar-collapse -->
+            @if(access()->guest)
+                <div id="navbar" class="navbar-collapse collapse">
+                        {{ Form::open(['route' => 'auth.login', 'class' => 'navbar-form navbar-right']) }}
+                        <div class="form-group">
+                            <input name="email" type="text" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input name="password" type="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success">Sign in</button>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            @endif
         </div><!--navbar-collapse-->
     </div><!--container-->
 </nav>
