@@ -90,6 +90,20 @@
                 </div><!--form-group-->
 
             </div>
+            @if (config('access.captcha.registration'))
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-4">
+                        {!! Form::captcha() !!}
+                        {{ Form::hidden('captcha_status', 'true') }}
+                    </div><!--col-md-6-->
+                </div><!--form-group-->
+            @endif
+
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    {{ Form::submit(trans('labels.frontend.auth.register_button'), ['class' => 'btn btn-primary']) }}
+                </div><!--col-md-6-->
+            </div><!--form-group-->
             {{ Form::close() }}
         </div>
 
