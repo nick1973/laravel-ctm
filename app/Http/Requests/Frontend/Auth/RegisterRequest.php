@@ -31,7 +31,7 @@ class RegisterRequest extends Request
             'title' => 'required',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed|alpha_num',
+            'password' => 'required|alpha_num|min:6|confirmed',
             'g-recaptcha-response' => 'required_if:captcha_status,true|captcha',
         ];
     }
