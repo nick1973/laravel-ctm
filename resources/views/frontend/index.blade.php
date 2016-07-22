@@ -74,20 +74,20 @@
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
+                    {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'control-label']) }}
                     {{ Form::input('email', 'email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
                 </div><!--form-group-->
 
                 <div class="form-group">
-                    {{ Form::label('password', trans('validation.attributes.frontend.password'), ['class' => 'col-md-4 control-label']) }}
+                    {{ Form::label('password', trans('validation.attributes.frontend.password'), ['class' => 'control-label']) }}
                     {{ Form::input('password', 'password', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.password')]) }}
                 </div><!--form-group-->
 
                 <div class="form-group">
-                    {{ Form::label('password_confirmation', trans('validation.attributes.frontend.password_confirmation'), ['class' => 'col-md-4 control-label']) }}
+                    {{ Form::label('password_confirmation', trans('validation.attributes.frontend.password_confirmation'), ['class' => 'control-label']) }}
                     {{ Form::input('password', 'password_confirmation', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.password_confirmation')]) }}
                 </div><!--form-group-->
-                
+
             </div>
         </div>
 
