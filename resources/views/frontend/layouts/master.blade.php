@@ -44,7 +44,7 @@
         {{--</script>--}}
 
 
-        <link rel="stylesheet" href="css/datepicker.css">
+        <link rel="stylesheet" href="/datepicker.css">
 
 
     </head>
