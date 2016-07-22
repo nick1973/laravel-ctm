@@ -45,7 +45,7 @@ class UserTableSeeder extends Seeder
                 'updated_at'        => Carbon::now(),
             ],
             [
-                'name'              => 'Default User',
+                'name'              => 'Bob the user',
                 'email'             => 'user@user.com',
                 'password'          => bcrypt('1234'),
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
