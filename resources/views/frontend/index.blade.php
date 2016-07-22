@@ -30,9 +30,7 @@
 
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
-                    {{--<input id="datepicker" name="dob" type="text" class="form-control" id="dob" placeholder="Date of Birth">--}}
-                    {{--<input class="datepicker" data-provide="datepicker">--}}
-                    <input  type="text" placeholder="click to show datepicker"  id="example1">
+                    <input id="datepicker" name="dob" type="date" class="form-control" id="dob" placeholder="Date of Birth">
                 </div>
             </div>
             <div class="col-md-4">
@@ -170,22 +168,7 @@
 
         {{--</div><!-- col-md-10 -->--}}
 
-
-
     </div><!--row-->
-
-        <script src="/js/jquery-1.9.1.min.js"></script>
-        <script src="/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-
-                $('#example1').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-
-            });
-        </script>
 
 @endsection
 
