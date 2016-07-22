@@ -22,6 +22,21 @@
                             <li role="presentation">
                                 <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details</a>
                             </li>
+                            <li role="presentation">
+                                <a href="#righttowork" aria-controls="righttowork" role="tab" data-toggle="tab">Right To Work</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content">
