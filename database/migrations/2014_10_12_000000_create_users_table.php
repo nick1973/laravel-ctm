@@ -18,6 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('dob');
+            $table->string('origin');
+            $table->string('gender');
+            $table->string('nationality');
+            $table->string('townofbirth');
+            $table->string('countryofbirth');
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('confirmation_code');
