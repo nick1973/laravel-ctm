@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
-                    <input name="dob" type="text" class="form-control" id="dob" placeholder="Date of Birth">
+                    <input name="dob" type="date" class="form-control" id="dob" placeholder="Date of Birth">
                 </div>
             </div>
             <div class="col-md-4">
@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
                 </div>
 
                 <div class="form-group">
