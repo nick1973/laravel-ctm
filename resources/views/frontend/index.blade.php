@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="title">Email address</label>
+                    <label for="title">Title</label>
                     <select name="title" class="form-control">
                         <option>Mr</option>
                         <option>Mrs</option>
@@ -19,18 +19,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="firstname">First Name(s)</label>
+                    <input name="name" type="text" class="form-control" id="firstname" placeholder="First Name(s)">
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="lastname">Last Name</label>
+                    <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name">
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="dob">Date of Birth</label>
+                    <input name="dob" type="text" class="form-control" id="dob" placeholder="Date of Birth">
                 </div>
             </div>
             <div class="col-md-4">
