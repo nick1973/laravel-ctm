@@ -34,11 +34,11 @@
 
         <!-- Fonts -->
         {{ Html::style('https://fonts.googleapis.com/css?family=Lato:100,300,400,700') }}
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-        <script> 
+        {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">--}}
+        {{--<link rel="stylesheet" href="/resources/demos/style.css">--}}
+        {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+        {{--<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>--}}
+        <script>
             $( function() {
                 $( "#datepicker" ).datepicker();
             } );
