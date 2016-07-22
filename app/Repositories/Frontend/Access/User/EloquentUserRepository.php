@@ -75,6 +75,7 @@ class EloquentUserRepository implements UserRepositoryContract
     {
         if ($provider) {
             $user = User::create([
+                'title' => $data['title'],
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => null,
