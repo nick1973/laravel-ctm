@@ -55,7 +55,7 @@
                 @endif
             </ul>
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
+                <form class="navbar-form navbar-right" action="/auth/login">
                     <div class="form-group">
                         <input type="text" placeholder="Email" class="form-control">
                     </div>
