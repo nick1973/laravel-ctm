@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
                     {{--<input id="datepicker" name="dob" type="text" class="form-control" id="dob" placeholder="Date of Birth">--}}
-                    <input data-provide="datepicker">
+                    <input class="datepicker" data-provide="datepicker">
                 </div>
             </div>
             <div class="col-md-4">
