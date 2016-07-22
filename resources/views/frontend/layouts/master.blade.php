@@ -43,6 +43,10 @@
 
         {{--</script>--}}
 
+
+        <link rel="stylesheet" href="css/datepicker.css">
+
+
     </head>
     <body id="app-layout">
         @include('includes.partials.logged-in-as')
