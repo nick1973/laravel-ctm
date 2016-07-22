@@ -42,7 +42,7 @@
             <div class="container">
                 <h1>Create Your New CTM Account.</h1>
                 <p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">New to CTM... Learn more &raquo;</a></p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">New to CTM? Learn more &raquo;</a></p>
             </div>
         </div>
             <div class="container">
