@@ -5,6 +5,7 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
+            {{--Col 1--}}
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -33,27 +34,39 @@
                     <input id="datepicker" name="dob" type="date" class="form-control" id="dob" placeholder="Date of Birth">
                 </div>
             </div>
+            {{--Col 2--}}
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="origin:">Ethnic Origin:</label>
+                    <select id="origin" name="origin" class="form-control">
+                        <option>White</option>
+                        <option>Black</option>
+                        <option>Asian</option>
+                        <option>Afro Caribbean</option>
+                        <option>Mixed Race</option>
+                        <option>Other</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" class="form-control">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="nationality">Nationality</label>
+                    <input type="text" class="form-control" id="nationality" placeholder="Nationality">
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="townofbirth">Town of Birth</label>
+                    <input type="text" class="form-control" id="townofbirth" placeholder="Town of Birth">
                 </div>
             </div>
+            {{--Col 3--}}
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
