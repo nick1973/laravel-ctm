@@ -5,6 +5,10 @@
             <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
         </tr>
         <tr>
+            <th>Title</th>
+            <td>{{ $user->name }}</td>
+        </tr>
+        <tr>
             <th>{{ trans('labels.frontend.user.profile.name') }}</th>
             <td>{{ $user->name }}</td>
         </tr>
