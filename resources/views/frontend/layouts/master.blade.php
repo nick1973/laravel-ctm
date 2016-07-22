@@ -38,7 +38,7 @@
     <body id="app-layout">
         @include('includes.partials.logged-in-as')
         @include('frontend.includes.nav')
-        @if (access()->hasRole('Administrator') || access()->hasRole('User'))
+        @if (!access()->hasRole('Administrator') || !access()->hasRole('User'))
             <div class="jumbotron">
                 <div class="container">
                     <h1>Create Your New CTM Account.</h1>
