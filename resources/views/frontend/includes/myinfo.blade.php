@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.name') }}</th>
-            <td>{{ $user->firstname }}</td>
+            <td>{{ $user->name }}</td>
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.name') }}</th>

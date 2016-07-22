@@ -41,7 +41,7 @@
         @if (access()->hasRole('Administrator') || access()->hasRole('User'))
                 <div class="jumbotron">
                     <div class="container">
-                        <h1>Welcome back {{ access()->user()->firstname }}.</h1>
+                        <h1>Welcome back {{ access()->user()->name }}.</h1>
                         <p>You can view and edit your profile below.</p>
                         <p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>
                     </div>

@@ -28,7 +28,7 @@ class UserTableSeeder extends Seeder
         $users = [
             [
                 'title'             => 'Mr',
-                'firstname'         => 'Admin',
+                'name'         => 'Admin',
                 'lastname'          => 'istrator',
                 'email'             => 'admin@admin.com',
                 'password'          => bcrypt('1234'),
@@ -39,7 +39,7 @@ class UserTableSeeder extends Seeder
             ],
             [
                 'title'             => 'Mr',
-                'firstname'         => 'Executive',
+                'name'         => 'Executive',
                 'lastname'          => 'User',
                 'email'             => 'executive@executive.com',
                 'password'          => bcrypt('1234'),
@@ -50,7 +50,7 @@ class UserTableSeeder extends Seeder
             ],
             [
                 'title'             => 'Mr',
-                'firstname'         => 'Bob',
+                'name'         => 'Bob',
                 'lastname'          => 'the user',
                 'email'             => 'user@user.com',
                 'password'          => bcrypt('1234'),
