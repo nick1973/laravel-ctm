@@ -30,10 +30,10 @@
                     {{--</li>--}}
                 {{--@endif--}}
 
-                @if (access()->guest())
+                {{--@if (access()->guest())--}}
                     {{--<li>{{ link_to('login', trans('navs.frontend.login')) }}</li>--}}
-                    <li>{{ link_to('register', trans('navs.frontend.register')) }}</li>
-                @else
+                    {{--<li>{{ link_to('register', trans('navs.frontend.register')) }}</li>--}}
+                {{--@else--}}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ access()->user()->name }} <span class="caret"></span>
