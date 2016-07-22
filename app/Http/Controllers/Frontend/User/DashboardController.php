@@ -17,7 +17,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.dashboard')
-            ->withUser(access()->user());
+//        return view('frontend.user.dashboard')
+//            ->withUser(access()->user());
+        return access()->user();
     }
 }
