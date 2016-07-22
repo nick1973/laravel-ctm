@@ -7,8 +7,15 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="title">Email address</label>
+                    <select name="title" class="form-control">
+                        <option>Mr</option>
+                        <option>Mrs</option>
+                        <option>Ms</option>
+                        <option>Miss</option>
+                        <option>Dr</option>
+                    </select>
+                    {{--<input type="title" class="form-control" id="exampleInputEmail1" placeholder="title">--}}
                 </div>
 
                 <div class="form-group">
@@ -104,19 +111,19 @@
             {{--</div><!-- col-md-10 -->--}}
         {{--@endauth--}}
 
-        @if (access()->hasRole('Administrator') || access()->hasRole('User'))
-            <div class="col-md-10 col-md-offset-1">
+        {{--@if (access()->hasRole('Administrator') || access()->hasRole('User'))--}}
+            {{--<div class="col-md-10 col-md-offset-1">--}}
 
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-home"></i> {{ trans('strings.frontend.tests.based_on.role') . trans('strings.frontend.tests.using_access_helper.role_name') }}</div>
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading"><i class="fa fa-home"></i> {{ trans('strings.frontend.tests.based_on.role') . trans('strings.frontend.tests.using_access_helper.role_name') }}</div>--}}
 
-                    <div class="panel-body">
-                        {{ trans('strings.frontend.test') . ' 2: ' . trans('strings.frontend.tests.you_can_see_because', ['role' => trans('roles.administrator')]) }}
-                    </div>
-                </div><!-- panel -->
+                    {{--<div class="panel-body">--}}
+                        {{--{{ trans('strings.frontend.test') . ' 2: ' . trans('strings.frontend.tests.you_can_see_because', ['role' => trans('roles.administrator')]) }}--}}
+                    {{--</div>--}}
+                {{--</div><!-- panel -->--}}
 
-            </div><!-- col-md-10 -->
-        @endif
+            {{--</div><!-- col-md-10 -->--}}
+        {{--@endif--}}
 
         {{-- The second parameter says the user must have all the roles specified. Administrator does not have the role with an id of 2, so this will not show. --}}
         {{--@if (access()->hasRoles(['Administrator', 2], true))--}}
