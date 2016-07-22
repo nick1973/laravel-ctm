@@ -45,7 +45,7 @@ class UserTableSeeder extends Seeder
                 'updated_at'        => Carbon::now(),
             ],
             [
-                'title'              => 'Mr',
+//                'title'              => 'Mr',
                 'name'              => 'Bob the user',
                 'email'             => 'user@user.com',
                 'password'          => bcrypt('1234'),
