@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Auth;
 
 use App\Http\Requests\Request;
+use Carbon\CarbonInterval;
 
 /**
  * Class RegisterRequest
@@ -27,16 +28,10 @@ class RegisterRequest extends Request
      */
     public function rules()
     {
+        $date = date('d-m-Y', strtotime('-16 years'));
         return [
-//            'title' => 'required|max:255',
-//            'lastname' => 'required|max:255',
             'name' => 'required|max:255',
-            'dob' => 'required|max:255',
-//            'origin' => 'required|max:255',
-//            'gender' => 'required|max:255',
-//            'nationality' => 'required|max:255',
-//            'townofbirth' => 'required|max:255',
-//            'countryofbirth' => 'required|max:255',
+            'dob' => 'required|before:' . $date,
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required_if:captcha_status,true|captcha',

@@ -159,5 +159,10 @@ return [
             'new_password_confirmation' => 'New Password Confirmation',
         ],
     ],
+    'custom' => [
+        'dob' => [
+            'before' => 'You need to be over 16 years old to apply, sorry!',
+        ],
+    ],
 
 ];
