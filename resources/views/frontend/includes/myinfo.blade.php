@@ -18,12 +18,72 @@
             <td>{{ $user->lastname }}</td>
         </tr>
         <tr>
+            <th>Mobile No</th>
+            <td>{{ $user->mobile }}</td>
+        </tr>
+        <tr>
+            <th>Land Line</th>
+            <td>{{ $user->land }}</td>
+        </tr>
+        <tr>
             <th>Date of Birth</th>
             <td>{{ $user->dob }}</td>
         </tr>
         <tr>
+            <th>Gender</th>
+            <td>{{ $user->gender }}</td>
+        </tr>
+        <tr>
+            <th>Ethnic Origin</th>
+            <td>{{ $user->origin }}</td>
+        </tr>
+        <tr>
+            <th>Nationality</th>
+            <td>{{ $user->nationality }}</td>
+        </tr>
+        <tr>
             <th>{{ trans('labels.frontend.user.profile.email') }}</th>
             <td>{{ $user->email }}</td>
+        </tr>
+        <tr>
+            <th>Emergency Contact Name</th>
+            <td>{{ $user->emergency_contact_name }}</td>
+        </tr>
+        <tr>
+            <th>Emergency Contact Relationship</th>
+            <td>{{ $user->emergency_contact_rel }}</td>
+        </tr>
+        <tr>
+            <th>Emergency Contact Number</th>
+            <td>{{ $user->emergency_contact_number }}</td>
+        </tr>
+        <tr>
+            <th>Emergency Contact Mobile</th>
+            <td>{{ $user->emergency_contact_mobile }}</td>
+        </tr>
+        <tr>
+            <th>Do you speak other languages?</th>
+            <td>{{ $user->other_lang }}</td>
+        </tr>
+        <tr>
+            <th>Do you speak other languages?</th>
+            <td>{{ $user->other_lang }}</td>
+        </tr>
+        <tr>
+            <th>Do you have a full UK driving Licence?</th>
+            <td>{{ $user->uk_driving_license }}</td>
+        </tr>
+        <tr>
+            <th>Do you have qualifications under the NRSWA 1991?</th>
+            <td>{{ $user->nrswa }}</td>
+        </tr>
+        <tr>
+            <th>Do you have any unspent criminal convictions?</th>
+            <td>{{ $user->convictions }}</td>
+        </tr>
+        <tr>
+            <th>Do you have any medical conditions we should be aware of?</th>
+            <td>{{ $user->medical_conditions }}</td>
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.created_at') }}</th>
