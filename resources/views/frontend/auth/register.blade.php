@@ -20,6 +20,13 @@
                     </div><!--form-group-->
 
                     <div class="form-group">
+                        {{ Form::label('dob', 'Date of Birth', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::input('date', 'dob', null, ['class' => 'form-control', 'placeholder' => 'Date of Birth']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
                         {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::input('email', 'email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}

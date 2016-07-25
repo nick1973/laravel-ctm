@@ -10,12 +10,20 @@
 
                 <div class="panel-body">
 
-                    {{ Form::model($user, ['route' => 'frontend.user.profile.update', 'class' => 'form-horizontal', 'method' => 'PATCH']) }}
+                    {{ Form::model($user, ['route' => 'frontend.user.profile.update', 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
 
                     <div class="form-group">
                         {{ Form::label('title', 'title', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::input('text', 'title', null, ['class' => 'form-control', 'placeholder' => 'Title']) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ Form::label('photo', 'Photo', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            <img width="100px" alt="No Image" src="http://localhost/public/male.png">
+                            {!! Form::file('photo', ['class' => 'form-control',]) !!}
                         </div>
                     </div>
 
@@ -29,6 +37,12 @@
                         {{ Form::label('lastname', 'Last Name', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::input('text', 'lastname', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('dob', 'Date of Birth', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::input('date', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                         </div>
                     </div>
 
