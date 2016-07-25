@@ -3,7 +3,7 @@
         <tr>
             <th>Photo</th>
             {{--<td><img src="{{ $user->picture }}" class="user-profile-image" /></td>--}}
-            <td><img width="100px" alt="No Image" src="http://localhost/public/male.png"></td>
+            <td><img width="100px" alt="No Image" src="/{{ $user->photo }}"></td>
         </tr>
         <tr>
             <th>Title</th>

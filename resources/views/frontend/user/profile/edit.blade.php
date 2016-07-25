@@ -10,8 +10,12 @@
 
                 <div class="panel-body">
 
-                    {{ Form::model($user, ['route' => 'frontend.user.profile.update', 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
-
+                    {{ Form::model($user, ['route' => 'frontend.user.profile.update', $user->id, 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
+                    {{--{!! Form::model($user,[--}}
+                                {{--'method' => 'PATCH',--}}
+                                {{--'files'=>true,--}}
+                                {{--'route' => ['frontend.user.profile.update',$user->id],--}}
+                                {{--'class' => 'form-horizontal']) !!}--}}
                     <div class="form-group">
                         {{ Form::label('title', 'title', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
@@ -22,7 +26,7 @@
                     <div class="form-group">
                         {{ Form::label('photo', 'Photo', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            <img width="100px" alt="No Image" src="http://localhost/public/male.png">
+                            <img width="100px" alt="No Image" src="/{{ $user->photo }}">
                             {!! Form::file('photo', ['class' => 'form-control',]) !!}
                         </div>
                     </div>

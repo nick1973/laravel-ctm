@@ -3,6 +3,7 @@
 namespace App\Repositories\Frontend\Access\User;
 
 use App\Models\Access\User\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Hash;
@@ -75,15 +76,8 @@ class EloquentUserRepository implements UserRepositoryContract
     {
         if ($provider) {
             $user = User::create([
-//                'title' => $data['title'],
                 'name' => $data['name'],
-//                'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
-//                'origin' => $data['origin'],
-//                'gender' => $data['gender'],
-//                'nationality' => $data['nationality'],
-//                'townofbirth' => $data['townofbirth'],
-//                'countryofbirth' => $data['countryofbirth'],
                 'email' => $data['email'],
                 'password' => null,
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
@@ -92,15 +86,8 @@ class EloquentUserRepository implements UserRepositoryContract
             ]);
         } else {
             $user = User::create([
-//                'title' => $data['title'],
                 'name' => $data['name'],
-//                'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
-//                'origin' => $data['origin'],
-//                'gender' => $data['gender'],
-//                'nationality' => $data['nationality'],
-//                'townofbirth' => $data['townofbirth'],
-//                'countryofbirth' => $data['countryofbirth'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
@@ -253,6 +240,12 @@ class EloquentUserRepository implements UserRepositoryContract
     {
         $user = $this->find($id);
         $user->title = $input['title'];
+        if(array_key_exists('photo', $input) ){
+            $user->photo = $input['photo'];
+        }
+//        else{
+//            $user->photo = '';
+//        }
         $user->name = $input['name'];
         $user->lastname = $input['lastname'];
         $user->dob = $input['dob'];

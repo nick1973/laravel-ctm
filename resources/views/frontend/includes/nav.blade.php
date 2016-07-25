@@ -50,6 +50,10 @@
                             <li>{{ link_to_route('admin.dashboard', trans('navs.frontend.user.administration')) }}</li>
                             @endauth
 
+                            @role('Manager')
+                                <li>{{ link_to_route('admin.dashboard', 'Managers') }}</li>
+                            @endauth
+
                             <li>{{ link_to_route('auth.logout', trans('navs.general.logout')) }}</li>
                         </ul>
                     </li>
