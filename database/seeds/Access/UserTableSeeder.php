@@ -40,10 +40,10 @@ class UserTableSeeder extends Seeder
             ],
             [
                 'title'             => 'Mr',
-                'name'         => 'Executive',
+                'name'         => 'Manager',
                 'lastname'          => 'User',
                 'dob'          => '1/1/2000',
-                'email'             => 'executive@executive.com',
+                'email'             => 'manager@manager.com',
                 'password'          => bcrypt('1234'),
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'confirmed'         => true,

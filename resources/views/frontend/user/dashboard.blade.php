@@ -14,7 +14,10 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}</a>
+                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}
+                                    <span id="myInfo">
+                                    <img src="/img/green-tick.png" height="18px">
+                                </span></a>
                             </li>
                             <li role="presentation">
                                 <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address</a>
@@ -27,9 +30,6 @@
                             </li>
                             <li role="presentation">
                                 <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>
                             </li>
                             <li role="presentation">
                                 <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>

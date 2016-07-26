@@ -1,4 +1,12 @@
 <div role="tabpanel" class="tab-pane active" id="profile">
+<!--    --><?php
+//        $array =  (array) $user;
+//        if (!array_filter($array)) {
+//            echo "<h1>" . "empty" . "</h2>";
+//        } else{
+//            echo "<h1>" . "Not empty" . "</h2>";
+//        }
+//    ?>
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
             <th>Photo</th>
@@ -7,7 +15,11 @@
         </tr>
         <tr>
             <th>Title</th>
-            <td>{{ $user->title }}</td>
+            @if(isset($user->title))
+                <td>{{ $user->title }}</td>
+                @else
+                <td></td>
+            @endif
         </tr>
         <tr>
             <th>First Name</th>
@@ -66,10 +78,6 @@
             <td>{{ $user->other_lang }}</td>
         </tr>
         <tr>
-            <th>Do you speak other languages?</th>
-            <td>{{ $user->other_lang }}</td>
-        </tr>
-        <tr>
             <th>Do you have a full UK driving Licence?</th>
             <td>{{ $user->uk_driving_license }}</td>
         </tr>
@@ -96,12 +104,28 @@
         <tr>
             <th>{{ trans('labels.general.actions') }}</th>
             <td>
-                {{ link_to_route('frontend.user.profile.edit', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-xs']) }}
+                {{ link_to_route('frontend.user.profile.edit', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
 
                 @if ($user->canChangePassword())
-                    {{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password'), [], ['class' => 'btn btn-warning btn-xs']) }}
+                    {{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password'), [], ['class' => 'btn btn-warning btn-sm']) }}
                 @endif
             </td>
         </tr>
     </table>
 </div><!--tab panel profile-->
+
+<script>
+
+    $( "td:empty" )
+            .text( "Information Required!" )
+            //.css( "background", "rgb(238,94,72)"
+            .addClass('bg-danger');
+
+    $("td.bg-danger").each(function(){
+        if ($(this).hasClass('bg-danger')) {
+            $("#myInfo").addClass('hidden');
+            console.log("has Class");
+        }
+    });
+
+</script>

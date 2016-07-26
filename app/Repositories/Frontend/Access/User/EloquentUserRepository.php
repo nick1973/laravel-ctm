@@ -76,6 +76,7 @@ class EloquentUserRepository implements UserRepositoryContract
     {
         if ($provider) {
             $user = User::create([
+                //'title' => $data['title'],
                 'name' => $data['name'],
                 'dob' => $data['dob'],
                 'email' => $data['email'],
@@ -86,6 +87,7 @@ class EloquentUserRepository implements UserRepositoryContract
             ]);
         } else {
             $user = User::create([
+                //'title' => $data['title'],
                 'name' => $data['name'],
                 'dob' => $data['dob'],
                 'email' => $data['email'],
@@ -243,12 +245,27 @@ class EloquentUserRepository implements UserRepositoryContract
         if(array_key_exists('photo', $input) ){
             $user->photo = $input['photo'];
         }
-//        else{
-//            $user->photo = '';
-//        }
         $user->name = $input['name'];
         $user->lastname = $input['lastname'];
+        $user->mobile = $input['mobile'];
+        $user->land = $input['land'];
+        $user->origin = $input['origin'];
+        $user->gender = $input['gender'];
         $user->dob = $input['dob'];
+        $user->nationality = $input['nationality'];
+        $user->emergency_contact_name = $input['emergency_contact_name'];
+        $user->emergency_contact_rel = $input['emergency_contact_rel'];
+        $user->emergency_contact_number = $input['emergency_contact_number'];
+        $user->emergency_contact_mobile = $input['emergency_contact_mobile'];
+        $user->other_lang = $input['other_lang'];
+        $user->uk_driving_license = $input['uk_driving_license'];
+        $user->nrswa = $input['nrswa'];
+        $user->convictions = $input['convictions'];
+        $user->convictions_info = $input['convictions_info'];
+        $user->medical_conditions = $input['medical_conditions'];
+        $user->medical_conditions_info = $input['medical_conditions_info'];
+        $user->townofbirth = $input['townofbirth'];
+        $user->countryofbirth = $input['countryofbirth'];
 
         if ($user->canChangeEmail()) {
             //Address is not current address

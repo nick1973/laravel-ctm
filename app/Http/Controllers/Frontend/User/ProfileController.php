@@ -25,12 +25,28 @@ class ProfileController extends Controller
             ->withUser(access()->user());
     }
 
+    public function edit_address()
+    {
+        return view('frontend.user.profile.edit_address')
+            ->withUser(access()->user());
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function update_address(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        return $request->all();
+    }
+
     /**
      * @param  UserRepositoryContract         $user
      * @param  UpdateProfileRequest $request
      * @return mixed
      */
-    public function update(UserRepositoryContract $user, UpdateProfileRequest $request)
+    public function updates(UserRepositoryContract $user, UpdateProfileRequest $request)
     {
         $photo = User::where('id', access()->id())->first();
         if ($request->hasFile('photo')) {
