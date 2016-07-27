@@ -20,13 +20,22 @@
                                 </span></a>
                             </li>
                             <li role="presentation">
-                                <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address</a>
+                                <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address
+                                    <span id="address_tick">
+                                    <img src="/img/green-tick.png" height="18px">
+                                </span></a>
                             </li>
                             <li role="presentation">
-                                <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details</a>
+                                <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details
+                                    <span id="reference_tick">
+                                    <img src="/img/green-tick.png" height="18px">
+                                </span></a>
                             </li>
                             <li role="presentation">
-                                <a href="#righttowork" aria-controls="righttowork" role="tab" data-toggle="tab">Right To Work</a>
+                                <a href="#righttowork" aria-controls="righttowork" role="tab" data-toggle="tab">Right To Work
+                                    <span id="righttowork_tick">
+                                    <img src="/img/green-tick.png" height="18px">
+                                </span></a>
                             </li>
                             <li role="presentation">
                                 <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit</a>
@@ -43,6 +52,8 @@
 
                             @include('frontend.includes.myinfo')
                             @include('frontend.includes.address')
+                            @include('frontend.includes.reference')
+                            @include('frontend.includes.righttowork')
 
 
 

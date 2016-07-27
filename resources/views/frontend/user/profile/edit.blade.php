@@ -7,7 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
 
             <div class="panel panel-default">
-                <div class="panel-heading">Update My Information</div>
+                <div class="panel-heading">
+                    <h4>Update My Information</h4>
+                </div>
 
                 <div class="panel-body">
 
@@ -16,18 +18,9 @@
                     <div class="form-group">
                         {{ Form::label('title', 'Title:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            <select name="title" class="form-control">
-                                @if($user->title)
-                                    <option>{{ $user->title }}</option>
-                                    @else
-                                    <option selected disabled>Title</option>
-                                @endif
-                                <option>Mr</option>
-                                <option>Mrs</option>
-                                <option>Ms</option>
-                                <option>Miss</option>
-                                <option>Dr</option>
-                            </select>
+                            {{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',
+                                                       'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',
+                            'id' => 'title'])}}
                         </div>
                     </div>
 

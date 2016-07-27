@@ -1,12 +1,4 @@
 <div role="tabpanel" class="tab-pane active" id="profile">
-<!--    --><?php
-//        $array =  (array) $user;
-//        if (!array_filter($array)) {
-//            echo "<h1>" . "empty" . "</h2>";
-//        } else{
-//            echo "<h1>" . "Not empty" . "</h2>";
-//        }
-//    ?>
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
             <th>Photo</th>

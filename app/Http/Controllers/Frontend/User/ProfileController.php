@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
+use App\Models\Access\User\References;
 use Illuminate\Http\Request;
 
 use App\Models\Access\User\User;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 /**
@@ -21,7 +23,8 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('frontend.user.profile.edit')
+        $reference = References::where('user_id', access()->id())->get();
+        return view('frontend.user.profile.edit', compact('reference'))
             ->withUser(access()->user());
     }
 
@@ -31,14 +34,50 @@ class ProfileController extends Controller
             ->withUser(access()->user());
     }
 
+    public function edit_employer_reference()
+    {
+        //$reference = access()->user()->references();
+        $reference = References::where('user_id', access()->id())->get();
+        return view('frontend.user.profile.edit_employer_reference', compact('reference'));
+
+//        return view('frontend.user.profile.edit_character_reference')
+//            ->withUser(access()->user())->references();
+
+
+    }
+
+    public function edit_character_reference()
+    {
+        $reference = References::where('user_id', access()->id())->get();
+        return view('frontend.user.profile.edit_character_reference', compact('reference'));
+    }
+
     /**
      * @param Request $request
      * @param $id
+     * @return array
+     */
+    public function update_employer_reference(Request $request, $id)
+    {
+        $input = $request->except(['_method', '_token']);
+        DB::table('references')
+            ->where('user_id', $id)
+            ->update($input);
+        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        //return $input;
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return array
      */
     public function update_address(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        return $request->all();
+        $user = User::find($id);
+        $input = $request->all();
+        $user->fill($input)->save();
+        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }
 
     /**

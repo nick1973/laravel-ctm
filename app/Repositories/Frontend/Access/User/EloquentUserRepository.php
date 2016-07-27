@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Frontend\Access\User;
 
+use App\Models\Access\User\References;
 use App\Models\Access\User\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Hash;
@@ -240,6 +242,9 @@ class EloquentUserRepository implements UserRepositoryContract
      */
     public function updateProfile($id, $input)
     {
+        DB::table('references')->insert(
+            ['user_id' => $id]
+        );
         $user = $this->find($id);
         $user->title = $input['title'];
         if(array_key_exists('photo', $input) ){

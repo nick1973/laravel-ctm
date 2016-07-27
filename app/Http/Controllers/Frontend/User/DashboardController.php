@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Access\User\References;
 
 /**
  * Class DashboardController
@@ -18,8 +19,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('frontend.user.dashboard')
+        $reference = References::where('user_id', access()->id())->get();
+        return view('frontend.user.dashboard', compact('reference'))
             ->withUser(access()->user());
-//        return access()->user();
     }
 }
