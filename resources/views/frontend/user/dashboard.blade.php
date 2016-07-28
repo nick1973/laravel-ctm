@@ -33,12 +33,15 @@
                             </li>
                             <li role="presentation">
                                 <a href="#righttowork" aria-controls="righttowork" role="tab" data-toggle="tab">Right To Work
-                                    <span id="righttowork_tick">
+                                    <span id="righttowork_tick" class="hidden">
                                     <img src="/img/green-tick.png" height="18px">
                                 </span></a>
                             </li>
                             <li role="presentation">
-                                <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit</a>
+                                <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit
+                                    <span id="money_tick">
+                                    <img src="/img/green-tick.png" height="18px">
+                                </span></a>
                             </li>
                             <li role="presentation">
                                 <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>
@@ -54,6 +57,7 @@
                             @include('frontend.includes.address')
                             @include('frontend.includes.reference')
                             @include('frontend.includes.righttowork')
+                            @include('frontend.includes.money')
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
 use App\Models\Access\User\References;
+use App\Models\Access\User\RTWork;
 use Illuminate\Http\Request;
 
 use App\Models\Access\User\User;
@@ -42,14 +43,34 @@ class ProfileController extends Controller
 
 //        return view('frontend.user.profile.edit_character_reference')
 //            ->withUser(access()->user())->references();
-
-
     }
 
     public function edit_character_reference()
     {
         $reference = References::where('user_id', access()->id())->get();
         return view('frontend.user.profile.edit_character_reference', compact('reference'));
+    }
+
+    public function edit_righttowork()
+    {
+        $rt_work = RTWork::where('user_id', access()->id())->get();
+        return view('frontend.user.profile.edit_righttowork', compact('rt_work'));
+    }
+
+    public function edit_money()
+    {
+        return view('frontend.user.profile.edit_money')
+            ->withUser(access()->user());
+    }
+
+    public function update_righttowork(Request $request, $id)
+    {
+        $input = $request->except(['_method', '_token']);
+        DB::table('rt_work')
+            ->where('user_id', $id)
+            ->update($input);
+        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        //return $input;
     }
 
     /**
@@ -90,8 +111,10 @@ class ProfileController extends Controller
         $photo = User::where('id', access()->id())->first();
         if ($request->hasFile('photo')) {
             $input = $request->all();
+
             $fileName = $request->file('photo')->getClientOriginalName();
             $request->file('photo')->move('photos', $fileName);
+
             array_pull($input, 'photo');
             $add_image = array_add($input, 'photo', 'photos/' . $fileName);
 

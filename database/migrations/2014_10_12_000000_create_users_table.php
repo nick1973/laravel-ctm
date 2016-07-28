@@ -46,6 +46,13 @@ class CreateUsersTable extends Migration
             $table->string('county');
             $table->string('country');
             $table->string('postcode');
+            //ACCOUNTS
+            $table->string('account_name');
+            $table->string('account_sort_code');
+            $table->string('account_number');
+            $table->string('ni_number');
+            $table->string('job_status');
+            $table->string('student_loan');
 
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);

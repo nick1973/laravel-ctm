@@ -3,6 +3,7 @@
 namespace App\Repositories\Frontend\Access\User;
 
 use App\Models\Access\User\References;
+use App\Models\Access\User\RTWork;
 use App\Models\Access\User\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -242,9 +243,21 @@ class EloquentUserRepository implements UserRepositoryContract
      */
     public function updateProfile($id, $input)
     {
-        DB::table('references')->insert(
-            ['user_id' => $id]
-        );
+        if (References::where('user_id', $id)->count() > 0) {
+            // user found
+        } else{
+            DB::table('references')->insert(
+                ['user_id' => $id]
+            );
+        }
+        if (RTWork::where('user_id', $id)->count() > 0) {
+            // user found
+        } else{
+            DB::table('rt_work')->insert(
+                ['user_id' => $id]
+            );
+        }
+
         $user = $this->find($id);
         $user->title = $input['title'];
         if(array_key_exists('photo', $input) ){
