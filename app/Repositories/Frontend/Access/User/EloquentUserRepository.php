@@ -81,6 +81,7 @@ class EloquentUserRepository implements UserRepositoryContract
             $user = User::create([
                 //'title' => $data['title'],
                 'name' => $data['name'],
+                'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
                 'email' => $data['email'],
                 'password' => null,
@@ -92,6 +93,7 @@ class EloquentUserRepository implements UserRepositoryContract
             $user = User::create([
                 //'title' => $data['title'],
                 'name' => $data['name'],
+                'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
@@ -99,6 +101,21 @@ class EloquentUserRepository implements UserRepositoryContract
                 'confirmed' => config('access.users.confirm_email') ? 0 : 1,
                 'status' => 1,
             ]);
+        }
+
+        if (References::where('user_id', $user->id)->count() > 0) {
+            // user found
+        } else{
+            DB::table('references')->insert(
+                ['user_id' => $user->id]
+            );
+        }
+        if (RTWork::where('user_id', $user->id)->count() > 0) {
+            // user found
+        } else{
+            DB::table('rt_work')->insert(
+                ['user_id' => $user->id]
+            );
         }
 
         /**

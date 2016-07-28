@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="reference">
 
-
+<h4>Please provide at least one reference.</h4>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
@@ -10,13 +10,17 @@
                     </a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     <h4>Employer Reference</h4>
-
+                    @foreach($reference as $ref)
                         <table class="table table-striped table-hover table-bordered dashboard-table">
-                            @foreach($reference as $ref)
-
+                                <tr>
+                                    <th>{{ trans('labels.general.actions') }}</th>
+                                    <td>
+                                        {{ link_to_route('frontend.user.profile.edit_employer_reference', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+                                    </td>
+                                </tr>
                             <tr>
                                 <th>Your Job Title</th>
                                 <td class="reference">{{ $ref->ref_job_title }}</td>
@@ -66,16 +70,8 @@
                                 <th>Postcode</th>
                                 <td class="reference">{{ $ref->ref_employer_county }}</td>
                             </tr>
-                            @endforeach
-                            <tr>
-                                <th>{{ trans('labels.general.actions') }}</th>
-                                <td>
-                                    {{ link_to_route('frontend.user.profile.edit_employer_reference', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-                                </td>
-                            </tr>
-
                         </table>
-
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -92,6 +88,12 @@
                     <h4>Character Reference</h4>
                     <table class="table table-striped table-hover table-bordered dashboard-table">
                         @foreach($reference as $ref)
+                            <tr>
+                                <th>{{ trans('labels.general.actions') }}</th>
+                                <td>
+                                    {{ link_to_route('frontend.user.profile.edit_character_reference', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Character Referee Name</th>
                                 <td class="reference">{{ $ref->ref_char_name }}</td>
@@ -132,13 +134,6 @@
                             <tr>
                                 <th>Postcode</th>
                                 <td class="reference">{{ $ref->ref_character_postcode }}</td>
-                            </tr>
-
-                            <tr>
-                                <th>{{ trans('labels.general.actions') }}</th>
-                                <td>
-                                    {{ link_to_route('frontend.user.profile.edit_character_reference', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-                                </td>
                             </tr>
                         @endforeach
 

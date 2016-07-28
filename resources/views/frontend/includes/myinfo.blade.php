@@ -1,6 +1,16 @@
 <div role="tabpanel" class="tab-pane active" id="profile">
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
+            <th>{{ trans('labels.general.actions') }}</th>
+            <td>
+                {{ link_to_route('frontend.user.profile.edit', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+
+                @if ($user->canChangePassword())
+                    {{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password'), [], ['class' => 'btn btn-warning btn-sm']) }}
+                @endif
+            </td>
+        </tr>
+        <tr>
             <th>Photo</th>
             {{--<td><img src="{{ $user->picture }}" class="user-profile-image" /></td>--}}
             <td><img width="100px" alt="No Image" src="/{{ $user->photo }}"></td>
@@ -92,16 +102,6 @@
         <tr>
             <th>{{ trans('labels.frontend.user.profile.last_updated') }}</th>
             <td>{{ $user->updated_at }} ({{ $user->updated_at->diffForHumans() }})</td>
-        </tr>
-        <tr>
-            <th>{{ trans('labels.general.actions') }}</th>
-            <td>
-                {{ link_to_route('frontend.user.profile.edit', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-
-                @if ($user->canChangePassword())
-                    {{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password'), [], ['class' => 'btn btn-warning btn-sm']) }}
-                @endif
-            </td>
         </tr>
     </table>
 </div><!--tab panel profile-->

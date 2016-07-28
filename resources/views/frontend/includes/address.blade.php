@@ -6,6 +6,12 @@
     {{--'class' => 'form-horizontal']) !!}--}}
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
+            <th>{{ trans('labels.general.actions') }}</th>
+            <td>
+                {{ link_to_route('frontend.user.profile.edit_address', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+            </td>
+        </tr>
+        <tr>
             <th>Number & Street</th>
             <td class="address">{{ $user->address_line_1 }}</td>
         </tr>
@@ -29,13 +35,6 @@
             <th>Postcode</th>
             <td class="address">{{ $user->postcode }}</td>
         </tr>
-        <tr>
-            <th>{{ trans('labels.general.actions') }}</th>
-            <td>
-                {{ link_to_route('frontend.user.profile.edit_address', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-            </td>
-        </tr>
-
     </table>
 </div><!--tab panel address-->
 <script>

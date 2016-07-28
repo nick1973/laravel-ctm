@@ -16,44 +16,30 @@
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
 
                     <div class="form-group">
-                        {{ Form::label('address_line_1', 'Number & Street:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('account_name', 'Account Holder\'s Name:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'address_line_1', null, ['class' => 'form-control', 'placeholder' => 'Number & Street']) }}
+                            {{ Form::input('text', 'account_name', null, ['class' => 'form-control', 'placeholder' => 'Account Holder\'s Name']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('address_line_2', 'Area / Region:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('account_sort_code', 'Account Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'address_line_2', null, ['class' => 'form-control', 'placeholder' => 'Area / Region']) }}
+                            {{ Form::input('text', 'account_sort_code', null, ['class' => 'form-control', 'placeholder' => 'Account Number']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('city', 'Town / City:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('account_number', 'Sort Code:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'city', null, ['class' => 'form-control', 'placeholder' => 'Town / City']) }}
+                            {{ Form::input('text', 'account_number', null, ['class' => 'form-control', 'placeholder' => 'Sort Code']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('county', 'County:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('ni_number', 'National Insurance Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'county', null, ['class' => 'form-control', 'placeholder' => 'County']) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        {{ Form::label('country', 'Country:', ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::input('text', 'country', null, ['class' => 'form-control', 'placeholder' => 'Country']) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        {{ Form::label('postcode', 'Postcode:', ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::input('text', 'postcode', null, ['class' => 'form-control', 'placeholder' => 'Postcode']) }}
+                            {{ Form::input('text', 'ni_number', null, ['class' => 'form-control', 'placeholder' => 'National Insurance Number']) }}
                         </div>
                     </div>
 

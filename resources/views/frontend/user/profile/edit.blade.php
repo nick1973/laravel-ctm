@@ -163,7 +163,11 @@
                         {{ Form::label('nrswa', 'Do you have qualifications under the NRSWA 1991?', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::select('nrswa', ['No' => 'No', 'Yes' => 'Yes'], null, ['class' => 'form-control',
-                            'id' => 'nrswa'])}}
+                            'id' => 'nrswa', 'onclick' => 'nrswaHideShow()'])}}
+                            <div id="nrswa_info" style="display: none">
+                                {{ Form::label('nrswa_date', 'NRSWA Expiry Date', ['class' => 'col-md-6 control-label']) }}
+                                {{ Form::input('date', 'nrswa_date', null, ['class' => 'form-control', 'placeholder' => 'Emergency Contact Mobile']) }}
+                            </div>
                         </div>
                     </div>
 
@@ -205,12 +209,12 @@
             $("#medical_conditions").change(function () {
                 var val = $(this).val();
                 if(val === "Yes") {
-                    console.log(val);
-                    $("#medical_conditions_info").show('fade');
+                    //console.log(val);
+                    $("#medical_conditions_info").show('fade').attr('required');
                 }
                 else if(val === "No"){
                     console.log(val);
-                    $("#medical_conditions_info").hide('fade');
+                    $("#medical_conditions_info").hide('fade').removeAttr('required');
                 }
             });
         }
@@ -225,6 +229,20 @@
                 else if(val === "No"){
                     console.log(val);
                     $("#convictions_info").hide('fade');
+                }
+            });
+        }
+
+        function nrswaHideShow() {
+            $("#nrswa").change(function () {
+                var val = $(this).val();
+                if(val === "Yes") {
+                    console.log(val);
+                    $("#nrswa_info").show('fade');
+                }
+                else if(val === "No"){
+                    console.log(val);
+                    $("#nrswa_info").hide('fade');
                 }
             });
         }

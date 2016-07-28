@@ -1,26 +1,26 @@
 <div role="tabpanel" class="tab-pane" id="money">
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
-            <th>Account Holder's Name</th>
-            <td class="address">{{ $user->address_line_1 }}</td>
-        </tr>
-        <tr>
-            <th>Account Number</th>
-            <td class="address">{{ $user->address_line_2 }}</td>
-        </tr>
-        <tr>
-            <th>Sort Code</th>
-            <td class="address">{{ $user->city }}</td>
-        </tr>
-        <tr>
-            <th>National Insurance Number</th>
-            <td class="address">{{ $user->county }}</td>
-        </tr>
-        <tr>
             <th>{{ trans('labels.general.actions') }}</th>
             <td>
                 {{ link_to_route('frontend.user.profile.edit_money', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
             </td>
+        </tr>
+        <tr>
+            <th>Account Holder's Name</th>
+            <td class="address">{{ $user->account_name }}</td>
+        </tr>
+        <tr>
+            <th>Account Number</th>
+            <td class="address">{{ $user->account_sort_code }}</td>
+        </tr>
+        <tr>
+            <th>Sort Code</th>
+            <td class="address">{{ $user->account_number }}</td>
+        </tr>
+        <tr>
+            <th>National Insurance Number</th>
+            <td class="address">{{ $user->ni_number }}</td>
         </tr>
     </table>
 </div><!--tab panel address-->
