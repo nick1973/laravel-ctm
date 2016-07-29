@@ -16,35 +16,46 @@
                             <li role="presentation" class="active">
                                 <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}
                                     <span id="myInfo">
-                                    <img src="/img/green-tick.png" height="18px">
-                                </span></a>
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
                                 <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address
                                     <span id="address_tick">
-                                    <img src="/img/green-tick.png" height="18px">
-                                </span></a>
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
                                 <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details
                                     <span id="reference_tick">
-                                    <img src="/img/green-tick.png" height="18px">
-                                </span></a>
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                    <span id="character_reference_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
                                 <a href="#righttowork" aria-controls="righttowork" role="tab" data-toggle="tab">Right To Work
                                     <span id="righttowork_tick" class="hidden">
-                                    <img src="/img/green-tick.png" height="18px">
-                                </span></a>
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
                                 <a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit
-                                    <span id="money_tick">
-                                    <img src="/img/green-tick.png" height="18px">
-                                </span></a>
+                                    <span id="account_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents</a>
+                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents
+                                    <span id="documents_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span></a>
                             </li>
                             <li role="presentation">
                                 <a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>
@@ -58,6 +69,7 @@
                             @include('frontend.includes.reference')
                             @include('frontend.includes.righttowork')
                             @include('frontend.includes.money')
+                            @include('frontend.includes.documents')
 
 
 

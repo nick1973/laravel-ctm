@@ -6,6 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}" />
 
+        {{--DROPZONE--}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+
+
+        {{--DROPZONE-END--}}
+
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
@@ -92,9 +99,22 @@
         @if (access()->hasRole('Administrator') || access()->hasRole('User'))
                 <div class="jumbotron">
                     <div class="container">
-                        <h1>Welcome back {{ access()->user()->name }}.</h1>
-                        <p>You can view and edit your profile below.</p>
-                        <p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>
+                        <div class="col-md-6">
+                            <h1>Welcome back to your profile {{ access()->user()->name }}.</h1>
+                            <p>You can view and edit your profile below.</p>
+                            {{--<p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>--}}
+                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                New to CTM? Learn more &raquo;
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <br/>
+                            @if(access()->user()->photo)
+                            <img src="/{{ access()->user()->photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">
+                                @else
+                                <img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />
+                            @endif
+                        </div>
                     </div>
                 </div>
             @else
@@ -122,5 +142,23 @@
         @yield('after-scripts-end')
 
         @include('includes.partials.ga')
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">About CTM</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Emma's Ideas.</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

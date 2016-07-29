@@ -149,7 +149,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {{ Form::submit('Save Address', ['class' => 'btn btn-primary']) }}
+                                {{ Form::submit('Save Right to Work', ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
                         {{ Form::close() }}

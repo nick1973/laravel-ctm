@@ -1,3 +1,12 @@
+<script>
+    function showAlert() {
+        $(".alert").addClass("fade");
+    }
+
+    window.setTimeout(function () {
+        showAlert('hide');
+    }, 3000);
+</script>
 @if ($errors->any())
     <div class="alert alert-danger">
         @foreach ($errors->all() as $error)

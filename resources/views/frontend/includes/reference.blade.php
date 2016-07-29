@@ -96,44 +96,44 @@
                             </tr>
                             <tr>
                                 <th>Character Referee Name</th>
-                                <td class="reference">{{ $ref->ref_char_name }}</td>
+                                <td class="character_reference">{{ $ref->ref_char_name }}</td>
                             </tr>
                             <tr>
                                 <th>How do you know your Character Referee?</th>
-                                <td class="reference">{{ $ref->ref_char_how_know }}</td>
+                                <td class="character_reference">{{ $ref->ref_char_how_know }}</td>
                             </tr>
                             <tr>
                                 <th>Character Referee Company</th>
-                                <td class="reference">{{ $ref->ref_char_company }}</td>
+                                <td class="character_reference">{{ $ref->ref_char_company }}</td>
                             </tr>
                             <tr>
                                 <th>Character Referee Phone Number</th>
-                                <td class="reference">{{ $ref->ref_char_phone_number }}</td>
+                                <td class="character_reference">{{ $ref->ref_char_phone_number }}</td>
                             </tr>
 
                             <tr>
                                 <th>Number & Street</th>
-                                <td class="reference">{{ $ref->ref_character_address_line_1 }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_address_line_1 }}</td>
                             </tr>
                             <tr>
                                 <th>Area / Region</th>
-                                <td class="reference">{{ $ref->ref_character_address_line_2 }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_address_line_2 }}</td>
                             </tr>
                             <tr>
                                 <th>Town / City</th>
-                                <td class="reference">{{ $ref->ref_character_city }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_city }}</td>
                             </tr>
                             <tr>
                                 <th>County</th>
-                                <td class="reference">{{ $ref->ref_character_county }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_county }}</td>
                             </tr>
                             <tr>
                                 <th>Country</th>
-                                <td class="reference">{{ $ref->ref_character_country }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_country }}</td>
                             </tr>
                             <tr>
                                 <th>Postcode</th>
-                                <td class="reference">{{ $ref->ref_character_postcode }}</td>
+                                <td class="character_reference">{{ $ref->ref_character_postcode }}</td>
                             </tr>
                         @endforeach
 
@@ -149,12 +149,35 @@
             .text( "Information Required!" )
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
+    $( "td.character_reference:empty" )
+            .text( "Information Required!" )
+            //.css( "background", "rgb(238,94,72)"
+            .addClass('bg-danger');
 
     $("td.reference.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#reference_tick").addClass('hidden');
-            console.log("has Class");
+        }
+
+    });
+
+    $("td.character_reference.bg-danger").each(function(){
+        if ($(this).hasClass('bg-danger')) {
+            $("#character_reference_tick").addClass('hidden');
         }
     });
+
+        $('#collapseTwo').each(function () {
+            if (!$("td.character_reference.bg-danger").hasClass('bg-danger')) {
+                $("#collapseTwo").collapse('show');
+            }
+        });
+
+        $('#collapseOne').each(function () {
+            if (!$("td.reference.bg-danger").hasClass('bg-danger')) {
+                $("#collapseOne").collapse('show');
+                console.log($(this));
+            }
+        })
 
 </script>

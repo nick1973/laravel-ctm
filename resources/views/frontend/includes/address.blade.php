@@ -1,9 +1,4 @@
 <div role="tabpanel" class="tab-pane" id="address">
-    {{--{!! Form::model($user,[--}}
-    {{--'method' => 'PATCH',--}}
-    {{--//'files'=>true,--}}
-    {{--'route' => ['dashboard.profile.update',$user->id],--}}
-    {{--'class' => 'form-horizontal']) !!}--}}
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
             <th>{{ trans('labels.general.actions') }}</th>

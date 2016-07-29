@@ -280,6 +280,7 @@ class EloquentUserRepository implements UserRepositoryContract
         if(array_key_exists('photo', $input) ){
             $user->photo = $input['photo'];
         }
+
         $user->name = $input['name'];
         $user->lastname = $input['lastname'];
         $user->mobile = $input['mobile'];

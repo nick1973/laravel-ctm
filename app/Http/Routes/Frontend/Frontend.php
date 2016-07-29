@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('profile/update_righttowork/{update_righttowork}', 'ProfileController@update_righttowork')->name('frontend.user.profile.update_righttowork');
 
         Route::get('profile/edit_money', 'ProfileController@edit_money')->name('frontend.user.profile.edit_money');
+        Route::get('profile/edit_documents', 'ProfileController@edit_documents')->name('frontend.user.profile.edit_documents');
+        Route::patch('profile/update_documents/{update_documents}', 'ProfileController@update_documents')->name('frontend.user.profile.update_documents');
+        Route::post('profile/upload_documents', 'ProfileController@upload_documents')->name('frontend.user.profile.upload_documents');
 
     });
 });

@@ -39,6 +39,12 @@ class CreateReferencesTable extends Migration
             $table->string('ref_character_country');
             $table->string('ref_character_postcode');
 
+//            DOCUMENTS
+            $table->string('passport_photo');
+            $table->string('passport_photo_page');
+            $table->string('birth_cert');
+            $table->string('ni_card');
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at');
 

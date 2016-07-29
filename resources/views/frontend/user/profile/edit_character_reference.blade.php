@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Update Employer Reference</h4>
+                    <h4>Update Character Reference</h4>
                 </div>
 
                 <div class="panel-body">
@@ -89,10 +89,9 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            {{ Form::submit('Save Address', ['class' => 'btn btn-primary']) }}
+                            {{ Form::submit('Save Character Reference', ['class' => 'btn btn-primary']) }}
                         </div>
                     </div>
-
                     {{ Form::close() }}
                     @endforeach
                 </div><!--panel body-->
