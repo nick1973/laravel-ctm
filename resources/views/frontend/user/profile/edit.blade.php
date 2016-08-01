@@ -24,13 +24,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        {{ Form::label('photo', 'Photo:', ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            <img width="100px" alt="No Image" src="/{{ $user->photo }}">
-                            {!! Form::file('photo', ['class' => 'form-control',]) !!}
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--{{ Form::label('photo', 'Photo:', ['class' => 'col-md-4 control-label']) }}--}}
+                        {{--<div class="col-md-6">--}}
+                            {{--<img width="100px" alt="No Image" src="/{{ $user->photo }}">--}}
+                            {{--{!! Form::file('photo', ['class' => 'form-control',]) !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <div class="form-group">
                         {{ Form::label('name', 'First Name:', ['class' => 'col-md-4 control-label']) }}

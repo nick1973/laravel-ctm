@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
+use App\Services\Access\Access;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -134,9 +135,23 @@ class ProfileController extends Controller
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }
 
-    public function upload_documents(Request $request)
+    public function update_passport_photo_page(Request $request, $id)
     {
-        return $request;
+        $this->validate($request, [
+            'passport_photo_page' => 'mimes:jpg,jpeg,png'
+        ]);
+        $user = User::find($id);
+        $file = $request->file('file');
+
+        $file_name = $file->getClientOriginalName();
+
+        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
+
+        References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
+
+        $path = References::find(1);
+
+        return $path->passport_photo_page;
     }
 
     /**
@@ -144,41 +159,64 @@ class ProfileController extends Controller
      * @param $id
      * @return mixed
      */
-    public function update_documents(Request $request, $id)
+    public function update_passport_photo(Request $request, $id)
     {
+        $this->validate($request, [
+            'passport_photo' => 'mimes:jpg,jpeg,png'
+        ]);
         $user = User::find($id);
+        $file = $request->file('file');
 
-        if ($request->hasFile('passport_photo')) {
+        $file_name = $file->getClientOriginalName();
 
-            $input = $request->all();
-            $passport_photo_fileName = $request->file('passport_photo')->getClientOriginalName();
-            $passport_photo_page_fileName = $request->file('passport_photo_page')->getClientOriginalName();
-            $birth_cert_fileName = $request->file('birth_cert')->getClientOriginalName();
-            $ni_card_fileName = $request->file('ni_card')->getClientOriginalName();
+        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo', $file_name);
 
-            $request->file('passport_photo')->move('docs/'. $user->name . $user->lastname . '.' . Carbon::now()->formatLocalized('%d %B %Y'), $passport_photo_fileName);
-            $request->file('passport_photo_page')->move('docs/'. $user->name . $user->lastname . '.' . Carbon::now()->formatLocalized('%d %B %Y'), $passport_photo_page_fileName);
-            $request->file('birth_cert')->move('docs/'. $user->name . $user->lastname . '.' . Carbon::now()->formatLocalized('%d %B %Y'), $birth_cert_fileName);
-            $request->file('ni_card')->move('docs/'. $user->name . $user->lastname . '.' . Carbon::now()->formatLocalized('%d %B %Y'), $ni_card_fileName);
+        References::where('user_id', $user->id)->update(['passport_photo' => $file_path]);
+        $user->update(['photo' => $file_path]);
+        $path = References::find(1);
 
-//            array_pull($input, 'passport_photo');
-//            array_pull($input, 'passport_photo_page');
-//            array_pull($input, 'birth_cert');
-//            array_pull($input, 'ni_card');
-//
-//            array_add($input, 'passport_photo', 'public/docs/'.$user->name.$user->lastname.'.'.Carbon::now()->formatLocalized('%d %B %Y').'/'.$passport_photo_fileName);
-//            array_add($input, 'passport_photo_page', 'public/docs/'.$user->name.$user->lastname.'.'.Carbon::now()->formatLocalized('%d %B %Y').'/'.$passport_photo_page_fileName);
-//            array_add($input, 'birth_cert', 'public/docs/'.$user->name.$user->lastname.'.'.Carbon::now()->formatLocalized('%d %B %Y').'/'.$birth_cert_fileName);
-//            array_add($input, 'ni_card', 'public/docs/'.$user->name.$user->lastname.'.'.Carbon::now()->formatLocalized('%d %B %Y').'/'.$ni_card_fileName);
+        return $user->photo;
 
+    }
 
-            //$reference = References::where('user_id', $id)->update($add_docs);
+    public function update_birth_cert(Request $request, $id)
+    {
+        $this->validate($request, [
+            'birth_cert' => 'mimes:jpg,jpeg,png'
+        ]);
+        $user = User::find($id);
+        $file = $request->file('file');
 
-            //return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
-            return $input;
-        }
-        //dd($request->all());
-        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        $file_name = $file->getClientOriginalName();
+
+        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/birth_cert', $file_name);
+
+        References::where('user_id', $user->id)->update(['birth_cert' => $file_path]);
+
+        $path = References::find(1);
+
+        return $path->passport_photo;
+
+    }
+
+    public function update_ni_card(Request $request, $id)
+    {
+        $this->validate($request, [
+            'ni_card' => 'mimes:jpg,jpeg,png'
+        ]);
+        $user = User::find($id);
+        $file = $request->file('file');
+
+        $file_name = $file->getClientOriginalName();
+
+        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
+
+        References::where('user_id', $user->id)->update(['ni_card' => $file_path]);
+
+        $path = References::find(1);
+
+        return $path->passport_photo;
+
     }
 
     /**

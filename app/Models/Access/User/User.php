@@ -22,7 +22,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['title', 'name', 'lasttname', 'mobile', 'dob', 'origin', 'gender', 'nationality', 'townofbirth',
+    protected $fillable = ['title', 'name', 'photo', 'lasttname', 'mobile', 'dob', 'origin', 'gender', 'nationality', 'townofbirth',
                             'countryofbirth', 'email', 'password', 'status', 'confirmation_code', 'confirmed',
                             'address_line_1', 'address_line_2', 'city', 'county', 'country', 'postcode',
                             'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan'];
@@ -32,8 +32,6 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Access\User\References');
     }
-
-
 
     /**
      * The attributes that should be hidden for arrays.

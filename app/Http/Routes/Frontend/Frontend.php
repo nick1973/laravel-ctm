@@ -26,8 +26,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('profile/edit_money', 'ProfileController@edit_money')->name('frontend.user.profile.edit_money');
         Route::get('profile/edit_documents', 'ProfileController@edit_documents')->name('frontend.user.profile.edit_documents');
-        Route::patch('profile/update_documents/{update_documents}', 'ProfileController@update_documents')->name('frontend.user.profile.update_documents');
-        Route::post('profile/upload_documents', 'ProfileController@upload_documents')->name('frontend.user.profile.upload_documents');
+        Route::post('profile/update_passport_photo_page/{id}', 'ProfileController@update_passport_photo_page')->name('frontend.user.profile.update_passport_photo_page');
+        Route::post('profile/update_passport_photo/{id}', 'ProfileController@update_passport_photo')->name('frontend.user.profile.update_passport_photo');
+        Route::post('profile/update_birth_cert/{id}', 'ProfileController@update_birth_cert')->name('frontend.user.profile.update_birth_cert');
+        Route::post('profile/update_ni_card/{id}', 'ProfileController@update_ni_card')->name('frontend.user.profile.update_ni_card');
 
     });
 });
