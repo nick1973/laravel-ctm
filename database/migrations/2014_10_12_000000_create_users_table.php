@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('visible');
             $table->string('photo');
             $table->string('title');
             $table->string('name');
@@ -53,6 +54,7 @@ class CreateUsersTable extends Migration
             $table->string('ni_number');
             $table->string('job_status');
             $table->string('student_loan');
+            $table->string('profile_confirmed');
 
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);

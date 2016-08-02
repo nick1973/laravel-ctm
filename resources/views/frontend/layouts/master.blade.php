@@ -117,6 +117,25 @@
                         </div>
                     </div>
                 </div>
+            @elseif(access()->hasRole('Executive'))
+                <div class="jumbotron">
+                    <div class="container">
+                        <div class="col-md-6">
+                            {{--<h1>Welcome to {{ access()->user()->name }}'s profile.</h1>--}}
+                            {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
+                            <h2>Managers Dashboard</h2>
+                            <a href="/dashboard/manager" class="btn btn-warning">Back to Dashboard</a>
+                        </div>
+                        <div class="col-md-6">
+
+                            {{--@if(access()->user()->photo)--}}
+                                {{--<img src="/{{ access()->user()->photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">--}}
+                            {{--@else--}}
+                                {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
+                            {{--@endif--}}
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="jumbotron">
                     <div class="container">

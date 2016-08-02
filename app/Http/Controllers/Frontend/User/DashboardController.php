@@ -22,6 +22,11 @@ class DashboardController extends Controller
     {
         $reference = References::where('user_id', access()->id())->get();
         $rt_work = RTWork::where('user_id', access()->id())->get();
+
+        if(access()->hasRole('Executive'))
+        {
+            return redirect('dashboard/manager');
+        }
         return view('frontend.user.dashboard', compact('reference', 'rt_work'))
             ->withUser(access()->user());
     }

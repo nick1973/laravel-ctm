@@ -25,7 +25,8 @@ class User extends Authenticatable
     protected $fillable = ['title', 'name', 'photo', 'lasttname', 'mobile', 'dob', 'origin', 'gender', 'nationality', 'townofbirth',
                             'countryofbirth', 'email', 'password', 'status', 'confirmation_code', 'confirmed',
                             'address_line_1', 'address_line_2', 'city', 'county', 'country', 'postcode',
-                            'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan'];
+                            'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan', 'profile_confirmed',
+                            'visible'];
 
 
     public function references()

@@ -1,6 +1,7 @@
 <div role="tabpanel" class="tab-pane active" id="profile">
+
     <table class="table table-striped table-hover table-bordered dashboard-table">
-        {{--@role(!'Executive')--}}
+        @role(!'Executive')
             <tr>
                 <th>{{ trans('labels.general.actions') }}</th>
                 <td>
@@ -11,7 +12,7 @@
                     @endif
                 </td>
             </tr>
-        {{--@endauth--}}
+        @endauth
         <tr>
             <th>Title</th>
             @if(isset($user->title))
@@ -101,6 +102,7 @@
             <td>{{ $user->updated_at }} ({{ $user->updated_at->diffForHumans() }})</td>
         </tr>
     </table>
+
 </div><!--tab panel profile-->
 
 <script>

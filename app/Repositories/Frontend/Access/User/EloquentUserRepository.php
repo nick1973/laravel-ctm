@@ -80,7 +80,7 @@ class EloquentUserRepository implements UserRepositoryContract
         //$dob = date_format($data['dob'],"d/m/Y");
         if ($provider) {
             $user = User::create([
-                //'title' => $data['title'],
+                'visible' => 1,
                 'name' => $data['name'],
                 'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
@@ -93,7 +93,7 @@ class EloquentUserRepository implements UserRepositoryContract
         } else {
 
             $user = User::create([
-                //'title' => $data['title'],
+                'visible' => 1,
                 'name' => $data['name'],
                 'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
