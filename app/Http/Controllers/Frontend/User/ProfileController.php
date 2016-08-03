@@ -14,6 +14,7 @@ use App\Models\Access\User\User;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Lodge\Postcode\Facades\Postcode;
 
 /**
  * Class ProfileController
@@ -34,7 +35,38 @@ class ProfileController extends Controller
     public function edit_address()
     {
         $apikey = 'AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs';
-        return view('frontend.user.profile.edit_address', compact('apikey'))
+        $address = [
+            'street'=>'',
+            'town'=>'',
+            'county'=>'',
+            'country'=>'',
+            'postcode'=>''
+        ];
+
+        return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+            ->withUser(access()->user());
+    }
+
+    public function get_postcode(Request $request)
+    {
+        $postcode = $request->input('postcode');
+        $apikey = 'AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs';
+        $address = Postcode::lookup($postcode);
+        if($postcode=='' || empty($address))
+        {
+            $address = [
+                'street'=>'',
+                'town'=>'',
+                'county'=>'',
+                'country'=>'',
+                'postcode'=>''
+            ];
+            return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+                ->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        }
+        //return $address;
+
+        return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
             ->withUser(access()->user());
     }
 

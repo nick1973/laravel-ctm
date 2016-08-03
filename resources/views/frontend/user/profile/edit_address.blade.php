@@ -1,35 +1,6 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-    <?php
-    $url = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=le91rr&key='.$apikey);
-    $json = json_decode($url);
-
-            foreach ($json->results as $result)
-                {
-                    foreach ($result->address_components as $obj)
-                        {
-                            $address[] = [
-                                    $obj->long_name
-                            ];
-                        }
-                }
-                print_r($address);
-    ?>
-
-    <script>
-        $( document ).ready(function() {
-            console.log( "ready!" );
-
-            $("button").click(function(){
-                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=le91rr&key={{$apikey}}", function(result){
-                    $.each(result, function(i, field){
-                        $("div").append(field + " ");
-                    });
-                });
-            });
-        });
-    </script>
 
     <div class="row">
 
@@ -41,50 +12,61 @@
                 </div>
 
                 <div class="panel-body">
-                    <button id="buttonAddress">Click</button>
-                    <div id="postcodeAdd">Address</div>
 
+                    {!! Form::open(array('url' => '/profile/get_postcode','class'=>'form-inline')) !!}
+                        <div class="form-group">
+                            <label class="sr-only">Postcode</label>
+                            <p class="form-control-static">Postcode</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword2" class="sr-only">Postcode</label>
+                            <input type="text" class="form-control" id="postcode" name="postcode" required>
+                        </div>
+                        <button type="submit" class="btn btn-default">Auto Fill Address</button>
+                        {!! Form::close() !!}
+
+                    <br/>
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
 
                     <div class="form-group">
-                        {{ Form::label('address_line_1', 'Number & Street:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('address_line_1', 'House Number/Name:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'address_line_1', null, ['class' => 'form-control', 'placeholder' => 'Number & Street']) }}
+                            {{ Form::input('text', 'address_line_1', null, ['class' => 'form-control', 'placeholder' => 'House Number/Name']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('address_line_2', 'Area / Region:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('address_line_2', 'Street:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'address_line_2', null, ['class' => 'form-control', 'placeholder' => 'Area / Region']) }}
+                            {{ Form::input('text', 'address_line_2', $address['street'], ['class' => 'form-control', 'placeholder' => 'Street']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('city', 'Town / City:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'city', null, ['class' => 'form-control', 'placeholder' => 'Town / City']) }}
+                            {{ Form::input('text', 'city', $address['town'], ['class' => 'form-control', 'placeholder' => 'Town / City']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('county', 'County:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'county', null, ['class' => 'form-control', 'placeholder' => 'County']) }}
+                            {{ Form::input('text', 'county', $address['county'], ['class' => 'form-control', 'placeholder' => 'County']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('country', 'Country:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'country', null, ['class' => 'form-control', 'placeholder' => 'Country']) }}
+                            {{ Form::input('text', 'country', $address['country'], ['class' => 'form-control', 'placeholder' => 'Country']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('postcode', 'Postcode:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'postcode', null, ['class' => 'form-control', 'placeholder' => 'Postcode']) }}
+                            {{ Form::input('text', 'postcode', $address['postcode'], ['class' => 'form-control', 'placeholder' => 'Postcode']) }}
                         </div>
                     </div>
 
