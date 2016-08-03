@@ -1,20 +1,15 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
     <div class="row">
-
         <div class="col-md-10 col-md-offset-1">
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>Your Bank Details</h4>
                 </div>
-
                 <div class="panel-body">
-
-                    {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
-
+                    {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH',
+                                            'id' => 'addressForm']) }}
                     <div class="form-group">
                         {{ Form::label('account_name', 'Account Holder\'s Name:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
@@ -25,14 +20,16 @@
                     <div class="form-group">
                         {{ Form::label('account_sort_code', 'Account Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'account_sort_code', null, ['class' => 'form-control', 'placeholder' => 'Account Number']) }}
+                            {{ Form::input('text', 'account_sort_code', null, ['class' => 'form-control', 'placeholder' => 'Account Number',
+                                                                                'id' => 'account_number', 'max' => 8]) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('account_number', 'Sort Code:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'account_number', null, ['class' => 'form-control', 'placeholder' => 'Sort Code']) }}
+                            {{ Form::input('text', 'account_number', null, ['class' => 'form-control', 'placeholder' => 'Sort Code',
+                                                                            'id' => 'sortcode_number']) }}
                         </div>
                     </div>
 
@@ -80,11 +77,13 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            {{ Form::submit('Save Details', ['class' => 'btn btn-primary']) }}
+                            {{--{{ Form::submit('Save Details', ['class' => 'btn btn-primary']) }}--}}
                         </div>
                     </div>
 
                     {{ Form::close() }}
+
+                    <button id="checkAccount" class="btn btn-primary">Save Details</button>
 
                 </div><!--panel body-->
 

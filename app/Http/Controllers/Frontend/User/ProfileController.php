@@ -61,8 +61,9 @@ class ProfileController extends Controller
                 'country'=>'',
                 'postcode'=>''
             ];
-            return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
-                ->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+            return redirect()->route('frontend.user.profile.edit_address',compact('apikey', 'address'))->withErrors('Postcode Returned No Results');
+            //return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+                //->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         }
         //return $address;
 
