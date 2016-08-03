@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Access\User\References');
     }
 
+    public function been_changed()
+    {
+        return User::getDirty();
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -28,7 +28,9 @@ class ManagerController extends Controller
         $reference = References::where('user_id', $id)->get();
         $rt_work = RTWork::where('user_id', $id)->get();
 
-        return view('frontend.manager.user_dashboard', compact('user', 'reference', 'rt_work'));
+        $dirty = $user->getDirty();
+        //return $dirty;
+        return view('frontend.manager.user_dashboard', compact('user', 'reference', 'rt_work', 'dirty'));
     }
 
     function update(Request $request, $id)

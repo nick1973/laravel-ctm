@@ -33,7 +33,8 @@ class ProfileController extends Controller
 
     public function edit_address()
     {
-        return view('frontend.user.profile.edit_address')
+        $apikey = 'AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs';
+        return view('frontend.user.profile.edit_address', compact('apikey'))
             ->withUser(access()->user());
     }
 

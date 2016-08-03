@@ -1,6 +1,35 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+    <?php
+    $url = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=le91rr&key='.$apikey);
+    $json = json_decode($url);
+
+            foreach ($json->results as $result)
+                {
+                    foreach ($result->address_components as $obj)
+                        {
+                            $address[] = [
+                                    $obj->long_name
+                            ];
+                        }
+                }
+                print_r($address);
+    ?>
+
+    <script>
+        $( document ).ready(function() {
+            console.log( "ready!" );
+
+            $("button").click(function(){
+                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=le91rr&key={{$apikey}}", function(result){
+                    $.each(result, function(i, field){
+                        $("div").append(field + " ");
+                    });
+                });
+            });
+        });
+    </script>
 
     <div class="row">
 
@@ -12,6 +41,8 @@
                 </div>
 
                 <div class="panel-body">
+                    <button id="buttonAddress">Click</button>
+                    <div id="postcodeAdd">Address</div>
 
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
 

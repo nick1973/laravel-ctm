@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
                     <div role="tabpanel">
-
+                            {{--{{ dd($dirty) }}--}}
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
