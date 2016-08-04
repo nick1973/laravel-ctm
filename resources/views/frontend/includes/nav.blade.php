@@ -37,7 +37,7 @@
 
                 @if (access()->guest())
                     {{--<li>{{ link_to('login', trans('navs.frontend.login')) }}</li>--}}
-                    {{--<li>{{ link_to('register', trans('navs.frontend.register')) }}</li>--}}
+{{--                    <li>{{ link_to('register', trans('navs.frontend.register')) }}</li>--}}
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -65,7 +65,7 @@
                 @endif
             </ul>
             @if(access()->guest())
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="">
                         {{ Form::open(['route' => 'auth.login', 'class' => 'navbar-form navbar-right']) }}
                         <div class="form-group">
                             <input name="email" type="text" placeholder="Email" class="form-control">
@@ -74,6 +74,11 @@
                             <input name="password" type="password" placeholder="Password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-success">Sign in</button>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                {{ link_to('password/reset', trans('labels.frontend.passwords.forgot_password')) }}
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
                     </form>
                 </div><!--/.navbar-collapse -->
             @endif

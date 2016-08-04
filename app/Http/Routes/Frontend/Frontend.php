@@ -3,7 +3,8 @@
 /**
  * Frontend Controllers
  */
-Route::get('/', 'User\DashboardController@index')->name('frontend.index');
+//Route::get('/', 'User\DashboardController@index')->name('frontend.index');
+Route::get('/', 'FrontendController@index')->name('frontend.index');
 Route::get('macros', 'FrontendController@macros')->name('frontend.macros');
 
 /**

@@ -29,7 +29,7 @@ class ManagerController extends Controller
         $rt_work = RTWork::where('user_id', $id)->get();
 
         $dirty = $user->getDirty();
-        //return $dirty;
+        return $dirty;
         return view('frontend.manager.user_dashboard', compact('user', 'reference', 'rt_work', 'dirty'));
     }
 

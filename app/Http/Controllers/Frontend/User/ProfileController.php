@@ -15,6 +15,7 @@ use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Lodge\Postcode\Facades\Postcode;
+use phpDocumentor\Reflection\Types\Object_;
 
 /**
  * Class ProfileController
@@ -107,10 +108,35 @@ class ProfileController extends Controller
 
     public function update_righttowork(Request $request, $id)
     {
+        $reference = RTWork::where('user_id', $id)->get();
+        foreach ($reference as $results)
+        {
+            $rtw = RTWork::find($results->id);
+        }
         $input = $request->except(['_method', '_token']);
         DB::table('rt_work')
             ->where('user_id', $id)
             ->update($input);
+
+        $rtw->work_status = $request->input('work_status');
+        $rtw->student = $request->input('student');
+        $rtw->teaching_establishment = $request->input('teaching_establishment');
+        $rtw->autumn_term_starts = $request->input('autumn_term_starts');
+        $rtw->autumn_term_ends = $request->input('autumn_term_ends');
+        $rtw->spring_term_starts = $request->input('spring_term_starts');
+        $rtw->spring_term_ends = $request->input('spring_term_ends');
+        $rtw->summer_term_starts = $request->input('summer_term_starts');
+        $rtw->summer_term_ends = $request->input('summer_term_ends');
+
+        $dirty = $rtw->getDirty();
+
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['rtw_dirty' => $dirty]);
+        }
+
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         //return $input;
     }
@@ -122,12 +148,47 @@ class ProfileController extends Controller
      */
     public function update_employer_reference(Request $request, $id)
     {
+        $reference = References::where('user_id', $id)->get();
+        foreach ($reference as $results)
+        {
+            $ref = References::find($results->id);
+        }
         $input = $request->except(['_method', '_token']);
+        $ref->ref_job_title = $request->input('ref_job_title');
+        $ref->ref_employed_from = $request->input('ref_employed_from');
+        $ref->ref_employed_to = $request->input('ref_employed_to');
+        $ref->ref_company_name = $request->input('ref_company_name');
+        $ref->ref_contact = $request->input('ref_contact');
+        $ref->ref_phone_number = $request->input('ref_phone_number');
+        $ref->ref_employer_address_line_1 = $request->input('ref_employer_address_line_1');
+        $ref->ref_employer_address_line_2 = $request->input('ref_employer_address_line_2');
+        $ref->ref_employer_city = $request->input('ref_employer_city');
+        $ref->ref_employer_county = $request->input('ref_employer_county');
+        $ref->ref_employer_country = $request->input('ref_employer_country');
+        $ref->ref_employer_postcode = $request->input('ref_employer_postcode');
+        $ref->ref_char_name = $request->input('ref_char_name');
+        $ref->ref_char_how_know = $request->input('ref_char_how_know');
+        $ref->ref_char_company = $request->input('ref_char_company');
+        $ref->ref_char_phone_number = $request->input('ref_char_phone_number');
+        $ref->ref_character_address_line_1 = $request->input('ref_character_address_line_1');
+        $ref->ref_character_address_line_2 = $request->input('ref_character_address_line_2');
+        $ref->ref_character_city = $request->input('ref_character_city');
+        $ref->ref_character_county = $request->input('ref_character_county');
+        $ref->ref_character_country = $request->input('ref_character_country');
+        $ref->ref_character_postcode = $request->input('ref_character_postcode');
         DB::table('references')
             ->where('user_id', $id)
             ->update($input);
+
+        $dirty = $ref->getDirty();
+
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['reference_dirty' => $dirty]);
+        }
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
-        //return $input;
     }
 
     /**
@@ -137,8 +198,25 @@ class ProfileController extends Controller
      */
     public function update_address(Request $request, $id)
     {
-        $user = User::find($id);
         $input = $request->all();
+        $user = User::find($id);
+        $user->address_line_1 = $request->input('address_line_1');
+        $user->address_line_2 = $request->input('address_line_2');
+        $user->city = $request->input('city');
+        $user->county = $request->input('county');
+        $user->country = $request->input('country');
+        $user->postcode = $request->input('postcode');
+
+        $dirty = $user->getDirty();
+
+        if($dirty!=[]){
+            $dirty = json_encode($dirty, true);
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['address_dirty' => $dirty]);
+            //return "saved" . $dirty;
+        }
+
         $user->fill($input)->save();
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }
@@ -175,6 +253,12 @@ class ProfileController extends Controller
             'passport_photo_page' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
+        $reference = References::where('user_id', $id)->get();
+        foreach ($reference as $results)
+        {
+            $ref = References::find($results->id);
+        }
+
         $file = $request->file('file');
 
         $file_name = $file->getClientOriginalName();
@@ -184,6 +268,18 @@ class ProfileController extends Controller
         References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
 
         $path = References::find(1);
+/////////////////////////////////////////////////////
+        $ref->passport_photo = $request->file('file');
+
+        $dirty = $ref->getDirty();
+
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['docs_dirty' => $dirty]);
+        }
+        ///////////////////////////////////////////////////////////
 
         return $path->passport_photo_page;
     }

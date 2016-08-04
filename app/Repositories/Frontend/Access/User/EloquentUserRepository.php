@@ -312,11 +312,19 @@ class EloquentUserRepository implements UserRepositoryContract
                 if ($this->findByEmail($input['email'])) {
                     throw new GeneralException(trans('exceptions.frontend.auth.email_taken'));
                 }
-
                 $user->email = $input['email'];
             }
         }
 
+        //$user->dirty($id);
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['dirty' => $dirty]);
+            return "NOT EMPTY" . $dirty;
+        }
         return $user->save();
     }
 

@@ -15,6 +15,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('visible');
+            $table->text('dirty');
+            $table->text('address_dirty');
+            $table->text('reference_dirty');
+            $table->text('rtw_dirty');
+            $table->text('docs_dirty');
             $table->string('photo');
             $table->string('title');
             $table->string('name');

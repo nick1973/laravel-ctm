@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Access\User\Traits\Attribute\UserAttribute;
 use App\Models\Access\User\Traits\Relationship\UserRelationship;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class User
@@ -26,7 +27,7 @@ class User extends Authenticatable
                             'countryofbirth', 'email', 'password', 'status', 'confirmation_code', 'confirmed',
                             'address_line_1', 'address_line_2', 'city', 'county', 'country', 'postcode',
                             'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan', 'profile_confirmed',
-                            'visible'];
+                            'visible', 'dirty', 'address_dirty', 'reference_dirty', 'rtw_dirty', 'docs_dirty'];
 
 
     public function references()
@@ -34,9 +35,17 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Access\User\References');
     }
 
-    public function been_changed()
+    public function dirty($id)
     {
-        return User::getDirty();
+        $user = User::find($id);
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if(!empty($dirty)){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['dirty' => $dirty]);
+        }
+        return $dirty;
     }
 
     /**
