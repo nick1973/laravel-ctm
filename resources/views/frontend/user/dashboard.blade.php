@@ -14,7 +14,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}
+                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">General Info
                                     <span id="myInfo">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">Reference Details
+                                <a href="#reference" aria-controls="reference" role="tab" data-toggle="tab">References
                                     <span id="reference_tick">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
@@ -52,13 +52,20 @@
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents
-                                    <span id="documents_tick">
+                                <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Docs
+                                    <span id="gp1_tick">
                                         <img src="/img/green-tick.png" height="18px">
-                                    </span></a>
+                                    </span>
+                                    <span id="gp2_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
                             </li>
                             <li role="presentation">
                                 <a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
                             </li>
                         </ul>
 
@@ -70,6 +77,8 @@
                             @include('frontend.includes.righttowork')
                             @include('frontend.includes.money')
                             @include('frontend.includes.documents')
+
+                            @include('frontend.includes.submit_application')
 
 
 

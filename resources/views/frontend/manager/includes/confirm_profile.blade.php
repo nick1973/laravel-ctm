@@ -15,7 +15,7 @@
         </div>
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-1">
-                    {{ Form::submit('Save Address', ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
                 </div>
             </div>
     </form>

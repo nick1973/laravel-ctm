@@ -8,6 +8,7 @@
                     <h4>Upload Documents</h4>
                 </div>
                 <div class="panel-body">
+                    <a href="/dashboard" class="btn btn-primary">Back</a>
                     <div class="form-group col-md-12">
                         {{ Form::label('passport_photo', 'Passport Style Photo:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-12">
@@ -17,14 +18,14 @@
                                   id="passportPhoto">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h4>Please drop your passport photo here!</h4>
+                                    <h4>Click or drag and drop your passport photo here!</h4>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <h4>Please provide documents from either group A or B.</h4>
+                    <h2>Please provide documents from either group A or B.</h2>
                     <hr>
-                    <h4>Group A:</h4>
+                    <h3>Group A:</h3>
                     <div class="form-group col-md-12">
                         {{ Form::label('passport_photo_page', 'Photo Page of Passport:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-12">
@@ -34,12 +35,13 @@
                                   id="my-awesome-dropzone">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h4>Please drop a Photo of your photo page of passport here!</h4>
+                                    <h4>Click or drag and drop a Photo of your photo page of passport here!</h4>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <h4>Group B:</h4>
+                    <h3>Group B:</h3>
+                    <hr>
                     <div class="form-group col-md-12">
                         {{ Form::label('birth_cert', 'Birth Certificate:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-12">
@@ -49,7 +51,7 @@
                                   id="my-awesome-dropzone">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h4>Please drop a Photo of your Birth Certificate here!</h4>
+                                    <h4>Click or drag and drop a Photo of your Birth Certificate here!</h4>
                                 </div>
                             </form>
                         </div>
@@ -64,7 +66,7 @@
                                   id="my-awesome-dropzone">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h4>Please drop a Photo of your National Insurance Document / Card here!</h4>
+                                    <h4>Click or drag and drop a Photo of your National Insurance Document / Card here!</h4>
                                 </div>
                             </form>
                         </div>

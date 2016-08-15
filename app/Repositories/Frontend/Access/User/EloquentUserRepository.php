@@ -315,15 +315,12 @@ class EloquentUserRepository implements UserRepositoryContract
                 $user->email = $input['email'];
             }
         }
-
-        //$user->dirty($id);
         $dirty = $user->getDirty();
         $dirty = json_encode($dirty, true);
         if($dirty!="[]"){
             DB::table('users')
                 ->where('id', $id)
                 ->update(['dirty' => $dirty]);
-            return "NOT EMPTY" . $dirty;
         }
         return $user->save();
     }

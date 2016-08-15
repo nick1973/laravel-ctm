@@ -1,5 +1,7 @@
 <div role="tabpanel" class="tab-pane" id="righttowork">
-
+    <div>
+        {{--{{ $user->rtw_dirty }}--}}
+    </div>
 
     <script>
         function visible(button, id) {
@@ -20,6 +22,7 @@
     </script>
     @foreach($rt_work as $ref)
     <div class="col-md-6">
+
         @if($ref->work_status=='UK Citizen')
             <script>
                 $("#righttowork_tick").removeClass('hidden');
@@ -27,6 +30,9 @@
             </script>
             <br/>
             <div id="collapseExample">
+                @if(strpos($user->rtw_dirty, 'work_status'))
+                    <p class="bg-success">{{ $ref->work_status }}</p>
+                @endif
                 <div class="well">
                     <h4>UK Citizen</h4>
                     <p>As you are a UK Citizen you automatically have the right to work in the UK, but you must supply one of the following:</p>
@@ -75,12 +81,15 @@
             <h4>Do you have the right to work in the UK?</h4>
         @endif
         <br/>
-        {{ link_to_route('frontend.user.profile.edit_righttowork', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+        {{--{{ link_to_route('frontend.user.profile.edit_righttowork', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}--}}
     </div>
 {{--COL TWO--}}
     <div class="col-md-6 form-group">
 
         <br/>
+        @if(strpos($user->rtw_dirty, 'student'))
+            <p class="bg-success">{{ $ref->student }}</p>
+        @endif
         <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
             Are you a student?
         </label>

@@ -84,17 +84,7 @@
         <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
             Are you a student?
         </label>
-        <div class="col-sm-1">
-                <div class="onoffswitch">
-                    <input name="student" type="hidden" value="No">
-                    <input type="checkbox" value="Yes" name="student" class="toggleBtn onoffswitch-checkbox" id="on-hold"
-                           onclick="visible(this.id,'ru_student')" <?php if($ref->student=='Yes') echo "checked" ?> disabled>
-                    <label for="on-hold" class="onoffswitch-label">
-                        <div class="onoffswitch-inner"></div>
-                        <div class="onoffswitch-switch"></div>
-                    </label>
-                </div>
-        </div>
+        <p>{{ $ref->student }}</p>
         <br/>
         <br/>
         <p>It is important that you answer the above question correctly as it may affect your tax code which could result in overpayment of tax.</p>

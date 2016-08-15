@@ -258,29 +258,19 @@ class ProfileController extends Controller
         {
             $ref = References::find($results->id);
         }
-
         $file = $request->file('file');
-
         $file_name = $file->getClientOriginalName();
-
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
-
         References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
-
         $path = References::find(1);
-/////////////////////////////////////////////////////
-        $ref->passport_photo = $request->file('file');
-
+        $ref->passport_photo_page = $file_name;
         $dirty = $ref->getDirty();
-
         $dirty = json_encode($dirty, true);
         if($dirty!="[]"){
             DB::table('users')
                 ->where('id', $id)
                 ->update(['docs_dirty' => $dirty]);
         }
-        ///////////////////////////////////////////////////////////
-
         return $path->passport_photo_page;
     }
 
@@ -296,17 +286,20 @@ class ProfileController extends Controller
         ]);
         $user = User::find($id);
         $file = $request->file('file');
-
         $file_name = $file->getClientOriginalName();
-
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo', $file_name);
-
         References::where('user_id', $user->id)->update(['passport_photo' => $file_path]);
         $user->update(['photo' => $file_path]);
         $path = References::find(1);
-
+        $user->passport_photo = $file_name;
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['docs_dirty' => $dirty]);
+        }
         return $user->photo;
-
     }
 
     public function update_birth_cert(Request $request, $id)
@@ -316,17 +309,19 @@ class ProfileController extends Controller
         ]);
         $user = User::find($id);
         $file = $request->file('file');
-
         $file_name = $file->getClientOriginalName();
-
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/birth_cert', $file_name);
-
         References::where('user_id', $user->id)->update(['birth_cert' => $file_path]);
-
         $path = References::find(1);
-
+        $user->birth_cert = $file_name;
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['docs_dirty' => $dirty]);
+        }
         return $path->passport_photo;
-
     }
 
     public function update_ni_card(Request $request, $id)
@@ -336,15 +331,18 @@ class ProfileController extends Controller
         ]);
         $user = User::find($id);
         $file = $request->file('file');
-
         $file_name = $file->getClientOriginalName();
-
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
-
         References::where('user_id', $user->id)->update(['ni_card' => $file_path]);
-
         $path = References::find(1);
-
+        $user->ni_card = $file_name;
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['docs_dirty' => $dirty]);
+        }
         return $path->passport_photo;
 
     }

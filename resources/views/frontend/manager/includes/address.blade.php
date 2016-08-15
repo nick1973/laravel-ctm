@@ -2,27 +2,51 @@
     <table class="table table-striped table-hover table-bordered dashboard-table">
         <tr>
             <th>Number & Street</th>
-            <td class="address">{{ $user->address_line_1 }}</td>
+            @if(strpos($user->address_dirty, 'address_line_1'))
+                <td class="bg-success address">{{ $user->address_line_1 }}</td>
+            @else
+                <td class="address">{{ $user->address_line_1 }}</td>
+            @endif
         </tr>
         <tr>
             <th>Area / Region</th>
-            <td class="address">{{ $user->address_line_2 }}</td>
+            @if(strpos($user->address_dirty, 'address_line_2'))
+                <td class="bg-success address">{{ $user->address_line_2 }}</td>
+            @else
+                <td class="address">{{ $user->address_line_2 }}</td>
+            @endif
         </tr>
         <tr>
             <th>Town / City</th>
-            <td class="address">{{ $user->city }}</td>
+            @if(strpos($user->address_dirty, 'address_line_2'))
+                <td class="bg-success address">{{ $user->city }}</td>
+            @else
+                <td class="address">{{ $user->city }}</td>
+            @endif
         </tr>
         <tr>
             <th>County</th>
-            <td class="address">{{ $user->county }}</td>
+            @if(strpos($user->address_dirty, 'county'))
+                <td class="bg-success address">{{ $user->county }}</td>
+            @else
+                <td class="address">{{ $user->county }}</td>
+            @endif
         </tr>
         <tr>
             <th>Country</th>
-            <td class="address">{{ $user->country }}</td>
+            @if(strpos($user->address_dirty, 'country'))
+                <td class="bg-success address">{{ $user->country }}</td>
+            @else
+                <td class="address">{{ $user->country }}</td>
+            @endif
         </tr>
         <tr>
             <th>Postcode</th>
-            <td class="address">{{ $user->postcode }}</td>
+            @if(strpos($user->address_dirty, 'postcode'))
+                <td class="bg-success address">{{ $user->postcode }}</td>
+            @else
+                <td class="address">{{ $user->postcode }}</td>
+            @endif
         </tr>
     </table>
 
