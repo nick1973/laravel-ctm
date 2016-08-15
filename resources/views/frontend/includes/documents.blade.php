@@ -56,7 +56,7 @@
 
     $("td.gp1.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
-            $("#gp2_tick").addClass('hidden');
+            $("#gp1_tick").addClass('hidden');
             console.log("has Class");
         }
     });
