@@ -14,7 +14,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">General Info
+                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">General
                                     <span id="myInfo">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
