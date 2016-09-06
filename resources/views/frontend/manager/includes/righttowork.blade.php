@@ -31,7 +31,7 @@
             <br/>
             <div id="collapseExample">
                 @if(strpos($user->rtw_dirty, 'work_status'))
-                    <p class="bg-success">{{ $ref->work_status }}</p>
+                    <p class="bg-success img-rounded text-center">{{ $ref->work_status }}</p>
                 @endif
                 <div class="well">
                     <h4>UK Citizen</h4>
@@ -88,7 +88,7 @@
 
         <br/>
         @if(strpos($user->rtw_dirty, 'student'))
-            <p class="bg-success">{{ $ref->student }}</p>
+            <p class="bg-success img-rounded text-center">{{ $ref->student }}</p>
         @endif
         <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
             Are you a student?

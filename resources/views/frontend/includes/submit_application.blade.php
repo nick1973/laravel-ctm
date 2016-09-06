@@ -1,11 +1,14 @@
 <div role="tabpanel" class="tab-pane" id="submit">
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <a href="#" class="btn btn-danger col-md-offset-6 ">Submit Application</a>
+    {{ Form::model($user, ['route' => ['frontend.user.profile.submit_profile', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH']) }}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>Once your application has been submitted it will be sent to the CTM admin team to be processed.</p>
+                <p>During this time you will no longer be able to edit your profile.</p>
+                <input name="confirmed" value="0" hidden>
+                {{ Form::submit('Submit Application', ['class' => 'btn btn-primary']) }}
+            </div>
         </div>
-    </div>
-
+    </form>
 </div><!--tab panel address-->
 <script>
 

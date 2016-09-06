@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Access\User\User;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Lodge\Postcode\Facades\Postcode;
@@ -104,6 +105,15 @@ class ProfileController extends Controller
     {
         return view('frontend.user.profile.edit_documents')
             ->withUser(access()->user());
+    }
+
+    public function submit_profile(Request $request, $id)
+    {
+        $user = User::find($id);
+        $input = $request->all();
+        $user->update($input);
+        Auth::logout();
+        return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');
     }
 
     public function update_righttowork(Request $request, $id)

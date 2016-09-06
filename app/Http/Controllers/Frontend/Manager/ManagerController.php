@@ -35,7 +35,8 @@ class ManagerController extends Controller
 
     function update(Request $request, $id)
     {
-        User::find($id)->update(['profile_confirmed' => $request['profile_confirmed']]);
+        $input = $request->all();
+        User::find($id)->update($input);
         return $this->index();
     }
 }

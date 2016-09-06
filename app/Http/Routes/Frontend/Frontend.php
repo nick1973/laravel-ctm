@@ -7,6 +7,8 @@
 Route::get('/', 'FrontendController@index')->name('frontend.index');
 Route::get('macros', 'FrontendController@macros')->name('frontend.macros');
 
+Route::post('/email', 'FrontendController@e_mail');
+
 /**
  * These frontend controllers require the user to be logged in
  */
@@ -37,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
             //Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
 
             Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
+
+            Route::patch('profile/submit_profile/{submit_profile}', 'ProfileController@submit_profile')->name('frontend.user.profile.submit_profile');
 
         });
 });

@@ -17,7 +17,8 @@
         "arcanedev/no-captcha": "~3.0",
         "spatie/laravel-backup": "^3.0",
         "yajra/laravel-datatables-oracle": "~6.0",
-        "lodge/postcode-lookup": "dev-master"
+        "lodge/postcode-lookup": "dev-master",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
