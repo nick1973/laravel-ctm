@@ -29,9 +29,9 @@ class FrontendController extends Controller
         $input = $request->all();
 
         Mail::send('emails.welcome', ['input'=>$input], function ($m) use ($input) {
-            $m->from('hello@app.com', 'Your Application');
+            $m->from('admin@ctm.uk.com', 'CTM Application');
 
-            $m->to('nick@ctm.uk.com', 'nick')->subject('Your Reminder!');
+            $m->to('nick@ctm.uk.com', 'nick')->subject('Your CTM Application!');
         });
     }
 
