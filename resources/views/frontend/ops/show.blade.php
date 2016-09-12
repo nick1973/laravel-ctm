@@ -668,7 +668,6 @@ echo $arr[1];
                 $scope.grade='';
                 $scope.pay='';
                 $scope.leeway='';
-                $scope.id='';
                 $scope.monday_start='';
                 $scope.mon_end='';
                 $scope.mon_sub_total='';
@@ -692,11 +691,11 @@ echo $arr[1];
                 $scope.sun_sub_total='';
             };
 
-            $scope.removeRow = function (id) {
+            $scope.removeRow = function (grade) {
                 var index = 0;
                 var comArr = eval($scope.specs);
                 for (var i = 0; i < comArr.length; i++) {
-                    if (comArr[i].id === id) {
+                    if (comArr[i].grade === grade) {
                         index = i;
                         break;
                     }

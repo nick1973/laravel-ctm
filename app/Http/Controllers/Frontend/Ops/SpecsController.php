@@ -73,37 +73,41 @@ class SpecsController extends Controller
             $specs = ['grade' => $grade,
                 'qty' => $qty,
                 'position' => $position,
-                'mon_start' => $mon_start,
-                'mon_end' => $mon_end,
-                'mon_sub_total' => $mon_sub_total,
-                'tues_start' => $tues_start,
-                'tues_end' => $tues_end,
-                'tues_sub_total' => $tues_sub_total,
-                'wed_start' => $wed_start,
-                'wed_end' => $wed_end,
-                'wed_sub_total' => $wed_sub_total,
-                'thur_start' => $thur_start,
-                'thur_end' => $thur_end,
-                'thur_sub_total' => $thur_sub_total,
-                'fri_start' => $fri_start,
-                'fri_end' => $fri_end,
-                'fri_sub_total' => $fri_sub_total,
-                'sat_start' => $sat_start,
-                'sat_end' => $sat_end,
-                'sat_sub_total' => $sat_sub_total,
-                'sun_start' => $sun_start,
-                'sun_end' => $sun_end,
-                'sun_sub_total' => $sun_sub_total
+                'monday_start' => $mon_start,
+                'monday_end' => $mon_end,
+                'monday_hours' => $mon_sub_total,
+                'tuesday_start' => $tues_start,
+                'tuesday_end' => $tues_end,
+                'tuesday_hours' => $tues_sub_total,
+                'wednesday_start' => $wed_start,
+                'wednesday_end' => $wed_end,
+                'wednesday_hours' => $wed_sub_total,
+                'thursday_start' => $thur_start,
+                'thursday_end' => $thur_end,
+                'thursday_hours' => $thur_sub_total,
+                'friday_start' => $fri_start,
+                'friday_end' => $fri_end,
+                'friday_hours' => $fri_sub_total,
+                'saturday_start' => $sat_start,
+                'saturday_end' => $sat_end,
+                'saturday_hours' => $sat_sub_total,
+                'sunday_start' => $sun_start,
+                'sunday_end' => $sun_end,
+                'sunday_hours' => $sun_sub_total
             ];
             //return $specs;
             $spec = new Specs($specs);
-            return $spec;
+            //return $specs;
             $event = Events::find($id);
             //DELETE ALL RECORDS WITH events_id of ID
             $event->spec()->delete();
 
             $event->spec()->save($spec);
-            //return $event->spec;
+            return redirect()->back();
+        } else{
+            $event = Events::find($id);
+            $event->spec()->delete();
+            return redirect()->back();
         }
     }
 }
