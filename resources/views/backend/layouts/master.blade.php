@@ -7,10 +7,11 @@
         <meta name="_token" content="{{ csrf_token() }}" />
 
         <title>@yield('title', app_name())</title>
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Meta -->
         <meta name="description" content="@yield('meta_description', 'Default Description')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+        {{--<meta name="author" content="@yield('meta_author', 'Anthony Rappa')">--}}
         @yield('meta')
 
         <!-- Styles -->

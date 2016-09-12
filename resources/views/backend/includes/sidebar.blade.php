@@ -54,6 +54,21 @@
                     </li>
                 </ul>
             </li>
+            {{--New for OPs--}}
+            <li class="{{ Active::pattern('admin/ops*') }} treeview">
+                <a href="#">
+                    <span>Ops Managers</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu {{ Active::pattern('admin/ops*', 'menu-open') }}" style="display: none; {{ Active::pattern('admin/ops*', 'display: block;') }}">
+                    <li class="{{ Active::pattern('admin/ops') }}">
+                        {{ link_to('admin/ops', 'Home') }}
+                    </li>
+                    <li class="{{ Active::pattern('admin/ops/pay_grade*') }}">
+                        {{ link_to('admin/ops/pay_grade', 'pay Grade') }}
+                    </li>
+                </ul>
+            </li>
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

@@ -23,6 +23,11 @@
                         <li>{{ link_to_route('frontend.user.dashboard', 'Profile Dashboard') }}</li>
                     </ul>
                 @endif
+                @if(access()->hasRole('OpsManager'))
+                    <ul class="nav navbar-nav">
+                        <li>{{ link_to_route('dashboard.ops.index', 'Ops Dashboard') }}</li>
+                    </ul>
+                @endif
             <ul class="nav navbar-nav navbar-right">
                 {{--@if (config('locale.status') && count(config('locale.languages')) > 1)--}}
                     {{--<li class="dropdown">--}}
@@ -45,7 +50,12 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>{{ link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard')) }}</li>
+                            @if(access()->hasRole('OpsManager'))
+                                    <li>{{ link_to_route('dashboard.ops.index', 'Ops Dashboard') }}</li>
+                                @else
+                                <li>{{ link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard')) }}</li>
+                            @endif
+
 
                             @if (access()->user()->canChangePassword())
                                 <li>{{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password')) }}</li>

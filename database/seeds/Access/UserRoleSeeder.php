@@ -38,6 +38,11 @@ class UserRoleSeeder extends Seeder
         $user_model = new $user_model;
         $user_model::find(3)->attachRole(3);
 
+        //Attach user role to OpsManager user
+        $user_model = config('auth.providers.users.model');
+        $user_model = new $user_model;
+        $user_model::find(3)->attachRole(3);
+
         if (DB::connection()->getDriverName() == 'mysql') {
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         }
