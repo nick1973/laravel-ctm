@@ -13,8 +13,8 @@ class Events extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function spec()
-    {
-        return $this->hasMany(Specs::class);
-    }
+//    public function spec()
+//    {
+//        return $this->hasMany(Specs::class);
+//    }
 }

@@ -13,15 +13,23 @@ Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
 
+Route::post('/specs', function (){
+    //$period = $_POST['events_id'];
+
+});
+
 Route::get('/event/{event}', function ($id) {
 
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
-    if($specs->isEmpty())
+    $grade = explode(',', $specs[0]->grade);
+
+    //return count($grade);
+    if(count($grade) <= 1)
     {
         return $specs;
     }
 
-    $grade = explode(',', $specs[0]->grade);
+    //$grade = explode(',', $specs[0]->grade);
     $qty = explode(',', $specs[0]->qty);
     $position = explode(',', $specs[0]->position);
     $monday_start = explode(',', $specs[0]->monday_start);
@@ -47,15 +55,7 @@ Route::get('/event/{event}', function ($id) {
     $sunday_hours = explode(',', $specs[0]->sunday_hours);
     $json = [];
 
-    $collection = collect($specs[0]->grade);
-
-    return $collection->count();
-
-    return count($specs);
-    if(count($specs)==1){
-        return $specs;
-    }
-    for($i=0; $i <= count($specs); $i++)
+    for($i=0; $i <= count($grade)-1; $i++)
     {
         array_push($json, ['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i],
             'mon_start' => $monday_start[$i], 'mon_end' => $monday_end[$i], 'mon_sub_total' => $monday_hours[$i],

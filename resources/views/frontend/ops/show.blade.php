@@ -20,8 +20,8 @@
         td{padding:5px 10px; height:35px;}
 
         .search-table-outter { overflow-x: scroll; }
-        th, td { min-width: 150px; }
-
+        th, td { min-width: 100px; }
+        .large { min-width: 150px; }
 
         .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
             background-color:#428bca;
@@ -33,14 +33,14 @@
             overflow-y:hidden;
             /*height:200px;*/
             width:100%;
-            padding: 0 15px 0 25px;
+            /*padding: 0 15px 0 0;*/
         }
 
         .DocumentItem
         {
             /*border:1px solid black;*/
-            padding:0;
             height:200px;
+            width: 400px;
         }
 
         .list-inline {
@@ -178,64 +178,84 @@ echo $arr[1];
 
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Monday Start</label>
-                                                <div class="col-md-5 col-lg-5">
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
                                                     <select onclick="day('mon')" id="mon_start" ng-model='monday_start'
                                                             class="form-control">
                                                         @foreach($arr as $time)
                                                             <option>{{ $time }}</option>
                                                         @endforeach
                                                     </select>
+                                                      <span class="input-group-btn">
+                                                        <button onclick="copyStart('mon')" class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Monday End</label>
-                                                <div class="col-md-5 col-lg-5">
-                                                    <select onclick="day('mon')" id="mon_end" ng-model='mon_end'
-                                                            class="form-control">
-                                                        @foreach($arr as $time)
-                                                            <option>{{ $time }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
+                                                        <select onclick="day('mon')" id="mon_start" ng-model='monday_start'
+                                                                class="form-control">
+                                                            @foreach($arr as $time)
+                                                                <option>{{ $time }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Sub Total</label>
-
-                                                <div class="col-md-5 col-lg-5">
+                                                <div class="col-md-4 col-lg-4">
                                                     <input type="text" class="form-control" id="mon_sub_total"
                                                            ng-model="mon_sub_total"/>
                                                 </div>
                                             </div>
                                         </li>
+
                                         <li class="DocumentItem">
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Tuesday Start</label>
-                                                <div class="col-md-5 col-lg-5">
-                                                    <select onclick="day('tues')" id="tues_start" ng-model='tues_start'
-                                                            class="form-control">
-                                                        @foreach($arr as $time)
-                                                            <option>{{ $time }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
+                                                        <select onclick="day('tues')" id="tues_start" ng-model='tues_start'
+                                                                class="form-control">
+                                                            @foreach($arr as $time)
+                                                                <option>{{ $time }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Tuesday End</label>
-                                                <div class="col-md-5 col-lg-5">
-                                                    <select onclick="day('tues')" id="tues_end" ng-model='tues_end'
-                                                            class="form-control">
-                                                        @foreach($arr as $time)
-                                                            <option>{{ $time }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
+                                                        <select onclick="day('tues')" id="tues_end" ng-model='tues_end'
+                                                                class="form-control">
+                                                            @foreach($arr as $time)
+                                                                <option>{{ $time }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="col-md-4 col-lg-4 control-label">Sub Total</label>
-
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" id="tues_sub_total"
                                                            ng-model="tues_sub_total"/>
@@ -244,34 +264,45 @@ echo $arr[1];
                                         </li>
                                         <li class="DocumentItem">
                                             <div class="form-group">
-                                                <label class="col-md-5 col-lg-5 control-label">Wednesday Start</label>
-                                                <div class="col-md-5 col-lg-5">
-                                                    <select onclick="day('wed')" id="wed_start" ng-model='wed_start'
-                                                            class="form-control">
-                                                        @foreach($arr as $time)
-                                                            <option>{{ $time }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <label class="col-md-4 col-lg-4 control-label">Wednesday Start</label>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
+                                                        <select onclick="day('wed')" id="tues_start" ng-model='wed_start'
+                                                                class="form-control">
+                                                            @foreach($arr as $time)
+                                                                <option>{{ $time }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-5 col-lg-5 control-label">Wednesday End</label>
-                                                <div class="col-md-5 col-lg-5">
-                                                    <select onclick="day('wed')" id="wed_end" ng-model='wed_end'
-                                                            class="form-control">
-                                                        @foreach($arr as $time)
-                                                            <option>{{ $time }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <label class="col-md-4 col-lg-4 control-label">Wednesday End</label>
+                                                <div class="col-md-6 col-lg-6">
+                                                    <div class="input-group">
+                                                        <select onclick="day('wed')" id="wed_end" ng-model='wed_end'
+                                                                class="form-control">
+                                                            @foreach($arr as $time)
+                                                                <option>{{ $time }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Copy>></button>
+                                                      </span>
+
+                                                    </div><!-- /input-group -->
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-5 col-lg-5 control-label">Sub Total</label>
+                                                <label class="col-md-4 col-lg-4 control-label">Sub Total</label>
 
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" id="wed_sub_total"
-                                                           ng-model="wed_sub_end"/>
+                                                           ng-model="wed_sub_total"/>
                                                 </div>
                                             </div>
                                         </li>
@@ -429,168 +460,175 @@ echo $arr[1];
 
 <div class="search-table-outter wrapper">
     {!! Form::model($event,[
-                            'method' => 'PATCH',
-                            'route' => ['dashboard.specs.update',$event->id],
-                            'class' => 'form-horizontal'])
+                            'method' => 'POST',
+                            'route' => ['dashboard.specs.store'],
+                            'class' => 'form-horizontal',
+                            'id'    => 'spec_rows'])
                             !!}
-    <table class="table search-table inner">
-        <thead>
-        <tr>
-            <th>Role</th>
-            <th>Qty</th>
-            <th>Position</th>
-            <th>Mon Start</th>
-            <th>Mon Finish</th>
-            <th>Mon hours</th>
+    {{--<form id="spec_rows">--}}
+        <input class="hidden" name="events_id" value="{{ $event->id }}">
+        <table class="table search-table inner">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Role</th>
+                <th>Qty</th>
+                <th>Position</th>
+                <th>Mon Start</th>
+                <th>Mon Finish</th>
+                <th>Mon hours</th>
 
-            <th>Tues Start</th>
-            <th>Tues Finish</th>
-            <th>Tues hours</th>
+                <th>Tues Start</th>
+                <th>Tues Finish</th>
+                <th>Tues hours</th>
 
-            <th>Wed Start</th>
-            <th>Wed Finish</th>
-            <th>Wed hours</th>
+                <th>Wed Start</th>
+                <th>Wed Finish</th>
+                <th>Wed hours</th>
 
-            <th>Thur Start</th>
-            <th>Thur Finish</th>
-            <th>Thur hours</th>
+                <th>Thur Start</th>
+                <th>Thur Finish</th>
+                <th>Thur hours</th>
 
-            <th>Fri Start</th>
-            <th>Fri Finish</th>
-            <th>Fri hours</th>
+                <th>Fri Start</th>
+                <th>Fri Finish</th>
+                <th>Fri hours</th>
 
-            <th>Sat Start</th>
-            <th>Sat Finish</th>
-            <th>Sat hours</th>
+                <th>Sat Start</th>
+                <th>Sat Finish</th>
+                <th>Sat hours</th>
 
-            <th>Sun Start</th>
-            <th>Sun Finish</th>
-            <th>Sun hours</th>
+                <th>Sun Start</th>
+                <th>Sun Finish</th>
+                <th>Sun hours</th>
 
-            <th>Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="spec in specs">
-            <td width="200">
-                <input name="grade[]" class="form-control users" type="text"
-                       value="@{{spec.grade}}">
-            </td>
-            <td width="100">
-                <input name="qty[]" class="form-control users" type="text"
-                       value="@{{spec.qty}}">
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="spec in specs">
+                <td>
+                    <input type="button" value="Remove"
+                           class="btn btn-danger addproduct"
+                           ng-click="removeRow(spec.grade)"/>
+                </td>
+                <td width="200">
+                    <input name="grade[]" class="form-control large" type="text"
+                           value="@{{spec.grade}}">
+                </td>
+                <td width="100">
+                    <input name="qty[]" class="form-control" type="text"
+                           value="@{{spec.qty}}">
 
-            </td>
-            <td width="300">
-                <input name="position[]" class="form-control users" type="text"
-                       value="@{{spec.position}}">
-            </td>
-            <td width="100">
-                <input name="monday_start[]" class="form-control users" type="text"
-                       value="@{{spec.monday_start}}">
-            </td>
-            <td width="100">
-                <input name="monday_end[]" class="form-control users" type="text"
-                       value="@{{spec.monday_end}}">
-            </td>
-            <td width="100">
-                <input name="monday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.monday_hours}}">
-            </td>
+                </td>
+                <td width="300">
+                    <input name="position[]" class="form-control large" type="text"
+                           value="@{{spec.position}}">
+                </td>
+                <td width="100">
+                    <input name="monday_start[]" class="form-control users" type="text"
+                           value="@{{spec.mon_start}}">
+                </td>
+                <td width="100">
+                    <input name="monday_end[]" class="form-control users" type="text"
+                           value="@{{spec.mon_end}}">
+                </td>
+                <td width="100">
+                    <input name="monday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.mon_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="tuesday_start[]" class="form-control users" type="text"
-                       value="@{{spec.tues_start}}">
-            </td>
-            <td width="100">
-                <input name="tuesday_end[]" class="form-control users" type="text"
-                       value="@{{spec.tues_end}}">
-            </td>
-            <td width="100">
-                <input name="tuesday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.tues_sub_total}}">
-            </td>
+                <td width="100">
+                    <input name="tuesday_start[]" class="form-control users" type="text"
+                           value="@{{spec.tues_start}}">
+                </td>
+                <td width="100">
+                    <input name="tuesday_end[]" class="form-control users" type="text"
+                           value="@{{spec.tues_end}}">
+                </td>
+                <td width="100">
+                    <input name="tuesday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.tues_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="wednesday_start[]" class="form-control users" type="text"
-                       value="@{{spec.wed_start}}">
-            </td>
-            <td width="100">
-                <input name="wednesday_end[]" class="form-control users" type="text"
-                       value="@{{spec.wed_end}}">
-            </td>
-            <td width="100">
-                <input name="wednesday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.wed_sub_total}}">
-            </td>
+                <td width="100">
+                    <input name="wednesday_start[]" class="form-control users" type="text"
+                           value="@{{spec.wed_start}}">
+                </td>
+                <td width="100">
+                    <input name="wednesday_end[]" class="form-control users" type="text"
+                           value="@{{spec.wed_end}}">
+                </td>
+                <td width="100">
+                    <input name="wednesday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.wed_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="thursday_start[]" class="form-control users" type="text"
-                       value="@{{spec.thur_start}}">
-            </td>
-            <td width="100">
-                <input name="thursday_end[]" class="form-control users" type="text"
-                       value="@{{spec.thur_end}}">
-            </td>
-            <td width="100">
-                <input name="thursday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.thur_sub_total}}">
-            </td>
+                <td width="100">
+                    <input name="thursday_start[]" class="form-control users" type="text"
+                           value="@{{spec.thur_start}}">
+                </td>
+                <td width="100">
+                    <input name="thursday_end[]" class="form-control users" type="text"
+                           value="@{{spec.thur_end}}">
+                </td>
+                <td width="100">
+                    <input name="thursday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.thur_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="friday_start[]" class="form-control users" type="text"
-                       value="@{{spec.fri_start}}">
-            </td>
-            <td width="100">
-                <input name="friday_end[]" class="form-control users" type="text"
-                       value="@{{spec.fri_end}}">
-            </td>
-            <td width="100">
-                <input name="friday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.fri_sub_total}}">
-            </td>
+                <td width="100">
+                    <input name="friday_start[]" class="form-control users" type="text"
+                           value="@{{spec.fri_start}}">
+                </td>
+                <td width="100">
+                    <input name="friday_end[]" class="form-control users" type="text"
+                           value="@{{spec.fri_end}}">
+                </td>
+                <td width="100">
+                    <input name="friday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.fri_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="saturday_start[]" class="form-control users" type="text"
-                       value="@{{spec.sat_start}}">
-            </td>
-            <td width="100">
-                <input name="saturday_end[]" class="form-control users" type="text"
-                       value="@{{spec.sat_end}}">
-            </td>
-            <td width="100">
-                <input name="saturday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.sat_sub_total}}">
-            </td>
+                <td width="100">
+                    <input name="saturday_start[]" class="form-control users" type="text"
+                           value="@{{spec.sat_start}}">
+                </td>
+                <td width="100">
+                    <input name="saturday_end[]" class="form-control users" type="text"
+                           value="@{{spec.sat_end}}">
+                </td>
+                <td width="100">
+                    <input name="saturday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.sat_sub_total}}" readonly>
+                </td>
 
-            <td width="100">
-                <input name="sunday_start[]" class="form-control users" type="text"
-                       value="@{{spec.sun_start}}">
-            </td>
-            <td width="100">
-                <input name="sunday_end[]" class="form-control users" type="text"
-                       value="@{{spec.sun_end}}">
-            </td>
-            <td width="100">
-                <input name="sunday_hours[]" class="form-control users" type="text"
-                       value="@{{spec.sun_sub_total}}">
-            </td>
-            <td>
-                <input id="total" name="total[]" class="form-control users" type="text"
-                       value="@{{spec.total}}">
-            </td>
-
-            <td>
-                <input type="button" value="Remove"
-                       class="btn btn-danger addproduct"
-                       ng-click="removeRow(spec.id)"/>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-success" type="submit">Save</button>
+                <td width="100">
+                    <input name="sunday_start[]" class="form-control users" type="text"
+                           value="@{{spec.sun_start}}">
+                </td>
+                <td width="100">
+                    <input name="sunday_end[]" class="form-control users" type="text"
+                           value="@{{spec.sun_end}}">
+                </td>
+                <td width="100">
+                    <input name="sunday_hours[]" class="form-control users" type="text"
+                           value="@{{spec.sun_sub_total}}" readonly>
+                </td>
+                <td>
+                    <input id="total" name="total[]" class="form-control users" type="text"
+                           value="@{{spec.total}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    <div class="form-group col-md-3 col-lg-3">
+        <button class="btn btn-success pull-right" type="submit">Save</button>
+    </div>
     </form>
+    {{--<div class="form-group col-md-3 col-lg-3">--}}
+        {{--<button class="btn btn-default pull-right" onclick="addSpec()">Save</button>--}}
+    {{--</div>--}}
 </div>
 <footer>
     </br>
@@ -599,6 +637,31 @@ echo $arr[1];
 </html>
 
     <script>
+
+            function addSpec() {
+                var formData = $("#spec_rows").serializeArray();
+                $.ajax({
+                    url: "/specs",
+                    type: "POST",
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        //data - response from server
+                        console.log(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                    }
+                });
+            };
+
+            function copyStart(day) {
+                var start = $('#'+day+'_start').val()
+                var end = $('#'+day+'_end').val()
+                if(day==='mon'){
+                    $('#tues_start').val(start)
+                    $('#tues_end').val(end)
+                }
+            }
+
         function day(id) {
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
@@ -656,8 +719,8 @@ echo $arr[1];
             $scope.specs = [];
 
             $scope.addRow = function(){
-                $scope.specs.push({ 'grade':$scope.grade, 'qty': $scope.qty, 'position':$scope.position, 'id': $scope.id,
-                                    'monday_start': $scope.monday_start, 'mon_end': $scope.mon_end, 'mon_sub_total': $scope.mon_sub_total,
+                $scope.specs.push({ 'grade':$scope.grade, 'qty': $scope.qty, 'position':$scope.position,
+                                    'mon_start': $scope.monday_start, 'mon_end': $scope.mon_end, 'mon_sub_total': $scope.mon_sub_total,
                                     'tues_start': $scope.tues_start, 'tues_end': $scope.tues_end, 'tues_sub_total': $scope.tues_sub_total,
                                     'wed_start': $scope.wed_start, 'wed_end': $scope.wed_end, 'wed_sub_total': $scope.wed_sub_total,
                                     'thur_start': $scope.thur_start, 'thur_end': $scope.thur_end, 'thur_sub_total': $scope.thur_sub_total,
@@ -706,26 +769,5 @@ echo $arr[1];
                 $scope.specs.splice(index, 1);
             };
         });
-
-
-//        $scope.addRow = function () {
-//            $scope.bonds.push({
-//                'item_name': $scope.item_name,
-//                'btbuy': $scope.btbuy,
-//                'bteup': $scope.bteup,
-//                'bt_ref': $scope.bt_ref,
-//                'quote_type': $scope.quote_type,
-//                'id': $scope.id
-//            });
-//            //console.log($scope.bonus);
-//            $scope.item_name = '';
-//            $scope.bt_ref = '';
-//            $scope.btbuy = '';
-//            $scope.bteup = '';
-//            $scope.quote_type = '';
-//            $scope.id = '';
-//        };
-
-
     </script>
 
