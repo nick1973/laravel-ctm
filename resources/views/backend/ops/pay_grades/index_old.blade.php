@@ -23,16 +23,12 @@
                 <thead>
                 <tr>
                     <th>Role</th>
-                    <th>Market Rate</th>
-                    <th>Base Pay</th>
-                    <th>Holiday Pay</th>
-                    <th>Pensions Cont</th>
-                    <th>NIRS</th>
-                    <th>Uniform</th>
+                    <th>Pay</th>
+                    <th>Leeway</th>
                     <th>Training</th>
                     <th>Accreditation</th>
                     <th>Charge p/h</th>
-                    <th>Margin</th>
+                    <th>Margin p/h</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -41,17 +37,12 @@
                     @foreach($pay_grades as $pay_grade)
                         <tr>
                             <td>{{ $pay_grade->role }}</td>
-                            <td>{{ $pay_grade->market_rate }}</td>
-                            <td>{{ $pay_grade->base_pay }}</td>
-                            <td>{{ $pay_grade->hol_pay }}</td>
-                            <td>{{ $pay_grade->pension }}</td>
-                            <td>{{ $pay_grade->nirs }}</td>
-                            <td>{{ $pay_grade->uniform }}</td>
+                            <td>{{ $pay_grade->pay }}</td>
+                            <td>{{ $pay_grade->leeway }}</td>
                             <td>{{ $pay_grade->training }}</td>
                             <td>{{ $pay_grade->accreditation }}</td>
                             <td>{{ $pay_grade->charge_per_hour }}</td>
                             <td>{{ $pay_grade->margin }}</td>
-
                             <td><a class="btn btn-primary" href="/admin/ops/pay_grade/{{ $pay_grade->id }}/edit">Edit</a></td>
                             <td>
                                 {!! Form::model($pay_grade,[

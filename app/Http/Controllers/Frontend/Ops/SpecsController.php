@@ -41,6 +41,7 @@ class SpecsController extends Controller
         $sun_start = $request->input('sunday_start');
         $sun_end = $request->input('sunday_end');
         $sun_sub_total = $request->input('sunday_hours');
+        $total = $request->input('total');
 
         if ($grade != "") {
             $grade= implode(',', $grade);
@@ -67,6 +68,7 @@ class SpecsController extends Controller
             $sun_start = implode(',', $sun_start);
             $sun_end = implode(',', $sun_end);
             $sun_sub_total = implode(',', $sun_sub_total);
+            $total = implode(',', $total);
 
             $rows = [
                 'events_id' => $events_id,
@@ -93,7 +95,8 @@ class SpecsController extends Controller
                 'saturday_hours' => $sat_sub_total,
                 'sunday_start' => $sun_start,
                 'sunday_end' => $sun_end,
-                'sunday_hours' => $sun_sub_total
+                'sunday_hours' => $sun_sub_total,
+                'total' => $total
             ];
 
             Specs::where('events_id', $events_id)->delete();

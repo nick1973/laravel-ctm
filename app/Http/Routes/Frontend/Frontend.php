@@ -53,21 +53,23 @@ Route::get('/event/{event}', function ($id) {
     $sunday_start = explode(',', $specs[0]->sunday_start);
     $sunday_end= explode(',', $specs[0]->sunday_end);
     $sunday_hours = explode(',', $specs[0]->sunday_hours);
+    $total = explode(',', $specs[0]->total);
     $json = [];
 
     for($i=0; $i <= count($grade)-1; $i++)
     {
         array_push($json, ['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i],
             'mon_start' => $monday_start[$i], 'mon_end' => $monday_end[$i], 'mon_sub_total' => $monday_hours[$i],
-            'tue_start' => $tuesday_start[$i], 'tue_end' => $tuesday_end[$i], 'tue_sub_total' => $tuesday_hours[$i],
+            'tues_start' => $tuesday_start[$i], 'tues_end' => $tuesday_end[$i], 'tues_sub_total' => $tuesday_hours[$i],
             'wed_start' => $wednesday_start[$i], 'wed_end' => $wednesday_end[$i], 'wed_sub_total' => $wednesday_hours[$i],
             'thur_start' => $thursday_start[$i], 'thur_end' => $thursday_end[$i], 'thur_sub_total' => $thursday_hours[$i],
             'fri_start' => $friday_start[$i], 'fri_end' => $friday_end[$i], 'fri_sub_total' => $friday_hours[$i],
             'sat_start' => $saturday_start[$i], 'sat_end' => $saturday_end[$i], 'sat_sub_total' => $saturday_hours[$i],
-            'sun_start' => $sunday_start[$i], 'sun_end' => $sunday_end[$i], 'sun_sub_total' => $sunday_hours[$i]
+            'sun_start' => $sunday_start[$i], 'sun_end' => $sunday_end[$i], 'sun_sub_total' => $sunday_hours[$i],
+            'total' => $total[$i], 'wednesday52_end' => 'wednesday52_end'
         ]);
     }
-    return json_encode($json);
+    return json_encode($json, true);
 
 //            $event = App\Models\Ops\Events::find($id);
 //    return $event->spec;
