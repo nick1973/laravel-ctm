@@ -134,7 +134,7 @@ echo $arr[1];
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}</h1>
-
+            <p id="demo"></p>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-lg-3 col-md-3">
@@ -296,7 +296,6 @@ echo $arr[1];
                                                 </div>
                                             </div>
                                     </ul>
-
                                 </div>
                                 <br/>
                                 {{--<a href="/peripherals/{{ $customer->crf_id }}" class="btn btn-success">Auto Add Bonds Override!</a>--}}
@@ -490,6 +489,8 @@ echo $arr[1];
             }
         })
 
+
+
             function copyStart(id) {
                 var val = $('#'+id).val()
                         @for($i=0; $i <= $diffInDays; $i++)
@@ -514,7 +515,14 @@ echo $arr[1];
                         @endfor
             }
 
+        var days = [];
+        
+
+
+        document.getElementById("demo").innerHTML = days;
+
         function day(id) {
+
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
             var startTime = start.split(':');
@@ -522,8 +530,15 @@ echo $arr[1];
             var subTotal = ((endTime[0]*60+endTime[1]*1) - (startTime[0]*60+startTime[1]*1)) / 60;
             $('#'+id+'_sub_total').val(subTotal);
             $('#'+id+'_sub_total').trigger('input');
-            console.log(subTotal)
+            if(!isNaN(subTotal)){
+                days.push(subTotal)
+            }
+
+            document.getElementById("demo").innerHTML = days;
                     @for($i=0; $i <= $diffInDays; $i++)
+                    // store values in an array throughout the form
+                    // calculate the total and send it to ID
+
                         var mon = $('#monday{{$i}}_sub_total').val();
                         var tues = $('#tuesday{{$i}}_sub_total').val();
                         var wed = $('#wednesday{{$i}}_sub_total').val();
@@ -531,7 +546,7 @@ echo $arr[1];
                         var fri = $('#friday{{$i}}_sub_total').val();
                         var sat = $('#saturday{{$i}}_sub_total').val();
                         var sun = $('#sunday{{$i}}_sub_total').val();
-                        $('#grand_total').val(+mon+ +tues+ +wed+ +thur+ +fri+ +sat+ +sun + ' hrs').trigger("change");
+                        //$('#grand_total').val(+mon+ +tues+ +wed+ +thur+ +fri+ +sat+ +sun + ' hrs').trigger("change");
                     @endfor
 
         };

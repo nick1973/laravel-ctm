@@ -66,7 +66,7 @@ Route::get('/event/{event}', function ($id) {
             'fri_start' => $friday_start[$i], 'fri_end' => $friday_end[$i], 'fri_sub_total' => $friday_hours[$i],
             'sat_start' => $saturday_start[$i], 'sat_end' => $saturday_end[$i], 'sat_sub_total' => $saturday_hours[$i],
             'sun_start' => $sunday_start[$i], 'sun_end' => $sunday_end[$i], 'sun_sub_total' => $sunday_hours[$i],
-            'total' => $total[$i], 'wednesday52_end' => 'wednesday52_end'
+            'total' => $total[$i]
         ]);
     }
     return json_encode($json, true);
