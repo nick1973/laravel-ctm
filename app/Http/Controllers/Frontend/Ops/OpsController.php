@@ -77,10 +77,11 @@ class OpsController extends Controller
         $day_number_table = $ctm_start_date->dayOfWeek;
         $day_number_ng = $ctm_start_date->dayOfWeek;
         $day_number_scope = $ctm_start_date->dayOfWeek;
+        $day_number_copy = $ctm_start_date->dayOfWeek;
         $day = $ctm_start_date->day;
 //        $obj = file_get_contents('http://btbeqt.com/hardware_flat');
         $pay_grades = json_decode($pay_grades, true);
         return view('frontend.ops.show', compact('event', 'pay_grades', 'ctm_start_date', 'ctm_end_date', 'diffInDays',
-            'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope'));
+            'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy'));
     }
 }

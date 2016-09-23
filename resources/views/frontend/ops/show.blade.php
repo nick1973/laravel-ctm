@@ -92,6 +92,15 @@
             }
         }
 
+        function next_day($day){
+            $day = $day + 1;
+            $x = dayOfWeek($day);
+            $next_lower_day = strtolower($x);
+            return $next_lower_day;
+        }
+
+
+
     $ctm_start = new \Carbon\Carbon($ctm_start_date);
     $ctm_start_date_table = new \Carbon\Carbon($ctm_start_date);
     $ctm_start_date_ng = new \Carbon\Carbon($ctm_start_date);
@@ -124,7 +133,7 @@ echo $arr[1];
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event, {{ $day_number }} Day Number</h1>
+            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}</h1>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -175,7 +184,7 @@ echo $arr[1];
                                     <label class="col-md-3 control-label">Role</label>
 
                                     <div class="col-md-6">
-                                        <select id="role" ng-model='gradea'
+                                        <select id="role" ng-model='grade'
                                                 class="form-control">
                                             <?php
                                             $i = 0;
@@ -234,7 +243,7 @@ echo $arr[1];
                                                     </label>
                                                     <div class="col-md-6 col-lg-6">
                                                         <div class="input-group">
-                                                            <select onclick="day('mon')" id="{{$lower_case_day}}{{$i}}_start"
+                                                            <select onclick="day('{{$lower_case_day}}{{$i}}')" id="{{$lower_case_day}}{{$i}}_start"
                                                                     ng-model='{{$lower_case_day}}{{$i}}_start'
                                                                     class="form-control">
                                                                 @foreach($arr as $time)
@@ -242,7 +251,7 @@ echo $arr[1];
                                                                 @endforeach
                                                             </select>
                                                             <span class="input-group-btn">
-                                                            <button onclick="copyStart('{{$lower_case_day}}_start')" class="btn btn-default" type="button">Copy>></button>
+                                                            <button onclick="copyStart('{{$lower_case_day}}{{$i}}_start')" class="btn btn-default" type="button">Copy>></button>
                                                           </span>
                                                         </div><!-- /input-group -->
                                                     </div>
@@ -254,7 +263,7 @@ echo $arr[1];
                                                     <div class="col-md-6 col-lg-6">
                                                         <div class="input-group">
 
-                                                            <select onclick="day('mon')" id="{{$lower_case_day}}{{$i}}_end"
+                                                            <select onclick="day('{{$lower_case_day}}{{$i}}')" id="{{$lower_case_day}}{{$i}}_end"
                                                                     ng-model='{{$lower_case_day}}{{$i}}_end'
                                                                     class="form-control">
                                                                 @foreach($arr as $time)
@@ -262,7 +271,7 @@ echo $arr[1];
                                                                 @endforeach
                                                             </select>
                                                             <span class="input-group-btn">
-                                                            <button onclick="copyStart('{{$lower_case_day}}_end')" class="btn btn-default" type="button">Copy>></button>
+                                                            <button onclick="copyStart('{{$lower_case_day}}{{$i}}_end')" class="btn btn-default" type="button">Copy>></button>
                                                           </span>
                                                         </div><!-- /input-group -->
                                                     </div>
@@ -278,7 +287,16 @@ echo $arr[1];
                                             </li>
                                             <?php $day_number++; $ctm_start->addDay(); ?>
                                         @endfor
+                                            {{--grand_total--}}
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-lg-4 control-label">Total</label>
+                                                <div class="col-md-4 col-lg-4">
+                                                    <input type="text" class="form-control" id="grand_total"
+                                                           ng-model="total"/>
+                                                </div>
+                                            </div>
                                     </ul>
+
                                 </div>
                                 <br/>
                                 {{--<a href="/peripherals/{{ $customer->crf_id }}" class="btn btn-success">Auto Add Bonds Override!</a>--}}
@@ -422,12 +440,13 @@ echo $arr[1];
                         $x = dayOfWeek($day_number_ng);
                         $lower_day = strtolower($x);
                         $start = "{{ spec." . $lower_day . $i . "_start }}";
-                        $end = "{{ spec." . $lower_day . $i . "_end }}";
+                        $end = "{{ spec." . $lower_day . $i . "_end}}";
+                        $pos = "{{ spec.position }}";
                         $sub_total = "{{ spec." . $lower_day . $i . "_sub_total }}";
                         ?>
                         <td width="100">
                             <input name="{{ $lower_day }}_start[]" class="form-control users" type="text"
-                                   value="{{ $start }}">
+                                   value="{{ $start }}" id="testing">
                         </td>
                         <td width="100">
                             <input name="{{ $lower_day }}_end[]" class="form-control users" type="text"
@@ -473,62 +492,26 @@ echo $arr[1];
 
             function copyStart(id) {
                 var val = $('#'+id).val()
-                if(id==='monday_start'){
-                    $('#tuesday_start').val(val).trigger("change");
-                    day('tuesday');
-                }
-                if(id==='monday_end'){
-                    $('#tuesday_end').val(val).trigger("change");
-                    day('tuesday');
-                }
-                if(id==='tuesday_start'){
-                    $('#wednesday_start').val(val).trigger("change");
-                    day('wednesday');
-                }
-                if(id==='tuesday_end'){
-                    $('#wednesday_end').val(val).trigger("change");
-                    day('wednesday');
-                }
-                if(id==='wednesday_start'){
-                    $('#thursday_start').val(val).trigger("change");
-                    day('thursday');
-                }
-                if(id==='wednesday_end'){
-                    $('#thursday_end').val(val).trigger("change");
-                    day('thursday');
-                }
-                if(id==='thursday_start'){
-                    $('#friday_start').val(val).trigger("change");
-                    day('friday');
-                }
-                if(id==='thursday_start_end'){
-                    $('#friday_end').val(val).trigger("change");
-                    day('friday');
-                }
-                if(id==='friday_start'){
-                    $('#saturday_start').val(val).trigger("change");
-                    day('saturday');
-                }
-                if(id==='friday_end'){
-                    $('#saturday_end').val(val).trigger("change");
-                    day('saturday');
-                }
-                if(id==='saturday_start'){
-                    $('#sunday_start').val(val).trigger("change");
-                    day('sunday');
-                }
-                if(id==='saturday_end'){
-                    $('#sunday_end').val(val).trigger("change");
-                    day('sunday');
-                }
-                if(id==='sunday_start'){
-                    $('#monday_start').val(val).trigger("change");
-                    day('monday');
-                }
-                if(id==='sunday_end'){
-                    $('#monday_end').val(val).trigger("change");
-                    day('monday');
-                }
+                        @for($i=0; $i <= $diffInDays; $i++)
+                                @if($day_number_copy ==7)
+                                    <?php $day_number_copy=0 ?>
+                                @endif
+                        <?php
+                        $nextDay = next_day($day_number_copy);
+                        $x = dayOfWeek($day_number_copy);
+                        $lower_day = strtolower($x);
+                        ?>
+                        var next_lowerDay = '{{ $nextDay }}';
+                        if(id==='{{$lower_day}}{{$i}}_start'){
+                            $('#{{$nextDay}}{{$i+1}}_start').val(val).trigger("change");
+                            day('{{$nextDay}}{{$i+1}}');
+                        }
+                        if(id==='{{$lower_day}}{{$i}}_end'){
+                            $('#{{$nextDay}}{{$i+1}}_end').val(val).trigger("change");
+                            day('{{$nextDay}}{{$i+1}}');
+                        }
+                        <?php $day_number_copy++ ?>
+                        @endfor
             }
 
         function day(id) {
@@ -539,14 +522,17 @@ echo $arr[1];
             var subTotal = ((endTime[0]*60+endTime[1]*1) - (startTime[0]*60+startTime[1]*1)) / 60;
             $('#'+id+'_sub_total').val(subTotal);
             $('#'+id+'_sub_total').trigger('input');
-            var mon = $('#mon_sub_total').val();
-            var tues = $('#tues_sub_total').val();
-            var wed = $('#wed_sub_total').val();
-            var thur = $('#thur_sub_total').val();
-            var fri = $('#fri_sub_total').val();
-            var sat = $('#sat_sub_total').val();
-            var sun = $('#sun_sub_total').val();
-            $('#grand_total').val(+mon+ +tues+ +wed+ +thur+ +fri+ +sat+ +sun + ' hrs').trigger("change");
+            console.log(subTotal)
+                    @for($i=0; $i <= $diffInDays; $i++)
+                        var mon = $('#monday{{$i}}_sub_total').val();
+                        var tues = $('#tuesday{{$i}}_sub_total').val();
+                        var wed = $('#wednesday{{$i}}_sub_total').val();
+                        var thur = $('#thursday{{$i}}_sub_total').val();
+                        var fri = $('#friday{{$i}}_sub_total').val();
+                        var sat = $('#saturday{{$i}}_sub_total').val();
+                        var sun = $('#sunday{{$i}}_sub_total').val();
+                        $('#grand_total').val(+mon+ +tues+ +wed+ +thur+ +fri+ +sat+ +sun + ' hrs').trigger("change");
+                    @endfor
 
         };
 
@@ -597,7 +583,7 @@ echo $arr[1];
             $scope.specs = [];
 
             $scope.addRow = function(){
-                var obj = {}
+                var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position,};
                 @for($i=0; $i <= $diffInDays; $i++)
                 @if($day_number_scope ==7)
                 <?php $day_number_scope=0 ?>
@@ -605,90 +591,18 @@ echo $arr[1];
                 <?php
                 $x = dayOfWeek($day_number_scope);
                 $lower_day = strtolower($x);
-                $start =   $lower_day.$i.'_start';
+                $start =   "$lower_day$i"."_start";
                 $end = "$lower_day$i"."_end";
                 $sub_total = "$lower_day$i"."_sub_total";
                 ?>
-                var strt = '{{ $start }}';
-                var end = '{{ $end }}';
-                var sub_total = '{{ $sub_total }}';
-                    obj["'"+strt+"'"] = '$scope.' + strt, obj["'"+end+"'"] = '$scope.' + end, obj["'"+sub_total+"'"] = '$scope.' + sub_total;
-                    //obj[strt] = '$scope.' + strt;
-                    //obj[end] = '$scope.' + end
-                    //obj[sub_total] = '$scope.' + sub_total
+                myArray.{{ $start }} = $scope.{{ $start }},
+                myArray.{{ $end }} = $scope.{{ $end }},
+                myArray.{{ $sub_total }} = $scope.{{ $sub_total }}
                 <?php $day_number_scope++; ?>
                 @endfor
 
-                //console.log(obj);
-                //$scope.specs.push(obj)
-                toPrettyObject(obj)
-                function indent(str) {
-                    return str.replace(/["]/g, "");
-                }
-
-                function toPrettyObject(obj) {
-                    var ajsoln = []; // Actual JavaScript Object Literal Notation
-
-                    if(Object.prototype.toString.call(obj) === '[object Array]') {
-                        for(var i = 0; i < obj.length; i++) {
-                            ajsoln.push(indent(toPrettyObject(obj[i])));
-                        }
-
-                        console.log( '[\n' + ajsoln.join(',\n') + '\n]' );
-
-                    } else if(typeof obj !== 'object') {
-                        return JSON.stringify(obj);
-                    } else {
-                        for(var x in obj) {
-                            ajsoln.push('\t' + ((x) ? x : JSON.stringify(x)) + ': ' + indent(toPrettyObject(obj[x])));
-                        }
-
-                        var obj = '{\n' + ajsoln.join(',\n') + '\n}'
-                        console.log(obj)
-                        $scope.specs.push(obj)
-
-                    }
-                }
-                    //console.log(obj)
-
-                //$scope.specs.push({});
-
-//                $scope.specs.push({ 'grade':$scope.grade, 'qty': $scope.qty, 'position':$scope.position,
-//                    'monday1_start': $scope.monday1_start, 'mon_end': $scope.monday_end, 'mon_sub_total': $scope.mon_sub_total,
-//                    'tues_start': $scope.tues_start, 'tues_end': $scope.tues_end, 'tues_sub_total': $scope.tues_sub_total,
-//                    'wed_start': $scope.wed_start, 'wed_end': $scope.wed_end, 'wed_sub_total': $scope.wed_sub_total,
-//                    'thur_start': $scope.thur_start, 'thur_end': $scope.thur_end, 'thur_sub_total': $scope.thur_sub_total,
-//                    'fri_start': $scope.fri_start, 'fri_end': $scope.fri_end, 'fri_sub_total': $scope.fri_sub_total,
-//                    'sat_start': $scope.sat_start, 'sat_end': $scope.sat_end, 'sat_sub_total': $scope.sat_sub_total,
-//                    'sunday0_start': $scope.sunday0_start, 'sun_end': $scope.sun_end, 'sun_sub_total': $scope.sun_sub_total,
-//                    'total': $scope.total,
-//                });
-
-//                $scope.grade='';
-//                $scope.pay='';
-//                $scope.leeway='';
-//                $scope.monday1_start='';
-//                $scope.monday_end='';
-//                $scope.mon_sub_total='';
-//                $scope.tues_start='';
-//                $scope.tues_end='';
-//                $scope.tues_sub_total='';
-//                $scope.wed_start='';
-//                $scope.wed_end='';
-//                $scope.wed_sub_total='';
-//                $scope.thur_start='';
-//                $scope.thur_end='';
-//                $scope.thur_sub_total='';
-//                $scope.fri_start='';
-//                $scope.fri_end='';
-//                $scope.fri_sub_total='';
-//                $scope.sat_start='';
-//                $scope.sat_end='';
-//                $scope.sat_sub_total='';
-//                $scope.sunday0_start='';
-//                $scope.sun_end='';
-//                $scope.sun_sub_total='';
-//                $scope.total='';
+                console.log(myArray);
+                $scope.specs.push(myArray)
             };
 
             $scope.removeRow = function (grade) {
