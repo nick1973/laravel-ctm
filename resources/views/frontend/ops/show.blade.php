@@ -533,7 +533,8 @@ echo $arr[1];
             for (var i = 0; i < hours.length; i++) {
                 total += hours[i];
             }
-            $("#grand_total").val(total)
+            $("#grand_total").val(total + ' hrs');
+            $('#grand_total').trigger('input');
             document.getElementById("demo").innerHTML = hours;
                     @for($i=0; $i <= $diffInDays; $i++)
                     // store values in an array throughout the form
