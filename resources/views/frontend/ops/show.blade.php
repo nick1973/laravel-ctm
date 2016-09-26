@@ -425,7 +425,6 @@ echo $arr[1];
                 <td width="100">
                     <input name="qty[]" class="form-control" type="text"
                            value="@{{spec.qty}}">
-
                 </td>
                 <td width="300">
                     <input name="position[]" class="form-control large" type="text"
@@ -515,14 +514,10 @@ echo $arr[1];
                         @endfor
             }
 
-        var days = [];
-        
-
-
-        document.getElementById("demo").innerHTML = days;
+        var hours = [];
+        document.getElementById("demo").innerHTML = hours;
 
         function day(id) {
-
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
             var startTime = start.split(':');
@@ -531,14 +526,18 @@ echo $arr[1];
             $('#'+id+'_sub_total').val(subTotal);
             $('#'+id+'_sub_total').trigger('input');
             if(!isNaN(subTotal)){
-                days.push(subTotal)
+                hours.push(subTotal)
             }
-
-            document.getElementById("demo").innerHTML = days;
+            // ADDS ARRAY
+            var total = 0;
+            for (var i = 0; i < hours.length; i++) {
+                total += hours[i];
+            }
+            $("#grand_total").val(total)
+            document.getElementById("demo").innerHTML = hours;
                     @for($i=0; $i <= $diffInDays; $i++)
                     // store values in an array throughout the form
                     // calculate the total and send it to ID
-
                         var mon = $('#monday{{$i}}_sub_total').val();
                         var tues = $('#tuesday{{$i}}_sub_total').val();
                         var wed = $('#wednesday{{$i}}_sub_total').val();
@@ -546,7 +545,6 @@ echo $arr[1];
                         var fri = $('#friday{{$i}}_sub_total').val();
                         var sat = $('#saturday{{$i}}_sub_total').val();
                         var sun = $('#sunday{{$i}}_sub_total').val();
-                        //$('#grand_total').val(+mon+ +tues+ +wed+ +thur+ +fri+ +sat+ +sun + ' hrs').trigger("change");
                     @endfor
 
         };
@@ -598,7 +596,7 @@ echo $arr[1];
             $scope.specs = [];
 
             $scope.addRow = function(){
-                var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position,};
+                var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position, 'total':$scope.total,};
                 @for($i=0; $i <= $diffInDays; $i++)
                 @if($day_number_scope ==7)
                 <?php $day_number_scope=0 ?>
@@ -615,8 +613,7 @@ echo $arr[1];
                 myArray.{{ $sub_total }} = $scope.{{ $sub_total }}
                 <?php $day_number_scope++; ?>
                 @endfor
-
-                console.log(myArray);
+                //console.log(myArray);
                 $scope.specs.push(myArray)
             };
 
