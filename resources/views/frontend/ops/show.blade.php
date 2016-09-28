@@ -65,32 +65,32 @@
 <?php
 
         function dayOfWeek($day){
-            switch ($day) {
-                case 1:
-                    return "Monday";
-                    break;
-                case 2:
-                    return "Tuesday";
-                    break;
-                case 3:
-                    return "Wednesday";
-                    break;
-                case 4:
-                    return "Thursday";
-                    break;
-                case 5:
-                    return "Friday";
-                    break;
-                case 6:
-                    return "Saturday";
-                    break;
-                case 0:
-                    return "Sunday";
-                    break;
-                default:
-                    return "Oops!";
-            }
-        }
+    switch ($day) {
+        case 1:
+            return "Monday";
+            break;
+        case 2:
+            return "Tuesday";
+            break;
+        case 3:
+            return "Wednesday";
+            break;
+        case 4:
+            return "Thursday";
+            break;
+        case 5:
+            return "Friday";
+            break;
+        case 6:
+            return "Saturday";
+            break;
+        case 0:
+            return "Sunday";
+            break;
+        default:
+            return "Oops!";
+    }
+}
 
         function next_day($day){
             $day = $day + 1;
@@ -134,7 +134,6 @@ echo $arr[1];
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}</h1>
-            <p id="demo"></p>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-lg-3 col-md-3">
@@ -288,7 +287,7 @@ echo $arr[1];
                                             <?php $day_number++; $ctm_start->addDay(); ?>
                                         @endfor
                                             {{--grand_total--}}
-                                            <div class="form-group">
+                                            <div class="form-group hidden">
                                                 <label class="col-md-4 col-lg-4 control-label">Total</label>
                                                 <div class="col-md-4 col-lg-4">
                                                     <input type="text" class="form-control" id="grand_total"
@@ -431,30 +430,35 @@ echo $arr[1];
                            value="@{{spec.position}}">
                 </td>
                 @for($i=0; $i <= $diffInDays; $i++)
+<!--                    --><?php
+//                    $week = 1;
+//                        if($week===3){
+//                            $week=1;
+//                        }
+//                    ?>
                     @if($day_number_ng ==7)
                         <?php $day_number_ng=0 ?>
                     @endif
                         <?php
                         $x = dayOfWeek($day_number_ng);
                         $lower_day = strtolower($x);
-                        $start = "{{ spec." . $lower_day . $i . "_start }}";
-                        $end = "{{ spec." . $lower_day . $i . "_end}}";
-                        $pos = "{{ spec.position }}";
-                        $sub_total = "{{ spec." . $lower_day . $i . "_sub_total }}";
+                        $start = "{{ spec.week1." . $lower_day . $i . "_start }}";
+                        $end = "{{ spec.week1." . $lower_day . $i . "_end}}";
+                        $sub_total = "{{ spec.week1." . $lower_day . $i . "_sub_total }}";
                         ?>
                         <td width="100">
                             <input name="{{ $lower_day }}_start[]" class="form-control users" type="text"
-                                   value="{{ $start }}" id="testing">
+                                   value="{{ $start }}" id="">
                         </td>
                         <td width="100">
                             <input name="{{ $lower_day }}_end[]" class="form-control users" type="text"
                                    value="{{ $end }}">
                         </td>
                         <td width="100">
-                            <input name="{{ $lower_day }}_sub_total[]" class="form-control users" type="text"
+                            <input name="{{ $lower_day }}_hours[]" class="form-control users" type="text"
                                    value="{{ $sub_total }}">
                         </td>
-                    <?php $day_number_ng++; ?>
+                    <?php $day_number_ng++; //$week++; ?>
                 @endfor
 
                 <td>
@@ -515,8 +519,6 @@ echo $arr[1];
             }
 
         var hours = [];
-        document.getElementById("demo").innerHTML = hours;
-
         function day(id) {
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
@@ -535,7 +537,6 @@ echo $arr[1];
             }
             $("#grand_total").val(total + ' hrs');
             $('#grand_total').trigger('input');
-            document.getElementById("demo").innerHTML = hours;
                     @for($i=0; $i <= $diffInDays; $i++)
                     // store values in an array throughout the form
                     // calculate the total and send it to ID
@@ -593,7 +594,7 @@ echo $arr[1];
                     .then(function (response) {
                         $scope.specs = response.data;
                     });
-
+            console.log($scope.specs)
             $scope.specs = [];
 
             $scope.addRow = function(){

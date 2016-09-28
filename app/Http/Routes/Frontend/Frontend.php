@@ -20,14 +20,51 @@ Route::post('/specs', function (){
 
 Route::get('/event/{event}', function ($id) {
 
+    $event = \App\Models\Ops\Events::find($id);
+    $ctm_start_date = \Carbon\Carbon::createFromFormat('d/m/Y', $event->ctm_start_date);
+    $ctm_start_date = \Carbon\Carbon::parse($ctm_start_date);
+    $ctm_end_date = \Carbon\Carbon::createFromFormat('d/m/Y', $event->ctm_end_date);
+    $ctm_end_date = \Carbon\Carbon::parse($ctm_end_date);
+    $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
+    $day_number = $ctm_start_date->dayOfWeek;
+
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
     $grade = explode(',', $specs[0]->grade);
 
-    //return count($grade);
-    if(count($grade) <= 1)
-    {
-        return $specs;
+    function dayOfWeek($day){
+        switch ($day) {
+            case 1:
+                return "Monday";
+                break;
+            case 2:
+                return "Tuesday";
+                break;
+            case 3:
+                return "Wednesday";
+                break;
+            case 4:
+                return "Thursday";
+                break;
+            case 5:
+                return "Friday";
+                break;
+            case 6:
+                return "Saturday";
+                break;
+            case 0:
+                return "Sunday";
+                break;
+            default:
+                return "Oops!";
+        }
     }
+
+
+    //return count($grade);
+//    if(count($grade) <= 1)
+//    {
+//        return $specs;
+//    }
 
     //$grade = explode(',', $specs[0]->grade);
     $qty = explode(',', $specs[0]->qty);
@@ -54,26 +91,108 @@ Route::get('/event/{event}', function ($id) {
     $sunday_end= explode(',', $specs[0]->sunday_end);
     $sunday_hours = explode(',', $specs[0]->sunday_hours);
     $total = explode(',', $specs[0]->total);
-    $json = [];
+    $array = [];
+    $day_array= [];
+    $lower_day = strtolower(dayOfWeek($day_number));
+    $start = $lower_day.'_start';
+    $start_count = explode(',', $specs[0]->$start);
+    $max_days = count($start_count);
+    $day = -1;
+        //return count($grade)-1;
+        for($i=0; $i < count($grade); $i++) {
+            //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
+            array_push($day_array,['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            //DAY NUMBER LOOP
+            $week = 0;
+            for ($x = 0; $x <= $diffInDays; $x++) {
+                if ($day_number == 7) {
+                    $day_number = 0;
+                }
+                //EVERY WEEK +1
+                if($x % 7 == 0){
+                    $week++;
+                    $day++;
+                }
+                //CREATES THE WEEK
+                $lower = strtolower(dayOfWeek($day_number));
+                $start = $lower.'_start';
+                $end = $lower.'_end';
+                $sub_total = $lower.'_hours';
+                // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
+                //
+                $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$day];
+                $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$day];
+                $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$day];
+                $day_number++;
 
-    for($i=0; $i <= count($grade)-1; $i++)
-    {
-        array_push($json, ['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i],
-            'mon_start' => $monday_start[$i], 'mon_end' => $monday_end[$i], 'mon_sub_total' => $monday_hours[$i],
-            'tues_start' => $tuesday_start[$i], 'tues_end' => $tuesday_end[$i], 'tues_sub_total' => $tuesday_hours[$i],
-            'wed_start' => $wednesday_start[$i], 'wed_end' => $wednesday_end[$i], 'wed_sub_total' => $wednesday_hours[$i],
-            'thur_start' => $thursday_start[$i], 'thur_end' => $thursday_end[$i], 'thur_sub_total' => $thursday_hours[$i],
-            'fri_start' => $friday_start[$i], 'fri_end' => $friday_end[$i], 'fri_sub_total' => $friday_hours[$i],
-            'sat_start' => $saturday_start[$i], 'sat_end' => $saturday_end[$i], 'sat_sub_total' => $saturday_hours[$i],
-            'sun_start' => $sunday_start[$i], 'sun_end' => $sunday_end[$i], 'sun_sub_total' => $sunday_hours[$i],
-            'total' => $total[$i]
-        ]);
-    }
-    return json_encode($json, true);
+            }
+            //$day++;
+        }
+    return $day_array;
 
 //            $event = App\Models\Ops\Events::find($id);
 //    return $event->spec;
 });
+
+
+//Route::get('/event/{event}', function ($id) {
+//
+//    $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
+//    $grade = explode(',', $specs[0]->grade);
+//
+//    //return count($grade);
+//    if(count($grade) <= 1)
+//    {
+//        return $specs;
+//    }
+//
+//    //$grade = explode(',', $specs[0]->grade);
+//    $qty = explode(',', $specs[0]->qty);
+//    $position = explode(',', $specs[0]->position);
+//    $monday_start = explode(',', $specs[0]->monday_start);
+//    $monday_end = explode(',', $specs[0]->monday_end);
+//    $monday_hours = explode(',', $specs[0]->monday_hours);
+//    $tuesday_start = explode(',', $specs[0]->tuesday_start);
+//    $tuesday_end = explode(',', $specs[0]->tuesday_end);
+//    $tuesday_hours = explode(',', $specs[0]->tuesday_hours);
+//    $wednesday_start = explode(',', $specs[0]->wednesday_start);
+//    $wednesday_end = explode(',', $specs[0]->wednesday_end);
+//    $wednesday_hours = explode(',', $specs[0]->wednesday_hours);
+//    $thursday_start = explode(',', $specs[0]->thursday_start);
+//    $thursday_end = explode(',', $specs[0]->thursday_end);
+//    $thursday_hours = explode(',', $specs[0]->thursday_hours);
+//    $friday_start = explode(',', $specs[0]->friday_start);
+//    $friday_end = explode(',', $specs[0]->friday_end);
+//    $friday_hours = explode(',', $specs[0]->friday_hours);
+//    $saturday_start = explode(',', $specs[0]->saturday_start);
+//    $saturday_end = explode(',', $specs[0]->saturday_end);
+//    $saturday_hours = explode(',', $specs[0]->saturday_hours);
+//    $sunday_start = explode(',', $specs[0]->sunday_start);
+//    $sunday_end= explode(',', $specs[0]->sunday_end);
+//    $sunday_hours = explode(',', $specs[0]->sunday_hours);
+//    $total = explode(',', $specs[0]->total);
+//    $json = [];
+//
+//    for($i=0; $i <= count($grade)-1; $i++)
+//    {
+//        //DAY NUMBER LOOP
+//
+//        array_push($json, ['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i],
+//            'monday_start' => $monday_start[$i], 'mon_end' => $monday_end[$i], 'mon_sub_total' => $monday_hours[$i],
+//            'tues_start' => $tuesday_start[$i], 'tues_end' => $tuesday_end[$i], 'tues_sub_total' => $tuesday_hours[$i],
+//            'wed_start' => $wednesday_start[$i], 'wed_end' => $wednesday_end[$i], 'wed_sub_total' => $wednesday_hours[$i],
+//            'thur_start' => $thursday_start[$i], 'thur_end' => $thursday_end[$i], 'thur_sub_total' => $thursday_hours[$i],
+//            'fri_start' => $friday_start[$i], 'fri_end' => $friday_end[$i], 'fri_sub_total' => $friday_hours[$i],
+//            'sat_start' => $saturday_start[$i], 'sat_end' => $saturday_end[$i], 'sat_sub_total' => $saturday_hours[$i],
+//            'sun_start' => $sunday_start[$i], 'sun_end' => $sunday_end[$i], 'sun_sub_total' => $sunday_hours[$i],
+//            'total' => $total[$i]
+//        ]);
+//    }
+//    return json_encode($json, true);
+//
+////            $event = App\Models\Ops\Events::find($id);
+////    return $event->spec;
+//});
 
 /**
  * These frontend controllers require the user to be logged in
