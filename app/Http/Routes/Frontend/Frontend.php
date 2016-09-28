@@ -104,6 +104,7 @@ Route::get('/event/{event}', function ($id) {
             array_push($day_array,['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
             //DAY NUMBER LOOP
             $week = 0;
+            $day_number = $ctm_start_date->dayOfWeek;
             for ($x = 0; $x <= $diffInDays; $x++) {
                 if ($day_number == 7) {
                     $day_number = 0;
@@ -124,9 +125,7 @@ Route::get('/event/{event}', function ($id) {
                 $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$day];
                 $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$day];
                 $day_number++;
-
             }
-            //$day++;
         }
     return $day_array;
 
