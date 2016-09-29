@@ -96,16 +96,12 @@ class SpecsController extends Controller
                 'sunday_start' => $sun_start,
                 'sunday_end' => $sun_end,
                 'sunday_hours' => $sun_sub_total,
-                'total' => $total
+                'total' => $total,
             ];
 
             Specs::where('events_id', $events_id)->delete();
-
             Specs::create($rows);
-
-            //return 'saved';
             return redirect()->back();
-
         }
 
         Specs::where('events_id', $events_id)->delete();

@@ -429,22 +429,24 @@ echo $arr[1];
                     <input name="position[]" class="form-control large" type="text"
                            value="@{{spec.position}}">
                 </td>
+                <?php
+                    $week = 0;
+                ?>
                 @for($i=0; $i <= $diffInDays; $i++)
-<!--                    --><?php
-//                    $week = 1;
-//                        if($week===3){
-//                            $week=1;
-//                        }
-//                    ?>
+                    <?php
+                    if($i % 7 == 0){
+                        $week++;
+                    }
+                    ?>
                     @if($day_number_ng ==7)
                         <?php $day_number_ng=0 ?>
                     @endif
                         <?php
                         $x = dayOfWeek($day_number_ng);
                         $lower_day = strtolower($x);
-                        $start = "{{ spec.week1." . $lower_day . $i . "_start }}";
-                        $end = "{{ spec.week1." . $lower_day . $i . "_end}}";
-                        $sub_total = "{{ spec.week1." . $lower_day . $i . "_sub_total }}";
+                        $start = "{{ spec.week$week." . $lower_day . $i . "_start }}";
+                        $end = "{{ spec.week$week." . $lower_day . $i . "_end}}";
+                        $sub_total = "{{ spec.week$week." . $lower_day . $i . "_sub_total }}";
                         ?>
                         <td width="100">
                             <input name="{{ $lower_day }}_start[]" class="form-control users" type="text"
@@ -596,9 +598,14 @@ echo $arr[1];
                     });
             console.log($scope.specs)
             $scope.specs = [];
-
+            $scope.specs.week1 = {};
             $scope.addRow = function(){
-                var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position, 'total':$scope.total,};
+
+                var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position, 'total':$scope.total,
+                                'week1':{},'week2':{},'week3':{},'week4':{},'week5':{},'week6':{},'week7':{},'week8':{}, 'week9':{},
+                    'week10':{},'week11':{},'week12':{},'week13':{},'week14':{},'week15':{},'week16':{},'week17':{},'week18':{},'week19':{},'week20':{},
+                };
+                <?php $week = 0; ?>
                 @for($i=0; $i <= $diffInDays; $i++)
                 @if($day_number_scope ==7)
                 <?php $day_number_scope=0 ?>
@@ -609,13 +616,17 @@ echo $arr[1];
                 $start =   "$lower_day$i"."_start";
                 $end = "$lower_day$i"."_end";
                 $sub_total = "$lower_day$i"."_sub_total";
+                if($i % 7 == 0){
+                    $week++;
+                }
                 ?>
-                myArray.{{ $start }} = $scope.{{ $start }},
-                myArray.{{ $end }} = $scope.{{ $end }},
-                myArray.{{ $sub_total }} = $scope.{{ $sub_total }}
+                        //$scope = $scope.specs.week1;
+                myArray.week{{$week}}.{{ $start }} = $scope.{{ $start }},
+                myArray.week{{$week}}.{{ $end }} = $scope.{{ $end }},
+                myArray.week{{$week}}.{{ $sub_total }} = $scope.{{ $sub_total }}
                 <?php $day_number_scope++; ?>
                 @endfor
-                //console.log(myArray);
+                console.log(myArray);
                 $scope.specs.push(myArray)
             };
 

@@ -120,17 +120,22 @@ Route::get('/event/{event}', function ($id) {
                 $end = $lower.'_end';
                 $sub_total = $lower.'_hours';
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
-                //
-                $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$day];
-                $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$day];
-                $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$day];
+                // PREVENT OFFSETS
+                if(count(explode(',', $specs[0]->$start)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$day];
+                }
+                if(count(explode(',', $specs[0]->$end)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$day];
+                }
+                if(count(explode(',', $specs[0]->$sub_total)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$day];
+                }
+
                 $day_number++;
             }
+            //$day = $i;
         }
     return $day_array;
-
-//            $event = App\Models\Ops\Events::find($id);
-//    return $event->spec;
 });
 
 
