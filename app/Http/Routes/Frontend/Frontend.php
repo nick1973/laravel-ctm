@@ -58,38 +58,8 @@ Route::get('/event/{event}', function ($id) {
                 return "Oops!";
         }
     }
-
-
-    //return count($grade);
-//    if(count($grade) <= 1)
-//    {
-//        return $specs;
-//    }
-
-    //$grade = explode(',', $specs[0]->grade);
     $qty = explode(',', $specs[0]->qty);
     $position = explode(',', $specs[0]->position);
-    $monday_start = explode(',', $specs[0]->monday_start);
-    $monday_end = explode(',', $specs[0]->monday_end);
-    $monday_hours = explode(',', $specs[0]->monday_hours);
-    $tuesday_start = explode(',', $specs[0]->tuesday_start);
-    $tuesday_end = explode(',', $specs[0]->tuesday_end);
-    $tuesday_hours = explode(',', $specs[0]->tuesday_hours);
-    $wednesday_start = explode(',', $specs[0]->wednesday_start);
-    $wednesday_end = explode(',', $specs[0]->wednesday_end);
-    $wednesday_hours = explode(',', $specs[0]->wednesday_hours);
-    $thursday_start = explode(',', $specs[0]->thursday_start);
-    $thursday_end = explode(',', $specs[0]->thursday_end);
-    $thursday_hours = explode(',', $specs[0]->thursday_hours);
-    $friday_start = explode(',', $specs[0]->friday_start);
-    $friday_end = explode(',', $specs[0]->friday_end);
-    $friday_hours = explode(',', $specs[0]->friday_hours);
-    $saturday_start = explode(',', $specs[0]->saturday_start);
-    $saturday_end = explode(',', $specs[0]->saturday_end);
-    $saturday_hours = explode(',', $specs[0]->saturday_hours);
-    $sunday_start = explode(',', $specs[0]->sunday_start);
-    $sunday_end= explode(',', $specs[0]->sunday_end);
-    $sunday_hours = explode(',', $specs[0]->sunday_hours);
     $total = explode(',', $specs[0]->total);
     $array = [];
     $day_array= [];
@@ -100,8 +70,9 @@ Route::get('/event/{event}', function ($id) {
     $day = -1;
         //return count($grade)-1;
         for($i=0; $i < count($grade); $i++) {
+
             //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
-            array_push($day_array,['grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            array_push($day_array,['id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
             //DAY NUMBER LOOP
             $week = 0;
             $day_number = $ctm_start_date->dayOfWeek;
@@ -112,7 +83,7 @@ Route::get('/event/{event}', function ($id) {
                 //EVERY WEEK +1
                 if($x % 7 == 0){
                     $week++;
-                    $day++;
+                    //$day++;
                 }
                 //CREATES THE WEEK
                 $lower = strtolower(dayOfWeek($day_number));
@@ -121,21 +92,22 @@ Route::get('/event/{event}', function ($id) {
                 $sub_total = $lower.'_hours';
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
                 // PREVENT OFFSETS
-                if(count(explode(',', $specs[0]->$start)) > $day){
-                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$day];
-                }
-                if(count(explode(',', $specs[0]->$end)) > $day){
-                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$day];
-                }
-                if(count(explode(',', $specs[0]->$sub_total)) > $day){
-                    $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$day];
-                }
+
+                //if(count(explode(',', $specs[0]->$start)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$i];
+                //}
+                //if(count(explode(',', $specs[0]->$end)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
+                //}
+                //if(count(explode(',', $specs[0]->$sub_total)) > $day){
+                    $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
+                //}
 
                 $day_number++;
             }
             //$day = $i;
         }
-    return $day_array;
+    return ['data'=>$day_array];
 });
 
 
@@ -238,6 +210,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
+        Route::resource('dashboard/sbf', 'SBFController');
 
     });
 });

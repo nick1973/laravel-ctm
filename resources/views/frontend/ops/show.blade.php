@@ -229,7 +229,7 @@ echo $arr[1];
 
                                 <div class="DocumentList">
                                     <ul class="list-inline">
-                                        @for($i=0; $i <= $diffInDays; $i++)
+                                        @for($i=0; $i <= $diffInDays-1; $i++)
                                             @if($day_number >6)
                                                 <?php $day_number=0 ?>
                                             @endif
@@ -398,7 +398,7 @@ echo $arr[1];
                 <th>Role</th>
                 <th>Qty</th>
                 <th>Position</th>
-                @for($i=0; $i <= $diffInDays; $i++)
+                @for($i=0; $i <= $diffInDays-1; $i++)
                     @if($day_number_table ==7)
                         <?php $day_number_table=0 ?>
                     @endif
@@ -432,7 +432,7 @@ echo $arr[1];
                 <?php
                     $week = 0;
                 ?>
-                @for($i=0; $i <= $diffInDays; $i++)
+                @for($i=0; $i <= $diffInDays-1; $i++)
                     <?php
                     if($i % 7 == 0){
                         $week++;
@@ -594,7 +594,7 @@ echo $arr[1];
 
             $http.get("/event/{{ $event->id }}")
                     .then(function (response) {
-                        $scope.specs = response.data;
+                        $scope.specs = response.data.data;
                     });
             console.log($scope.specs)
             $scope.specs = [];

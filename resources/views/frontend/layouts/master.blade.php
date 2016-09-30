@@ -157,6 +157,7 @@
                             {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
                             <h2>Managers Dashboard</h2>
                             <a href="/dashboard/manager" class="btn btn-warning">Back to Dashboard</a>
+                            <a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>
                         </div>
                         <div class="col-md-6">
 
