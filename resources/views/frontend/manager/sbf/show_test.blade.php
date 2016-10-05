@@ -12,11 +12,17 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {{--<link rel="stylesheet" href="/resources/demos/style.css">--}}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+
+    {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>--}}
+    {{--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>--}}
+    {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>--}}
+
+    {{--<script src="//code.jquery.com/jquery-1.12.3.js"></script>--}}
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -27,6 +33,8 @@
     <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+
 
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">--}}
@@ -45,11 +53,31 @@
         display: none;
     }
 
+    .row_selected{background-color: #0000ff !important; z-index:9999}
+
+    .large { min-width: 150px; }
+    .medium { min-width: 100px; }
+    .small { min-width: 50px; }
+
+    /*table.dataTable thead th, table.dataTable thead td{*/
+        /*border-bottom: none;*/
+    /*}*/
+    /*table.dataTable.no-footer{*/
+        /*border-bottom: 1px solid #111;*/
+    /*}*/
 </style>
 
 </head>
 <body id="app-layout" ng-controller="MondayCtrl">
-
+<?php
+$date = new DateTime('2011-06-28 00:00:00');
+$count = 24 * 60 / 15;
+$arr = array();
+while($count--) {
+    $arr[] = $date->add(new DateInterval("P0Y0DT0H15M"))->format("H:i");
+}
+echo $arr[1];
+?>
 @include('includes.partials.logged-in-as')
 @include('frontend.includes.nav')
 <div class="jumbotron">
@@ -108,28 +136,38 @@
 
             <table id="staff" class="table" cellspacing="0" width="100%" hidden>
             <thead>
-                <tr>
+                <tr style="color: #5bc0de">
+                    <th>Start</th>
+                    <th>Finish</th>
                     <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Surname</th>
+                    <th>Driver</th>
                     <th>Mobile</th>
                     <th>Email</th>
+                    <th>RTW</th>
+                    <th>Medical</th>
+                    <th>Age</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
                 <tbody>
                     <tr>
+                        <th class="medium"></th>
+                        <th class="medium"></th>
+                        <td><input class="form-control" type="text" value=""/></td>
+                        <td><input class="form-control" type="text" value=""/></td>
+                        <td><input class="form-control" type="text" value=""/></td>
+                        <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
-                        <td></td>
+                        <th></th>
                     </tr>
                 </tbody>
             </table>
-
-
         </div><!-- col-md-12 -->
 </div><!-- container -->
 
@@ -140,12 +178,31 @@
 </html>
 
 <script>
+    $(document).ready(function() {
+
+
+    });
+</script>
+
+<script>
+var iTableCounter = 1;
+var oInnerTable;
+var oTable;
+var table;
+var TableHtml;
 // IN A FUNCTION THAT PASSES THE MAIN PARENT ID TO USE TO HOOK
 function staffing(id) {
     var id = $(id).closest('table').attr('id');
         function add() {
             var t = $("#" + id).DataTable();
             t.row.add( [
+
+                '<td class="large"><select class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+                '<td width="75"><select class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+                '<td><input class="form-control" type="text" value=""/></td>',
+                '<td><input class="form-control" type="text" value=""/></td>',
+                '<td><input class="form-control" type="text" value=""/></td>',
+                '<td><input class="form-control" type="text" value=""/></td>',
                 '<td><input class="form-control" type="text" value=""/></td>',
                 '<td><input class="form-control" type="text" value=""/></td>',
                 '<td><input class="form-control" type="text" value=""/></td>',
@@ -173,7 +230,6 @@ function staffing(id) {
                 t.row('.selected').remove().draw( false );
             } );
         });
-
     }
 
     function fnFormatDetails(table_id, html) {
@@ -189,13 +245,10 @@ function staffing(id) {
         return sOut;
     }
 
-    var iTableCounter = 1;
-    var oInnerTable;
-    //var oTable;
-    var TableHtml;
-
     //Run On HTML Build
     $(document).ready(function () {
+
+
 
         TableHtml = $("#staff").html();
 
@@ -213,7 +266,7 @@ function staffing(id) {
             this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
         });
 
-        //Initialse DataTables, with no sorting on the 'details' column
+        //Initialse DataTables
         var oTable = $('#exampleTable').dataTable({
             "ajax": "/event/{{ $event->id }}",
             //dom: '<"top"Blf>rT<"clear">',
@@ -237,19 +290,21 @@ function staffing(id) {
             "order": [[1, 'asc']]
         });
 
+        var table = $('#exampleTable').DataTable({
+            retrieve: true,
+            searching: false
+        });
+
         /* Add event listener for opening and closing details
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
 
+
         $('#exampleTable tbody').on('click', 'td.details-control', function () {
             var nTr = $(this).parents('tr')[0];
             var nextTr = $(this).parents('tr')[1];
             var tr = $(this).closest('tr');
-            var table = $('#exampleTable').DataTable({
-                retrieve: true,
-                searching: false
-            });
             var row = table.row( tr );
             if (oTable.fnIsOpen(nTr)) {
                 /* This row is already open - close it */
@@ -402,13 +457,15 @@ function shits ( d ) {
                 }
             });
             output += '<td>'+d.total+'</td>'
+            //output += '<td><input class="form-control btn btn-info clone" type="button" value="Clone" onclick="clone(this)"/></td>'
             output += '</tr>';
             var id = 'staff'+i+''
             output += '<tr id='+id+'>';
             output += '<td style="font-weight: bold">Staff: ' + i + '</td>';
             output += '</tr>';
 
-            output += '<td colspan="'+dayNumber+'">';
+            //output += '<td colspan="'+dayNumber+'">';
+            output += '<td colspan="100%">';
             output += fnFormatDetails(iTableCounter, TableHtml);
             iTableCounter ++;
             output += '<td>';
@@ -417,6 +474,5 @@ function shits ( d ) {
     }
     return output;
 }
-
 </script>
 
