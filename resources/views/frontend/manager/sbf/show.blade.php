@@ -8,12 +8,25 @@
           href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
 
     <script src="//code.jquery.com/jquery-1.12.3.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
 
     <style>
@@ -23,6 +36,7 @@
         .search-table-outter { overflow-x: scroll; }
         /*th, td { min-width: 155px; }*/
         .large { min-width: 150px; }
+        .small { min-width: 75px; }
 
         .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
             background-color:#428bca;
@@ -158,15 +172,42 @@ echo $arr[1];
                     </div>
                 </div>
             </div>
-
+            <button id="addRow">addRow</button>
             <table id="example2" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th></th>
+                    <th>row id</th>
                     <th>Role</th>
                     <th>Position</th>
                     <th>Qty</th>
                 </tr>
+                {{--<tr>--}}
+                    {{--<td>--}}
+                <table id="staffing" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                    {{--</td>--}}
+                {{--</tr>--}}
+
+
                 </thead>
                 <tfoot>
                 <tr>
@@ -174,40 +215,61 @@ echo $arr[1];
                     <th></th>
                     <th></th>
                     <th></th>
-                </tr>
-                </tfoot>
-            </table>
-            <table id="example" class="display" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                    <th>Column 4</th>
-                    <th>Column 5</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                    <th>Column 4</th>
-                    <th>Column 5</th>
+                    <th></th>
+
+
                 </tr>
                 </tfoot>
             </table>
 
-            <hr>
-            <hr>
-            <hr>
-            <hr>
-            <hr>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br></br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br></br>
+            </br>
+            </br>
+            </br>
+            </br></br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+
+
+
+
             <hr>
             <hr>
 
-
-                <button id="addRow">addRow</button>
             {{--<table id="example" class="display" cellspacing="0" width="100%">--}}
                 {{--<thead>--}}
                 {{--<tr>--}}
@@ -355,13 +417,13 @@ echo $arr[1];
     /* Formatting function for row details - modify as you need */
     function format ( d ) {
         // `d` is the original data object for the row
-        var output = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+        var output = $("#example2");
         Object.size = function(obj) {
             var size = 0, key;
             for (key in obj) {
                 if (obj.hasOwnProperty(key)) size++;
             }
-            return size-6;
+            return size-7;
         };
             // Get the size of an object
         var daySize = Object.size(d);
@@ -375,57 +437,174 @@ echo $arr[1];
         for (var i = 1; i <= d.qty; i++) {
             var counter = 0;
             var dayNumber = '{{ $day }}';
-            output += '<tr>';
-            output += '<td style="font-weight: bold">Staff: ' + i + '</td>';
-            output += '</tr>';
+
             output += '<tr>';
             //output += '</tr>';
-            //output += '<tr>';
+            output += '<tr>';
             $.each(d[foo], function (index, value) {
-                if(index.includes("saturday")){
-                    var day = "Saturday"
-                }
-                if(index.includes("sunday")){
-                    var day = "Sunday"
-                }
-                if(index.includes("monday")){
-                    var day = "Monday"
-                }
-                if(index.includes("tuesday")){
-                    var day = "Tuesday"
-                }
-                if(index.includes("wednesday")){
-                    var day = "Wednesday"
-                }
-                if(index.includes("thursday")){
-                    var day = "Thursday"
-                }
-                if(index.includes("friday")){
-                    var day = "Friday"
-                }
                 if(counter % 7 == 0 && x > 1){
                     dayNumber = +dayNumber+7
                 }
-                if(value.length > 0){
-                    output += '<td class="large">' + day + dayNumber + ':  ' + value + '</td>';
+                if(index.includes("saturday")){
+                    if(index.includes("start")){
+                        var day = "Saturday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Saturday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Saturday"+dayNumber+" Hours"
+                    }
                 }
+                if(index.includes("sunday")){
+                    if(index.includes("start")){
+                        var day = "Sunday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Sunday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Sunday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("monday")){
+                    if(index.includes("start")){
+                        var day = "Monday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Monday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Monday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("tuesday")){
+                    if(index.includes("start")){
+                        var day = "Tuesday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Tuesday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Tuesday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("wednesday")){
+                    if(index.includes("start")){
+                        var day = "Wednesday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Wednesday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Wednesday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("thursday")){
+                    if(index.includes("start")){
+                        var day = "Thursday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Thursday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Thursday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("friday")){
+                    if(index.includes("start")){
+                        var day = "Friday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Friday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Friday"+dayNumber+" Hours"
+                    }
+                }
+
+                //if(value.length > 0){
+                    output += '<td class="large" style="font-weight: bold; background-color: #dddddd">'+day+'</td>';
+                //}
 
                 counter++;
                 if (counter % 3 == 0) {
-                    output += '<td></td>'
+                    output += '<td class="small"></td>'
                     //output += '</tr>';
                     dayNumber++
                 }
             });
+                    output += '<tr>'
+            $.each(d[foo], function (index, value) {
+                    output += '<td class="large">' + value + '</td>';
+                counter++;
+                if (counter % 3 == 0) {
+                    output += '<td class="small"></td>'
+                    //output += '</tr>';
+                    dayNumber++
+                }
+            });
+            output += '<td>'+d.total+'</td>'
+            output += '</tr>';
+
+            var id = 'staff'+i+''
+            output += '<tr id=' +
+                    id+'>';
+            output += '<td style="font-weight: bold">Staff: ' + i + '</td>';
+            output += '<td>Full Shift <input name="qty[]" class="" type="checkbox"></td>';
+//            $.each(d[foo], function (index, value) {
+//                //output += '<td class="large">' + value + '</td>';
+//                counter++;
+//                if (counter % 3 == 0) {
+//                    output += '<td> <input name="qty[]" class="" type="checkbox"</td>'
+//                    dayNumber++
+//                }
+//            });
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><input name="qty[]" class="form-control" type="text"></td>';
+            output += '<td><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></td>';
+            output += '</tr>';
+
+//            output += '<table id="staffing" class="display" cellspacing="0" width="100%"> ' +
+//                    '<thead> ' +
+//                    '<tr> ' +
+//                    '<th>Column 1</th> ' +
+//                    '<th>Column 2</th> ' +
+//                    '<th>Column 3</th> ' +
+//                    '<th>Column 4</th> ' +
+//                    '<th>Column 5</th> ' +
+//                    '</tr> ' +
+//                    '</thead> ' +
+//                    '<tfoot> ' +
+//                    '<tr> ' +
+//                    '<th>Column 1</th> ' +
+//                    '<th>Column 2</th> ' +
+//                    '<th>Column 3</th> ' +
+//                    '<th>Column 4</th> ' +
+//                    '<th>Column 5</th> ' +
+//                    '</tr> ' +
+//                    '</tfoot> ' +
+//                    '</table>'
+
         }
     }
-            output+='</table>';
+            //output+='</table>';
             return output;
     }
 
     $(document).ready(function() {
         var table = $('#example2').DataTable( {
             "ajax": "/event/{{ $event->id }}",
+            dom: '<"top"Blf>rT<"bottom"p><"clear">',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf'
+            ],
+
             "columns": [
                 {
                     "className":      'details-control',
@@ -433,6 +612,7 @@ echo $arr[1];
                     "data":           null,
                     "defaultContent": ''
                 },
+                { "data": "row_id" },
                 { "data": "grade" },
                 { "data": "position" },
                 { "data": "qty" }
@@ -442,23 +622,24 @@ echo $arr[1];
         } );
 
 
-        // Add event listener for opening and closing details
-        $(".shift_1").click(function () {
-            alert("boo");
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
+        var t = $('#staffing').DataTable();
+        var counter = 1;
 
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                // Open this row
-                row.child( format(row.data()) ).show();
-                tr.addClass('shown');
-            }
+        $('#addRow').on( 'click', function () {
+            t.row.add( [
+                counter +'.1',
+                counter +'.2',
+                counter +'.3',
+                counter +'.4',
+                'test' + counter
+
+            ] ).draw( false );
+
+            counter++;
         } );
+
+        // Automatically add a first row of data
+        //$('#addRow').click();
 
 
         // Add event listener for opening and closing details
@@ -486,7 +667,7 @@ echo $arr[1];
 
 
     $(document).ready(function() {
-        var t = $('#example').DataTable();
+        var t = $('#staff').DataTable();
         var counter = 1;
 
         $('#addRow').on( 'click', function () {

@@ -17,6 +17,7 @@ class SpecsController extends Controller
     public function store(Request $request)
     {
         $events_id = $request->input('events_id');
+        $row_id = $request->input('row_id');
         $grade = $request->input('grade');
         $qty = $request->input('qty');
         $position = $request->input('position');
@@ -45,6 +46,7 @@ class SpecsController extends Controller
 
         if ($grade != "") {
             $grade= implode(',', $grade);
+            $row_id= implode(',', $row_id);
             $qty = implode(',', $qty);
             $position = implode(',', $position);
             $mon_start = implode(',', $mon_start);
@@ -72,6 +74,7 @@ class SpecsController extends Controller
 
             $rows = [
                 'events_id' => $events_id,
+                'row_id' => $row_id,
                 'grade' => $grade,
                 'qty' => $qty,
                 'position' => $position,

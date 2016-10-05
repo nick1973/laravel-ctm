@@ -194,7 +194,7 @@ echo $arr[1];
                                             ?>
                                         </select>
                                     </div>
-                                    <input id="id" ng-model="id" hidden>
+                                    <input id="id" ng-model="id" hidden="">
                                 </div>
 
                                 <div class="form-group">
@@ -229,7 +229,7 @@ echo $arr[1];
 
                                 <div class="DocumentList">
                                     <ul class="list-inline">
-                                        @for($i=0; $i <= $diffInDays-1; $i++)
+                                        @for($i=0; $i <= $diffInDays; $i++)
                                             @if($day_number >6)
                                                 <?php $day_number=0 ?>
                                             @endif
@@ -415,7 +415,11 @@ echo $arr[1];
                 <td>
                     <input type="button" value="Remove"
                            class="btn btn-danger addproduct"
-                           ng-click="removeRow(spec.grade)"/>
+                           ng-click="removeRow($index)"/>
+                </td>
+                <td width="200" hidden>
+                    <input name="row_id[]" class="form-control large" type="text"
+                           value="@{{$index + 1}}">
                 </td>
                 <td width="200">
                     <input name="grade[]" class="form-control large" type="text"
@@ -630,20 +634,28 @@ echo $arr[1];
                 $scope.specs.push(myArray)
             };
 
-            $scope.removeRow = function (grade) {
-                var index = 0;
-                var comArr = eval($scope.specs);
-                for (var i = 0; i < comArr.length; i++) {
-                    if (comArr[i].grade === grade) {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index === -1) {
-                    alert("Something gone wrong");
-                }
-                $scope.specs.splice(index, 1);
+
+            $scope.removeRow = function(index){
+                $scope.specs.splice(index-1, 1);
             };
+
+
+
+
+//            $scope.removeRow = function (grade) {
+//                var index = 0;
+//                var comArr = eval($scope.specs);
+//                for (var i = 0; i < comArr.length; i++) {
+//                    if (comArr[i].grade === grade) {
+//                        index = i;
+//                        break;
+//                    }
+//                }
+//                if (index === -1) {
+//                    alert("Something gone wrong");
+//                }
+//                $scope.specs.splice(index, 1);
+//            };
         });
     </script>
 

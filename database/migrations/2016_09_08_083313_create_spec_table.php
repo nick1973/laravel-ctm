@@ -15,6 +15,7 @@ class CreateSpecTable extends Migration
         Schema::create('specs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id')->unsigned();
+            $table->text('row_id');
             $table->text('grade');
             $table->text('qty');
             $table->text('position');

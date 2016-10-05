@@ -72,7 +72,9 @@ Route::get('/event/{event}', function ($id) {
         for($i=0; $i < count($grade); $i++) {
 
             //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
-            array_push($day_array,['id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            $row_id = explode(',', $specs[0]->row_id)[$i];
+            array_push($day_array,['row_id' => $row_id, 'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+
             //DAY NUMBER LOOP
             $week = 0;
             $day_number = $ctm_start_date->dayOfWeek;
@@ -92,7 +94,7 @@ Route::get('/event/{event}', function ($id) {
                 $sub_total = $lower.'_hours';
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
                 // PREVENT OFFSETS
-
+                    //$day_array[$i] = explode(',', $specs[0]->row_id)[$i];
                 //if(count(explode(',', $specs[0]->$start)) > $day){
                     $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$i];
                 //}
