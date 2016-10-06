@@ -13,6 +13,24 @@ Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
 
+Route::get('/staff', function () {
+    $first_name=[];
+    $last_name=[];
+    $id=[];
+    $staff = \App\Models\Access\User\User::all();
+    foreach($staff as $row) {
+        $id[] = $row->id;
+        $first_name[] = $row->name;
+        $last_name[] = $row->lastname;
+    }
+    $response = [
+        'id'        => $id,
+        'first_name' => $first_name,
+        'last_name' => $last_name
+    ];
+    return json_encode($response);
+});
+
 Route::post('/specs', function (){
     //$period = $_POST['events_id'];
 
