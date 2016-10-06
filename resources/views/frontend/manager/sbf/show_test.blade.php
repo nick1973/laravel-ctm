@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="Test">
+<html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,6 @@
     <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script src="/js/vue.js"></script>
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">--}}
     {{--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>--}}
@@ -196,7 +195,7 @@ echo $arr[1];
                         <th class="medium"></th>
                         <th class="medium"></th>
                         <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
+                        <td><input onkeyup="getId(this)" class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
                         <td><input class="form-control" type="text" value=""/></td>
@@ -211,7 +210,15 @@ echo $arr[1];
             </table>
         </div><!-- col-md-12 -->
 </div><!-- container -->
+<script>
+    function getId(id) {
+        var tableId = $(id).closest('table').attr('id')
+        var first_name = $(id).attr('id',tableId+'first_name')
+        var last_name = $(id).nextAll('input').first().focus();
+        console.log(last_name)
 
+    }
+</script>
 
 <footer>
 </footer>

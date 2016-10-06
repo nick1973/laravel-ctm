@@ -8,11 +8,11 @@ var count = 1;
 // IN A FUNCTION THAT PASSES THE MAIN PARENT ID TO USE TO HOOK
 
 function staffing(id) {
-    var id = $(id).closest('table').attr('id');
+    var tableId = $(id).closest('table').attr('id');
     function add() {
-        var t = $("#" + id).DataTable();
+        var t = $("#" + tableId).DataTable();
         t.row.add( [
-            '<td class="large"><select name="timeObj" class="form-control" multiple>'+
+            '<td class="large"><select class="form-control" multiple>'+
             <?php
     for($i=0; $i <= $diffInDays; $i++)
     {
@@ -23,23 +23,23 @@ function staffing(id) {
         <?php $day_number_copy++; $ctm_start_date_copy->addDay();
         }?>
     '</select></td>',
-        '<td width="75"><select class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
-            '<td width="75"><select class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
-            '<td><input class="form-control" type="text" value=""/></td>',
+            '<td width="75"><select id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+            '<td width="75"><select id="'+tableId+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+            '<td><input id="'+tableId+'_agency'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_first_name'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_Last_name'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_driver'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_mobile'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_email'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_rtw'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_medical'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_age'+count+'" class="form-control" type="text" value=""/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
     }
     add();
-
+    count++;
     $(".timeObj").change(function () {
         var foo = $('select[name=timeObj]').val()
         console.log(foo)
