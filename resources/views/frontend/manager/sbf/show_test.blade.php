@@ -197,7 +197,7 @@ echo $arr[1];
                             <td><input class="form-control" type="text" value=""/></td>
                             {{--<td><input onclick="getId(this)" class="form-control" type="text" value=""/></td>--}}
                             <td>
-                                <select onclick="getId(this)" onchange="findStaff(this)"
+                                <select  onclick="getId(this)" onchange="findStaff(this)"
                                         class="form-control large">
                                     <option></option>
                                     <?php
@@ -209,7 +209,7 @@ echo $arr[1];
                                     ?>
                                 </select>
                             </td>
-                            <td><input onkeyup="searchLastName(this)" class="form-control noID" type="text"/></td>
+                            <td><input onfocus="searchName(this)" class="form-control noID" type="text"/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
@@ -224,22 +224,45 @@ echo $arr[1];
                 </table>
             </form>
         </div><!-- col-md-12 -->
+
+    <button id="exampleTable_1_staff20">test</button>
+
 </div><!-- container -->
 <script>
     $(function(){
         console.log( "ready!" );
 
-        window.searchLastName = function searchLastName(item) {
+        window.searchName = function searchName(item) {
+            //getId(item)
             if(getId(item)){
                 $(item).autocomplete({
                     source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
                 });
+            } else {
+                console.log('not ini')
             }
         }
 
+        window.getId = function getId(id) {
+        var tableId = $(id).closest('table').attr('id')
+        var first_name = $(id).attr('id',tableId+'first_name')
+        var count = 1
+        $('#'+tableId).find('td').each(function(i, el) {
+            var inputEl = $(el).children().get(0)
+            var input = $(inputEl).hasClass('noID')
+            if(input){
+                $(inputEl).attr('id',tableId+'_staff'+count)
+                //console.log(inputEl)
+            }
+            count++
+        })
+        return true
+    }
+    });
+
     var pay_grades = <?php echo json_encode($users);?>;
     //$("#exampleTable_1first_name").change(function () {
-        window.findStaff = function findStaff(item) {
+    window.findStaff = function findStaff(item) {
         var tableId = $(item).closest('table').attr('id')
         var id = $(item).children(":selected").attr("id");//the count
         var x = id - 1;
@@ -273,24 +296,6 @@ echo $arr[1];
         input3.trigger('input');
         //console.log(pay_grades[x]['id']);
     };
-
-        window.getId = function getId(id) {
-        var tableId = $(id).closest('table').attr('id')
-        var first_name = $(id).attr('id',tableId+'first_name')
-        var count = 1
-        $('#'+tableId).find('td').each(function(i, el) {
-            var inputEl = $(el).children().get(0)
-            var input = $(inputEl).hasClass('noID')
-            if(input){
-                $(inputEl).attr('id',tableId+'_staff'+count)
-
-            }
-            count++
-        })
-            console.log(first_name)
-            return true;
-    }
-    });
 </script>
 
 <footer>
