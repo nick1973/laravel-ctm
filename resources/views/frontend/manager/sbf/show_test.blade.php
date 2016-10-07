@@ -11,15 +11,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
+    {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--}}
 
     {{--<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">--}}
 
     {{--<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>--}}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -32,7 +31,8 @@
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">--}}
     {{--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>--}}
-<style>
+
+    <style>
     td.details-control {
         background: url('/details_open.png') no-repeat center center;
         cursor: pointer;
@@ -159,70 +159,144 @@ echo $arr[1];
                 </tbody>
             </table>
 
-
-            <table id="staff" class="table" cellspacing="0" width="100%" hidden>
-            <thead>
-                <tr style="color: #5bc0de">
-                    <th>Days</th>
-                    <th>Start</th>
-                    <th>Finish</th>
-                    <th>Agency</th>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Driver</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>RTW</th>
-                    <th>Medical</th>
-                    <th>Age</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-                <tbody>
-                    <tr>
-                        <td class="large">
-                            <select name="timeObj" class="form-control" multiple>
-                                @for($i=0; $i <= $diffInDays; $i++)
-                                    @if($day_number ==7)
-                                        {{$day_number=0}}
-                                    @endif
-                                    <option id="{{ dayOfWeek($day_number) }}{{ $i }}">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
-                                    {{ $day_number++  }} {{ $ctm_start_date->addDay() }}
-                                @endfor
-                            </select>
-                        </td>
-                        <th class="medium"></th>
-                        <th class="medium"></th>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input onkeyup="getId(this)" class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control" type="text" value=""/></td>
-                        <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
+            <form id="tabel_form" method="post" action="#">
+                <table id="staff" class="table" cellspacing="0" width="100%" hidden>
+                <thead>
+                    <tr style="color: #5bc0de">
+                        <th>Days</th>
+                        <th>Start</th>
+                        <th>Finish</th>
+                        <th>Agency</th>
+                        <th>First Name</th>
+                        <th>Surname</th>
+                        <th>Driver</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>RTW</th>
+                        <th>Medical</th>
+                        <th>Age</th>
+                        <th></th>
                         <th></th>
                     </tr>
-                </tbody>
-            </table>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <td class="large">
+                                <select name="timeObj" class="form-control" multiple>
+                                    @for($i=0; $i <= $diffInDays; $i++)
+                                        @if($day_number ==7)
+                                            {{$day_number=0}}
+                                        @endif
+                                        <option id="{{ dayOfWeek($day_number) }}{{ $i }}">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                        {{ $day_number++  }} {{ $ctm_start_date->addDay() }}
+                                    @endfor
+                                </select>
+                            </td>
+                            <th class="medium"></th>
+                            <th class="medium"></th>
+                            <td><input class="form-control" type="text" value=""/></td>
+                            {{--<td><input onclick="getId(this)" class="form-control" type="text" value=""/></td>--}}
+                            <td>
+                                <select onclick="getId(this)" onchange="findStaff(this)"
+                                        class="form-control large">
+                                    <option></option>
+                                    <?php
+                                    $i = 0;
+                                    foreach ($users as $obj) {
+                                        $i++;
+                                        echo "<option id='" . $i . "' value='" . $obj{'name'} . "'>" . $obj{'name'} . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                            <td><input onkeyup="searchLastName(this)" class="form-control noID" type="text"/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
+                            <th></th>
+                        </tr>
+                        <button type="submit">submit</button>
+                    </tbody>
+                </table>
+            </form>
         </div><!-- col-md-12 -->
 </div><!-- container -->
 <script>
-    function getId(id) {
+    $(function(){
+        console.log( "ready!" );
+
+        window.searchLastName = function searchLastName(item) {
+            if(getId(item)){
+                $(item).autocomplete({
+                    source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+                });
+            }
+        }
+
+    var pay_grades = <?php echo json_encode($users);?>;
+    //$("#exampleTable_1first_name").change(function () {
+        window.findStaff = function findStaff(item) {
+        var tableId = $(item).closest('table').attr('id')
+        var id = $(item).children(":selected").attr("id");//the count
+        var x = id - 1;
+        //console.log(x);
+        var input = $('#'+tableId+'_staff4');
+        input.val(pay_grades[x]['lastname']);
+        input.trigger('input');
+        /////////////////////////
+        var input2 = $('#'+tableId+'_staff5');
+        input2.val(pay_grades[x]['uk_driving_license']);
+        input2.trigger('input');
+        /////////////////////////
+        var input3 = $('#'+tableId+'_staff6');
+        input3.val(pay_grades[x]['mobile']);
+        input3.trigger('input');
+        //////////////////////////////////
+        var input3 = $('#'+tableId+'_staff7');
+        input3.val(pay_grades[x]['email']);
+        input3.trigger('input');
+        //////////////////////////////////
+        var input3 = $('#'+tableId+'_staff8');
+        input3.val(pay_grades[x]['charge_per_hour']);
+        input3.trigger('input');
+        //////////////////////////////////
+        var input3 = $('#'+tableId+'_staff9');
+        input3.val(pay_grades[x]['medical_conditions']);
+        input3.trigger('input');
+        //////////////////////////////////
+        var input3 = $('#'+tableId+'_staff10');
+        input3.val(pay_grades[x]['id']);
+        input3.trigger('input');
+        //console.log(pay_grades[x]['id']);
+    };
+
+        window.getId = function getId(id) {
         var tableId = $(id).closest('table').attr('id')
         var first_name = $(id).attr('id',tableId+'first_name')
-        var last_name = $(id).nextAll('input').first().focus();
-        console.log(last_name)
+        var count = 1
+        $('#'+tableId).find('td').each(function(i, el) {
+            var inputEl = $(el).children().get(0)
+            var input = $(inputEl).hasClass('noID')
+            if(input){
+                $(inputEl).attr('id',tableId+'_staff'+count)
 
+            }
+            count++
+        })
+            console.log(first_name)
+            return true;
     }
+    });
 </script>
 
 <footer>
 </footer>
 </body>
 </html>
+
 @include('frontend.manager.sbf.includes.tables')
 

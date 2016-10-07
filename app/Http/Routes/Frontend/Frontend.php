@@ -31,9 +31,9 @@ Route::get('/staff', function () {
     return json_encode($response);
 });
 
-Route::post('/specs', function (){
+Route::post('/staffname', function (){
     //$period = $_POST['events_id'];
-
+    //return $_POST['staff_name'];
 });
 
 Route::get('/event/{event}', function ($id) {
