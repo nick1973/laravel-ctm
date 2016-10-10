@@ -31,9 +31,11 @@ Route::get('/staff', function () {
     return json_encode($response);
 });
 
-Route::post('/staffname', function (){
+Route::get('/staffname', function (){
     //$period = $_POST['events_id'];
-    //return $_POST['staff_name'];
+//    $query = \Illuminate\Support\Facades\DB::table('users')->select('name')->get();
+//    return json_encode($query);
+    return \App\Models\Access\User\User::all();
 });
 
 Route::get('/event/{event}', function ($id) {

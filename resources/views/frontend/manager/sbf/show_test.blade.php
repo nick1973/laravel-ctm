@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 
-    {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     {{--<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">--}}
 
@@ -33,6 +33,8 @@
     {{--<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>--}}
 
     <style>
+
+
     td.details-control {
         background: url('/details_open.png') no-repeat center center;
         cursor: pointer;
@@ -195,21 +197,9 @@ echo $arr[1];
                             <th class="medium"></th>
                             <th class="medium"></th>
                             <td><input class="form-control" type="text" value=""/></td>
-                            {{--<td><input onclick="getId(this)" class="form-control" type="text" value=""/></td>--}}
-                            <td>
-                                <select  onclick="getId(this)" onchange="findStaff(this)"
-                                        class="form-control large">
-                                    <option></option>
-                                    <?php
-                                    $i = 0;
-                                    foreach ($users as $obj) {
-                                        $i++;
-                                        echo "<option id='" . $i . "' value='" . $obj{'name'} . "'>" . $obj{'name'} . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </td>
-                            <td><input onfocus="searchName(this)" class="form-control noID" type="text"/></td>
+                            <td><input onclick="getId(this)" onfocus="searchName(this)" class="form-control noID" type="text"/></td>
+
+                            <td><input onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
@@ -230,17 +220,93 @@ echo $arr[1];
 </div><!-- container -->
 <script>
     $(function(){
-        console.log( "ready!" );
+        window.searchLastName = function searchLastName(att) {
+            var tableId = $(att).closest('table').attr('id')
+            $(function() {
+                $(att).autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/staffname",
+                            type: "GET",
+                            dataType: "json",
+                            data: {
+                                term: $(att).val()
+                            },
+                            success: function (data) {
+                                var array = $.map(data, function (item) {
+                                    return {
+                                        id: item.id,
+                                        value: item.lastname,
+                                        label: item.name + ' ' + item.lastname,
+                                        name: item.name,
+                                        lastname: item.lastname,
+                                        mobile: item.mobile,
+                                        email: item.email,
+                                        uk_driving_license: item.uk_driving_license,
+                                        medical_conditions: item.medical_conditions,
+                                        rtw_dirty: item.rtw_dirty,
+                                        dob: item.dob,
+                                    };
+                                });
+                                //call the filter here
+                                response($.ui.autocomplete.filter(array, request.term));
+                            }
+                        });
+                    },
+                    select: function (event, ui) {
+                        //$(att).val(ui.item.name);
+                        console.log(ui.item.id)
+                        //$('#'+tableId+'_staff7').val( ui.item.email );
+                        loadStaff(att, ui)
+                    },
+                    minLength: 0
 
-        window.searchName = function searchName(item) {
-            //getId(item)
-            if(getId(item)){
-                $(item).autocomplete({
-                    source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-                });
-            } else {
-                console.log('not ini')
-            }
+                })
+            })
+        }
+
+
+        window.searchName = function searchName(att) {
+            var tableId = $(att).closest('table').attr('id')
+            $(function() {
+                $(att).autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/staffname",
+                            type: "GET",
+                            dataType: "json",
+                            data: {
+                                term: $(att).val()
+                            },
+                            success: function (data) {
+                                var array = $.map(data, function (item) {
+                                    return {
+                                        id: item.id,
+                                        value: item.name,
+                                        label: item.name + ' ' + item.lastname,
+                                        name: item.name,
+                                        lastname: item.lastname,
+                                        mobile: item.mobile,
+                                        email: item.email,
+                                        uk_driving_license: item.uk_driving_license,
+                                        medical_conditions: item.medical_conditions,
+                                        rtw_dirty: item.rtw_dirty,
+                                        dob: item.dob,
+                                    };
+                                });
+                                //call the filter here
+                                response($.ui.autocomplete.filter(array, request.term));
+                            }
+                        });
+                    },
+                    select: function (event, ui) {
+                        //$(att).val(ui.item.name);
+                        loadStaff(att, ui)
+                    },
+                    minLength: 0
+
+                })
+            })
         }
 
         window.getId = function getId(id) {
@@ -258,44 +324,69 @@ echo $arr[1];
         })
         return true
     }
-    });
 
-    var pay_grades = <?php echo json_encode($users);?>;
-    //$("#exampleTable_1first_name").change(function () {
-    window.findStaff = function findStaff(item) {
-        var tableId = $(item).closest('table').attr('id')
-        var id = $(item).children(":selected").attr("id");//the count
-        var x = id - 1;
-        //console.log(x);
-        var input = $('#'+tableId+'_staff4');
-        input.val(pay_grades[x]['lastname']);
-        input.trigger('input');
-        /////////////////////////
-        var input2 = $('#'+tableId+'_staff5');
-        input2.val(pay_grades[x]['uk_driving_license']);
-        input2.trigger('input');
-        /////////////////////////
-        var input3 = $('#'+tableId+'_staff6');
-        input3.val(pay_grades[x]['mobile']);
-        input3.trigger('input');
-        //////////////////////////////////
-        var input3 = $('#'+tableId+'_staff7');
-        input3.val(pay_grades[x]['email']);
-        input3.trigger('input');
-        //////////////////////////////////
-        var input3 = $('#'+tableId+'_staff8');
-        input3.val(pay_grades[x]['charge_per_hour']);
-        input3.trigger('input');
-        //////////////////////////////////
-        var input3 = $('#'+tableId+'_staff9');
-        input3.val(pay_grades[x]['medical_conditions']);
-        input3.trigger('input');
-        //////////////////////////////////
-        var input3 = $('#'+tableId+'_staff10');
-        input3.val(pay_grades[x]['id']);
-        input3.trigger('input');
-        //console.log(pay_grades[x]['id']);
-    };
+        window.loadStaff = function loadStaff(item, result) {
+            var tableId = $(item).closest('table').attr('id')
+            //var id = $(item).children(":selected").attr("id");//the count
+            //var x = id - 1;
+            //console.log(x);
+            //console.log(result)
+            var input = $('#'+tableId+'_staff3');
+            input.val(result.item.name);
+            input.trigger('input');
+            /////////////////////////
+            var input = $('#'+tableId+'_staff4');
+            input.val(result.item.lastname);
+            input.trigger('input');
+            /////////////////////////
+            var input2 = $('#'+tableId+'_staff5');
+            input2.val(result.item.uk_driving_license);
+            input2.trigger('input');
+            /////////////////////////
+            var input3 = $('#'+tableId+'_staff6');
+            input3.val(result.item.mobile);
+            input3.trigger('input');
+            //////////////////////////////////
+            var input3 = $('#'+tableId+'_staff7');
+            input3.val(result.item.email);
+            input3.trigger('input');
+            //////////////////////////////////
+            var input3 = $('#'+tableId+'_staff8');
+            var rtw = jQuery.parseJSON(result.item.rtw_dirty);
+            input3.val(rtw.work_status);
+            input3.trigger('input');
+            //////////////////////////////////
+            var input3 = $('#'+tableId+'_staff9');
+            input3.val(result.item.medical_conditions);
+            input3.trigger('input');
+            //////////////////////////////////
+            var input3 = $('#'+tableId+'_staff10');
+            var dob = result.item.dob
+            var month = Number(dob.substr(5,2));
+            var day = Number(dob.substr(8,2));
+            var year = Number(dob.substr(0,4));
+            var age = 18;
+            var age2 = 25;
+            var mydate = new Date();
+            mydate.setFullYear(year, month-1, day);
+            var currdate = new Date();
+            var setDate = new Date();
+            var eighteen = setDate.setFullYear(mydate.getFullYear() + age,month-1, day);
+            var twentyFive = setDate.setFullYear(mydate.getFullYear() + age2,month-1, day);
+            if ((currdate - eighteen) > 0 && (currdate - twentyFive) < 0){
+                // you are above 18
+                input3.val('over 18');
+            }
+            else if((currdate - twentyFive) > 0){
+                // you are above 25
+                input3.val('over 25');
+            }
+            else{
+                input3.val('Under 18');
+            }
+            input3.trigger('input');
+        };
+    });
 </script>
 
 <footer>
