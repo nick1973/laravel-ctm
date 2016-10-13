@@ -23,17 +23,22 @@ function staffing(id) {
         <?php $day_number_copy++; $ctm_start_date_copy->addDay();
         }?>
     '</select></td>',
-            '<td width="75"><select id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
-            '<td width="75"><select id="'+tableId+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+            '<td width="75"><select name="start[]" id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
+            '<td width="75"><select name="end[]" id="'+tableId+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
             '<td><input id="'+tableId+'_agency'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_first_name'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_Last_name'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_driver'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_mobile'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_email'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_rtw'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_medical'+count+'" class="form-control" type="text" value=""/></td>',
-            '<td><input id="'+tableId+'_age'+count+'" class="form-control" type="text" value=""/></td>',
+            '<td><input onfocus="searchName(this)" id="'+tableId+'_first_name'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input onfocus="searchLastName(this)" id="'+tableId+'_Last_name'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_driver'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_mobile'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_email'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td>' +
+            '<input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID" type="text" value=""/>' +
+            '<input name="row_id[]" class="form-control" type="text" value="'+count+'"/>' +
+            '<input name="spec_id[]" class="form-control" type="text" value="{{$spec->id}}" />' +
+            '</td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
@@ -146,6 +151,11 @@ $(document).ready(function () {
             oTable.fnOpen(nTr, shifts(row.data()));
             oInnerTable = $("#exampleTable_" + iTableCounter).DataTable({
             });
+
+            $(".name").each(function(){
+                $(this)[0].onclick();
+            })
+
             iTableCounter ++;
         }
     });
@@ -287,8 +297,11 @@ function shifts ( d ) {
 
             //output += '<td colspan="'+dayNumber+'">';
             output += '<td colspan="100%">';
+            output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
+            output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
             output += fnFormatDetails(iTableCounter, TableHtml);
             iTableCounter ++;
+            output += '</form>';
             output += '<td>';
             output += '</tr>';
         }

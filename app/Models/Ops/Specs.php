@@ -2,6 +2,7 @@
 
 namespace App\Models\Ops;
 
+use App\Models\Access\User\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Specs extends Model
@@ -13,8 +14,13 @@ class Specs extends Model
         , 'saturday_start', 'saturday_end', 'saturday_hours', 'sunday_start', 'sunday_end', 'sunday_hours'
         , 'total'];
 
-//    public function event()
-//    {
-//        return $this->belongsTo(Events::class);
-//    }
+    public function event()
+    {
+        return $this->belongsTo(Events::class);
+    }
+
+    public function staff()
+    {
+        return $this->belongsToMany(User::class)->withPivot('row_id')->withTimestamps();
+    }
 }

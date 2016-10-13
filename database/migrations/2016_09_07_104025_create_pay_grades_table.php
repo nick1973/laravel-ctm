@@ -21,6 +21,13 @@ class CreatePayGradesTable extends Migration
             $table->decimal('accreditation', 5, 2);
             $table->decimal('charge_per_hour', 5, 2);
 
+            $table->decimal('market_rate');
+            $table->decimal('base_pay');
+            $table->decimal('hol_pay', 5, 2);
+            $table->decimal('pension', 5, 2);
+            $table->decimal('nirs', 5, 2);
+            $table->decimal('uniform', 5, 2);
+
             $table->string('margin');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

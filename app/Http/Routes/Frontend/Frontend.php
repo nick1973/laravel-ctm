@@ -41,15 +41,17 @@ Route::get('/staffname', function (){
 Route::get('/event/{event}', function ($id) {
 
     $event = \App\Models\Ops\Events::find($id);
-    $ctm_start_date = \Carbon\Carbon::createFromFormat('d/m/Y', $event->ctm_start_date);
+    $ctm_start_date = \Carbon\Carbon::createFromFormat('Y/m/d', $event->ctm_start_date);
     $ctm_start_date = \Carbon\Carbon::parse($ctm_start_date);
-    $ctm_end_date = \Carbon\Carbon::createFromFormat('d/m/Y', $event->ctm_end_date);
+    $ctm_end_date = \Carbon\Carbon::createFromFormat('Y/m/d', $event->ctm_end_date);
     $ctm_end_date = \Carbon\Carbon::parse($ctm_end_date);
     $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
     $day_number = $ctm_start_date->dayOfWeek;
 
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
     $grade = explode(',', $specs[0]->grade);
+
+
 
     function dayOfWeek($day){
         switch ($day) {
@@ -88,6 +90,11 @@ Route::get('/event/{event}', function ($id) {
     $start_count = explode(',', $specs[0]->$start);
     $max_days = count($start_count);
     $day = -1;
+
+
+    //dd (count(explode(',', $specs[0]->$start)) !==0 );
+
+
         //return count($grade)-1;
         for($i=0; $i < count($grade); $i++) {
 
@@ -115,15 +122,15 @@ Route::get('/event/{event}', function ($id) {
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
                 // PREVENT OFFSETS
                     //$day_array[$i] = explode(',', $specs[0]->row_id)[$i];
-                //if(count(explode(',', $specs[0]->$start)) > $day){
+                if(count(explode(',', $specs[0]->$start)) !== $day_number-1 ){
                     $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$i];
-                //}
-                //if(count(explode(',', $specs[0]->$end)) > $day){
+                }
+                if(count(explode(',', $specs[0]->$end)) !== $day_number-1 ){
                     $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
-                //}
-                //if(count(explode(',', $specs[0]->$sub_total)) > $day){
+                }
+                if(count(explode(',', $specs[0]->$sub_total)) !== $day_number-1 ){
                     $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
-                //}
+                }
 
                 $day_number++;
             }

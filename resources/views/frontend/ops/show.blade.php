@@ -153,10 +153,10 @@ echo $arr[1];
                         <h4>CTM End Date:</h4>
                     </div>
                     <div class="col-lg-3 col-md-3">
-                        <h4>{{ $event->event_start_date }}</h4>
-                        <h4>{{ $event->event_end_date }}</h4>
-                        <h4>{{ $event->ctm_start_date }}</h4>
-                        <h4>{{ $event->ctm_end_date }}</h4>
+                        <h4>{{ $event_start_date->format('m/d/Y') }}</h4>
+                        <h4>{{ $event_end_date->format('m/d/Y') }}</h4>
+                        <h4>{{ $ctm_start_date->format('m/d/Y') }}</h4>
+                        <h4>{{ $ctm_end_date->format('m/d/Y') }}</h4>
                     </div>
                 </div>
             </div>

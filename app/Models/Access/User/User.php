@@ -3,6 +3,7 @@
 namespace App\Models\Access\User;
 
 use App\Models\Access\User\Traits\UserAccess;
+use App\Models\Ops\Specs;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Access\User\Traits\Attribute\UserAttribute;
@@ -29,6 +30,11 @@ class User extends Authenticatable
                             'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan', 'profile_confirmed',
                             'visible', 'dirty', 'address_dirty', 'reference_dirty', 'rtw_dirty', 'docs_dirty'];
 
+
+    public function specs()
+    {
+        return $this->belongsToMany(Specs::class)->withTimestamps();
+    }
 
     public function references()
     {

@@ -114,16 +114,21 @@ echo $arr[1];
     <div class="container">
         <div class="col-md-6">
             <h2>Managers Dashboard</h2>
-            <a href="/dashboard/ops" class="btn btn-warning">Back to Dashboard</a>
+            <a href="/dashboard/manager" class="btn btn-warning">Back to Dashboard</a>
             <a href="#" class="btn btn-info active">Staff Booking Form</a>
         </div>
         <div class="col-md-6">
-
         </div>
     </div>
 </div>
 <div class="">
         <div class="col-md-12 col-lg-12">
+            {{--{{ $spec }}--}}
+            @foreach($spec->staff as $value)
+                Row{{ $value->pivot->row_id}} User {{ $users->find($value->pivot->user_id)->name }}
+                <br>
+            @endforeach
+
             <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event.</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -160,8 +165,6 @@ echo $arr[1];
                     </tr>
                 </tbody>
             </table>
-
-            <form id="tabel_form" method="post" action="#">
                 <table id="staff" class="table" cellspacing="0" width="100%" hidden>
                 <thead>
                     <tr style="color: #5bc0de">
@@ -179,216 +182,112 @@ echo $arr[1];
                         <th>Age</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                     <tbody>
+                        <script>
+                            function fetchData() {
+                                @foreach($spec->staff as $key=>$value)
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff3").val('{{ $users->find($value->pivot->user_id)->name }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff4").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff5").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff6").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff7").val('{{ $users->find($value->pivot->user_id)->email }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff8").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff9").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff10").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff11").val('{{ $users->find($value->pivot->user_id)->id }}');
+
+                                    <?php  $array[] = $value->pivot->row_id; ?>
+
+                                    // FIND THE DUPLICATED ROW_ID AND THEN
+                                    // USE JS TO APPEND INPUT FIELDS TO A DIV
+
+                                @endforeach
+
+
+                            }
+                        </script>
                         <tr>
                             <td class="large">
-                                <select name="timeObj" class="form-control" multiple>
+                                <select name="days[]" class="form-control" multiple>
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
                                             {{$day_number=0}}
                                         @endif
-                                        <option id="{{ dayOfWeek($day_number) }}{{ $i }}">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                        <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
                                         {{ $day_number++  }} {{ $ctm_start_date->addDay() }}
                                     @endfor
                                 </select>
                             </td>
                             <th class="medium"></th>
                             <th class="medium"></th>
-                            <td><input class="form-control" type="text" value=""/></td>
-                            <td><input onclick="getId(this)" onfocus="searchName(this)" class="form-control noID" type="text"/></td>
-
-                            <td><input onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>
+                            <td>
+                                <input name="agency[]" class="form-control" type="text" value=""/>
+                                {{--@foreach($specs as $spec)--}}
+                                    <div class="hidden">
+                                        <input name="spec_id" class="form-control" type="text" value="{{$spec->id}}" />
+                                    </div>
+                                {{--@endforeach--}}
+                            </td>
+                            <td>
+                                {{--@foreach($spec->staff as $value)--}}
+                                    {{--@if($value->pivot->row_id === 1)--}}
+                                        <input name="name[]" onclick="getId(this)" onfocus="searchName(this)"
+                                               class="form-control noID name" type="text"
+                                               value=""/>
+                                    {{--@endif--}}
+                                {{--@endforeach--}}
+                            </td>
+                            <td><input name="last_name[]" onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
+                            <td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
                             <th></th>
                         </tr>
-                        <button type="submit">submit</button>
                     </tbody>
                 </table>
-            </form>
+            <?php
+            //if(array_count_values($array)>1){
+                dd(array_count_values($array)) ;
+             //} ?>
+            <input type="submit" value="save" onclick="addNote()">
         </div><!-- col-md-12 -->
 
-    <button id="exampleTable_1_staff20">test</button>
+    <div id="result"></div>
 
 </div><!-- container -->
 <script>
-    $(function(){
-        window.searchLastName = function searchLastName(att) {
-            var tableId = $(att).closest('table').attr('id')
-            $(function() {
-                $(att).autocomplete({
-                    source: function (request, response) {
-                        $.ajax({
-                            url: "/staffname",
-                            type: "GET",
-                            dataType: "json",
-                            data: {
-                                term: $(att).val()
-                            },
-                            success: function (data) {
-                                var array = $.map(data, function (item) {
-                                    return {
-                                        id: item.id,
-                                        value: item.lastname,
-                                        label: item.name + ' ' + item.lastname,
-                                        name: item.name,
-                                        lastname: item.lastname,
-                                        mobile: item.mobile,
-                                        email: item.email,
-                                        uk_driving_license: item.uk_driving_license,
-                                        medical_conditions: item.medical_conditions,
-                                        rtw_dirty: item.rtw_dirty,
-                                        dob: item.dob,
-                                    };
-                                });
-                                //call the filter here
-                                response($.ui.autocomplete.filter(array, request.term));
-                            }
-                        });
-                    },
-                    select: function (event, ui) {
-                        //$(att).val(ui.item.name);
-                        console.log(ui.item.id)
-                        //$('#'+tableId+'_staff7').val( ui.item.email );
-                        loadStaff(att, ui)
-                    },
-                    minLength: 0
-
-                })
-            })
-        }
-
-
-        window.searchName = function searchName(att) {
-            var tableId = $(att).closest('table').attr('id')
-            $(function() {
-                $(att).autocomplete({
-                    source: function (request, response) {
-                        $.ajax({
-                            url: "/staffname",
-                            type: "GET",
-                            dataType: "json",
-                            data: {
-                                term: $(att).val()
-                            },
-                            success: function (data) {
-                                var array = $.map(data, function (item) {
-                                    return {
-                                        id: item.id,
-                                        value: item.name,
-                                        label: item.name + ' ' + item.lastname,
-                                        name: item.name,
-                                        lastname: item.lastname,
-                                        mobile: item.mobile,
-                                        email: item.email,
-                                        uk_driving_license: item.uk_driving_license,
-                                        medical_conditions: item.medical_conditions,
-                                        rtw_dirty: item.rtw_dirty,
-                                        dob: item.dob,
-                                    };
-                                });
-                                //call the filter here
-                                response($.ui.autocomplete.filter(array, request.term));
-                            }
-                        });
-                    },
-                    select: function (event, ui) {
-                        //$(att).val(ui.item.name);
-                        loadStaff(att, ui)
-                    },
-                    minLength: 0
-
-                })
-            })
-        }
-
-        window.getId = function getId(id) {
-        var tableId = $(id).closest('table').attr('id')
-        var first_name = $(id).attr('id',tableId+'first_name')
-        var count = 1
-        $('#'+tableId).find('td').each(function(i, el) {
-            var inputEl = $(el).children().get(0)
-            var input = $(inputEl).hasClass('noID')
-            if(input){
-                $(inputEl).attr('id',tableId+'_staff'+count)
-                //console.log(inputEl)
+    function addNote() {
+        var formData = $(".table_form").serializeArray();
+        var url = $(".table_form").attr( "action" );
+        $.ajax({
+            url : url,
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data - response from server
+                console.log(data)
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log(textStatus)
             }
-            count++
-        })
-        return true
+        });
     }
-
-        window.loadStaff = function loadStaff(item, result) {
-            var tableId = $(item).closest('table').attr('id')
-            //var id = $(item).children(":selected").attr("id");//the count
-            //var x = id - 1;
-            //console.log(x);
-            //console.log(result)
-            var input = $('#'+tableId+'_staff3');
-            input.val(result.item.name);
-            input.trigger('input');
-            /////////////////////////
-            var input = $('#'+tableId+'_staff4');
-            input.val(result.item.lastname);
-            input.trigger('input');
-            /////////////////////////
-            var input2 = $('#'+tableId+'_staff5');
-            input2.val(result.item.uk_driving_license);
-            input2.trigger('input');
-            /////////////////////////
-            var input3 = $('#'+tableId+'_staff6');
-            input3.val(result.item.mobile);
-            input3.trigger('input');
-            //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff7');
-            input3.val(result.item.email);
-            input3.trigger('input');
-            //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff8');
-            var rtw = jQuery.parseJSON(result.item.rtw_dirty);
-            input3.val(rtw.work_status);
-            input3.trigger('input');
-            //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff9');
-            input3.val(result.item.medical_conditions);
-            input3.trigger('input');
-            //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff10');
-            var dob = result.item.dob
-            var month = Number(dob.substr(5,2));
-            var day = Number(dob.substr(8,2));
-            var year = Number(dob.substr(0,4));
-            var age = 18;
-            var age2 = 25;
-            var mydate = new Date();
-            mydate.setFullYear(year, month-1, day);
-            var currdate = new Date();
-            var setDate = new Date();
-            var eighteen = setDate.setFullYear(mydate.getFullYear() + age,month-1, day);
-            var twentyFive = setDate.setFullYear(mydate.getFullYear() + age2,month-1, day);
-            if ((currdate - eighteen) > 0 && (currdate - twentyFive) < 0){
-                // you are above 18
-                input3.val('over 18');
-            }
-            else if((currdate - twentyFive) > 0){
-                // you are above 25
-                input3.val('over 25');
-            }
-            else{
-                input3.val('Under 18');
-            }
-            input3.trigger('input');
-        };
-    });
 </script>
 
+
+
+
+@include('frontend.manager.sbf.includes.autocomplete')
 <footer>
 </footer>
 </body>

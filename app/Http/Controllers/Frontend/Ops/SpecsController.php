@@ -44,65 +44,112 @@ class SpecsController extends Controller
         $sun_sub_total = $request->input('sunday_hours');
         $total = $request->input('total');
 
+
         if ($grade != "") {
-            $grade= implode(',', $grade);
-            $row_id= implode(',', $row_id);
-            $qty = implode(',', $qty);
-            $position = implode(',', $position);
-            $mon_start = implode(',', $mon_start);
-            $mon_end = implode(',', $mon_end);
-            $mon_sub_total = implode(',', $mon_sub_total);
-            $tues_start = implode(',', $tues_start);
-            $tues_end = implode(',', $tues_end);
-            $tues_sub_total = implode(',', $tues_sub_total);
-            $wed_start = implode(',', $wed_start);
-            $wed_end = implode(',', $wed_end);
-            $wed_sub_total = implode(',', $wed_sub_total);
-            $thur_start = implode(',', $thur_start);
-            $thur_end = implode(',', $thur_end);
-            $thur_sub_total = implode(',', $thur_sub_total);
-            $fri_start = implode(',', $fri_start);
-            $fri_end = implode(',', $fri_end);
-            $fri_sub_total = implode(',', $fri_sub_total);
-            $sat_start = implode(',', $sat_start);
-            $sat_end = implode(',', $sat_end);
-            $sat_sub_total = implode(',', $sat_sub_total);
-            $sun_start = implode(',', $sun_start);
-            $sun_end = implode(',', $sun_end);
-            $sun_sub_total = implode(',', $sun_sub_total);
-            $total = implode(',', $total);
+            $gradei = implode(',', $grade);
+            $row_idi = implode(',', $row_id);
+            $qtyi = implode(',', $qty);
+            $positioni = implode(',', $position);
+            if($mon_start!== null){
+                $mon_starti = implode(',', $mon_start);
+                $mon_endi = implode(',', $mon_end);
+                $mon_sub_totali = implode(',', $mon_sub_total);
+            } else{
+                $mon_starti = '';
+                $mon_endi = '';
+                $mon_sub_totali = '';
+            }
+            if($tues_start!== null){
+                $tues_starti = implode(',', $tues_start);
+                $tues_endi = implode(',', $tues_end);
+                $tues_sub_totali = implode(',', $tues_sub_total);
+            } else{
+                $tues_starti = '';
+                $tues_endi = '';
+                $tues_sub_totali = '';
+            }
+            if($wed_start!== null){
+                $wed_starti = implode(',', $wed_start);
+                $wed_endi = implode(',', $wed_end);
+                $wed_sub_totali = implode(',', $wed_sub_total);
+            } else{
+                $wed_starti = '';
+                $wed_endi = '';
+                $wed_sub_totali = '';
+            }
+            if($thur_start!== null){
+                $thur_starti = implode(',', $thur_start);
+                $thur_endi = implode(',', $thur_end);
+                $thur_sub_totali = implode(',', $thur_sub_total);
+            } else{
+                $thur_starti = '';
+                $thur_endi = '';
+                $thur_sub_totali = '';
+            }
+            if($fri_start!== null){
+                $fri_starti = implode(',', $fri_start);
+                $fri_endi = implode(',', $fri_end);
+                $fri_sub_totali = implode(',', $fri_sub_total);
+            } else{
+                $fri_starti = '';
+                $fri_endi = '';
+                $fri_sub_totali = '';
+            }
+            if($sat_start!== null){
+                $sat_starti = implode(',', $sat_start);
+                $sat_endi = implode(',', $sat_end);
+                $sat_sub_totali = implode(',', $sat_sub_total);
+            } else{
+                $sat_starti = '';
+                $sat_endi = '';
+                $sat_sub_totali = '';
+            }
+            if($sun_start!== null){
+                $sun_starti = implode(',', $sun_start);
+                $sun_endi = implode(',', $sun_end);
+                $sun_sub_totali = implode(',', $sun_sub_total);
+            } else{
+                $sun_starti = '';
+                $sun_endi = '';
+                $sun_sub_totali = '';
+            }
+
+            $totali = implode(',', $total);
 
             $rows = [
                 'events_id' => $events_id,
-                'row_id' => $row_id,
-                'grade' => $grade,
-                'qty' => $qty,
-                'position' => $position,
-                'monday_start' => $mon_start,
-                'monday_end' => $mon_end,
-                'monday_hours' => $mon_sub_total,
-                'tuesday_start' => $tues_start,
-                'tuesday_end' => $tues_end,
-                'tuesday_hours' => $tues_sub_total,
-                'wednesday_start' => $wed_start,
-                'wednesday_end' => $wed_end,
-                'wednesday_hours' => $wed_sub_total,
-                'thursday_start' => $thur_start,
-                'thursday_end' => $thur_end,
-                'thursday_hours' => $thur_sub_total,
-                'friday_start' => $fri_start,
-                'friday_end' => $fri_end,
-                'friday_hours' => $fri_sub_total,
-                'saturday_start' => $sat_start,
-                'saturday_end' => $sat_end,
-                'saturday_hours' => $sat_sub_total,
-                'sunday_start' => $sun_start,
-                'sunday_end' => $sun_end,
-                'sunday_hours' => $sun_sub_total,
-                'total' => $total,
+                'row_id' => $row_idi,
+                'grade' => $gradei,
+                'qty' => $qtyi,
+                'position' => $positioni,
+                'monday_start' => $mon_starti,
+                'monday_end' => $mon_endi,
+                'monday_hours' => $mon_sub_totali,
+                'tuesday_start' => $tues_starti,
+                'tuesday_end' => $tues_endi,
+                'tuesday_hours' => $tues_sub_totali,
+                'wednesday_start' => $wed_starti,
+                'wednesday_end' => $wed_endi,
+                'wednesday_hours' => $wed_sub_totali,
+                'thursday_start' => $thur_starti,
+                'thursday_end' => $thur_endi,
+                'thursday_hours' => $thur_sub_totali,
+                'friday_start' => $fri_starti,
+                'friday_end' => $fri_endi,
+                'friday_hours' => $fri_sub_totali,
+                'saturday_start' => $sat_starti,
+                'saturday_end' => $sat_endi,
+                'saturday_hours' => $sat_sub_totali,
+                'sunday_start' => $sun_starti,
+                'sunday_end' => $sun_endi,
+                'sunday_hours' => $sun_sub_totali,
+                'total' => $totali,
             ];
+            if(Specs::where('events_id', $events_id)->exists())
+            {
+                Specs::where('events_id', $events_id)->delete();
+            }
 
-            Specs::where('events_id', $events_id)->delete();
             Specs::create($rows);
             return redirect()->back();
         }
