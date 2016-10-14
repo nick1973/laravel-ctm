@@ -114,6 +114,7 @@
         }
 
         window.getId = function getId(id) {
+            fetchData()
             var tableId = $(id).closest('table').attr('id')
             var first_name = $(id).attr('id',tableId+'first_name')
             var count = 1
@@ -122,12 +123,11 @@
                 var input = $(inputEl).hasClass('noID')
                 if(input){
                     $(inputEl).attr('id',tableId+'_staff'+count)
-                    //console.log(inputEl)
-                     fetchData()
-                        //$("#exampleTable_1_staff3").val("row 1");
                 }
                 count++
             })
+
+            //rowID()
             return true
         }
 

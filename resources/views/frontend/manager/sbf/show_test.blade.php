@@ -96,6 +96,8 @@
         $next_lower_day = strtolower($x);
         return $next_lower_day;
     }
+
+
     ?>
 </head>
 <body>
@@ -187,26 +189,128 @@ echo $arr[1];
                 </thead>
                     <tbody>
                         <script>
+                            var rows;
+                            function once(fn, context) {
+                                var result;
+                                return function() {
+                                    if(fn) {
+                                        result = fn.apply(context || this, arguments);
+                                        fn = null;
+                                    }
+                                    return result;
+                                };
+                            }
+                            var rowID = once(function () {
+                                var array = []
+                                @foreach($spec->staff as $value)
+                                    array.push({{ $value->pivot->row_id }});
+                                @endforeach
+                                var arr = [1, 1, 2, 1, 3, 3, 4, 5];
+                                var sorted_arr = array.slice().sort();
+                                var rows = [];
+                                for (var i = 0; i < array.length - 1; i++) {
+                                    if (sorted_arr[i + 1] == sorted_arr[i]) {
+                                        rows.push(sorted_arr[i]);
+                                    }
+                                }
+                                for (var i = 0; i < rows.length; i++) {
+
+                                    var name = $('#exampleTable_'+rows[i]+'_staff3').closest('tr')
+                                    //var tableId = $(name).closest('table').attr('id')
+                                    var tableId = 'exampleTable_'+rows[i]
+                                    //console.log(rows[i]);
+                                    var row = $("<tr>");
+
+                                    row.append($('<td class="large"><select class="form-control" multiple>'+
+                                        <?php
+                                        for($i=0; $i <= $diffInDays; $i++)
+                                        {
+                                        if($day_number_copy ==7){
+                                            $day_number_copy=0;
+                                        } ?>
+                                        '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
+                                        <?php $day_number_copy++; $ctm_start_date_copy->addDay();
+                                        }?>
+                                        '</select></td>'))
+                                            .append($("<td></td>"))
+                                            .append($("<td></td>"))
+                                            .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
+                                            .append($('<td><input name="name[]" onclick="getId(this)" onfocus="searchName(this)"class="form-control noID name" type="text"value=""/></td>'))
+                                            .append($('<td><input name="last_name[]" onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'));
+
+                                    //$("#exampleTable_1 tbody").append(row);
+                                    $('#'+ tableId + ' ' + 'tbody').append(row);
+                                }
+                            })
+
+                            <?php
+                                    function duplicates($a){
+                                        $arr = array('a','a','b','c','d','d','e');
+                                        $arr_unique = array_unique($a);
+                                        $arr_duplicates = array_diff_assoc($a, $arr_unique);
+                                        return $arr_duplicates;
+                                    }
+                                    ?>
+
                             function fetchData() {
+                                rowID()
+                                //IF DUPLICATE FOUND LOOP AGAIN BUT
+                                //CHANGE THE $XX + 5
                                 @foreach($spec->staff as $key=>$value)
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff3").val('{{ $users->find($value->pivot->user_id)->name }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff4").val('{{ $users->find($value->pivot->user_id)->lastname }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff5").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff6").val('{{ $users->find($value->pivot->user_id)->mobile }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff7").val('{{ $users->find($value->pivot->user_id)->email }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff8").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff9").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff10").val('{{ $users->find($value->pivot->user_id)->dob }}');
-                                    $("#exampleTable_{{ $value->pivot->row_id}}_staff11").val('{{ $users->find($value->pivot->user_id)->id }}');
+                                <?php $xx = 3; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
 
-                                    <?php  $array[] = $value->pivot->row_id; ?>
+                                    <?php $array[] = $value->pivot->row_id; ?>
 
-                                    // FIND THE DUPLICATED ROW_ID AND THEN
-                                    // USE JS TO APPEND INPUT FIELDS TO A DIV
+                                    @if(!empty(duplicates($array)))
+
+                                        <?php $xx =17 ; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
+
+                                    @endif
 
                                 @endforeach
-
-
+                                    <?php duplicates($array); ?>
                             }
                         </script>
                         <tr>
@@ -231,14 +335,10 @@ echo $arr[1];
                                     </div>
                                 {{--@endforeach--}}
                             </td>
-                            <td>
-                                {{--@foreach($spec->staff as $value)--}}
-                                    {{--@if($value->pivot->row_id === 1)--}}
-                                        <input name="name[]" onclick="getId(this)" onfocus="searchName(this)"
+                            <td id="name_row">
+                                <input name="name[]" onclick="getId(this)" onfocus="searchName(this)"
                                                class="form-control noID name" type="text"
                                                value=""/>
-                                    {{--@endif--}}
-                                {{--@endforeach--}}
                             </td>
                             <td><input name="last_name[]" onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
@@ -253,10 +353,6 @@ echo $arr[1];
                         </tr>
                     </tbody>
                 </table>
-            <?php
-            //if(array_count_values($array)>1){
-                dd(array_count_values($array)) ;
-             //} ?>
             <input type="submit" value="save" onclick="addNote()">
         </div><!-- col-md-12 -->
 
