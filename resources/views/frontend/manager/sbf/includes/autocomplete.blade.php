@@ -194,6 +194,7 @@
             input3.val(result.item.id);
             input3.trigger('input');
             //////////////////////////////////
+
         };
 
         window.loadStaff = function loadStaff(item, result) {
@@ -260,6 +261,10 @@
             input3.val(result.item.id);
             input3.trigger('input');
             //////////////////////////////////
+            var rowNo = tableId.match(/\d+/)
+            var input3 = $('#'+tableId+'_staff12');
+            input3.val(rowNo);
+            input3.trigger('input');
             console.log(result.item.id)
         };
     });
