@@ -8,7 +8,9 @@ var count = 1;
 // IN A FUNCTION THAT PASSES THE MAIN PARENT ID TO USE TO HOOK
 
 function staffing(id) {
+
     var tableId = $(id).closest('table').attr('id');
+    var tableNo = tableId.match(/\d+/)
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
@@ -22,6 +24,7 @@ function staffing(id) {
         '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
         <?php $day_number_copy++; $ctm_start_date_copy->addDay();
         }?>
+
     '</select></td>',
             '<td width="75"><select name="start[]" id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
             '<td width="75"><select name="end[]" id="'+tableId+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
@@ -34,11 +37,8 @@ function staffing(id) {
             '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td>' +
-            '<input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID" type="text" value=""/>' +
-            '<input name="row_id[]" class="form-control" type="text" value="'+count+'"/>' +
-            '<input name="spec_id[]" class="form-control" type="text" value="{{$spec->id}}" />' +
-            '</td>',
+            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID" type="text" value=""/></td>',
+            '<td><input name="row_id[]" class="form-control" type="text" value="'+tableNo+'"/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
@@ -298,7 +298,7 @@ function shifts ( d ) {
             //output += '<td colspan="'+dayNumber+'">';
             output += '<td colspan="100%">';
             output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
-            output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
+            //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
             output += fnFormatDetails(iTableCounter, TableHtml);
             iTableCounter ++;
             output += '</form>';

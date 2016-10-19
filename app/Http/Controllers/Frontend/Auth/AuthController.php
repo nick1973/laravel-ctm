@@ -39,6 +39,10 @@ class AuthController extends Controller
             return route('frontend.user.dashboard');
         }
 
+        if (access()->hasRole('OpsManager')) {
+            return route('dashboard.ops.index');
+        }
+
         if (access()->allow('view-backend')) {
 //            return route('admin.dashboard');
             return route('frontend.user.dashboard');

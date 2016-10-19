@@ -33,8 +33,9 @@ class SBFController extends Controller
         $spec = Specs::where('id', $spec_id)->first();
         $spec->staff()->detach();
         //LOOP THROUGH POST ARRAYS THEN SYNC 1 AT A TIME
-        for ($i = 0; $i < count($user_id); $i++){
+        for ($i = 0; $i < count($user_id);){
                 $spec->staff()->attach([$user_id[$i] => ['row_id' => $row_id[$i]]]);
+            $i++;
         }
         return $request->all();
     }

@@ -126,10 +126,10 @@ echo $arr[1];
 <div class="">
         <div class="col-md-12 col-lg-12">
             {{--{{ $spec }}--}}
-            @foreach($spec->staff as $value)
-                Row{{ $value->pivot->row_id}} User {{ $users->find($value->pivot->user_id)->name }}
-                <br>
-            @endforeach
+            {{--@foreach($spec->staff as $value)--}}
+                {{--Row{{ $value->pivot->row_id}} User {{ $users->find($value->pivot->user_id)->name }}--}}
+                {{--<br>--}}
+            {{--@endforeach--}}
 
             <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event.</h1>
             <div class="panel panel-default">
@@ -182,6 +182,7 @@ echo $arr[1];
                         <th>RTW</th>
                         <th>Medical</th>
                         <th>Age</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -244,7 +245,9 @@ echo $arr[1];
                                             .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
                                             .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
                                             .append($('<td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'));
+                                            .append($('<td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>'))
+                                            .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'))
+                                            .append($('<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'));
 
                                     //$("#exampleTable_1 tbody").append(row);
                                     $('#'+ tableId + ' ' + 'tbody').append(row);
@@ -252,18 +255,17 @@ echo $arr[1];
                             })
 
                             <?php
-                                    function duplicates($a){
-                                        $arr = array('a','a','b','c','d','d','e');
+                                    function duplicateRows($a){
                                         $arr_unique = array_unique($a);
                                         $arr_duplicates = array_diff_assoc($a, $arr_unique);
                                         return $arr_duplicates;
-                                    }
-                                    ?>
+                                    } ?>
 
                             function fetchData() {
                                 rowID()
-                                //IF DUPLICATE FOUND LOOP AGAIN BUT
-                                //CHANGE THE $XX + 5
+                                <?php
+                                    $boo =  (array) $spec->staff;
+                                ?>
                                 @foreach($spec->staff as $key=>$value)
                                 <?php $xx = 3; ?>
                                         $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
@@ -283,34 +285,43 @@ echo $arr[1];
                                         $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
                                 <?php $xx++; ?>
                                         $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
-
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
                                     <?php $array[] = $value->pivot->row_id; ?>
-
-                                    @if(!empty(duplicates($array)))
-
-                                        <?php $xx =17 ; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_1_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
-
-                                    @endif
-
                                 @endforeach
-                                    <?php duplicates($array); ?>
+
+                                <?php
+                                if(isset($array)){
+
+
+                                      foreach (duplicateRows($array) as $row){
+                                                  $xx = 3;
+                                                      foreach ($spec->staff as $key=>$value){ ?>
+                                    @if($value->pivot->row_id==$row)
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
+                                <?php $xx++; ?>
+                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
+                                <?php $xx = $xx + 7; ?>
+                                @endif
+                            <?php  }
+                                }
+                                }?>
                             }
                         </script>
                         <tr>
@@ -348,8 +359,9 @@ echo $arr[1];
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>
+                            <td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
-                            <th></th>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
