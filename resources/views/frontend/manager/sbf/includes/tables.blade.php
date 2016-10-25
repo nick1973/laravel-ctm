@@ -14,7 +14,7 @@ function staffing(id) {
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
-            '<td class="large"><select class="form-control" multiple>'+
+            '<td class="large"><select name="days[]" class="form-control" multiple>'+
             <?php
     for($i=0; $i <= $diffInDays; $i++)
     {
@@ -23,7 +23,7 @@ function staffing(id) {
     } ?>
         '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
         <?php $day_number_copy++; $ctm_start_date_copy->addDay();
-        }?>
+        } ?>
 
     '</select></td>',
             '<td width="75"><select name="start[]" id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
@@ -77,7 +77,7 @@ function fnFormatDetails(table_id, html) {
         "info":     false
     });
 
-    var sOut = "<table id=\"exampleTable_" + table_id + "\">";
+    var sOut = "<table class='staff' id=\"exampleTable_" + table_id + "\">";
     sOut += html;
     sOut += "</table>";
     return sOut;
@@ -155,11 +155,30 @@ $(document).ready(function () {
             $(".name").each(function(){
                 $(this)[0].onclick();
             })
+            //fetchData()
+
+            dragNdrop()
 
             iTableCounter ++;
         }
     });
 });
+
+function dragNdrop() {
+    var countTables = $('.staff').length;
+    console.log(countTables)
+    for(var x=1; x <=countTables; x++){
+        $("#exampleTable_" + x + " tbody").sortable({
+            items: "> tr:not(:first)",
+            appendTo: "parent",
+            helper: "clone",
+            placeholder: 'ui-state-highlight',
+            classes: {
+                "ui-sortable": "highlight"
+            }
+        }).disableSelection();//.effect("bounce", "slow" );
+    }
+}
 
 function shifts ( d ) {
     // `d` is the original data object for the row

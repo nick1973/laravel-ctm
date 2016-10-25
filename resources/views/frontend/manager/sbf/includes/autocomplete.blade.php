@@ -48,12 +48,12 @@
                         $(att).val(ui.item.name);
                         if($(att).hasClass('hasID')){
                             var lastChar = $(att).get(0).id.substr($(att).get(0).id.length - 1); // => "1"
-                            //console.log(lastChar)
+                            console.log(lastChar)
                             loadStaffWithId(att, ui, lastChar)
                         } else {
                             loadStaff(att, ui)
                         }
-
+                        addNote()
                     },
                     minLength: 0
 
@@ -103,7 +103,10 @@
                             //console.log(lastChar)
                             loadStaffWithId(att, ui, lastChar)
                         } else {
-                            loadStaff(att, ui)
+                            var lastChar = $(att).get(0).id.substr($(att).get(0).id);
+                            var matches = parseInt(lastChar.match(/(\d+)$/)[0], 10);
+                            //console.log("att: " + att)
+                            loadStaff(att, ui, matches)
                         }
 
                     },
@@ -195,43 +198,63 @@
             input3.trigger('input');
             //////////////////////////////////
 
+            var voo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').length
+            var val = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            var foo = 'staff' + result.item.id + ',' + val
+            if(voo>1){
+                var boo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+                var doo = $(item).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
+                        .attr("value",foo)
+                        .prop("selected", true)
+                        .text('All Days')
+                );
+            } else {
+                $(item).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
+            }
+            addNote()
         };
 
-        window.loadStaff = function loadStaff(item, result) {
+        window.loadStaff = function loadStaff(item, result, num) {
             var tableId = $(item).closest('table').attr('id')
-            var input = $('#'+tableId+'_staff3');
+            var input = $('#'+tableId+'_staff'+num);
             input.val(result.item.name);
             input.trigger('input');
+            num++
             /////////////////////////
-            var input = $('#'+tableId+'_staff4');
+            var input = $('#'+tableId+'_staff'+num);
             input.val(result.item.lastname);
             input.trigger('input');
+            num++
             /////////////////////////
-            var input2 = $('#'+tableId+'_staff5');
+            var input2 = $('#'+tableId+'_staff'+num);
             input2.val(result.item.uk_driving_license);
             input2.trigger('input');
+            num++
             /////////////////////////
-            var input3 = $('#'+tableId+'_staff6');
+            var input3 = $('#'+tableId+'_staff'+num);
             input3.val(result.item.mobile);
             input3.trigger('input');
+            num++
             //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff7');
+            var input3 = $('#'+tableId+'_staff'+num);
             input3.val(result.item.email);
             input3.trigger('input');
+            num++
             //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff8');
+            var input3 = $('#'+tableId+'_staff'+num);
             if(result.item.rtw_dirty.length > 0){
                 var rtw = jQuery.parseJSON(result.item.rtw_dirty);
                 input3.val(rtw.work_status);
                 input3.trigger('input');
             }
-
+            num++
             //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff9');
+            var input3 = $('#'+tableId+'_staff'+num);
             input3.val(result.item.medical_conditions);
             input3.trigger('input');
+            num++
             //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff10');
+            var input3 = $('#'+tableId+'_staff'+num);
             var dob = result.item.dob
             var month = Number(dob.substr(5,2));
             var day = Number(dob.substr(8,2));
@@ -256,16 +279,35 @@
                 input3.val('Under 18');
             }
             input3.trigger('input');
+            num++
             //////////////////////////////////
-            var input3 = $('#'+tableId+'_staff11');
+            var input3 = $('#'+tableId+'_staff'+num);
             input3.val(result.item.id);
             input3.trigger('input');
+            num++
             //////////////////////////////////
             var rowNo = tableId.match(/\d+/)
-            var input3 = $('#'+tableId+'_staff12');
+            var input3 = $('#'+tableId+'_staff'+num);
             input3.val(rowNo);
             input3.trigger('input');
-            console.log(result.item.id)
+            ////////////////////////////
+            //console.log(result.item.id)
+
+            var voo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').length
+            var val = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            var foo = 'staff' + result.item.id + ',' + val
+            if(voo>1){
+                var boo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+                var doo = $(item).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
+                        .attr("value",foo)
+                        .prop("selected", true).text('All Days')
+                        );
+            } else {
+                $(item).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
+            }
+            addNote()
+            console.log(foo)
+
         };
     });
 </script>

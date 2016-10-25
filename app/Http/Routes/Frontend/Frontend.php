@@ -9,6 +9,12 @@ Route::get('macros', 'FrontendController@macros')->name('frontend.macros');
 
 Route::post('/email', 'FrontendController@e_mail');
 
+Route::get('/spec-staff/{staff}', function ($staff) {
+    $spec = \App\Models\Ops\Specs::where('events_id',$staff)->first();
+    //$collection = collect($spec->staff);
+    return $spec;
+});
+
 Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });

@@ -1,10 +1,10 @@
 @extends('frontend.layouts.master')
 <?php
 $date = date_create($event->created_at);
-//$event_start_date = date_create($event->event_start_date);
-//$event_end_date = date_create($event->event_end_date);
-//$ctm_start_date = date_create($event->ctm_start_date);
-//$ctm_end_date = date_create($event->ctm_end_date);
+$event_start_date = date_create($event->event_start_date);
+$event_end_date = date_create($event->event_end_date);
+$ctm_start_date = date_create($event->ctm_start_date);
+$ctm_end_date = date_create($event->ctm_end_date);
 ?>
 @section('content')
     <div class="row">
@@ -38,7 +38,7 @@ $date = date_create($event->created_at);
                     <div class="col-sm-10 col-md-5 col-lg-5">
                         <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
                              data-date="{{ date_format($date,"d/m/Y") }}">
-                            <input name="event_start_date" type="text" class="form-control" value="{{ date_format($date,"d/m/Y") }}">
+                            <input name="event_start_date" type="text" class="form-control" value="{{ date_format($event_start_date,"d/m/Y") }}">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -51,7 +51,7 @@ $date = date_create($event->created_at);
                     <div class="col-sm-10 col-md-5 col-lg-5">
                         <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
                              data-date="{{ date_format($date,"d/m/Y") }}">
-                            <input name="event_end_date" type="text" class="form-control" value="{{ date_format($date,"d/m/Y") }}">
+                            <input name="event_end_date" type="text" class="form-control" value="{{ date_format($event_end_date,"d/m/Y") }}">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -64,7 +64,7 @@ $date = date_create($event->created_at);
                     <div class="col-sm-10 col-md-5 col-lg-5">
                         <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
                              data-date="{{ date_format($date,"d/m/Y") }}">
-                            <input name="ctm_start_date" type="text" class="form-control" value="{{ date_format($date,"d/m/Y") }}">
+                            <input name="ctm_start_date" type="text" class="form-control" value="{{ date_format($ctm_start_date,"d/m/Y") }}">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -77,7 +77,7 @@ $date = date_create($event->created_at);
                     <div class="col-sm-10 col-md-5 col-lg-5">
                         <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
                              data-date="{{ date_format($date,"d/m/Y") }}">
-                            <input name="ctm_end_date" type="text" class="form-control" value="{{ date_format($date,"d/m/Y") }}">
+                            <input name="ctm_end_date" type="text" class="form-control" value="{{ date_format($ctm_end_date,"d/m/Y") }}">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>

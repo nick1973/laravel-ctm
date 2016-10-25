@@ -19,7 +19,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -131,7 +130,7 @@ echo $arr[1];
                 {{--<br>--}}
             {{--@endforeach--}}
 
-            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event.</h1>
+            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays+1 }} Day Event.</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-lg-4 col-md-4">
@@ -167,6 +166,7 @@ echo $arr[1];
                     </tr>
                 </tbody>
             </table>
+
                 <table id="staff" class="table" cellspacing="0" width="100%" hidden>
                 <thead>
                     <tr style="color: #5bc0de">
@@ -189,150 +189,15 @@ echo $arr[1];
                     </tr>
                 </thead>
                     <tbody>
-                        <script>
-                            var rows;
-                            function once(fn, context) {
-                                var result;
-                                return function() {
-                                    if(fn) {
-                                        result = fn.apply(context || this, arguments);
-                                        fn = null;
-                                    }
-                                    return result;
-                                };
-                            }
-                            var rowID = once(function () {
-                                var array = []
-                                @foreach($spec->staff as $value)
-                                    array.push({{ $value->pivot->row_id }});
-                                @endforeach
-                                var arr = [1, 1, 2, 1, 3, 3, 4, 5];
-                                var sorted_arr = array.slice().sort();
-                                var rows = [];
-                                for (var i = 0; i < array.length - 1; i++) {
-                                    if (sorted_arr[i + 1] == sorted_arr[i]) {
-                                        rows.push(sorted_arr[i]);
-                                    }
-                                }
-                                for (var i = 0; i < rows.length; i++) {
-
-                                    var name = $('#exampleTable_'+rows[i]+'_staff3').closest('tr')
-                                    //var tableId = $(name).closest('table').attr('id')
-                                    var tableId = 'exampleTable_'+rows[i]
-                                    //console.log(rows[i]);
-                                    var row = $("<tr>");
-
-                                    row.append($('<td class="large"><select class="form-control" multiple>'+
-                                        <?php
-                                        for($i=0; $i <= $diffInDays; $i++)
-                                        {
-                                        if($day_number_copy ==7){
-                                            $day_number_copy=0;
-                                        } ?>
-                                        '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
-                                        <?php $day_number_copy++; $ctm_start_date_copy->addDay();
-                                        }?>
-                                        '</select></td>'))
-                                            .append($("<td></td>"))
-                                            .append($("<td></td>"))
-                                            .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
-                                            .append($('<td><input name="name[]" onclick="getId(this)" onfocus="searchName(this)"class="form-control noID name" type="text"value=""/></td>'))
-                                            .append($('<td><input name="last_name[]" onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>'))
-                                            .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'))
-                                            .append($('<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'));
-
-                                    //$("#exampleTable_1 tbody").append(row);
-                                    $('#'+ tableId + ' ' + 'tbody').append(row);
-                                }
-                            })
-
-                            <?php
-                                    function duplicateRows($a){
-                                        $arr_unique = array_unique($a);
-                                        $arr_duplicates = array_diff_assoc($a, $arr_unique);
-                                        return $arr_duplicates;
-                                    } ?>
-
-                            function fetchData() {
-                                rowID()
-                                <?php
-                                    $boo =  (array) $spec->staff;
-                                ?>
-                                @foreach($spec->staff as $key=>$value)
-                                <?php $xx = 3; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
-                                    <?php $array[] = $value->pivot->row_id; ?>
-                                @endforeach
-
-                                <?php
-                                if(isset($array)){
-
-
-                                      foreach (duplicateRows($array) as $row){
-                                                  $xx = 3;
-                                                      foreach ($spec->staff as $key=>$value){ ?>
-                                    @if($value->pivot->row_id==$row)
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
-                                <?php $xx++; ?>
-                                        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
-                                <?php $xx = $xx + 7; ?>
-                                @endif
-                            <?php  }
-                                }
-                                }?>
-                            }
-                        </script>
                         <tr>
                             <td class="large">
-                                <select name="days[]" class="form-control" multiple>
+                                <select name="days[]" class="form-control days" multiple>
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
-                                            {{$day_number=0}}
+                                            <?php $day_number=0; ?>
                                         @endif
-                                        <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
-                                        {{ $day_number++  }} {{ $ctm_start_date->addDay() }}
+                                        <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                        <?php $day_number++; $ctm_start_date->addDay(); ?>
                                     @endfor
                                 </select>
                             </td>
@@ -358,7 +223,7 @@ echo $arr[1];
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
-                            <td><input name="user_id[]" class="form-control noID" type="text" value=""/></td>
+                            <td><input name="user_id[]" class="form-control noID user_id" type="text" value=""/></td>
                             <td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
                             <td></td>
@@ -371,7 +236,16 @@ echo $arr[1];
     <div id="result"></div>
 
 </div><!-- container -->
+
 <script>
+
+
+//    $("#exampleTable_1 tbody").sortable({
+//        items: "> tr:not(:first)",
+//        appendTo: "parent",
+//        helper: "clone"
+//    }).disableSelection();
+
     function addNote() {
         var formData = $(".table_form").serializeArray();
         var url = $(".table_form").attr( "action" );
@@ -391,7 +265,144 @@ echo $arr[1];
         });
     }
 </script>
+<script>
+    var rows;
+    function once(fn, context) {
+        var result;
+        return function() {
+            if(fn) {
+                result = fn.apply(context || this, arguments);
+                fn = null;
+            }
+            return result;
+        };
+    }
+    var rowID = once(function () {
+        var array = []
+        @foreach($spec->staff as $value)
+            array.push({{ $value->pivot->row_id }});
+                @endforeach
+        var arr = [1, 1, 2, 1, 3, 3, 4, 5];
+        var sorted_arr = array.slice().sort();
+        var rows = [];
+        for (var i = 0; i < array.length - 1; i++) {
+            if (sorted_arr[i + 1] == sorted_arr[i]) {
+                rows.push(sorted_arr[i]);
+            }
+        }
+        for (var i = 0; i < rows.length; i++) {
 
+            var name = $('#exampleTable_'+rows[i]+'_staff3').closest('tr')
+            //var tableId = $(name).closest('table').attr('id')
+            var tableId = 'exampleTable_'+rows[i]
+            //console.log(rows[i]);
+            var row = $("<tr>");
+
+            row.append($('<td class="large"><select name="days[]" class="form-control" multiple>'+
+                    <?php
+                            for($i=0; $i <= $diffInDays; $i++)
+                            {
+                            if($day_number_copy ==7){
+                                $day_number_copy=0;
+                            } ?>
+                            '<option selected id="{{ dayOfWeek($day_number_copy) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
+                    <?php $day_number_copy++; $ctm_start_date_copy->addDay();
+                            }?>
+                            '</select></td>'))
+                    .append($("<td></td>"))
+                    .append($("<td></td>"))
+                    .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
+                    .append($('<td><input name="name[]" onfocus="searchName(this)"class="form-control noID name" type="text"value=""/></td>'))
+                    .append($('<td><input name="last_name[]" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input name="user_id[]" class="form-control noID user_id" type="text" value=""/></td>'))
+                    .append($('<td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'))
+                    .append($('<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'));
+
+            //$("#exampleTable_1 tbody").append(row);
+            $('#'+ tableId + ' ' + 'tbody').append(row);
+        }
+    })
+
+    <?php
+    function duplicateRows($a){
+        $arr_unique = array_unique($a);
+        $arr_duplicates = array_diff_assoc($a, $arr_unique);
+        return $arr_duplicates;
+    } ?>
+
+    function fetchData() {
+        rowID()
+        <?php
+            $boo =  (array) $spec->staff;
+//                                    $staff = file_get_contents('http://localhost/spec-staff/4');
+                //$json = file_get_contents('http://localhost/spec-staff/4');
+                //$obj = json_decode($json);
+        ?>
+        @foreach($spec->staff as $key=>$value)
+        <?php $xx = 3; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
+        <?php $array[] = $value->pivot->row_id; ?>
+    @endforeach
+
+    <?php
+    if(isset($array)){
+
+
+          foreach (duplicateRows($array) as $row){
+                      $xx = 3;
+                          foreach ($spec->staff as $key=>$value){ ?>
+        @if($value->pivot->row_id==$row)
+            $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->mobile }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->email }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->rtw_dirty }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
+        <?php $xx++; ?>
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $value->pivot->row_id }}');
+        <?php $xx = $xx + 7; ?>
+        @endif
+        <?php  }
+        }
+        }?>
+    }
+</script>
 
 
 

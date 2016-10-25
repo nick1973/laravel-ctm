@@ -4,7 +4,6 @@
     <div class="row">
 
         <div class="col-md-12 col-lg-12">
-            <p>A list of All events angularJS</p>
             {{--<h4>Add New Event <span style="vertical-align: middle"><i style="color: green" class="fa fa-plus-square fa-2x" aria-hidden="true"></i></span></h4>--}}
             <div class="table-responsive">
                 <table id="events" class="table table-bordered table-hover table-striped">

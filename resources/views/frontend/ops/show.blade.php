@@ -133,7 +133,7 @@ echo $arr[1];
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}</h1>
+            <h1>Spec for {{ $event->event_name }}, {{ $diffInDays+1 }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-lg-3 col-md-3">
@@ -398,7 +398,7 @@ echo $arr[1];
                 <th>Role</th>
                 <th>Qty</th>
                 <th>Position</th>
-                @for($i=0; $i <= $diffInDays-1; $i++)
+                @for($i=0; $i <= $diffInDays; $i++)
                     @if($day_number_table ==7)
                         <?php $day_number_table=0 ?>
                     @endif
@@ -436,7 +436,7 @@ echo $arr[1];
                 <?php
                     $week = 0;
                 ?>
-                @for($i=0; $i <= $diffInDays-1; $i++)
+                @for($i=0; $i <= $diffInDays; $i++)
                     <?php
                     if($i % 7 == 0){
                         $week++;

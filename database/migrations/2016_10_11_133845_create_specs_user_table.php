@@ -16,6 +16,9 @@ class CreateSpecsUserTable extends Migration
 
             $table->integer('user_id');
             $table->integer('specs_id');
+            $table->string('start');
+            $table->string('end');
+            $table->text('days');
             //$table->primary(['user_id','specs_id']);
             $table->timestamps();
         });

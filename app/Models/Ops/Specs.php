@@ -12,7 +12,7 @@ class Specs extends Model
         , 'tuesday_start', 'tuesday_end', 'tuesday_hours', 'wednesday_start', 'wednesday_end', 'wednesday_hours'
         , 'thursday_start', 'thursday_end', 'thursday_hours', 'friday_start', 'friday_end', 'friday_hours'
         , 'saturday_start', 'saturday_end', 'saturday_hours', 'sunday_start', 'sunday_end', 'sunday_hours'
-        , 'total'];
+        , 'total', 'start', 'end', 'days'];
 
     public function event()
     {
@@ -21,6 +21,6 @@ class Specs extends Model
 
     public function staff()
     {
-        return $this->belongsToMany(User::class)->withPivot('row_id')->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot('row_id', 'start', 'end', 'days')->withTimestamps();
     }
 }
