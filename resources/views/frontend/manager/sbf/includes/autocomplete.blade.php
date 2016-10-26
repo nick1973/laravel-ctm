@@ -197,20 +197,8 @@
             input3.val(result.item.id);
             input3.trigger('input');
             //////////////////////////////////
+            days(item, result)
 
-            var voo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').length
-            var val = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
-            var foo = 'staff' + result.item.id + ',' + val
-            if(voo>1){
-                var boo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
-                var doo = $(item).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
-                        .attr("value",foo)
-                        .prop("selected", true)
-                        .text('All Days')
-                );
-            } else {
-                $(item).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
-            }
             addNote()
         };
 
@@ -293,21 +281,37 @@
             ////////////////////////////
             //console.log(result.item.id)
 
-            var voo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').length
-            var val = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            days(item, result)
+            addNote()
+        };
+
+        window.daysSplit = function daysSplit(obj) {
+            //var val = $(obj).closest("tr").find('td:eq(0)').find('select option').length
+            $(obj).closest("tr").find('td:eq(0)').find('select').removeAttr('multiple')
+            var value = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            if(value.includes('staff')){
+                if (value.indexOf(',') > -1) {
+                    var staff = value.split(',')
+                    console.log(staff[0])
+                }
+            }
+
+        }
+
+        window.days = function days(obj, result) {
+            var voo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').length
+            var val = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
             var foo = 'staff' + result.item.id + ',' + val
             if(voo>1){
-                var boo = $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
-                var doo = $(item).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
+                var boo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+                var doo = $(obj).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
                         .attr("value",foo)
-                        .prop("selected", true).text('All Days')
-                        );
+                        .prop("selected", true)
+                        .text(foo)
+                );
             } else {
-                $(item).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
+                $(obj).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
             }
-            addNote()
-            console.log(foo)
-
-        };
+        }
     });
 </script>

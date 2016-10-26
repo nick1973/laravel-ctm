@@ -191,7 +191,7 @@ echo $arr[1];
                     <tbody>
                         <tr>
                             <td class="large">
-                                <select name="days[]" class="form-control days" multiple>
+                                <select name="days[]" class="form-control days" multiple ondblclick="reloadSelect(this)" onchange="clearStaff(this)">
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
                                             <?php $day_number=0; ?>
@@ -223,8 +223,8 @@ echo $arr[1];
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input class="form-control noID" type="text" value=""/></td>
-                            <td><input name="user_id[]" class="form-control noID user_id" type="text" value=""/></td>
-                            <td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>
+                            <td><input name="user_id[]" class="form-control noID user_id hidden" type="text" value=""/></td>
+                            <td><input name="row_id[]" class="form-control noID hidden" type="text" value=""/></td>
                             <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
                             <td></td>
                         </tr>
@@ -239,12 +239,34 @@ echo $arr[1];
 
 <script>
 
+    function clearStaff(item) {
+        $(item).closest('tr').find('td').find('input[type="text"]').val('')
+    }
 
-//    $("#exampleTable_1 tbody").sortable({
-//        items: "> tr:not(:first)",
-//        appendTo: "parent",
-//        helper: "clone"
-//    }).disableSelection();
+    function reloadSelect(item) {
+
+        var value = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
+        if(value.includes('staff')){
+            if (value.indexOf(',') > -1) {
+                var staff = value.split(',')
+            }
+        }
+        //console.log(staff[0])
+
+        $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
+
+        $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
+        $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+        $(item).closest("tr").find('td:eq(0)').find('select option').remove()
+        @for($i=0; $i <= $diffInDays; $i++)
+        @if($day_number_scope ==7)
+        <?php $day_number_scope=0; ?>
+        @endif
+                //'+staff[0]+',
+                $(item).append('<option>{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
+        <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
+        @endfor
+    }
 
     function addNote() {
         var formData = $(".table_form").serializeArray();
@@ -298,15 +320,15 @@ echo $arr[1];
             //console.log(rows[i]);
             var row = $("<tr>");
 
-            row.append($('<td class="large"><select name="days[]" class="form-control" multiple>'+
+            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)" multiple>'+
                     <?php
                             for($i=0; $i <= $diffInDays; $i++)
                             {
-                            if($day_number_copy ==7){
-                                $day_number_copy=0;
+                            if($day_number_rep ==7){
+                                $day_number_rep=0;
                             } ?>
-                            '<option selected id="{{ dayOfWeek($day_number_copy) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
-                    <?php $day_number_copy++; $ctm_start_date_copy->addDay();
+                            '<option selected id="{{ dayOfWeek($day_number_rep) }}{{ $i }}">{{ dayOfWeek($day_number_rep) }} {{ $ctm_start_date_rep->day }}</option>'+
+                    <?php $day_number_rep++; $ctm_start_date_rep->addDay();
                             }?>
                             '</select></td>'))
                     .append($("<td></td>"))
@@ -320,8 +342,8 @@ echo $arr[1];
                     .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
                     .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
                     .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
-                    .append($('<td><input name="user_id[]" class="form-control noID user_id" type="text" value=""/></td>'))
-                    .append($('<td><input name="row_id[]" class="form-control noID" type="text" value=""/></td>'))
+                    .append($('<td><input name="user_id[]" class="form-control noID user_id hidden" type="text" value=""/></td>'))
+                    .append($('<td><input name="row_id[]" class="form-control noID hidden" type="text" value=""/></td>'))
                     .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'))
                     .append($('<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'));
 
@@ -347,7 +369,13 @@ echo $arr[1];
         ?>
         @foreach($spec->staff as $key=>$value)
         <?php $xx = 3; ?>
-                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
+
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                        .removeAttr('multiple')
+                        .append('<option selected>{{ $value->pivot->days}}</option>');
+
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}')
+                        .removeAttr('onclick');
         <?php $xx++; ?>
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
         <?php $xx++; ?>
@@ -377,6 +405,11 @@ echo $arr[1];
                       $xx = 3;
                           foreach ($spec->staff as $key=>$value){ ?>
         @if($value->pivot->row_id==$row)
+
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                    .removeAttr('multiple')
+                    .append('<option selected>{{ $value->pivot->days}}</option>');
+
             $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
         <?php $xx++; ?>
                 $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');

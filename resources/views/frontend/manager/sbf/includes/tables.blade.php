@@ -8,13 +8,13 @@ var count = 1;
 // IN A FUNCTION THAT PASSES THE MAIN PARENT ID TO USE TO HOOK
 
 function staffing(id) {
-
+    daysSplit(id)
     var tableId = $(id).closest('table').attr('id');
     var tableNo = tableId.match(/\d+/)
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
-            '<td class="large"><select name="days[]" class="form-control" multiple>'+
+            '<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)">'+
             <?php
     for($i=0; $i <= $diffInDays; $i++)
     {
@@ -37,8 +37,8 @@ function staffing(id) {
             '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td><input name="row_id[]" class="form-control" type="text" value="'+tableNo+'"/></td>',
+            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" type="text" value=""/></td>',
+            '<td><input name="row_id[]" class="form-control hidden" type="text" value="'+tableNo+'"/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
@@ -64,9 +64,23 @@ function remove(tag) {
             $(this).addClass('selected');
         }
 
+        var row_id = 0
+        $('#'+id+' > tbody > tr:not(:first)').each(function(index, value) {
+            row_id += Number($('td:eq(13)', this).find('input').length)
+        });
+        console.log(row_id)
         $('.remove').click( function () {
             t.row('.selected').remove().draw( false );
-        } );
+            if(row_id >1){
+                $('#'+id+' td:first').find('select').removeAttr('multiple')
+
+            } else {
+                $('#'+id+' td:first').find('select').prop('multiple', true).dblclick()
+                //clearStaff($('#'+id+' td:first').find('select'))
+                //$('#'+id+' td:first').find('select option').remove()
+            }
+
+        });
     });
 }
 

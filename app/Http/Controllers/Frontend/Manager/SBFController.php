@@ -59,6 +59,8 @@ class SBFController extends Controller
         $ctm_start_date = Carbon::createFromFormat('Y/m/d', $event->ctm_start_date);
         $ctm_start_date = Carbon::parse($ctm_start_date);
         $ctm_start_date_copy = Carbon::parse($ctm_start_date);
+        $ctm_start_date_rep = Carbon::parse($ctm_start_date);
+        $ctm_start_date_scope = Carbon::parse($ctm_start_date);
         $ctm_end_date = Carbon::createFromFormat('Y/m/d', $event->ctm_end_date);
         $ctm_end_date = Carbon::parse($ctm_end_date);
         $ctm_end_date = Carbon::parse($ctm_end_date);
@@ -68,12 +70,14 @@ class SBFController extends Controller
         $day_number_ng = $ctm_start_date->dayOfWeek;
         $day_number_scope = $ctm_start_date->dayOfWeek;
         $day_number_copy = $ctm_start_date->dayOfWeek;
+        $day_number_rep = $ctm_start_date->dayOfWeek;
         $day = $ctm_start_date->day;
 //        $obj = file_get_contents('http://btbeqt.com/hardware_flat');
         $pay_grades = json_decode($pay_grades, true);
         return view('frontend.manager.sbf.show_test', compact('event', 'pay_grades', 'ctm_start_date', 'ctm_end_date', 'diffInDays',
-            'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy','ctm_start_date_copy','users',
-            'collection', 'spec', 'user'));
+            'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy', 'day_number_rep','ctm_start_date_copy',
+            'ctm_start_date_rep', 'users',
+            'collection', 'spec', 'user', 'ctm_start_date_scope'));
 
     }
 }
