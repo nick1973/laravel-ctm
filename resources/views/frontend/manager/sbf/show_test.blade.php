@@ -116,7 +116,7 @@ echo $arr[1];
         <div class="col-md-6">
             <h2>Managers Dashboard</h2>
             <a href="/dashboard/manager" class="btn btn-warning">Back to Dashboard</a>
-            <a href="#" class="btn btn-info active">Staff Booking Form</a>
+            <a href="/dashboard/sbf" class="btn btn-info active">Staff Booking Form</a>
         </div>
         <div class="col-md-6">
         </div>

@@ -13,11 +13,12 @@ class CreateSpecsUserTable extends Migration
     public function up()
     {
         Schema::create('specs_user', function (Blueprint $table) {
-
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('specs_id');
-            $table->string('start');
-            $table->string('end');
+            $table->integer('row_id');
+            $table->string('start')->nullable();
+            $table->string('end')->nullable();
             $table->text('days');
             //$table->primary(['user_id','specs_id']);
             $table->timestamps();

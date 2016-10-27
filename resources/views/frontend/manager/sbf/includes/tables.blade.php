@@ -86,8 +86,8 @@ function remove(tag) {
 
             } else {
                 $('#'+id+' td:first').find('select').prop('multiple', true).dblclick()
-                $("#"+id).find('.start').replaceWith('<td class="start"></td>')
-                $("#"+id).find('.finish').replaceWith('<td class="finish"></td>')
+                $("#"+id).find('.start').addClass('hidden')
+                $("#"+id).find('.finish').addClass('hidden')
 
                 //clearStaff($('#'+id+' td:first').find('select'))
                 //$('#'+id+' td:first').find('select option').remove()
@@ -161,6 +161,7 @@ $(document).ready(function () {
      * rather it is done here
      */
     $('#exampleTable tbody').on('click', 'td.details-control', function () {
+        //location.reload()
         var nTr = $(this).parents('tr')[0];
         var nextTr = $(this).parents('tr')[1];
         var tr = $(this).closest('tr');
@@ -348,7 +349,8 @@ function shifts ( d ) {
             output += '</tr>';
 
             //output += '<td colspan="'+dayNumber+'">';
-            output += '<td colspan="100%">';
+            //output += '<td colspan="100%">';
+            output += '<td colspan="80%">';
             output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
             //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
             output += fnFormatDetails(iTableCounter, TableHtml);
