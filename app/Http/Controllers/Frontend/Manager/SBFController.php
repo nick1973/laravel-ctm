@@ -36,12 +36,20 @@ class SBFController extends Controller
         $day_count = count($request->input('days'));
         $day_array = implode(',', $days);
         //return $days;
-        $spec = Specs::where('id', $spec_id)->first();
+        //$spec = Specs::where('id', $spec_id)->first();
+        $spec = Specs::find($spec_id);
         $spec->staff()->detach();
         //LOOP THROUGH POST ARRAYS THEN SYNC 1 AT A TIME
-        for ($i = 0; $i < count($user_id);){
+        $staff = count($user_id);
+        $time = count($start);
+        if($staff>$time){
+            $count = $time;
+        } else{
+            $count = $staff;
+        }
+        for ($i = 0; $i < $staff;){
                 $spec->staff()->attach([$user_id[$i] => ['row_id' => $row_id[$i], 'days' => $days[$i],
-                    //'start' => $start[$i], 'end' => $end[$i]
+                    'start' => $start[$i], 'end' => $end[$i]
                 ]]);
             $i++;
         }

@@ -168,29 +168,7 @@
             input3.trigger('input');
             //////////////////////////////////
             var input3 = $('#'+tableId+'_age'+num);
-            var dob = result.item.dob
-            var month = Number(dob.substr(5,2));
-            var day = Number(dob.substr(8,2));
-            var year = Number(dob.substr(0,4));
-            var age = 18;
-            var age2 = 25;
-            var mydate = new Date();
-            mydate.setFullYear(year, month-1, day);
-            var currdate = new Date();
-            var setDate = new Date();
-            var eighteen = setDate.setFullYear(mydate.getFullYear() + age,month-1, day);
-            var twentyFive = setDate.setFullYear(mydate.getFullYear() + age2,month-1, day);
-            if ((currdate - eighteen) > 0 && (currdate - twentyFive) < 0){
-                // you are above 18
-                input3.val('over 18');
-            }
-            else if((currdate - twentyFive) > 0){
-                // you are above 25
-                input3.val('over 25');
-            }
-            else{
-                input3.val('Under 18');
-            }
+            input3.val(ifAge(result.item.dob))
             input3.trigger('input');
             //////////////////////////////////
             var input3 = $('#'+tableId+'_id'+num);
@@ -243,29 +221,7 @@
             num++
             //////////////////////////////////
             var input3 = $('#'+tableId+'_staff'+num);
-            var dob = result.item.dob
-            var month = Number(dob.substr(5,2));
-            var day = Number(dob.substr(8,2));
-            var year = Number(dob.substr(0,4));
-            var age = 18;
-            var age2 = 25;
-            var mydate = new Date();
-            mydate.setFullYear(year, month-1, day);
-            var currdate = new Date();
-            var setDate = new Date();
-            var eighteen = setDate.setFullYear(mydate.getFullYear() + age,month-1, day);
-            var twentyFive = setDate.setFullYear(mydate.getFullYear() + age2,month-1, day);
-            if ((currdate - eighteen) > 0 && (currdate - twentyFive) < 0){
-                // you are above 18
-                input3.val('over 18');
-            }
-            else if((currdate - twentyFive) > 0){
-                // you are above 25
-                input3.val('over 25');
-            }
-            else{
-                input3.val('Under 18');
-            }
+            input3.val(ifAge(result.item.dob))
             input3.trigger('input');
             num++
             //////////////////////////////////
@@ -284,6 +240,32 @@
             days(item, result)
             addNote()
         };
+
+        window.ifAge = function ifAge(isAge) {
+            var dob = isAge
+            var month = Number(dob.substr(5,2));
+            var day = Number(dob.substr(8,2));
+            var year = Number(dob.substr(0,4));
+            var age = 18;
+            var age2 = 25;
+            var mydate = new Date();
+            mydate.setFullYear(year, month-1, day);
+            var currdate = new Date();
+            var setDate = new Date();
+            var eighteen = setDate.setFullYear(mydate.getFullYear() + age,month-1, day);
+            var twentyFive = setDate.setFullYear(mydate.getFullYear() + age2,month-1, day);
+            if ((currdate - eighteen) > 0 && (currdate - twentyFive) < 0){
+                // you are above 18
+                return 'over 18'
+            }
+            else if((currdate - twentyFive) > 0){
+                // you are above 25
+                return 'over 25'
+            }
+            else{
+                return 'Under 18'
+            }
+        }
 
         window.daysSplit = function daysSplit(obj) {
             //var val = $(obj).closest("tr").find('td:eq(0)').find('select option').length

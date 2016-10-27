@@ -21,6 +21,6 @@ class Specs extends Model
 
     public function staff()
     {
-        return $this->belongsToMany(User::class)->withPivot('row_id', 'start', 'end', 'days')->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot('id', 'row_id', 'start', 'end', 'days')->withTimestamps();
     }
 }

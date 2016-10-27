@@ -147,7 +147,9 @@ echo $arr[1];
                     </div>
                 </div>
             </div>
-
+            <div class="col-lg-offset-5 col-md-offset-5">
+                <img src="/ajax-loader.gif" class="loaderImage" style="display: none; padding-left: 5px;text-align: center">
+            </div>
             <table id="exampleTable">
                 <thead>
                 <tr>
@@ -191,7 +193,7 @@ echo $arr[1];
                     <tbody>
                         <tr>
                             <td class="large">
-                                <select name="days[]" class="form-control days" multiple ondblclick="reloadSelect(this)" onchange="clearStaff(this)">
+                                <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="clearStaff(this)">
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
                                             <?php $day_number=0; ?>
@@ -201,13 +203,25 @@ echo $arr[1];
                                     @endfor
                                 </select>
                             </td>
-                            <th class="medium"></th>
-                            <th class="medium"></th>
+                            <td class="medium start">
+                                <select name="start[]" class="form-control hidden">
+                                    <option><?php foreach($arr as $time) {?>
+                                    <option>{{ $time }}</option>
+                                    <?php } ?></option>
+                                </select>
+                            </td>
+                            <td class="medium finish">
+                                <select name="end[]" class="form-control hidden">
+                                    <option><?php foreach($arr as $time) {?>
+                                    <option>{{ $time }}</option>
+                                    <?php } ?></option>
+                                </select>
+                            </td>
                             <td>
                                 <input name="agency[]" class="form-control" type="text" value=""/>
                                 {{--@foreach($specs as $spec)--}}
                                     <div class="hidden">
-                                        <input name="spec_id" class="form-control" type="text" value="{{$spec->id}}" />
+                                        <input name="spec_id" class="form-control static" value="{{$spec->id}}" />
                                     </div>
                                 {{--@endforeach--}}
                             </td>
@@ -269,6 +283,7 @@ echo $arr[1];
     }
 
     function addNote() {
+        $('.loaderImage').show('fade');
         var formData = $(".table_form").serializeArray();
         var url = $(".table_form").attr( "action" );
         $.ajax({
@@ -278,6 +293,7 @@ echo $arr[1];
             success: function(data, textStatus, jqXHR)
             {
                 //data - response from server
+                $('.loaderImage').hide('fade');
                 console.log(data)
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -314,13 +330,13 @@ echo $arr[1];
         }
         for (var i = 0; i < rows.length; i++) {
 
-            var name = $('#exampleTable_'+rows[i]+'_staff3').closest('tr')
+            var name = $('#exampleTable_'+rows[i]+'_staff5').closest('tr')
             //var tableId = $(name).closest('table').attr('id')
             var tableId = 'exampleTable_'+rows[i]
             //console.log(rows[i]);
             var row = $("<tr>");
 
-            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)" multiple>'+
+            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)" multiple required>'+
                     <?php
                             for($i=0; $i <= $diffInDays; $i++)
                             {
@@ -331,8 +347,8 @@ echo $arr[1];
                     <?php $day_number_rep++; $ctm_start_date_rep->addDay();
                             }?>
                             '</select></td>'))
-                    .append($("<td></td>"))
-                    .append($("<td></td>"))
+                    .append($('<td width="75" class="start"><select name="start[]" id="_start" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
+                    .append($('<td width="75" class="finish"><select name="end[]" id="_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
                     .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
                     .append($('<td><input name="name[]" onfocus="searchName(this)"class="form-control noID name" type="text"value=""/></td>'))
                     .append($('<td><input name="last_name[]" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>'))
@@ -367,8 +383,9 @@ echo $arr[1];
                 //$json = file_get_contents('http://localhost/spec-staff/4');
                 //$obj = json_decode($json);
         ?>
+        //ONLY 1 ROW IN THE TABLE
         @foreach($spec->staff as $key=>$value)
-        <?php $xx = 3; ?>
+        <?php $xx = 5; ?>
 
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
                         .removeAttr('multiple')
@@ -377,7 +394,8 @@ echo $arr[1];
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}')
                         .removeAttr('onclick');
         <?php $xx++; ?>
-                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}');
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->lastname }}')
+                .removeAttr('onclick');
         <?php $xx++; ?>
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->uk_driving_license }}');
         <?php $xx++; ?>
@@ -389,7 +407,7 @@ echo $arr[1];
         <?php $xx++; ?>
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
         <?php $xx++; ?>
-                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val(ifAge('{{ $users->find($value->pivot->user_id)->dob }}'));
         <?php $xx++; ?>
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
         <?php $xx++; ?>
@@ -400,15 +418,23 @@ echo $arr[1];
     <?php
     if(isset($array)){
 
-
+//MORE THAN 1 ROW IN THE TABLE
           foreach (duplicateRows($array) as $row){
-                      $xx = 3;
-                          foreach ($spec->staff as $key=>$value){ ?>
+                      $xx = 5;
+                          foreach ($spec->staff()->orderBy('specs_user.id','asc')->get() as $key=>$value){ ?>
         @if($value->pivot->row_id==$row)
+
+                addTopTime('exampleTable_{{$row}}')
 
             $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
                     .removeAttr('multiple')
                     .append('<option selected>{{ $value->pivot->days}}</option>');
+
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')
+                    .append('<option selected>{{ $value->pivot->start}}</option>');
+
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(2)').find('select')
+                    .append('<option selected>{{ $value->pivot->end}}</option>');
 
             $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
         <?php $xx++; ?>
@@ -424,7 +450,7 @@ echo $arr[1];
         <?php $xx++; ?>
                 $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->medical_conditions }}');
         <?php $xx++; ?>
-                $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->dob }}');
+                $("#exampleTable_{{$row}}_staff{{$xx}}").val(ifAge('{{ $users->find($value->pivot->user_id)->dob }}'));
         <?php $xx++; ?>
                 $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->id }}');
         <?php $xx++; ?>

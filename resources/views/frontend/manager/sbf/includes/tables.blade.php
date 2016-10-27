@@ -37,19 +37,29 @@ function staffing(id) {
             '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" type="text" value=""/></td>',
-            '<td><input name="row_id[]" class="form-control hidden" type="text" value="'+tableNo+'"/></td>',
+            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value=""/></td>',
+            '<td><input name="row_id[]" class="form-control hidden" value="'+tableNo+'"/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
     }
     add();
+    addTopTime(tableId)
     count++;
     $(".timeObj").change(function () {
         var foo = $('select[name=timeObj]').val()
-        console.log(foo)
+        //console.log(foo)
     });
     count++
+}
+
+function addTopTime(id) {
+    //APPEND TWO DROPDOWNS FOR THE TIME
+    //$("#"+id).find('.start').replaceWith('<td width="75" class="start"><select name="start[]" id="'+id+'_start" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>')
+    //$("#"+id).find('.finish').replaceWith('<td width="75" class="finish"><select name="end[]" id="'+id+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>')
+    $("#"+id).find('.start').find('select').removeClass('hidden')
+    $("#"+id).find('.finish').find('select').removeClass('hidden')
+
 }
 
 function remove(tag) {
@@ -68,7 +78,7 @@ function remove(tag) {
         $('#'+id+' > tbody > tr:not(:first)').each(function(index, value) {
             row_id += Number($('td:eq(13)', this).find('input').length)
         });
-        console.log(row_id)
+        //console.log(row_id)
         $('.remove').click( function () {
             t.row('.selected').remove().draw( false );
             if(row_id >1){
@@ -76,6 +86,9 @@ function remove(tag) {
 
             } else {
                 $('#'+id+' td:first').find('select').prop('multiple', true).dblclick()
+                $("#"+id).find('.start').replaceWith('<td class="start"></td>')
+                $("#"+id).find('.finish').replaceWith('<td class="finish"></td>')
+
                 //clearStaff($('#'+id+' td:first').find('select'))
                 //$('#'+id+' td:first').find('select option').remove()
             }
@@ -189,9 +202,13 @@ function dragNdrop() {
             placeholder: 'ui-state-highlight',
             classes: {
                 "ui-sortable": "highlight"
+            },
+            update: function(event, ui) {
+                addNote()
             }
         }).disableSelection();//.effect("bounce", "slow" );
     }
+    //addNote()
 }
 
 function shifts ( d ) {
@@ -206,7 +223,7 @@ function shifts ( d ) {
     };
     // Get the size of an object
     var daySize = Object.size(d);
-
+    //console.log("day size " + daySize)
     for(var x = 1; x <= daySize; x++) {
         var foo = 'week' + x.toString()
         output += '<tr>';
@@ -310,9 +327,11 @@ function shifts ( d ) {
                     dayNumber++
                 }
             });
-            output += '<tr>'
+            //console.log(d)
+            output += '<tr class="times">'
             $.each(d[foo], function (index, value) {
-                output += '<td class="large">' + value + '</td>';
+                output += '<td class="large"><b>' + value + '</b></td>';
+
                 counter++;
                 if (counter % 3 == 0) {
                     output += '<td class="small"></td>'
@@ -320,7 +339,7 @@ function shifts ( d ) {
                     dayNumber++
                 }
             });
-            output += '<td>'+d.total+'</td>'
+            output += '<td><b>'+d.total+'</b></td>'
             //output += '<td><input class="form-control btn btn-info clone" type="button" value="Clone" onclick="clone(this)"/></td>'
             output += '</tr>';
             var id = 'staff'+i+''
