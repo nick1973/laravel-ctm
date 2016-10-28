@@ -18,6 +18,7 @@
     {{--<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>--}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/colResizable-1.5.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -147,7 +148,8 @@ echo $arr[1];
                     </div>
                 </div>
             </div>
-            <div class="col-lg-offset-5 col-md-offset-5">
+            <div id="top_centre" class="col-md-2 col-lg-2 col-lg-offset-5 col-md-offset-5">
+                <br/>
                 <img src="/ajax-loader.gif" class="loaderImage" style="display: none; padding-left: 5px;text-align: center">
             </div>
             <table id="exampleTable">
@@ -169,7 +171,7 @@ echo $arr[1];
                 </tbody>
             </table>
 
-                <table id="staff" class="table" cellspacing="0" width="100%" hidden>
+                <table id="staff" class="table" cellspacing="0" hidden>
                 <thead>
                     <tr style="color: #5bc0de">
                         <th>Days</th>
@@ -192,7 +194,7 @@ echo $arr[1];
                 </thead>
                     <tbody>
                         <tr>
-                            <td class="large">
+                            <td class="large left">
                                 <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="clearStaff(this)">
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
@@ -244,6 +246,7 @@ echo $arr[1];
                         </tr>
                     </tbody>
                 </table>
+
             <input type="submit" value="save" onclick="addNote()">
         </div><!-- col-md-12 -->
 
@@ -252,6 +255,8 @@ echo $arr[1];
 </div><!-- container -->
 
 <script>
+
+
 
     function clearStaff(item) {
         $(item).closest('tr').find('td').find('input[type="text"]').val('')

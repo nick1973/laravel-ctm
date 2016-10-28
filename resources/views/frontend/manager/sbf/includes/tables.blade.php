@@ -184,13 +184,35 @@ $(document).ready(function () {
                 $(this)[0].onclick();
             })
             //fetchData()
-
             dragNdrop()
+            top_centre()
+
+//            $("#exampleTable_1").colResizable({
+//                fixed:false,
+//                liveDrag:true,
+//                gripInnerHtml:"<div class='grip2'></div>",
+//                draggingClass:"dragging"
+//            });
 
             iTableCounter ++;
         }
     });
 });
+
+function top_centre() {
+    $( "#top_centre" ).slider({
+        range: "max",
+        min: 10,
+        max: 100,
+        value: 50,
+        slide: function( event, ui ) {
+            $( "#amount" ).val( ui.value );
+            $(".colspan").attr('colspan', ui.value+'%')
+            console.log(ui.value)
+        }
+    });
+    //$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+}
 
 function dragNdrop() {
     var countTables = $('.staff').length;
@@ -350,7 +372,7 @@ function shifts ( d ) {
 
             //output += '<td colspan="'+dayNumber+'">';
             //output += '<td colspan="100%">';
-            output += '<td colspan="80%">';
+            output += '<td class="colspan" colspan="100%">';
             output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
             //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
             output += fnFormatDetails(iTableCounter, TableHtml);
