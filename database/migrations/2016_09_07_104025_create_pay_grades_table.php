@@ -44,6 +44,6 @@ class CreatePayGradesTable extends Migration
      */
     public function down()
     {
-        //Schema::drop('pay_grades');
+        Schema::drop('pay_grades');
     }
 }
