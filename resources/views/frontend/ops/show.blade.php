@@ -524,27 +524,43 @@ echo $arr[1];
                         @endfor
             }
 
-        var hours = [];
-        var gTotal = 0;
+
+
         function day(id) {
-            var number = id.match(/\d+/);
-            console.log(number[0])
-            if(number[0]===0){
-                gTotal = 0
-            }
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
             var startTime = start.split(':');
             var endTime = end.split(':');
             var subTotal = ((endTime[0]*60+endTime[1]*1) - (startTime[0]*60+startTime[1]*1)) / 60;
+            //grandTotal(subTotal)
             $('#'+id+'_sub_total').val(subTotal);
             $('#'+id+'_sub_total').trigger('input');
-            if($.isNumeric(subTotal)){
-                gTotal += subTotal;
-            }
-            //console.log(id)
-            $("#grand_total").val(gTotal + ' hrs');
-            $('#grand_total').trigger('input');
+            var gTotal = 0;
+            $("[id$='_sub_total']").each(function () {
+                var hours = [];
+
+                if($.isNumeric(subTotal)) {
+                    var twoPlacedFloat = parseFloat($(this).val()).toFixed(2)
+                    if(isNaN(twoPlacedFloat)){
+                        twoPlacedFloat  =  0
+                    }
+                    hours.push(twoPlacedFloat)
+                    for (var i = 0; i < hours.length; i++) {
+                        gTotal += hours[i] << 0;
+                    }
+//                    gTotal = parseFloat(gTotal).toFixed(2)
+                    $("#grand_total").val(gTotal + ' hrs');
+                    $('#grand_total').trigger('input');
+                    console.log(hours)
+                }
+            })
+
+//            if($.isNumeric(subTotal)){
+//                gTotal += subTotal;
+//            }
+
+
+
                     @for($i=0; $i <= $diffInDays; $i++)
                     // store values in an array throughout the form
                     // calculate the total and send it to ID
