@@ -37,7 +37,7 @@ function staffing(id) {
             '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value="1000000"/></td>',
+            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value="5"/></td>',
             '<td><input name="row_id[]" class="form-control hidden" value="'+tableNo+'"/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
