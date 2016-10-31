@@ -287,7 +287,7 @@ echo $arr[1];
                                             <?php $day_number++; $ctm_start->addDay(); ?>
                                         @endfor
                                             {{--grand_total--}}
-                                            <div class="form-group hidden">
+                                            <div class="form-group ">
                                                 <label class="col-md-4 col-lg-4 control-label">Total</label>
                                                 <div class="col-md-4 col-lg-4">
                                                     <input type="text" class="form-control" id="grand_total"
@@ -525,7 +525,13 @@ echo $arr[1];
             }
 
         var hours = [];
+        var gTotal = 0;
         function day(id) {
+            var number = id.match(/\d+/);
+            console.log(number[0])
+            if(number[0]===0){
+                gTotal = 0
+            }
             var start = $('#'+id+'_start').val()
             var end = $('#'+id+'_end').val()
             var startTime = start.split(':');
@@ -533,15 +539,11 @@ echo $arr[1];
             var subTotal = ((endTime[0]*60+endTime[1]*1) - (startTime[0]*60+startTime[1]*1)) / 60;
             $('#'+id+'_sub_total').val(subTotal);
             $('#'+id+'_sub_total').trigger('input');
-            if(!isNaN(subTotal)){
-                hours.push(subTotal)
+            if($.isNumeric(subTotal)){
+                gTotal += subTotal;
             }
-            // ADDS ARRAY
-            var total = 0;
-            for (var i = 0; i < hours.length; i++) {
-                total += hours[i];
-            }
-            $("#grand_total").val(total + ' hrs');
+            //console.log(id)
+            $("#grand_total").val(gTotal + ' hrs');
             $('#grand_total').trigger('input');
                     @for($i=0; $i <= $diffInDays; $i++)
                     // store values in an array throughout the form
@@ -561,7 +563,7 @@ echo $arr[1];
         $("#role").change(function () {
             var id = $(this).children(":selected").attr("id");//the count
             var x = id - 1;
-            console.log(x);
+            //console.log(x);
             var input = $('#pay');
             input.val(pay_grades[x]['pay']);
             input.trigger('input');
@@ -589,7 +591,7 @@ echo $arr[1];
             var input3 = $('#id');
             input3.val(pay_grades[x]['id']);
             input3.trigger('input');
-            console.log(pay_grades[x]['id']);
+            //console.log(pay_grades[x]['id']);
         });
 
 
@@ -600,7 +602,7 @@ echo $arr[1];
                     .then(function (response) {
                         $scope.specs = response.data.data;
                     });
-            console.log($scope.specs)
+            //console.log($scope.specs)
             $scope.specs = [];
             $scope.specs.week1 = {};
             $scope.addRow = function(){
@@ -630,13 +632,13 @@ echo $arr[1];
                 myArray.week{{$week}}.{{ $sub_total }} = $scope.{{ $sub_total }}
                 <?php $day_number_scope++; ?>
                 @endfor
-                console.log(myArray);
+                //console.log(myArray);
                 $scope.specs.push(myArray)
             };
 
 
             $scope.removeRow = function(index){
-                $scope.specs.splice(index-1, 1);
+                $scope.specs.splice(index, 1);
             };
 
 

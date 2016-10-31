@@ -14,7 +14,7 @@ function staffing(id) {
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
-            '<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)">'+
+            '<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" multiple>'+
             <?php
     for($i=0; $i <= $diffInDays; $i++)
     {
@@ -37,7 +37,7 @@ function staffing(id) {
             '<td><input id="'+tableId+'_rtw'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_medical'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
-            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value=""/></td>',
+            '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value="1000000"/></td>',
             '<td><input name="row_id[]" class="form-control hidden" value="'+tableNo+'"/></td>',
             '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
@@ -75,7 +75,7 @@ function remove(tag) {
         }
 
         var row_id = 0
-        $('#'+id+' > tbody > tr:not(:first)').each(function(index, value) {
+        $('#'+id+' > tbody > tr').each(function(index, value) {//:not(:first)
             row_id += Number($('td:eq(13)', this).find('input').length)
         });
         //console.log(row_id)
@@ -86,8 +86,8 @@ function remove(tag) {
 
             } else {
                 $('#'+id+' td:first').find('select').prop('multiple', true).dblclick()
-                $("#"+id).find('.start').addClass('hidden')
-                $("#"+id).find('.finish').addClass('hidden')
+                //$("#"+id).find('.start').addClass('hidden')
+                //$("#"+id).find('.finish').addClass('hidden')
 
                 //clearStaff($('#'+id+' td:first').find('select'))
                 //$('#'+id+' td:first').find('select option').remove()
@@ -219,7 +219,7 @@ function dragNdrop() {
     console.log(countTables)
     for(var x=1; x <=countTables; x++){
         $("#exampleTable_" + x + " tbody").sortable({
-            items: "> tr:not(:first)",
+            items: "> tr",//:not(:first)
             appendTo: "parent",
             helper: "clone",
             placeholder: 'ui-state-highlight',

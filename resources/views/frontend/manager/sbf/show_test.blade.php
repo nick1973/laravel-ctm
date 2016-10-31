@@ -195,7 +195,7 @@ echo $arr[1];
                     <tbody>
                         <tr>
                             <td class="large left">
-                                <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="clearStaff(this)">
+                                <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
                                     @for($i=0; $i <= $diffInDays; $i++)
                                         @if($day_number ==7)
                                             <?php $day_number=0; ?>
@@ -206,14 +206,14 @@ echo $arr[1];
                                 </select>
                             </td>
                             <td class="medium start">
-                                <select name="start[]" class="form-control hidden">
+                                <select name="start[]" class="form-control">
                                     <option><?php foreach($arr as $time) {?>
                                     <option>{{ $time }}</option>
                                     <?php } ?></option>
                                 </select>
                             </td>
                             <td class="medium finish">
-                                <select name="end[]" class="form-control hidden">
+                                <select name="end[]" class="form-control">
                                     <option><?php foreach($arr as $time) {?>
                                     <option>{{ $time }}</option>
                                     <?php } ?></option>
@@ -341,7 +341,7 @@ echo $arr[1];
             //console.log(rows[i]);
             var row = $("<tr>");
 
-            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="clearStaff(this)" multiple required>'+
+            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" multiple required>'+
                     <?php
                             for($i=0; $i <= $diffInDays; $i++)
                             {
@@ -383,7 +383,7 @@ echo $arr[1];
     function fetchData() {
         rowID()
         <?php
-            $boo =  (array) $spec->staff;
+            //$boo =  (array) $spec->staff;
 //                                    $staff = file_get_contents('http://localhost/spec-staff/4');
                 //$json = file_get_contents('http://localhost/spec-staff/4');
                 //$obj = json_decode($json);
@@ -394,6 +394,7 @@ echo $arr[1];
 
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
                         .removeAttr('multiple')
+                .attr('ondblclick','reloadSelect(this)')
                         .append('<option selected>{{ $value->pivot->days}}</option>');
 
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}')
@@ -433,6 +434,7 @@ echo $arr[1];
 
             $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
                     .removeAttr('multiple')
+                    .attr('ondblclick','reloadSelect(this)')
                     .append('<option selected>{{ $value->pivot->days}}</option>');
 
             $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')

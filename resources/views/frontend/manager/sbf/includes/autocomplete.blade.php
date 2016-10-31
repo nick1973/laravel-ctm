@@ -48,12 +48,12 @@
                         $(att).val(ui.item.name);
                         if($(att).hasClass('hasID')){
                             var lastChar = $(att).get(0).id.substr($(att).get(0).id.length - 1); // => "1"
-                            console.log(lastChar)
+                            //console.log(lastChar)
                             loadStaffWithId(att, ui, lastChar)
                         } else {
                             loadStaff(att, ui)
                         }
-                        addNote()
+                        //addNote()
                     },
                     minLength: 0
 
@@ -294,6 +294,25 @@
             } else {
                 $(obj).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
             }
+        }
+
+        window.saveDays = function saveDays(obj) {
+            var voo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').length
+            var val = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            var user_id = $(obj).closest("tr").find('td:eq(12)').find('input').val()
+            console.log('user ID '+user_id)
+            var foo = 'staff' + user_id + ',' + val
+            if(voo>1){
+                var boo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+                var doo = $(obj).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
+                        .attr("value",foo)
+                        .prop("selected", true)
+                        .text(foo)
+                );
+            } else {
+                $(obj).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
+            }
+            addNote()
         }
     });
 </script>
