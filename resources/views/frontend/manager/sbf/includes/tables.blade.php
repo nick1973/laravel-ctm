@@ -202,7 +202,7 @@ function top_centre() {
         range: "max",
         min: 10,
         max: 100,
-        value: 50,
+        value: 0,
         slide: function( event, ui ) {
             $( "#amount" ).val( ui.value );
             $(".colspan").attr('colspan', ui.value+'%')
