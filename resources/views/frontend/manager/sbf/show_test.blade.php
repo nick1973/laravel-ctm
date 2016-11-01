@@ -287,7 +287,7 @@ echo $arr[1];
 
     function addNote() {
         $('.loaderImage').show('fade');
-        $('body').css('background-color', '#e589d7')
+        //$('body').css('background-color', '#e589d7')
         var formData = $(".table_form").serializeArray();
         var url = $(".table_form").attr( "action" );
         $.ajax({
@@ -298,7 +298,7 @@ echo $arr[1];
             {
                 //data - response from server
                 $('.loaderImage').hide('fade');
-                $('body').css('background-color', '#ffffff')
+                //$('body').css('background-color', '#ffffff')
                 console.log(data)
             },
             error: function (jqXHR, textStatus, errorThrown)
