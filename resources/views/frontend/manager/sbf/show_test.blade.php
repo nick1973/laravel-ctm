@@ -96,8 +96,6 @@
         $next_lower_day = strtolower($x);
         return $next_lower_day;
     }
-
-
     ?>
 </head>
 <body>

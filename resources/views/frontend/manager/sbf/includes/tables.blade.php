@@ -148,7 +148,11 @@ $(document).ready(function () {
             { "data": "position" },
             { "data": "qty" }
         ],
-        "order": [[1, 'asc']]
+        "order": [[1, 'asc']],
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            //$('td:eq(0)', nRow).addClass( "text-primary" );
+            $('td:eq(1),td:eq(2),td:eq(3),td:eq(4)', nRow).addClass( "lead" );
+        }
     });
 
     var table = $('#exampleTable').DataTable({
