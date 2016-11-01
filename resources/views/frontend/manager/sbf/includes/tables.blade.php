@@ -14,7 +14,7 @@ function staffing(id) {
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
-            '<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" multiple>'+
+            '<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" ondblclick="reloadSelect(this)" multiple>'+
             <?php
     for($i=0; $i <= $diffInDays; $i++)
     {
