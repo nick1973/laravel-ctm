@@ -36,11 +36,11 @@
 
 
     td.details-control {
-        background: url('/details_open.png') no-repeat center center;
+        background: url('/details_close.png') no-repeat center center;
         cursor: pointer;
     }
     td.details-control.closed {
-        background: url('/details_close.png') no-repeat center center;
+        background: url('/details_open.png') no-repeat center center;
     }
 
     .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate, .paging_simple_numbers
