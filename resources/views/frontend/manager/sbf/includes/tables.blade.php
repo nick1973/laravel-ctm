@@ -138,7 +138,7 @@ $(document).ready(function () {
         ],
         "columns": [
             {
-                "className":      'details-control',
+                "className":      'details-control closed',
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": ''
@@ -150,7 +150,7 @@ $(document).ready(function () {
         ],
         "order": [[1, 'asc']],
         "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-            //$('td:eq(0)', nRow).addClass( "text-primary" );
+            $('td:eq(0)', nRow).addClass( "text-primary" );
             $('td:eq(1),td:eq(2),td:eq(3),td:eq(4)', nRow).addClass( "lead" );
         }
     });
@@ -166,16 +166,18 @@ $(document).ready(function () {
      */
     $('#exampleTable tbody').on('click', 'td.details-control', function () {
         //location.reload()
+            $(this).addClass('closed')
         var nTr = $(this).parents('tr')[0];
         var nextTr = $(this).parents('tr')[1];
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         if (oTable.fnIsOpen(nTr)) {
             /* This row is already open - close it */
-            this.src = "http://i.imgur.com/SD7Dz.png";
+            this.src = "http://i.imgur.com/d4ICC.png";
             oTable.fnClose(nTr);
         }
         else {
+            $(this).removeClass('closed')
             /* Open this row */
             this.src = "http://i.imgur.com/d4ICC.png";
 
@@ -190,14 +192,6 @@ $(document).ready(function () {
             //fetchData()
             dragNdrop()
             top_centre()
-
-//            $("#exampleTable_1").colResizable({
-//                fixed:false,
-//                liveDrag:true,
-//                gripInnerHtml:"<div class='grip2'></div>",
-//                draggingClass:"dragging"
-//            });
-
             iTableCounter ++;
         }
     });
@@ -215,7 +209,6 @@ function top_centre() {
             console.log(ui.value)
         }
     });
-    //$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
 }
 
 function dragNdrop() {
@@ -235,7 +228,6 @@ function dragNdrop() {
             }
         }).disableSelection();//.effect("bounce", "slow" );
     }
-    //addNote()
 }
 
 function shifts ( d ) {
@@ -252,19 +244,16 @@ function shifts ( d ) {
     var daySize = Object.size(d);
     //console.log("day size " + daySize)
     for(var x = 1; x <= daySize; x++) {
+        var dayNumber = '{{ $day }}';
+        var counter1 = 0
         var foo = 'week' + x.toString()
         output += '<tr>';
         output += '<td style="font-weight: bold">WEEK: ' + x + '</td>';
         output += '</tr>';
+
         output += '<tr>';
-        for (var i = 1; i <= d.qty; i++) {
-            var counter = 0;
-            var dayNumber = '{{ $day }}';
-            output += '<tr>';
-            output += '</tr>';
-            output += '<tr>';
-            $.each(d[foo], function (index, value) {
-                if(counter % 7 == 0 && x > 1){
+                    $.each(d[foo], function (index, value) {
+                if(counter1 % 7 == 0 && x > 1){
                     dayNumber = +dayNumber+7
                 }
                 if(index.includes("saturday")){
@@ -347,8 +336,8 @@ function shifts ( d ) {
                 //if(value.length > 0){
                 output += '<td class="large" style="font-weight: bold; background-color: #dddddd">'+day+'</td>';
                 //}
-                counter++;
-                if (counter % 3 == 0) {
+                counter1++;
+                if (counter1 % 3 == 0) {
                     output += '<td class="small"></td>'
                     //output += '</tr>';
                     dayNumber++
@@ -359,14 +348,131 @@ function shifts ( d ) {
             $.each(d[foo], function (index, value) {
                 output += '<td class="large"><b>' + value + '</b></td>';
 
-                counter++;
-                if (counter % 3 == 0) {
+                counter1++;
+                if (counter1 % 3 == 0) {
                     output += '<td class="small"></td>'
                     //output += '</tr>';
                     dayNumber++
                 }
             });
-            output += '<td><b>'+d.total+'</b></td>'
+
+        output += '</tr>';
+
+
+
+
+        output += '<tr>';
+        for (var i = 1; i <= d.qty; i++) {
+            var counter = 0;
+
+            output += '<tr>';
+//            output += '</tr>';
+//            output += '<tr>';
+
+//            $.each(d[foo], function (index, value) {
+//                if(counter % 7 == 0 && x > 1){
+//                    dayNumber = +dayNumber+7
+//                }
+//                if(index.includes("saturday")){
+//                    if(index.includes("start")){
+//                        var day = "Saturday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Saturday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Saturday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("sunday")){
+//                    if(index.includes("start")){
+//                        var day = "Sunday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Sunday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Sunday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("monday")){
+//                    if(index.includes("start")){
+//                        var day = "Monday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Monday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Monday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("tuesday")){
+//                    if(index.includes("start")){
+//                        var day = "Tuesday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Tuesday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Tuesday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("wednesday")){
+//                    if(index.includes("start")){
+//                        var day = "Wednesday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Wednesday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Wednesday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("thursday")){
+//                    if(index.includes("start")){
+//                        var day = "Thursday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Thursday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Thursday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("friday")){
+//                    if(index.includes("start")){
+//                        var day = "Friday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Friday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Friday"+dayNumber+" Hours"
+//                    }
+//                }
+//                //if(value.length > 0){
+//                output += '<td class="large" style="font-weight: bold; background-color: #dddddd">'+day+'</td>';
+//                //}
+//                counter++;
+//                if (counter % 3 == 0) {
+//                    output += '<td class="small"></td>'
+//                    //output += '</tr>';
+//                    dayNumber++
+//                }
+//            });
+//            //console.log(d)
+//            output += '<tr class="times">'
+//            $.each(d[foo], function (index, value) {
+//                output += '<td class="large"><b>' + value + '</b></td>';
+//
+//                counter++;
+//                if (counter % 3 == 0) {
+//                    output += '<td class="small"></td>'
+//                    //output += '</tr>';
+//                    dayNumber++
+//                }
+//            });
+//            output += '<td><b>'+d.total+'</b></td>'
             //output += '<td><input class="form-control btn btn-info clone" type="button" value="Clone" onclick="clone(this)"/></td>'
             output += '</tr>';
             var id = 'staff'+i+''

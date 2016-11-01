@@ -39,7 +39,7 @@
         background: url('/details_open.png') no-repeat center center;
         cursor: pointer;
     }
-    tr.shown td.details-control {
+    td.details-control.closed {
         background: url('/details_close.png') no-repeat center center;
     }
 
