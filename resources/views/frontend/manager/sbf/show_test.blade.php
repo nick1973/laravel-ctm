@@ -196,7 +196,7 @@ echo $arr[1];
                             <td class="exlarge left">
                                 @if($diffInDays > 6)
                                     {{ $diffInDays % 7 }}
-                                    <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
+                                    <select style="" name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
                                         @for($i=0; $i <= $diffInDays; $i++)
                                             @if($day_number ==7)
                                                 <?php $day_number=0; ?>
@@ -216,6 +216,7 @@ echo $arr[1];
                                         @endfor
                                     </select>
                                 @endif
+                                    {{--<textarea class="form-control" ondblclick="reloadSelect(this)"></textarea>--}}
                             </td>
                             <td class="medium start">
                                 <select name="start[]" class="form-control">
@@ -328,23 +329,23 @@ echo $arr[1];
         for(var i=0; i<rowCount.length; i++){
 
             //for(var x = 1; x < rowCount.length; x++) {
-                var foo = $('#' + tableId + ' tr:eq(' + i + 1 + ') td:eq(0)').find('textarea').val()
-                if (typeof foo != 'undefined') {
-                    var str = foo.toString()
-                    var selDays = str.split(', ');
-                }
-
-                //var str = selectedDays.replace(', ', '');
-                console.log('selected days ' + selDays)
+//                var foo = $('#' + tableId + ' tr:eq(' + i + 1 + ') td:eq(0)').find('textarea').val()
+//                if (typeof foo != 'undefined') {
+//                    var str = foo.toString()
+//                    var selDays = str.split(', ');
+//                }
+//
+//                //var str = selectedDays.replace(', ', '');
+//                console.log('selected days ' + selDays)
             //}
 
 
 
-            //var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
-            //var str = day[i]+ " " + nums[i].toString()
+            var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
+            var str = day[i]+ " " + nums[i].toString()
             //console.log(str)
             $(item).find('option').css('color','red')
-            $(item).find('option[value="' + selDays + '"]').remove();
+            $(item).find('option[value="' + str + '"]').remove();
         }
 //        var tableId = $(item).closest('table').attr('id');
 //        var rowCount = $('#'+tableId+' tr');
@@ -458,9 +459,11 @@ echo $arr[1];
                             '<option selected id="{{ dayOfWeek($day_number_rep) }}{{ $i }}">{{ dayOfWeek($day_number_rep) }} {{ $ctm_start_date_rep->day }}</option>'+
                     <?php $day_number_rep++; $ctm_start_date_rep->addDay();
                             }?>
-                            '</select><textarea class="form-control" ondblclick="reloadSelect(this)"></textarea></td>'))
+                            '</select>' +
+                    '<textarea class="form-control" ondblclick="reloadSelect(this)"></textarea>' +
+                    '</td>'))
 
-//            row.append($('<td class="large"><textarea class="form-control" ondblclick="reloadSelect(this)"></textarea></td>'))
+            //.append($('<td class="large"><textarea class="form-control" ondblclick="reloadSelect(this)"></textarea></td>'))
                     .append($('<td width="75" class="start"><select name="start[]" id="_start" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
                     .append($('<td width="75" class="finish"><select name="end[]" id="_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
                     .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
@@ -501,10 +504,10 @@ echo $arr[1];
         @foreach($spec->staff as $key=>$value)
         <?php $xx = 5; ?>
 
-                //$("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
-                        //.removeAttr('multiple')
-                //.attr('ondblclick','reloadSelect(this)')
-                        //.append('<option selected>{{ $value->pivot->days}}</option>');
+                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                        .removeAttr('multiple')
+                .attr('ondblclick','reloadSelect(this)')
+                        .append('<option selected>{{ $value->pivot->days}}</option>');
 
         $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('textarea').val('{{ $value->pivot->days }}')
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}')
@@ -542,16 +545,16 @@ echo $arr[1];
 
                 addTopTime('exampleTable_{{$row}}')
 
-            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
-                    //.removeAttr('multiple')
-                    //.attr('ondblclick','reloadSelect(this)')
-                    //.append('<option selected>{{ $value->pivot->days}}</option>');
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                    .removeAttr('multiple')
+                    .attr('ondblclick','reloadSelect(this)')
+                    .append('<option selected>{{ $value->pivot->days}}</option>');
 
-            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')
-                    //.append('<option selected>{{ $value->pivot->start}}</option>');
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')
+                    .append('<option selected>{{ $value->pivot->start}}</option>');
 
-            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(2)').find('select')
-                    //.append('<option selected>{{ $value->pivot->end}}</option>');
+            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(2)').find('select')
+                    .append('<option selected>{{ $value->pivot->end}}</option>');
 
         $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('textarea').val('{{ $value->pivot->days }}')
 
