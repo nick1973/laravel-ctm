@@ -268,71 +268,6 @@ echo $arr[1];
 
 <script>
 
-
-
-    function clearStaff(item) {
-        $(item).closest('tr').find('td').find('input[type="text"]').val('')
-    }
-
-    function reloadSelect(item) {
-        $(item).closest("tr").find('td:eq(0)').find('textarea').hide('fade')
-        $(item).closest("tr").find('td:eq(0)').find('select').show('fade')
-        var sel = $(item).closest("tr").find('td:eq(0)').find('select')
-        $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
-        $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
-        $(item).closest("tr").find('td:eq(0)').find('select option').remove()
-        @for($i=0; $i <= $diffInDays; $i++)
-        @if($day_number_scope ==7)
-        <?php $day_number_scope=0; ?>
-        @endif
-                //'+staff[0]+',
-
-            $(item).append('<option value="{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}">{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
-
-                <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
-        @endfor
-
-        var $tr = $(item).closest("tr")
-        var days = $tr.prev().children().eq(0).find('textarea').css('color', 'blue').val()
-        var day = days.replace(/\d+/g, ''); // 123456
-        var day = day.split(' '); // 123456
-        var nums = days.match(/\d+/g); // 123456
-        console.log(day)
-        //console.log(nums)
-        //console.log(days)
-        for(var i=0; i<nums.length; i++){
-            var str = day[i]+ " " + nums[i].toString()
-            //console.log(str)
-            $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option').css('color','red')
-            $(item).find('option[value="' + str + '"]').remove();
-        }
-    }
-
-    //function reloadSelect(item) {
-        //$(item).closest("tr").find('td:eq(0)').find('select').show('fade')
-        //var value = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
-        //if(value.includes('staff')){
-        //    if (value.indexOf(',') > -1) {
-        //        var staff = value.split(',')
-         //   }
-       // }
-        //console.log(staff[0])
-
-       // $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
-
-       // $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
-       // $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
-       // $(item).closest("tr").find('td:eq(0)').find('select option').remove()
-        @for($i=0; $i <= $diffInDays; $i++)
-        @if($day_number_scope ==7)
-        <?php $day_number_scope=0; ?>
-        @endif
-        //'+staff[0]+',
-       // $(item).append('<option>{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
-        <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
-        @endfor
-    //}
-
     function addNote() {
         $('.loaderImage').show('fade');
         //$('body').css('background-color', '#e589d7')
@@ -356,7 +291,83 @@ echo $arr[1];
             }
         });
     }
-    
+
+    function clearStaff(item) {
+        $(item).closest('tr').find('td').find('input[type="text"]').val('')
+    }
+
+    function reloadSelect(item) {
+        var tableId = $(item).closest('table').attr('id');
+        var rowCount = $('#'+tableId+' tr');
+        $(item).closest("tr").find('td:eq(0)').find('textarea').hide('fade')
+        $(item).closest("tr").find('td:eq(0)').find('select').show('fade')
+        var sel = $(item).closest("tr").find('td:eq(0)').find('select')
+        $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
+        $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+        $(item).closest("tr").find('td:eq(0)').find('select option').remove()
+        @for($i=0; $i <= $diffInDays; $i++)
+        @if($day_number_scope ==7)
+        <?php $day_number_scope=0; ?>
+        @endif
+                //'+staff[0]+',
+
+                    $(item).append('<option value="{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}">{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
+
+                <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
+        @endfor
+
+        var $tr = $(item).closest("tr")
+        var daysprev = $tr.prevAll().children().eq(0).find('textarea').css('color', 'blue').val()
+        var daysNext = $tr.nextAll().children().eq(0).find('textarea').css('color', 'blue').val()
+        var day = daysprev.replace(/\d+/g, ''); // 123456
+        var day = day.split(' '); // 123456
+        var nums = daysprev.match(/\d+/g); // 123456
+        //console.log(day)
+        //console.log(nums)
+        //console.log(daysNext)
+        for(var i=0; i<rowCount.length; i++){
+
+            //for(var x = 1; x < rowCount.length; x++) {
+                var foo = $('#' + tableId + ' tr:eq(' + i + 1 + ') td:eq(0)').find('textarea').val()
+                if (typeof foo != 'undefined') {
+                    var str = foo.toString()
+                    var selDays = str.split(', ');
+                }
+
+                //var str = selectedDays.replace(', ', '');
+                console.log('selected days ' + selDays)
+            //}
+
+
+
+            //var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
+            //var str = day[i]+ " " + nums[i].toString()
+            //console.log(str)
+            $(item).find('option').css('color','red')
+            $(item).find('option[value="' + selDays + '"]').remove();
+        }
+//        var tableId = $(item).closest('table').attr('id');
+//        var rowCount = $('#'+tableId+' tr');
+//
+//        for(var i = 1; i < rowCount.length; i++){
+//
+//            var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
+//            if(typeof foo !='undefined'){
+//                var str = foo.toString()
+//                var selDays = str.split(', ');
+//            }
+//
+//            //var str = selectedDays.replace(', ', '');
+//            console.log('selected days '+selDays)
+//            $(item).closest("tr").next('tr').find('td').eq(0).find('select').find('option').css('color','red')
+//            $(item).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays[i-1] + '"]').remove()
+//            $(item).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays + '"]').remove()
+//        }
+
+
+
+    }
+
     function showStaffDays(el, selectedDays, dayCount) {
         $(el).hide('fade')
 
@@ -365,16 +376,21 @@ echo $arr[1];
         var day = day.split(' '); // 123456
         $(el).closest('td').find('textarea').remove()
         var textarea = $(el).closest('td').append('<textarea class="form-control" ondblclick="reloadSelect(this)"></textarea>').hide().fadeIn(500);
-
+        var id = $(el).closest('table').attr('id');
         for(var i=0; i<nums.length; i++){
             var str = day[i]+ " " + nums[i].toString()
             $(textarea).find('textarea').append(str+', ')
         }
         // IF THERE'S MORE DAYS AVAILABLE TO CHOOSE FROM, SPLIT THEM
         if(dayCount.length>nums.length){
-            staffing(el)
+            if($('#' + id + ' tr').length <= '{{ $diffInDays+1 }}'){
+                staffing(el)
+            }
+
         }
 
+        //console.log('tr count'+$('#' + id + ' tr').length)
+        //console.log('daycount'+'{{ $diffInDays+1 }}')
         var row = $(el).closest("tr").eq(0)
         var chosenDays = $(el).closest("tr").eq(0).find('textarea').val()
         var prevRow = $( row ).prev().find('textarea').val()
@@ -382,8 +398,8 @@ echo $arr[1];
          // 123456
         var tableId = $(el).closest('table').attr('id');
         var rowCount = $('#'+tableId+' tr');
-console.log(rowCount.length)
-        for(i = 1; i < rowCount.length;i++){
+//console.log(rowCount.length)
+        for(i = 1; i < rowCount.length; i++){
 
             var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
             if(typeof foo !='undefined'){
@@ -392,7 +408,7 @@ console.log(rowCount.length)
             }
 
             //var str = selectedDays.replace(', ', '');
-            console.log(selDays)
+            //console.log(selDays)
             $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option').css('color','red')
             $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays[i-1] + '"]').remove()
             $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays[0] + '"]').remove()
