@@ -281,11 +281,13 @@
         }
 
         window.days = function days(obj, result) {
+
             var voo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').length
             var val = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
             var foo = 'staff' + result.item.id + ',' + val
             if(voo>1){
                 var boo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+                $(obj).closest("tr").find('td:eq(0)').find('select option').remove()
                 var doo = $(obj).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
                         .attr("value",foo)
                         .prop("selected", true)
@@ -297,21 +299,20 @@
         }
 
         window.saveDays = function saveDays(obj) {
-            var voo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').length
+            var selectedDays = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
+            var actualDays= []
+            $(obj).closest("tr").find('td:eq(0)').find('select option').each(function () {
+                    actualDays.push($(this).val())
+            })
+            var staffName = $(obj).closest("tr").find('td:eq(4)').find('input').val()
             var val = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').text()
             var user_id = $(obj).closest("tr").find('td:eq(12)').find('input').val()
-            console.log('user ID '+user_id)
+            //console.log('actualDays '+actualDays)
             var foo = 'staff' + user_id + ',' + val
-            if(voo>1){
-                var boo = $(obj).closest("tr").find('td:eq(0)').find('select option:selected').remove()
-                var doo = $(obj).closest("tr").find('td:eq(0)').find('select').append($("<option></option>")
-                        .attr("value",foo)
-                        .prop("selected", true)
-                        .text(foo)
-                );
-            } else {
-                $(obj).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
-            }
+
+            $(obj).closest("tr").find('td:eq(0)').find('select option:selected').val(foo)
+
+            showStaffDays(obj, selectedDays, actualDays)
             addNote()
         }
     });

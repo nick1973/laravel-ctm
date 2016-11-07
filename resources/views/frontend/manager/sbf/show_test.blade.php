@@ -50,6 +50,7 @@
 
     .row_selected{background-color: #0000ff !important; z-index:9999}
 
+    .exlarge { min-width: 250px; }
     .large { min-width: 150px; }
     .medium { min-width: 100px; }
     .small { min-width: 50px; }
@@ -153,7 +154,7 @@ echo $arr[1];
             <table id="exampleTable">
                 <thead>
                 <tr>
-                    <th>row id</th>
+                    {{--<th>row id</th>--}}
                     <th>Role</th>
                     <th>Position</th>
                     <th>Qty</th>
@@ -161,7 +162,7 @@ echo $arr[1];
                 </thead>
                 <tbody>
                     <tr>
-                        <th></th>
+                        {{--<th></th>--}}
                         <th></th>
                         <th></th>
                         <th></th>
@@ -192,16 +193,29 @@ echo $arr[1];
                 </thead>
                     <tbody>
                         <tr>
-                            <td class="large left">
-                                <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
-                                    @for($i=0; $i <= $diffInDays; $i++)
-                                        @if($day_number ==7)
-                                            <?php $day_number=0; ?>
-                                        @endif
-                                        <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
-                                        <?php $day_number++; $ctm_start_date->addDay(); ?>
-                                    @endfor
-                                </select>
+                            <td class="exlarge left">
+                                @if($diffInDays > 6)
+                                    {{ $diffInDays % 7 }}
+                                    <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
+                                        @for($i=0; $i <= $diffInDays; $i++)
+                                            @if($day_number ==7)
+                                                <?php $day_number=0; ?>
+                                            @endif
+                                            <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                            <?php $day_number++; $ctm_start_date->addDay(); ?>
+                                        @endfor
+                                    </select>
+                                @else
+                                    <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
+                                        @for($i=0; $i <= $diffInDays; $i++)
+                                            @if($day_number ==7)
+                                                <?php $day_number=0; ?>
+                                            @endif
+                                            <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                            <?php $day_number++; $ctm_start_date->addDay(); ?>
+                                        @endfor
+                                    </select>
+                                @endif
                             </td>
                             <td class="medium start">
                                 <select name="start[]" class="form-control">
@@ -239,7 +253,7 @@ echo $arr[1];
                             <td><input class="form-control noID" type="text" value=""/></td>
                             <td><input name="user_id[]" class="form-control noID user_id hidden" type="text" value=""/></td>
                             <td><input name="row_id[]" class="form-control noID hidden" type="text" value=""/></td>
-                            <td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>
+                            <td><input class="form-control btn btn-warning" type="button" value="Clear" onclick="clearStaff(this)"/></td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -261,17 +275,9 @@ echo $arr[1];
     }
 
     function reloadSelect(item) {
-
-        var value = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
-        if(value.includes('staff')){
-            if (value.indexOf(',') > -1) {
-                var staff = value.split(',')
-            }
-        }
-        //console.log(staff[0])
-
-        $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
-
+        $(item).closest("tr").find('td:eq(0)').find('textarea').hide('fade')
+        $(item).closest("tr").find('td:eq(0)').find('select').show('fade')
+        var sel = $(item).closest("tr").find('td:eq(0)').find('select')
         $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
         $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
         $(item).closest("tr").find('td:eq(0)').find('select option').remove()
@@ -280,10 +286,52 @@ echo $arr[1];
         <?php $day_number_scope=0; ?>
         @endif
                 //'+staff[0]+',
-                $(item).append('<option>{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
+
+            $(item).append('<option value="{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}">{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
+
+                <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
+        @endfor
+
+        var $tr = $(item).closest("tr")
+        var days = $tr.prev().children().eq(0).find('textarea').css('color', 'blue').val()
+        var day = days.replace(/\d+/g, ''); // 123456
+        var day = day.split(' '); // 123456
+        var nums = days.match(/\d+/g); // 123456
+        console.log(day)
+        //console.log(nums)
+        //console.log(days)
+        for(var i=0; i<nums.length; i++){
+            var str = day[i]+ " " + nums[i].toString()
+            //console.log(str)
+            $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option').css('color','red')
+            $(item).find('option[value="' + str + '"]').remove();
+        }
+    }
+
+    //function reloadSelect(item) {
+        //$(item).closest("tr").find('td:eq(0)').find('select').show('fade')
+        //var value = $(item).closest("tr").find('td:eq(0)').find('select option:selected').text()
+        //if(value.includes('staff')){
+        //    if (value.indexOf(',') > -1) {
+        //        var staff = value.split(',')
+         //   }
+       // }
+        //console.log(staff[0])
+
+       // $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
+
+       // $(item).closest("tr").find('td:eq(0)').find('select').prop('multiple', true)
+       // $(item).closest("tr").find('td:eq(0)').find('select option:selected').remove()
+       // $(item).closest("tr").find('td:eq(0)').find('select option').remove()
+        @for($i=0; $i <= $diffInDays; $i++)
+        @if($day_number_scope ==7)
+        <?php $day_number_scope=0; ?>
+        @endif
+        //'+staff[0]+',
+       // $(item).append('<option>{{ dayOfWeek($day_number_scope) }} {{ $ctm_start_date_scope->day }}</option>');
         <?php $day_number_scope++; $ctm_start_date_scope->addDay(); ?>
         @endfor
-    }
+    //}
 
     function addNote() {
         $('.loaderImage').show('fade');
@@ -299,13 +347,56 @@ echo $arr[1];
                 //data - response from server
                 $('.loaderImage').hide('fade');
                 //$('body').css('background-color', '#ffffff')
-                console.log(data)
+                //console.log(data)
+
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                console.log(textStatus)
+                //console.log(textStatus)
             }
         });
+    }
+    
+    function showStaffDays(el, selectedDays, dayCount) {
+        $(el).hide('fade')
+
+        var day = selectedDays.replace(/\d+/g, ''); // 123456
+        var nums = selectedDays.match(/\d+/g); // 123456
+        var day = day.split(' '); // 123456
+        $(el).closest('td').find('textarea').remove()
+        var textarea = $(el).closest('td').append('<textarea class="form-control" ondblclick="reloadSelect(this)"></textarea>').hide().fadeIn(500);
+
+        for(var i=0; i<nums.length; i++){
+            var str = day[i]+ " " + nums[i].toString()
+            $(textarea).find('textarea').append(str+', ')
+        }
+        // IF THERE'S MORE DAYS AVAILABLE TO CHOOSE FROM, SPLIT THEM
+        if(dayCount.length>nums.length){
+            staffing(el)
+        }
+
+        var row = $(el).closest("tr").eq(0)
+        var chosenDays = $(el).closest("tr").eq(0).find('textarea').val()
+        var prevRow = $( row ).prev().find('textarea').val()
+        //var selectedDays = chosenDays.replace(' ', ''); // 123456
+         // 123456
+        var tableId = $(el).closest('table').attr('id');
+        var rowCount = $('#'+tableId+' tr');
+console.log(rowCount.length)
+        for(i = 1; i < rowCount.length;i++){
+
+            var foo = $('#'+tableId+' tr:eq('+i+') td:eq(0)').find('textarea').val()
+            if(typeof foo !='undefined'){
+                var str = foo.toString()
+                var selDays = str.split(', ');
+            }
+
+            //var str = selectedDays.replace(', ', '');
+            console.log(selDays)
+            $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option').css('color','red')
+            $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays[i-1] + '"]').remove()
+            $(el).closest("tr").next('tr').find('td').eq(0).find('select').find('option[value="' + selDays[0] + '"]').remove()
+        }
     }
 </script>
 <script>
@@ -341,7 +432,7 @@ echo $arr[1];
             //console.log(rows[i]);
             var row = $("<tr>");
 
-            row.append($('<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" multiple required>'+
+            row.append($('<td class="large"><select style="display: none" name="days[]" class="form-control"  onchange="saveDays(this)" multiple required>'+
                     <?php
                             for($i=0; $i <= $diffInDays; $i++)
                             {
@@ -351,7 +442,9 @@ echo $arr[1];
                             '<option selected id="{{ dayOfWeek($day_number_rep) }}{{ $i }}">{{ dayOfWeek($day_number_rep) }} {{ $ctm_start_date_rep->day }}</option>'+
                     <?php $day_number_rep++; $ctm_start_date_rep->addDay();
                             }?>
-                            '</select></td>'))
+                            '</select><textarea class="form-control" ondblclick="reloadSelect(this)"></textarea></td>'))
+
+//            row.append($('<td class="large"><textarea class="form-control" ondblclick="reloadSelect(this)"></textarea></td>'))
                     .append($('<td width="75" class="start"><select name="start[]" id="_start" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
                     .append($('<td width="75" class="finish"><select name="end[]" id="_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>'))
                     .append($('<td><input name="agency[]" class="form-control" type="text" value=""/></td>'))
@@ -365,7 +458,7 @@ echo $arr[1];
                     .append($('<td><input class="form-control noID" type="text" value=""/></td>'))
                     .append($('<td><input name="user_id[]" class="form-control noID user_id hidden" type="text" value=""/></td>'))
                     .append($('<td><input name="row_id[]" class="form-control noID hidden" type="text" value=""/></td>'))
-                    .append($('<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>'))
+                    .append($('<td><input class="form-control btn btn-warning" type="button" value="Clear" onclick="clearStaff(this)"/></td>'))
                     .append($('<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'));
 
             //$("#exampleTable_1 tbody").append(row);
@@ -392,11 +485,12 @@ echo $arr[1];
         @foreach($spec->staff as $key=>$value)
         <?php $xx = 5; ?>
 
-                $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
-                        .removeAttr('multiple')
-                .attr('ondblclick','reloadSelect(this)')
-                        .append('<option selected>{{ $value->pivot->days}}</option>');
+                //$("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                        //.removeAttr('multiple')
+                //.attr('ondblclick','reloadSelect(this)')
+                        //.append('<option selected>{{ $value->pivot->days}}</option>');
 
+        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('textarea').val('{{ $value->pivot->days }}')
                 $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}')
                         .removeAttr('onclick');
         <?php $xx++; ?>
@@ -432,16 +526,18 @@ echo $arr[1];
 
                 addTopTime('exampleTable_{{$row}}')
 
-            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
-                    .removeAttr('multiple')
-                    .attr('ondblclick','reloadSelect(this)')
-                    .append('<option selected>{{ $value->pivot->days}}</option>');
+            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('select')
+                    //.removeAttr('multiple')
+                    //.attr('ondblclick','reloadSelect(this)')
+                    //.append('<option selected>{{ $value->pivot->days}}</option>');
 
-            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')
-                    .append('<option selected>{{ $value->pivot->start}}</option>');
+            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(1)').find('select')
+                    //.append('<option selected>{{ $value->pivot->start}}</option>');
 
-            $("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(2)').find('select')
-                    .append('<option selected>{{ $value->pivot->end}}</option>');
+            //$("#exampleTable_{{$row}}_staff{{$xx}}").closest("tr").find('td:eq(2)').find('select')
+                    //.append('<option selected>{{ $value->pivot->end}}</option>');
+
+        $("#exampleTable_{{ $value->pivot->row_id}}_staff{{$xx}}").closest("tr").find('td:eq(0)').find('textarea').val('{{ $value->pivot->days }}')
 
             $("#exampleTable_{{$row}}_staff{{$xx}}").val('{{ $users->find($value->pivot->user_id)->name }}');
         <?php $xx++; ?>

@@ -57,7 +57,7 @@ Route::get('/event/{event}', function ($id) {
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
     $grade = explode(',', $specs[0]->grade);
 
-
+    //return $ctm_start_date->dayOfWeek;
 
     function dayOfWeek($day){
         switch ($day) {
@@ -128,15 +128,16 @@ Route::get('/event/{event}', function ($id) {
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
                 // PREVENT OFFSETS
                     //$day_array[$i] = explode(',', $specs[0]->row_id)[$i];
-                if(count(explode(',', $specs[0]->$start)) !== $day_number-1 ){
+
+//                if(count(explode(',', $specs[0]->$start)) == $day_number ){
                     $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$i];
-                }
-                if(count(explode(',', $specs[0]->$end)) !== $day_number-1 ){
+                //}
+                //if(count(explode(',', $specs[0]->$end)) == $day_number ){
                     $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
-                }
-                if(count(explode(',', $specs[0]->$sub_total)) !== $day_number-1 ){
+                //}
+                //if(count(explode(',', $specs[0]->$sub_total)) == $day_number ){
                     $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
-                }
+                //}
 
                 $day_number++;
             }

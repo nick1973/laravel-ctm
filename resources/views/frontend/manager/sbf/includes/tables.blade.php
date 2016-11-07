@@ -21,7 +21,7 @@ function staffing(id) {
         if($day_number_copy ==7){
         $day_number_copy=0;
     } ?>
-        '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
+        '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}" value="{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
         <?php $day_number_copy++; $ctm_start_date_copy->addDay();
         } ?>
 
@@ -39,12 +39,13 @@ function staffing(id) {
             '<td><input id="'+tableId+'_age'+count+'" class="form-control hasID" type="text" value=""/></td>',
             '<td><input name="user_id[]" id="'+tableId+'_id'+count+'" class="form-control hasID hidden" value="5"/></td>',
             '<td><input name="row_id[]" class="form-control hidden" value="'+tableNo+'"/></td>',
-            '<td><input class="form-control btn btn-info" type="button" value="Split" onclick="staffing(this)"/></td>',
+            '<td><input class="form-control btn btn-warning" type="button" value="Clear" onclick="clearStaff(this)"/></td>',
             '<td><input class="form-control btn btn-danger remove" type="button" value="Remove" onclick="remove(this)"/></td>'
     ] ).draw();
     }
     add();
     addTopTime(tableId)
+    //reloadSelect(id)
     count++;
     $(".timeObj").change(function () {
         var foo = $('select[name=timeObj]').val()
@@ -82,7 +83,7 @@ function remove(tag) {
         $('.remove').click( function () {
             t.row('.selected').remove().draw( false );
             if(row_id >1){
-                $('#'+id+' td:first').find('select').removeAttr('multiple')
+                //$('#'+id+' td:first').find('select').removeAttr('multiple')
 
             } else {
                 $('#'+id+' td:first').find('select').prop('multiple', true).dblclick()
@@ -143,7 +144,7 @@ $(document).ready(function () {
                 "data":           null,
                 "defaultContent": ''
             },
-            { "data": "row_id" },
+            //{ "data": "row_id" },
             { "data": "grade" },
             { "data": "position" },
             { "data": "qty" }
@@ -193,6 +194,7 @@ $(document).ready(function () {
             dragNdrop()
             top_centre()
             iTableCounter ++;
+            //selectedDays(row.data())
         }
     });
 });
@@ -206,14 +208,14 @@ function top_centre() {
         slide: function( event, ui ) {
             $( "#amount" ).val( ui.value );
             $(".colspan").attr('colspan', ui.value+'%')
-            console.log(ui.value)
+            //console.log(ui.value)
         }
     });
 }
 
 function dragNdrop() {
     var countTables = $('.staff').length;
-    console.log(countTables)
+    //console.log(countTables)
     for(var x=1; x <=countTables; x++){
         $("#exampleTable_" + x + " tbody").sortable({
             items: "> tr",//:not(:first)
@@ -228,6 +230,46 @@ function dragNdrop() {
             }
         }).disableSelection();//.effect("bounce", "slow" );
     }
+}
+
+function selectedDays(d) {
+    Object.size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size-7;
+    };
+
+    var daySize = Object.size(d);
+
+    for(var x = 1; x <= daySize; x++) {
+        var dayNumber = '{{ $day_number }}';
+        var counter1 = 0
+        var foo = 'week' + x.toString()
+
+
+            @for($i=0; $i <= $diffInDays; $i++)
+                <?php $x=0; ?>
+                <?php if($diffInDays % 7 == 0){ $x++ ?>
+
+                    <?php if($day_number == 7){ $day_number=0; }?>
+                            $("#exampleTable_{{$x}}").find('td:first').find('select')
+                        .append('<option><?php echo dayOfWeek($day_number); echo $ctm_start_date->day;  ?></option>')
+
+                <?php $day_number++; ?>
+                <?php $ctm_start_date->addDay(); ?>
+                //console.log('{{$ctm_start_date->day}}')
+
+                <?php } ?>
+            @endfor
+
+    }
+
+
+//    $(".days").each(function () {
+//        $(this).css('background-color', 'yellow')
+//    })
 }
 
 function shifts ( d ) {
@@ -252,7 +294,7 @@ function shifts ( d ) {
         output += '</tr>';
 
         output += '<tr>';
-                    $.each(d[foo], function (index, value) {
+        $.each(d[foo], function (index, value) {
                 if(counter1 % 7 == 0 && x > 1){
                     dayNumber = +dayNumber+7
                 }
@@ -357,11 +399,9 @@ function shifts ( d ) {
             });
 
         output += '</tr>';
-
-
-
-
         output += '<tr>';
+
+
         for (var i = 1; i <= d.qty; i++) {
             var counter = 0;
 
@@ -482,7 +522,7 @@ function shifts ( d ) {
 
             //output += '<td colspan="'+dayNumber+'">';
             //output += '<td colspan="100%">';
-            output += '<td class="colspan" colspan="100%">';
+            output += '<td class="colspan" colspan="10%">';
             output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
             //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
             output += fnFormatDetails(iTableCounter, TableHtml);
