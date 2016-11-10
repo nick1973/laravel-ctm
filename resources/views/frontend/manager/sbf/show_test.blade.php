@@ -69,6 +69,7 @@
     /*table.dataTable.no-footer{*/
         /*border-bottom: 1px solid #111;*/
     /*}*/
+
 </style>
 <?php
     function dayOfWeek($day){

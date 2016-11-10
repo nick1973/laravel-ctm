@@ -283,91 +283,104 @@ function shifts ( d ) {
         var dayNumber = '{{ $day }}';
         var counter1 = 0
         var foo = 'week' + x.toString()
-        //output += '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+
 
         output += '<tr class="week">';
-        output += '<td style="font-weight: bold">WEEK: ' + x + '</td>';
+        output += '<td style="font-weight: bold; padding-top: 15px">WEEK: ' + x + '</td>';
         output += '</tr>';
         //output += '<tr>';
+
+        output += '<tr>';
+
+        output += '<tr>';
+        output += '<td></td>';
+
+
+        $.each(d[foo], function (index, value) {
+
+            if (index.includes("end")) {
+                var day = "Date"
+                output += '<td class="small" style="font-weight: bold;text-align: center" colspan="2">' + day + '</td>';
+            }
+
+
+        })
+        output += '</tr>';
+
+
+        output += '<td></td>';
+        console.log(d[foo])
+        $.each(d[foo], function (index, value) {
+
+            if (index.includes("saturday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("sunday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("monday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("tuesday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("wednesday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("thursday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            if (index.includes("friday")) {
+                if (index.includes("start")) {
+                    var day = "Start"
+                }
+                if (index.includes("end")) {
+                    var day = "End"
+                }
+            }
+            output += '<td class="small" style="font-weight: bold;text-align: center">' + day + '</td>';
+        });
+        output += '</tr>';
+
+
 
         for (var i = 1; i <= d.qty; i++) {
             var counter = 0;
 
             var id = 'staff' + i + ''
-            output += '<tr id=' + id + '>';
-            output += '<td style="font-weight: bold">Staff: ' + i + '</td>';
-            output += '</tr>';
-
-            //output += '<td>';
-
-            //output += '</td>';
-            //output += '</tr>';
-            //}
 
             output += '<tr>';
-            console.log(d[foo])
-            $.each(d[foo], function (index, value) {
-
-                if (index.includes("saturday")) {
-                    if (index.includes("start")) {
-                        var day = "Saturday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Saturday End"
-                    }
-                }
-                if (index.includes("sunday")) {
-                    if (index.includes("start")) {
-                        var day = "Sunday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Sunday End"
-                    }
-                }
-                if (index.includes("monday")) {
-                    if (index.includes("start")) {
-                        var day = "Monday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Monday End"
-                    }
-                }
-                if (index.includes("tuesday")) {
-                    if (index.includes("start")) {
-                        var day = "Tuesday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Tuesday End"
-                    }
-                }
-                if (index.includes("wednesday")) {
-                    if (index.includes("start")) {
-                        var day = "Wednesday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Wednesday End"
-                    }
-                }
-                if (index.includes("thursday")) {
-                    if (index.includes("start")) {
-                        var day = "Thursday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Thursday End"
-                    }
-                }
-                if (index.includes("friday")) {
-                    if (index.includes("start")) {
-                        var day = "Friday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Friday End"
-                    }
-                }
-                output += '<td class="small" style="font-weight: bold;">' + day + '</td>';
-            });
-            output += '</tr>';
-            output += '<tr>';
+            output += '<td style="font-weight: bold" width="100px">Staff: ' + i + '</td>';
             //console.log(d) TIMES
             //output += '<tr class="times">'
             $.each(d[foo], function (index, value) {
@@ -383,6 +396,8 @@ function shifts ( d ) {
 //        output += '</tr>';
 
             //output += '</table>';
+
+            //output += '<tr></tr>';
         }
     }
 
