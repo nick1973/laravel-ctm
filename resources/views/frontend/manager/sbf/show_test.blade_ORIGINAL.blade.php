@@ -53,15 +53,7 @@
     .exlarge { min-width: 250px; }
     .large { min-width: 150px; }
     .medium { min-width: 100px; }
-    .smalltd { min-width: 50px; }
-    /*table {*/
-        /*max-width: 100%;*/
-    /*}*/
-
-    table.dataTable tbody th, table.dataTable tbody td {
-        padding: 4px 0 0 0;
-
-    }
+    .small { min-width: 50px; }
 
     /*table.dataTable thead th, table.dataTable thead td{*/
         /*border-bottom: none;*/
@@ -159,7 +151,6 @@ echo $arr[1];
                 <br/>
                 <img src="/ajax-loader.gif" class="loaderImage" style="display: none; padding-left: 5px;text-align: center">
             </div>
-            {{--<div class="col-lg-12">--}}
             <table id="exampleTable">
                 <thead>
                 <tr>
@@ -178,11 +169,11 @@ echo $arr[1];
                     </tr>
                 </tbody>
             </table>
-            {{--</div>--}}
+
                 <table id="staff" class="table" cellspacing="0" hidden>
                 <thead>
                     <tr style="color: #5bc0de">
-
+                        <th>Days</th>
                         <th>Start</th>
                         <th>Finish</th>
                         <th>Agency</th>
@@ -202,6 +193,45 @@ echo $arr[1];
                 </thead>
                     <tbody>
                         <tr>
+                            <td class="exlarge left">
+                                @if($diffInDays > 6)
+                                    {{ $diffInDays % 7 }}
+                                    <select style="" name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
+                                        @for($i=0; $i <= $diffInDays; $i++)
+                                            @if($day_number ==7)
+                                                <?php $day_number=0; ?>
+                                            @endif
+                                            <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                            <?php $day_number++; $ctm_start_date->addDay(); ?>
+                                        @endfor
+                                    </select>
+                                @else
+                                    <select name="days[]" class="form-control days" multiple required ondblclick="reloadSelect(this)" onchange="saveDays(this)">
+                                        @for($i=0; $i <= $diffInDays; $i++)
+                                            @if($day_number ==7)
+                                                <?php $day_number=0; ?>
+                                            @endif
+                                            <option selected id="{{ dayOfWeek($day_number) }}{{ $i }}" value="[{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}]">{{ dayOfWeek($day_number) }} {{ $ctm_start_date->day }}</option>
+                                            <?php $day_number++; $ctm_start_date->addDay(); ?>
+                                        @endfor
+                                    </select>
+                                @endif
+                                    {{--<textarea class="form-control" ondblclick="reloadSelect(this)"></textarea>--}}
+                            </td>
+                            <td class="medium start">
+                                <select name="start[]" class="form-control">
+                                    <option><?php foreach($arr as $time) {?>
+                                    <option>{{ $time }}</option>
+                                    <?php } ?></option>
+                                </select>
+                            </td>
+                            <td class="medium finish">
+                                <select name="end[]" class="form-control">
+                                    <option><?php foreach($arr as $time) {?>
+                                    <option>{{ $time }}</option>
+                                    <?php } ?></option>
+                                </select>
+                            </td>
                             <td>
                                 <input name="agency[]" class="form-control" type="text" value=""/>
                                 {{--@foreach($specs as $spec)--}}
@@ -238,12 +268,6 @@ echo $arr[1];
 </div><!-- container -->
 
 <script>
-
-    function times() {
-        $.each(shiftTimes, function (index, value) {
-            $(".shift-times").append('<input value="'+value+'">')
-        });
-    }
 
     function addNote() {
         $('.loaderImage').show('fade');

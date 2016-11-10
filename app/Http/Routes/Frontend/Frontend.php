@@ -136,7 +136,7 @@ Route::get('/event/{event}', function ($id) {
                     $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
                 //}
                 //if(count(explode(',', $specs[0]->$sub_total)) == $day_number ){
-                    $day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
+                    //$day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
                 //}
 
                 $day_number++;

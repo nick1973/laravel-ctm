@@ -14,7 +14,18 @@ function staffing(id) {
     function add() {
         var t = $("#" + tableId).DataTable();
         t.row.add( [
+            '<td class="large"><select name="days[]" class="form-control"  onchange="saveDays(this)" ondblclick="reloadSelect(this)" multiple>'+
+            <?php
+    for($i=0; $i <= $diffInDays; $i++)
+    {
+        if($day_number_copy ==7){
+        $day_number_copy=0;
+    } ?>
+        '<option id="{{ dayOfWeek($day_number_copy) }}{{ $i }}" value="{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}">{{ dayOfWeek($day_number_copy) }} {{ $ctm_start_date_copy->day }}</option>'+
+        <?php $day_number_copy++; $ctm_start_date_copy->addDay();
+        } ?>
 
+    '</select></td>',
             '<td width="75"><select name="start[]" id="'+tableId+'_start'+count+'" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
             '<td width="75"><select name="end[]" id="'+tableId+'_end" class="form-control"><option><?php foreach($arr as $time) {?><option>{{ $time }}</option><?php } ?></option></select></td>',
             '<td><input id="'+tableId+'_agency'+count+'" class="form-control" type="text" value=""/></td>',
@@ -140,9 +151,7 @@ $(document).ready(function () {
         ],
         "order": [[1, 'asc']],
         "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-            $('td:eq(0)', nRow).css( "width", "100px" );
             $('td:eq(0)', nRow).addClass( "text-primary" );
-            //$('td:eq(1),td:eq(2),td:eq(3),td:eq(4)', nRow).css( "width", "50px" );
             $('td:eq(1),td:eq(2),td:eq(3),td:eq(4)', nRow).addClass( "lead" );
         }
     });
@@ -184,7 +193,6 @@ $(document).ready(function () {
             //fetchData()
             dragNdrop()
             top_centre()
-            $('.week').parent('td').attr('colspan', 3)
             iTableCounter ++;
             //selectedDays(row.data())
         }
@@ -192,16 +200,14 @@ $(document).ready(function () {
 });
 
 function top_centre() {
-
-    var s = $("#top_centre").slider({
+    $( "#top_centre" ).slider({
         range: "max",
-        min: 1,
-        max: 4,
-        value: 3,
-        slide: function (event, ui) {
-            $("#amount").val(ui.value);
-            $('.week').parent('td').attr('colspan', ui.value)
-            //$("td").attr('colspan', ui.value+'%')
+        min: 10,
+        max: 100,
+        value: 0,
+        slide: function( event, ui ) {
+            $( "#amount" ).val( ui.value );
+            $(".colspan").attr('colspan', ui.value+'%')
             //console.log(ui.value)
         }
     });
@@ -283,109 +289,249 @@ function shifts ( d ) {
         var dayNumber = '{{ $day }}';
         var counter1 = 0
         var foo = 'week' + x.toString()
-        //output += '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-
-        output += '<tr class="week">';
+        output += '<tr>';
         output += '<td style="font-weight: bold">WEEK: ' + x + '</td>';
         output += '</tr>';
-        //output += '<tr>';
+
+        output += '<tr>';
+        $.each(d[foo], function (index, value) {
+                if(counter1 % 7 == 0 && x > 1){
+                    dayNumber = +dayNumber+7
+                }
+                if(index.includes("saturday")){
+                    if(index.includes("start")){
+                        var day = "Saturday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Saturday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Saturday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("sunday")){
+                    if(index.includes("start")){
+                        var day = "Sunday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Sunday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Sunday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("monday")){
+                    if(index.includes("start")){
+                        var day = "Monday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Monday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Monday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("tuesday")){
+                    if(index.includes("start")){
+                        var day = "Tuesday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Tuesday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Tuesday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("wednesday")){
+                    if(index.includes("start")){
+                        var day = "Wednesday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Wednesday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Wednesday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("thursday")){
+                    if(index.includes("start")){
+                        var day = "Thursday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Thursday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Thursday"+dayNumber+" Hours"
+                    }
+                }
+                if(index.includes("friday")){
+                    if(index.includes("start")){
+                        var day = "Friday"+dayNumber+" Start"
+                    }
+                    if(index.includes("end")){
+                        var day = "Friday"+dayNumber+" End"
+                    }
+                    if(index.includes("sub_total")){
+                        var day = "Friday"+dayNumber+" Hours"
+                    }
+                }
+                //if(value.length > 0){
+                output += '<td class="large" style="font-weight: bold; background-color: #dddddd">'+day+'</td>';
+                //}
+                counter1++;
+                if (counter1 % 3 == 0) {
+                    output += '<td class="small"></td>'
+                    //output += '</tr>';
+                    dayNumber++
+                }
+            });
+            //console.log(d)
+            output += '<tr class="times">'
+            $.each(d[foo], function (index, value) {
+                output += '<td class="large"><b>' + value + '</b></td>';
+
+                counter1++;
+                if (counter1 % 3 == 0) {
+                    output += '<td class="small"></td>'
+                    //output += '</tr>';
+                    dayNumber++
+                }
+            });
+
+        output += '</tr>';
+        output += '<tr>';
+
 
         for (var i = 1; i <= d.qty; i++) {
             var counter = 0;
 
-            var id = 'staff' + i + ''
-            output += '<tr id=' + id + '>';
+            output += '<tr>';
+//            output += '</tr>';
+//            output += '<tr>';
+
+//            $.each(d[foo], function (index, value) {
+//                if(counter % 7 == 0 && x > 1){
+//                    dayNumber = +dayNumber+7
+//                }
+//                if(index.includes("saturday")){
+//                    if(index.includes("start")){
+//                        var day = "Saturday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Saturday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Saturday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("sunday")){
+//                    if(index.includes("start")){
+//                        var day = "Sunday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Sunday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Sunday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("monday")){
+//                    if(index.includes("start")){
+//                        var day = "Monday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Monday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Monday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("tuesday")){
+//                    if(index.includes("start")){
+//                        var day = "Tuesday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Tuesday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Tuesday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("wednesday")){
+//                    if(index.includes("start")){
+//                        var day = "Wednesday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Wednesday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Wednesday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("thursday")){
+//                    if(index.includes("start")){
+//                        var day = "Thursday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Thursday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Thursday"+dayNumber+" Hours"
+//                    }
+//                }
+//                if(index.includes("friday")){
+//                    if(index.includes("start")){
+//                        var day = "Friday"+dayNumber+" Start"
+//                    }
+//                    if(index.includes("end")){
+//                        var day = "Friday"+dayNumber+" End"
+//                    }
+//                    if(index.includes("sub_total")){
+//                        var day = "Friday"+dayNumber+" Hours"
+//                    }
+//                }
+//                //if(value.length > 0){
+//                output += '<td class="large" style="font-weight: bold; background-color: #dddddd">'+day+'</td>';
+//                //}
+//                counter++;
+//                if (counter % 3 == 0) {
+//                    output += '<td class="small"></td>'
+//                    //output += '</tr>';
+//                    dayNumber++
+//                }
+//            });
+//            //console.log(d)
+//            output += '<tr class="times">'
+//            $.each(d[foo], function (index, value) {
+//                output += '<td class="large"><b>' + value + '</b></td>';
+//
+//                counter++;
+//                if (counter % 3 == 0) {
+//                    output += '<td class="small"></td>'
+//                    //output += '</tr>';
+//                    dayNumber++
+//                }
+//            });
+//            output += '<td><b>'+d.total+'</b></td>'
+            //output += '<td><input class="form-control btn btn-info clone" type="button" value="Clone" onclick="clone(this)"/></td>'
+            output += '</tr>';
+            var id = 'staff'+i+''
+            output += '<tr id='+id+'>';
             output += '<td style="font-weight: bold">Staff: ' + i + '</td>';
             output += '</tr>';
 
-            //output += '<td>';
-
-            //output += '</td>';
-            //output += '</tr>';
-            //}
-
-            output += '<tr>';
-            console.log(d[foo])
-            $.each(d[foo], function (index, value) {
-
-                if (index.includes("saturday")) {
-                    if (index.includes("start")) {
-                        var day = "Saturday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Saturday End"
-                    }
-                }
-                if (index.includes("sunday")) {
-                    if (index.includes("start")) {
-                        var day = "Sunday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Sunday End"
-                    }
-                }
-                if (index.includes("monday")) {
-                    if (index.includes("start")) {
-                        var day = "Monday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Monday End"
-                    }
-                }
-                if (index.includes("tuesday")) {
-                    if (index.includes("start")) {
-                        var day = "Tuesday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Tuesday End"
-                    }
-                }
-                if (index.includes("wednesday")) {
-                    if (index.includes("start")) {
-                        var day = "Wednesday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Wednesday End"
-                    }
-                }
-                if (index.includes("thursday")) {
-                    if (index.includes("start")) {
-                        var day = "Thursday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Thursday End"
-                    }
-                }
-                if (index.includes("friday")) {
-                    if (index.includes("start")) {
-                        var day = "Friday Start"
-                    }
-                    if (index.includes("end")) {
-                        var day = "Friday End"
-                    }
-                }
-                output += '<td class="small" style="font-weight: bold;">' + day + '</td>';
-            });
-            output += '</tr>';
-            output += '<tr>';
-            //console.log(d) TIMES
-            //output += '<tr class="times">'
-            $.each(d[foo], function (index, value) {
-                output += '<td class="small"><input class="form-control" value="' + value + '"></td>';
-            });
-//        output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
+            //output += '<td colspan="'+dayNumber+'">';
+            //output += '<td colspan="100%">';
+            output += '<td class="colspan" colspan="10%">';
+            output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
             //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
-//        output += '<td>';
-//        output += fnFormatDetails(iTableCounter, TableHtml);
-//        output += '</td>';
-//        iTableCounter ++;
-//        output += '</form>';
-//        output += '</tr>';
-
-            //output += '</table>';
+            output += fnFormatDetails(iTableCounter, TableHtml);
+            iTableCounter ++;
+            output += '</form>';
+            output += '<td>';
+            output += '</tr>';
         }
     }
-
     return output;
 }
 </script>
