@@ -286,13 +286,14 @@ function shifts ( d ) {
 
 
         output += '<tr class="week">';
-        output += '<td style="font-weight: bold; padding-top: 15px">WEEK: ' + x + '</td>';
+        output += '<td style="font-weight: bold; padding-top: 15px" width="75px">WEEK: ' + x + '</td>';
         output += '</tr>';
         //output += '<tr>';
 
         output += '<tr>';
 
         output += '<tr>';
+        output += '<td></td>';
         output += '<td></td>';
 
 
@@ -308,6 +309,7 @@ function shifts ( d ) {
         output += '</tr>';
 
 
+        output += '<td></td>';
         output += '<td></td>';
         console.log(d[foo])
         $.each(d[foo], function (index, value) {
@@ -380,7 +382,10 @@ function shifts ( d ) {
             var id = 'staff' + i + ''
 
             output += '<tr>';
-            output += '<td style="font-weight: bold" width="100px">Staff: ' + i + '</td>';
+
+            output += '<td><input type="button" class="btn btn-success" value="Split"></td>';
+
+            output += '<td style="font-weight: bold; padding-left: 8px" width="100px">Staff: ' + i + '</td>';
             //console.log(d) TIMES
             //output += '<tr class="times">'
             $.each(d[foo], function (index, value) {
