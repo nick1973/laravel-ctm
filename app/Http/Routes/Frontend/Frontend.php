@@ -53,6 +53,7 @@ Route::get('/event/{event}', function ($id) {
     $ctm_end_date = \Carbon\Carbon::parse($ctm_end_date);
     $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
     $day_number = $ctm_start_date->dayOfWeek;
+    $day_numbers = $ctm_start_date->dayOfWeek;
 
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
     $grade = explode(',', $specs[0]->grade);
@@ -101,12 +102,22 @@ Route::get('/event/{event}', function ($id) {
     //dd (count(explode(',', $specs[0]->$start)) !==0 );
 
 
+        for($i=0; $i <= $diffInDays; $i++) {
+            if ($day_numbers == 7) {
+                $day_numbers = 0;
+            }
+            //echo dayOfWeek($day_number) . $ctm_start_date->day;
+            $date[] = dayOfWeek($day_numbers) . $ctm_start_date->day;
+
+            $day_numbers++; $ctm_start_date->addDay();
+        }
+        //array_push($day_array,['date' => $date]);
         //return count($grade)-1;
         for($i=0; $i < count($grade); $i++) {
 
             //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
             $row_id = explode(',', $specs[0]->row_id)[$i];
-            array_push($day_array,['row_id' => $row_id, 'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            array_push($day_array,['date' => $date, 'row_id' => $row_id, 'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
 
             //DAY NUMBER LOOP
             $week = 0;
@@ -136,7 +147,7 @@ Route::get('/event/{event}', function ($id) {
                     $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
                 //}
                 //if(count(explode(',', $specs[0]->$sub_total)) == $day_number ){
-                    //$day_array[$i]['week'.$week][$lower.$x.'_sub_total'] = explode(',', $specs[0]->$sub_total)[$i];
+                    //$day_array[$i]['week'.$week]['date'] = $date[$i];
                 //}
 
                 $day_number++;

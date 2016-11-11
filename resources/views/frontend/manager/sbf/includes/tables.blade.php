@@ -184,7 +184,7 @@ $(document).ready(function () {
             //fetchData()
             dragNdrop()
             top_centre()
-            $('.week').parent('td').attr('colspan', 3)
+            $('.week').parent('td').attr('colspan', 4)
             iTableCounter ++;
             //selectedDays(row.data())
         }
@@ -197,7 +197,7 @@ function top_centre() {
         range: "max",
         min: 1,
         max: 4,
-        value: 3,
+        value: 4,
         slide: function (event, ui) {
             $("#amount").val(ui.value);
             $('.week').parent('td').attr('colspan', ui.value)
@@ -266,15 +266,42 @@ function selectedDays(d) {
 //    })
 }
 
+function addRows(el) {
+    var $tr    = $(el).closest('.tr_clone');
+    var $clone = $tr.clone();
+    $clone.find(':text').val('');
+    var foo = $clone.find('td:eq(1)')
+//    $( foo[0]+" :contains('.')" ).css( "text-decoration", "underline" );
+
+//    if(foo.indexOf('.')){
+//        console.log('found .')
+//        var num = foo.split(".").pop()
+//        num =+1
+//    }
+    //$clone.find('td:eq(1)').text(foo + '.' + num)
+    $tr.after($clone);
+    console.log(num)
+};
+
 function shifts ( d ) {
     // `d` is the original data object for the row
+    var week = 0
+    var dates = []
+    for(var xx = 0; xx <= d['date'].length; xx++) {
+        if(xx % 7 == 0){
+            week++;
+            dates.push(['week'+week])
+        }
+        dates[week-1].push([d['date'][xx]])
+    }
+    console.log(dates)
     var output;
     Object.size = function(obj) {
         var size = 0, key;
         for (key in obj) {
             if (obj.hasOwnProperty(key)) size++;
         }
-        return size-7;
+        return size-8;
     };
     // Get the size of an object
     var daySize = Object.size(d);
@@ -296,22 +323,18 @@ function shifts ( d ) {
         output += '<td></td>';
         output += '<td></td>';
 
-
-        $.each(d[foo], function (index, value) {
-
-            if (index.includes("end")) {
-                var day = "Date"
-                output += '<td class="small" style="font-weight: bold;text-align: center" colspan="2">' + day + '</td>';
+        //console.log(dates[x])
+        $.each(dates[x-1], function (index, value) {
+            if (!value.includes("week")) {
+                output += '<td class="small" style="font-weight: bold;text-align: center" colspan="2">' + value + '</td>';
             }
-
-
         })
         output += '</tr>';
 
 
         output += '<td></td>';
         output += '<td></td>';
-        console.log(d[foo])
+        //console.log(d[foo])
         $.each(d[foo], function (index, value) {
 
             if (index.includes("saturday")) {
@@ -372,6 +395,15 @@ function shifts ( d ) {
             }
             output += '<td class="small" style="font-weight: bold;text-align: center">' + day + '</td>';
         });
+        output += '<td class="small" style="font-weight: bold;text-align: center">Agent</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">First Name</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Surname</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Driver</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Mobile</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Email</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">RTW</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Medical</td>';
+        output += '<td class="small" style="font-weight: bold;text-align: center">Age</td>';
         output += '</tr>';
 
 
@@ -381,11 +413,12 @@ function shifts ( d ) {
 
             var id = 'staff' + i + ''
 
-            output += '<tr>';
+            output += '<tr class="tr_clone">';
 
-            output += '<td><input type="button" class="btn btn-success" value="Split"></td>';
+            output += '<td><input onclick="addRows(this)" type="button" class="btn btn-success" value="Split"></td>';
+            //output += '<td><input class="form-control btn btn-warning" type="button" value="Clear" onclick="clearStaff(this)"/></td>';
 
-            output += '<td style="font-weight: bold; padding-left: 8px" width="100px">Staff: ' + i + '</td>';
+            output += '<td style="font-weight: bold; padding-left: 0px" width="75px">Staff: ' + i + '</td>';
             //console.log(d) TIMES
             //output += '<tr class="times">'
             $.each(d[foo], function (index, value) {
@@ -393,7 +426,24 @@ function shifts ( d ) {
             });
 //        output += '{{ Form::open(['route' => 'dashboard.sbf.store', 'class' => 'table_form']) }}';
             //output += '<input id="row_id_'+iTableCounter+'" name="row_id[]" value="'+iTableCounter+'">';
-//        output += '<td>';
+        output += '<td>' +
+                '<input name="agency[]" class="form-control" type="text" value=""/>' +
+                '<div class="hidden">' +
+                '<input name="spec_id" class="form-control static" value="{{$spec->id}}" />' +
+                '</div>' +
+                '</td>';
+        output += '<td id="name_row">' +
+                '<input name="name[]" onclick="getId(this)" onfocus="searchName(this)" class="form-control noID name" type="text" value=""/>' +
+                '</td>';
+            output += '<td><input name="last_name[]" onclick="getId(this)" onfocus="searchLastName(this)" class="form-control noID" type="text"/></td>'
+            output += '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input class="form-control noID" type="text" value=""/></td>' +
+                    '<td><input name="user_id[]" class="form-control noID user_id hidden" type="text" value=""/></td>' +
+                    '<td><input name="row_id[]" class="form-control noID hidden" type="text" value=""/></td>'
 //        output += fnFormatDetails(iTableCounter, TableHtml);
 //        output += '</td>';
 //        iTableCounter ++;
