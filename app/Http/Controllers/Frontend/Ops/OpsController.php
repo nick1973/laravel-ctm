@@ -79,6 +79,7 @@ class OpsController extends Controller
         $ctm_end_date = Carbon::createFromFormat('Y/m/d', $event->ctm_end_date);
         $ctm_end_date = Carbon::parse($ctm_end_date);
         $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
+        $diffInDays_event = $event_start_date->diffInDays($event_end_date);
         $day_number = $ctm_start_date->dayOfWeek;
         $day_number_table = $ctm_start_date->dayOfWeek;
         $day_number_ng = $ctm_start_date->dayOfWeek;
@@ -89,6 +90,6 @@ class OpsController extends Controller
         $pay_grades = json_decode($pay_grades, true);
         return view('frontend.ops.show', compact('event', 'pay_grades', 'ctm_start_date', 'ctm_end_date', 'diffInDays',
             'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy', 'event_start_date',
-            'event_end_date'));
+            'event_end_date', 'diffInDays_event'));
     }
 }
