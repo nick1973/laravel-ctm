@@ -196,7 +196,7 @@ echo $arr[1];
             </div>
             <form id="form_modal_tabs_remove">
                 <div class="modal-body">
-                    <p>Choose a tab to remove</p>
+                    <p>Choose a Spec to remove</p>
                         <div class="form-group existingTabs"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
