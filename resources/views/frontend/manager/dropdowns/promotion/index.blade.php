@@ -52,7 +52,7 @@
                             'route' => ['dashboard.register.dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{ $results->promo_name }}
+                                {{--{{ $results->promo_name }}--}}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
@@ -81,7 +81,7 @@
                             'route' => ['dashboard.register.uni-dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{ $results->uni_name }}
+                                {{--{{ $results->uni_name }}--}}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.uni-dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
