@@ -37,7 +37,8 @@ class ManagerController extends Controller
     {
         $input = $request->all();
         User::find($id)->update($input);
-        return $this->index();
+        //return $this->index();
+        return redirect('dashboard/manager');
     }
 
     function staff_search()
