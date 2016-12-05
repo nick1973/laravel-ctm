@@ -36,9 +36,59 @@
                         </div><!--form-group-->
 
                         <div class="form-group">
+                            {{ Form::label('land', 'Mobile', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                {{ Form::input('mobile', 'mobile', null, ['class' => 'form-control', 'placeholder' => 'Mobile']) }}
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+
+                        <div class="form-group">
                             {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
                                 {{ Form::input('email', 'email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                {{ $notes->notes }}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            {{ Form::label('email', 'How did you hear about us?', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="heard_about_us" id="heard" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($list as $res)
+                                        <option>{{ $res->hear_about_us_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+
+                        <div id="uni" class="form-group" style="display: none">
+                            {{ Form::label('email', 'Select Your University', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="uni" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($unis as $res)
+                                        <option>{{ $res->uni_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+
+                        <div id="others" class="form-group" style="display: none">
+                            {{ Form::label('email', 'Please select', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="promotion" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($promotions as $res)
+                                        <option>{{ $res->promo_name }}</option>
+                                    @endforeach
+                                </select>
                             </div><!--col-md-6-->
                         </div><!--form-group-->
 
@@ -81,6 +131,22 @@
 
         </div><!-- row -->
     @endif
+    <script>
+        $(function() {
+            $("#heard").change(function () {
+                console.log($(this).val())
+                if($(this).val()=='University'){
+                    $("#uni").show('fade')
+                    $("#others").hide('fade')
+                } else {
+                    $("#uni").hide('fade')
+                    $("#others").show('fade')
+                }
+
+
+            })
+        });
+    </script>
 @endsection
 
 @section('after-scripts-end')

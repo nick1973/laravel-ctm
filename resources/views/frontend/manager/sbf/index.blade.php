@@ -2,7 +2,7 @@
 
 @section('content')
 
-<p>add staff</p>
+{{--<p>add staff</p>--}}
 
 <div class="row">
 
@@ -22,6 +22,7 @@
 
                     {{--<th>Edit</th>--}}
                     <th>SBF</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
+
                 </tr>
                 </tbody>
             </table>
@@ -41,10 +43,10 @@
     </div>
 
 
+
 </div><!-- col-md-10 -->
 
 </div><!-- row -->
-
 <script>
 
     $(document).ready( function () {
@@ -72,14 +74,29 @@
             "ajax": "/events",
             //"paging": false,
             //dom: 'Bfrip',
+//            tableTools: {
+//                "sRowSelect": "single"
+//            },
             dom: '<"top"Blf>rT<"bottom"p><"clear">',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf'
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy Table',
+                    header: false,
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                },
+                'csv', 'excel', 'pdf'
             ],
+
+
             "columns": [
-                { "data": "event_name" , className: "centre" },
-                { "data": "contract_manager" , className: "centre" },
-                { "data": "operation_manager" , className: "centre" },
+                { "data": "event_name" , className: "centre get" },
+                { "data": "contract_manager" , className: "centre get" },
+                { "data": "operation_manager" , className: "centre get" },
                 { "data": "ctm_start_date" , className: "centre" },
                 { "data": "ctm_end_date" , className: "centre" },
                 { "data": "event_start_date" , className: "centre" },
@@ -92,7 +109,56 @@
 
             ]
         } );
+
+//        $('#events tbody').on( 'click', 'tr', function () {
+//            if ( $(this).hasClass('selected') ) {
+//                $(this).removeClass('selected');
+//            }
+//            else {
+//                table.$('tr.selected').removeClass('selected');
+//                console.log($(this))
+//                $(this).addClass('selected').attr('id','copy-target');
+//            }
+//        } );
+
+        var clipboard = new Clipboard('.copy-button', {
+            target: function() {
+                return document.querySelector('#copy-target');
+            }
+        });
+
     } );
+
+    function selectElementContents(el) {
+        var el = el.closest('tr')
+        var ell = $(el).find('td.get')
+        console.log(el)
+        var body = document.body, range, sel;
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+        } else if (body.createTextRange) {
+            range = body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+        }
+    }
+
+//    function copyButton(el) {
+//        var clipboard = new Clipboard(el);
+//        console.log(clipboard)
+//    };
+
+
+
 </script>
 
 <style>

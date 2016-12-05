@@ -39,4 +39,9 @@ class ManagerController extends Controller
         User::find($id)->update($input);
         return $this->index();
     }
+
+    function staff_search()
+    {
+        return view('frontend.manager.staff');
+    }
 }

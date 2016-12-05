@@ -20,6 +20,10 @@
         <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
         <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
         <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+        {{--<script src="/js/dataTables.tableTools.js"></script>--}}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
+
 
         <script src="https://cdn.jsdelivr.net/vue/1.0.26/vue.min.js"></script>
 
@@ -121,6 +125,11 @@
             .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
                 right: 0px;
             }
+            /* Hidden placeholder */
+            select option[disabled]:first-child {
+                display: none;
+            }
+
         </style>
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -152,12 +161,14 @@
             @elseif(access()->hasRole('Executive'))
                 <div class="jumbotron">
                     <div class="container">
-                        <div class="col-md-6">
+                        <div class="col-md-12 col-ld-12">
                             {{--<h1>Welcome to {{ access()->user()->name }}'s profile.</h1>--}}
                             {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
                             <h2>Managers Dashboard</h2>
-                            <a href="/dashboard/manager" class="btn btn-warning">Back to Dashboard</a>
+                            <a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>
                             <a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>
+                            <a href="/dashboard/manager/staff/search" class="btn btn-primary">User Search</a>
+                            <a href="/dashboard/register/dropdowns" class="btn btn-danger">Registration Dropdowns</a>
                         </div>
                         <div class="col-md-6">
 

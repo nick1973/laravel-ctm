@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dropdowns\HearAboutUs;
+use App\Models\Dropdowns\Promotions;
+use App\Models\Dropdowns\RegistrationNotes;
+use App\Models\Dropdowns\Unis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,8 +24,19 @@ class FrontendController extends Controller
         javascript()->put([
             'test' => 'it works!',
         ]);
+        $list = HearAboutUs::all();
+        $promotions = Promotions::all();
+        $unis = Unis::all();
+        $notes = RegistrationNotes::find(1);
+        return view('frontend.auth.register', compact('list','promotions','unis','notes'));
+    }
 
-        return view('frontend.auth.register');
+    /**
+     * @return string
+     */
+    public function map()
+    {
+        return view('frontend.maps');
     }
 
     public function e_mail(Request $request)
