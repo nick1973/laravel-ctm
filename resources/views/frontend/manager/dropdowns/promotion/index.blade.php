@@ -93,19 +93,19 @@
                 </table>
                 <a href="{{ route('dashboard.register.uni-dropdowns.create') }}" class="btn btn-warning">Add to Uni's</a>
             </div>
-            {!! Form::model($notes,[
-                    'method' => 'PATCH',
-                    'route' => ['dashboard.register.reg-notes.update', $notes->id],
-                    'class' => 'form-horizontal']) !!}
-                <div class="col-md-12">
-                    <h3>Registration Notes</h3>
+            {{--{!! Form::model($notes,[--}}
+                    {{--'method' => 'PATCH',--}}
+                    {{--'route' => ['dashboard.register.reg-notes.update', $notes->id],--}}
+                    {{--'class' => 'form-horizontal']) !!}--}}
+                {{--<div class="col-md-12">--}}
+                    {{--<h3>Registration Notes</h3>--}}
                     {{--<textarea name="notes" class="form-control" rows="6">{{ $notes->notes }}</textarea>--}}
-                    <br/>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Save Notes">
-                    </div>
-                </div>
-            {!! Form::close() !!}
+                    {{--<br/>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<input type="submit" class="btn btn-success" value="Save Notes">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--{!! Form::close() !!}--}}
         </div>
 
 
