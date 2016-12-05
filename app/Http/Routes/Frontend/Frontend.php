@@ -5,6 +5,7 @@
  */
 //Route::get('/', 'User\DashboardController@index')->name('frontend.index');
 Route::get('/', 'FrontendController@index')->name('frontend.index');
+Route::get('/map', 'FrontendController@map')->name('frontend.map');
 Route::get('macros', 'FrontendController@macros')->name('frontend.macros');
 
 Route::post('/email', 'FrontendController@e_mail');
@@ -220,6 +221,8 @@ Route::get('/event/{event}', function ($id) {
 /**
  * These frontend controllers require the user to be logged in
  */
+
+
 Route::group(['middleware' => 'auth'], function () {
         Route::group(['namespace' => 'User'], function () {
             Route::resource('dashboard/manager', 'ManagerController');
@@ -257,8 +260,19 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
+        Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
         Route::resource('dashboard/sbf', 'SBFController');
 
+        Route::resource('dashboard/register/dropdowns', 'PromotionsDropdownsController');
+        Route::resource('dashboard/register/reg-notes', 'RegistrationNotesController');
+
+        Route::resource('dashboard/register/uni-dropdowns', 'UniDropdownsController');
+        Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
+        Route::get('dashboard/manager/staff/search/all', function () {
+            //$staff= \App\Models\Access\User\User::where('visible', 1);
+            $staff= \App\Models\Access\User\User::all();
+            return ['data'=>$staff];
+        });
     });
 });
 

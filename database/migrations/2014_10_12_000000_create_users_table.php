@@ -60,6 +60,10 @@ class CreateUsersTable extends Migration
             $table->string('job_status');
             $table->string('student_loan');
             $table->string('profile_confirmed');
+            //Marketing
+            $table->string('heard_about_us');
+            $table->string('uni');
+            $table->string('promotion');
 
             $table->string('confirmation_code');
             $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);

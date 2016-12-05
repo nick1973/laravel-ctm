@@ -78,12 +78,21 @@ class EloquentUserRepository implements UserRepositoryContract
     public function create(array $data, $provider = false)
     {
         //$dob = date_format($data['dob'],"d/m/Y");
+        if(isset($data['promotion'])){
+        $data['promotion'] = '';
+        }
+        if(isset($data['uni'])){
+            $data['uni'] = '';
+        }
         if ($provider) {
             $user = User::create([
                 'visible' => 1,
                 'name' => $data['name'],
                 'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
+                'heard_about_us' => $data['heard_about_us'],
+                'uni' => $data['uni'],
+                'promotion' => $data['promotion'],
                 'email' => $data['email'],
                 'password' => null,
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
@@ -97,6 +106,9 @@ class EloquentUserRepository implements UserRepositoryContract
                 'name' => $data['name'],
                 'lastname' => $data['lastname'],
                 'dob' => $data['dob'],
+                'heard_about_us' => $data['heard_about_us'],
+                'uni' => $data['uni'],
+                'promotion' => $data['promotion'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),

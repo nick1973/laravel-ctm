@@ -32,6 +32,7 @@ trait RegistersUsers
             event(new UserRegistered($user));
             return redirect()->route('frontend.index')->withFlashSuccess(trans('exceptions.frontend.auth.confirmation.created_confirm'));
         } else {
+            //return $request->all();
             auth()->login($this->user->create($request->all()));
             event(new UserRegistered(access()->user()));
             return redirect($this->redirectPath());
