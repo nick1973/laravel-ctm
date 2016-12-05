@@ -77,7 +77,7 @@ class EloquentUserRepository implements UserRepositoryContract
      */
     public function create(array $data, $provider = false)
     {
-        //$dob = date_format($data['dob'],"d/m/Y");
+//        $dob = date_format($data['dob'],"d/m/Y");
         if(isset($data['promotion'])){
         $data['promotion'] = '';
         }
