@@ -23,7 +23,7 @@
                             'route' => ['dashboard.register.hearaboutus-dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{ $results->hear_about_us_name }}
+                                {{--{{ $results->hear_about_us_name }}--}}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.hearaboutus-dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
