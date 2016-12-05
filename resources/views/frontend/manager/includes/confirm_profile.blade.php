@@ -82,9 +82,10 @@
                 $.ajax({
                     type: "POST",
                     url: '/email',
-                    data: {email: tinyMCE.activeEditor.getContent()}
+                    data: {email: tinyMCE.activeEditor.getContent(),
+                            e_address: '<?php echo $user->email ?>'}
                 });
-                console.log(tinyMCE.activeEditor.getContent());
+
 
             }
         tinymce.init({

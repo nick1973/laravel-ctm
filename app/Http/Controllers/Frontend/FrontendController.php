@@ -41,13 +41,15 @@ class FrontendController extends Controller
 
     public function e_mail(Request $request)
     {
-        $input = $request->all();
+        $input = $request->except('e_address');
+        $email = $request->input('e_address');
+        //return $input;
 
-        Mail::send('emails.welcome', ['input'=>$input], function ($m) use ($input) {
+        Mail::send('emails.welcome', ['input'=>$input], function ($m) use ($input, $email) {
             $m->from('admin@ctm.uk.com', 'CTM Application');
-
-            $m->to('nick@ctm.uk.com', 'nick')->subject('Your CTM Application!');
+            $m->to($email, 'nick')->subject('Your CTM Application!');
         });
+        return $email;
     }
 
 
