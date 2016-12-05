@@ -23,7 +23,7 @@
                             'route' => ['dashboard.register.hearaboutus-dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{--{{ $results->hear_about_us_name }}--}}
+                                {{ $results->hear_about_us_name }}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.hearaboutus-dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
@@ -52,7 +52,7 @@
                             'route' => ['dashboard.register.dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{--{{ $results->promo_name }}--}}
+                                {{ $results->promo_name }}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
@@ -66,7 +66,6 @@
             </div>
 
             <div class="col-md-3">
-                {{--<a href="{{ route('admin.dropdown_management.create') }}" class="btn btn-warning">Add to LOB</a>--}}
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
@@ -81,7 +80,7 @@
                             'route' => ['dashboard.register.uni-dropdowns.destroy', $results->id]
                             ]) !!}
                             <td>
-                                {{--{{ $results->uni_name }}--}}
+                                {{ $results->uni_name }}
                             </td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.register.uni-dropdowns.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
