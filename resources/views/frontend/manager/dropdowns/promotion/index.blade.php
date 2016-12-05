@@ -99,7 +99,7 @@
                     'class' => 'form-horizontal']) !!}
                 <div class="col-md-12">
                     <h3>Registration Notes</h3>
-                    <textarea name="notes" class="form-control" rows="6">{{ $notes->notes }}</textarea>
+                    {{--<textarea name="notes" class="form-control" rows="6">{{ $notes->notes }}</textarea>--}}
                     <br/>
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Save Notes">
