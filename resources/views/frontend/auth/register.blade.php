@@ -55,7 +55,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
                             {{ Form::label('email', 'How did you hear about us?', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
