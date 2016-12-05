@@ -49,48 +49,48 @@
                             </div><!--col-md-6-->
                         </div><!--form-group-->
 
-                        {{--<div class="panel panel-danger">--}}
-                            {{--<div class="panel-body">--}}
-                                {{--{{ $notes->notes }}--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                {{ $notes->notes }}
+                            </div>
+                        </div>
 
 
-                        {{--<div class="form-group">--}}
-                            {{--{{ Form::label('email', 'How did you hear about us?', ['class' => 'col-md-4 control-label']) }}--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<select name="heard_about_us" id="heard" class="form-control empty">--}}
-                                    {{--<option selected disabled>Please Select</option>--}}
-                                    {{--@foreach($list as $res)--}}
-                                        {{--<option>{{ $res->hear_about_us_name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div><!--col-md-6-->--}}
-                        {{--</div><!--form-group-->--}}
+                        <div class="form-group">
+                            {{ Form::label('email', 'How did you hear about us?', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="heard_about_us" id="heard" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($list as $res)
+                                        <option>{{ $res->hear_about_us_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
 
-                        {{--<div id="uni" class="form-group" style="display: none">--}}
-                            {{--{{ Form::label('email', 'Select Your University', ['class' => 'col-md-4 control-label']) }}--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<select name="uni" class="form-control empty">--}}
-                                    {{--<option selected disabled>Please Select</option>--}}
-                                    {{--@foreach($unis as $res)--}}
-                                        {{--<option>{{ $res->uni_name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div><!--col-md-6-->--}}
-                        {{--</div><!--form-group-->--}}
+                        <div id="uni" class="form-group" style="display: none">
+                            {{ Form::label('email', 'Select Your University', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="uni" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($unis as $res)
+                                        <option>{{ $res->uni_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
 
-                        {{--<div id="others" class="form-group" style="display: none">--}}
-                            {{--{{ Form::label('email', 'Please select', ['class' => 'col-md-4 control-label']) }}--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<select name="promotion" class="form-control empty">--}}
-                                    {{--<option selected disabled>Please Select</option>--}}
-                                    {{--@foreach($promotions as $res)--}}
-                                        {{--<option>{{ $res->promo_name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div><!--col-md-6-->--}}
-                        {{--</div><!--form-group-->--}}
+                        <div id="others" class="form-group" style="display: none">
+                            {{ Form::label('email', 'Please select', ['class' => 'col-md-4 control-label']) }}
+                            <div class="col-md-6">
+                                <select name="promotion" class="form-control empty">
+                                    <option selected disabled>Please Select</option>
+                                    @foreach($promotions as $res)
+                                        <option>{{ $res->promo_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
 
                         <div class="form-group">
                             {{ Form::label('password', trans('validation.attributes.frontend.password'), ['class' => 'col-md-4 control-label']) }}
