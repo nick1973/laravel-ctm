@@ -169,7 +169,7 @@
                         <div class="col-md-12 col-ld-12">
                             {{--<h1>Welcome to {{ access()->user()->name }}'s profile.</h1>--}}
                             {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
-                            <h2>Managers Dashboard</h2>
+                            <h2>Resource Dashboard</h2>
                             <a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>
                             <a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>
                             <a href="/dashboard/manager/staff/search" class="btn btn-primary">User Search</a>
