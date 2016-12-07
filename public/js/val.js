@@ -15,8 +15,8 @@ $( document ).ready(function() {
         }
         else {
             console.log("Pass");
-            //$( "#addressForm" ).submit();
-            BankAccountValidation_Interactive_Validate_v2_00(key, accountNumber, sortCode);
+            $( "#addressForm" ).submit();
+            //BankAccountValidation_Interactive_Validate_v2_00(key, accountNumber, sortCode);
         }
     });
 });
