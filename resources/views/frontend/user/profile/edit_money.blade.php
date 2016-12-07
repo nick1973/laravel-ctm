@@ -83,8 +83,8 @@
 
                     {{ Form::close() }}
 
-                    <button id="checkAccount" class="btn btn-primary">Save Details</button>
-
+                    <button class="btn btn-primary">Save Details</button>
+                    {{--id="checkAccount"--}}
                 </div><!--panel body-->
 
             </div><!-- panel -->
