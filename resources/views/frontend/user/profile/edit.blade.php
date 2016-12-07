@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('land', 'Land Line:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('land', 'Land/Alternative Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::input('text', 'land', null, ['class' => 'form-control', 'placeholder' => 'land Line']) }}
                         </div>

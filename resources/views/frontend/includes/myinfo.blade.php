@@ -33,7 +33,7 @@
             <td>{{ $user->mobile }}</td>
         </tr>
         <tr>
-            <th>Land Line</th>
+            <th>Land/Alternative Number</th>
             <td>{{ $user->land }}</td>
         </tr>
         <tr>
