@@ -275,7 +275,7 @@ Route::group(['middleware' => 'auth'], function () {
             return ['data'=>$staff];
         });
 
-        //Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
+        Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
     });
 });
 

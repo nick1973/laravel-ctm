@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 
 /**
@@ -83,7 +84,30 @@ class ManagerController extends Controller
             ->where('confirmed', 1)
             ->where('payroll_export', 1)
             ->get();
+        //return dd($staff);
 
+        foreach ($staff as $payroll)
+        {
+            $result[] = '"'.$payroll->payroll.'",' . '"'.$payroll->title.'",' . '"'.$payroll->name.'",' .
+                '"'.$payroll->lastname.'",' . '"'.$payroll->nationality.'",' . '"'.$payroll->origin.'",' .
+                '"'.$payroll->dob.'"' . '"'.$payroll->gender.'"' . '"'.$payroll->email.'"' .
+                '"'.$payroll->address_line_1.'",' . '"'.$payroll->address_line_2.'",' . '"'.$payroll->address_line_3.'",' .
+                '"'.$payroll->address_line_4.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->mobile.'",' .
+                '"'.$payroll->land.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
+                '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
+                '"'.$payroll->uk_driving_license.'",' . '"'.$payroll->nrswa.'",' . '"'.$payroll->convictions.'",' .
+                '"'.$payroll->medical_conidtions.'",' . '"'.$payroll->uni.'",' . '"BR"' . "\r\n";
+        }
+        //return $result[1];
+        //dd($result);
 
+        Storage::put('payroll/test33.txt', $result[0]);
+        for ($i=1; $i<count($result);$i++)
+        {
+            Storage::append('payroll/test33.txt', $result[$i]);
+        }
+
+        $path = public_path(). "/test33.txt";
+        return Response::download($path);
     }
 }

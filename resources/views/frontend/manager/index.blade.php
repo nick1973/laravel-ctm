@@ -40,7 +40,10 @@
         </div><!-- col-md-10 -->
 
         <div class="col-lg-12">
-            <button id="export" class="btn btn-success">Export</button>
+            <h3>Use the 'Export' button below to download the payroll file:</h3>
+            <form action="/dashboard/manager/staff/export" method="get">
+                <button type="submit" id="export" class="btn btn-success">Export</button>
+            </form>
         </div>
 
         <div id="results" class="col-lg-12"></div>
