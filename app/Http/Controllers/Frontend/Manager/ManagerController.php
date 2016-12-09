@@ -6,6 +6,7 @@ use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
 use App\Models\Access\User\User;
 use App\Models\Access\User\UserSnapshot;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -80,34 +81,45 @@ class ManagerController extends Controller
 
     function staff_export()
     {
-        $staff = User::where('profile_confirmed', 'yes')
-            ->where('confirmed', 1)
-            ->where('payroll_export', 1)
+        $staff = User::where('profile_confirmed', '=', 'Yes')
+            ->where('confirmed', '=', 1)
+            ->where('payroll_export', '=', 1)
             ->get();
         //return dd($staff);
 
         foreach ($staff as $payroll)
-        {
+        {$day = substr($payroll->dob,5,2);
+            $month = substr($payroll->dob,8,2);
+            $year = substr($payroll->dob,0,4);
+            $dt = Carbon::now();
+            $dt->year = $year;
+            $dt->month = $month;
+            $dt->day = $day;
             $result[] = '"'.$payroll->payroll.'",' . '"'.$payroll->title.'",' . '"'.$payroll->name.'",' .
-                '"'.$payroll->lastname.'",' . '"'.$payroll->nationality.'",' . '"'.$payroll->origin.'",' .
-                '"'.$payroll->dob.'"' . '"'.$payroll->gender.'"' . '"'.$payroll->email.'"' .
-                '"'.$payroll->address_line_1.'",' . '"'.$payroll->address_line_2.'",' . '"'.$payroll->address_line_3.'",' .
-                '"'.$payroll->address_line_4.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->mobile.'",' .
-                '"'.$payroll->land.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
+                '"'.$payroll->lastname.'",' . '"'.$dt->format('d/m/Y').'"' . '"'.$payroll->gender.'"' . '"'.$payroll->email.'"' .
+                '"'.$payroll->postcode.'"' . '"'.$payroll->address_line_1 . ' ' . $payroll->address_line_2 .'",' .
+                '"'.$payroll->city.'",' . '"'.$payroll->county.'",' .
+                '"'.$payroll->country.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->land.'",' .
+                '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
                 '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
-                '"'.$payroll->uk_driving_license.'",' . '"'.$payroll->nrswa.'",' . '"'.$payroll->convictions.'",' .
-                '"'.$payroll->medical_conidtions.'",' . '"'.$payroll->uni.'",' . '"BR"' . "\r\n";
+                '"'.$payroll->account_name.'",' . '"'.$payroll->account_number.'",' . '"'.$payroll->account_sort_code.'",' .
+                '"'.$payroll->ni_number.'",' . '"BR"';
         }
+
         //return $result[1];
         //dd($result);
 
-        Storage::put('payroll/test33.txt', $result[0]);
+        $headers = array(
+            'Content-Type: text/plain',
+            'Content-disposition: attachment'
+        );
+
+        Storage::put('payroll/test1.txt', $result[0]);
         for ($i=1; $i<count($result);$i++)
         {
-            Storage::append('payroll/test33.txt', $result[$i]);
+            Storage::append('payroll/test1.txt', $result[$i]);
         }
-
-        $path = public_path(). "/test33.txt";
-        return Response::download($path);
+        $path = base_path(). "/storage/app/docs/payroll/test1.txt";
+        return Response::download($path, 'test1.txt', $headers);
     }
 }
