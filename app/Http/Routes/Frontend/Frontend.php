@@ -234,6 +234,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('profile/edit_address', 'ProfileController@edit_address')->name('frontend.user.profile.edit_address');
             Route::patch('profile/update_address/{update_address}', 'ProfileController@update_address')->name('frontend.user.profile.update_address');
+            Route::patch('profile/update_bank/{update_bank}', 'ProfileController@update_bank')->name('frontend.user.profile.update_bank');
 
             Route::get('profile/edit_employer_reference', 'ProfileController@edit_employer_reference')->name('frontend.user.profile.edit_employer_reference');
             Route::patch('profile/update_employer_reference/{update_employer_reference}', 'ProfileController@update_employer_reference')->name('frontend.user.profile.update_employer_reference');
@@ -270,9 +271,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
         Route::get('dashboard/manager/staff/search/all', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
-            $staff= \App\Models\Access\User\User::all();
+            $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->get();
             return ['data'=>$staff];
         });
+
+        //Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
     });
 });
 

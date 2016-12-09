@@ -8,7 +8,7 @@
                     <h4>Your Bank Details</h4>
                 </div>
                 <div class="panel-body">
-                    {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH',
+                    {{ Form::model($user, ['route' => ['frontend.user.profile.update_bank', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH',
                                             'id' => 'addressForm']) }}
                     <div class="form-group">
                         {{ Form::label('account_name', 'Account Holder\'s Name:', ['class' => 'col-md-4 control-label']) }}
@@ -18,18 +18,18 @@
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('account_sort_code', 'Account Number:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('account_number', 'Account Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'account_sort_code', null, ['class' => 'form-control', 'placeholder' => 'Account Number',
-                                                                                'id' => 'account_number', 'max' => 8]) }}
+                            <input id="account_number" name="account_number" max="8" type="text" value="{{ $user->account_number }}"
+                                   class="form-control" placeholder="Account Number">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('account_number', 'Sort Code:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('account_sort_code', 'Sort Code:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'account_number', null, ['class' => 'form-control', 'placeholder' => 'Sort Code',
-                                                                            'id' => 'sortcode_number']) }}
+                            <input id="sortcode_number" name="account_sort_code" type="text" value="{{ $user->account_sort_code }}"
+                                   class="form-control" placeholder="Sort Code">
                         </div>
                     </div>
 

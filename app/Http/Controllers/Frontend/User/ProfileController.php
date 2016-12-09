@@ -216,9 +216,7 @@ class ProfileController extends Controller
         $user->county = $request->input('county');
         $user->country = $request->input('country');
         $user->postcode = $request->input('postcode');
-
         $dirty = $user->getDirty();
-
         if($dirty!=[]){
             $dirty = json_encode($dirty, true);
             DB::table('users')
@@ -226,7 +224,19 @@ class ProfileController extends Controller
                 ->update(['address_dirty' => $dirty]);
             //return "saved" . $dirty;
         }
+        $user->fill($input)->save();
+        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+    }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    function update_bank(Request $request, $id)
+    {
+        $input = $request->all();
+        $user = User::find($id);
         $user->fill($input)->save();
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }

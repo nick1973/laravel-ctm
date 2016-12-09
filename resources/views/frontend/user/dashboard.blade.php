@@ -61,12 +61,14 @@
                                     </span>
                                 </a>
                             </li>
-                            <li role="presentation">
-                                <a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
-                            </li>
+                            {{--<li role="presentation">--}}
+                                {{--<a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>--}}
+                            {{--</li>--}}
+                            @if($user->profile_confirmed=="" || $user->profile_confirmed=="No")
+                                <li role="presentation">
+                                    <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
+                                </li>
+                            @endif
                         </ul>
 
                         <div class="tab-content">

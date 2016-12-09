@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUserTabele extends Migration
+class UpdateUserTabelAgain extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class UpdateUserTabele extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('heard_about_us');
-            $table->string('uni');
-            $table->string('promotion');
+            $table->string('payroll');
+            $table->tinyInteger('payroll_export');
         });
     }
 

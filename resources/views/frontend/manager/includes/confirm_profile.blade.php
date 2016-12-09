@@ -4,6 +4,7 @@
     {{ Form::model($user, ['route' => ['dashboard.manager.update', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH']) }}
         <div class="col-sm-1">
             <div class="onoffswitch">
+                <input name="payroll_export" type="hidden" value="1">
                 <input name="profile_confirmed" type="hidden" value="No">
                 <input type="checkbox" value="Yes" name="profile_confirmed" class="toggleBtn onoffswitch-checkbox" id="isConfirmed"
                        onclick="visible(this.id,'email')" <?php if($user->profile_confirmed=='Yes') echo "checked" ?>>

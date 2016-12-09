@@ -12,11 +12,11 @@
         </tr>
         <tr>
             <th>Account Number</th>
-            <td class="account">{{ $user->account_sort_code }}</td>
+            <td class="account">{{ $user->account_number }}</td>
         </tr>
         <tr>
             <th>Sort Code</th>
-            <td class="account">{{ $user->account_number }}</td>
+            <td class="account">{{ $user->account_sort_code }}</td>
         </tr>
         <tr>
             <th>National Insurance Number</th>

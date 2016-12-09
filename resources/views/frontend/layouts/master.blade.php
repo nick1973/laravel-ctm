@@ -131,6 +131,7 @@
             }
 
         </style>
+
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>

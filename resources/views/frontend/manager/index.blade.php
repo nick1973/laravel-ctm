@@ -39,5 +39,20 @@
 
         </div><!-- col-md-10 -->
 
+        <div class="col-lg-12">
+            <button id="export" class="btn btn-success">Export</button>
+        </div>
+
+        <div id="results" class="col-lg-12"></div>
+
+        <script>
+            $("#export").click(function(){
+                $.get("/dashboard/manager/staff/export", function(data, status){
+
+
+                });
+            });
+        </script>
+
     </div><!-- row -->
 @endsection

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class UserSnapshotTabele extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user_snapshot', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('visible');
             $table->text('dirty');
@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->text('reference_dirty');
             $table->text('rtw_dirty');
             $table->text('docs_dirty');
+            $table->text('status');
             $table->string('photo');
             $table->string('title');
             $table->string('name');
@@ -43,7 +44,7 @@ class CreateUsersTable extends Migration
             $table->string('convictions_info');
             $table->string('medical_conditions');
             $table->string('medical_conditions_info');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password')->nullable();
             //ADDRESSES
             $table->string('address_line_1');
@@ -61,6 +62,7 @@ class CreateUsersTable extends Migration
             $table->string('student_loan');
             $table->string('profile_confirmed');
             $table->string('payroll');
+            $table->tinyInteger('payroll_export');
             //Marketing
             $table->string('heard_about_us');
             $table->string('uni');
@@ -82,6 +84,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('user_snapshot');
     }
 }

@@ -14,6 +14,7 @@
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Postcode</th>
                         <th>Email</th>
                         <th>Mobile</th>
                         <th>Land Line</th>
@@ -26,6 +27,7 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -72,6 +74,7 @@
                 "columns": [
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
+                    { "data": "postcode" , className: "centre get" },
                     { "data": "email" , className: "centre get" },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "land" , className: "centre" },
