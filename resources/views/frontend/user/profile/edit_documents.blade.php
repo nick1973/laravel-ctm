@@ -8,7 +8,7 @@
                     <h4>Upload Documents</h4>
                 </div>
                 <div class="panel-body">
-                    <a href="/dashboard" class="btn btn-primary">Back</a>
+                    <a href="/dashboard" class="btn btn-primary">Save</a>
                     <div class="form-group col-md-12">
                         {{ Form::label('passport_photo', 'Passport Style Photo:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-12">
