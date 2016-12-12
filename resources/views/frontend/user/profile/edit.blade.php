@@ -148,6 +148,8 @@
                         <div class="col-md-6">
                             {{ Form::select('other_lang', ['No' => 'No', 'Yes' => 'Yes'], null, ['class' => 'form-control',
                             'id' => 'other_lang'])}}
+                            {{ Form::input('text', 'lang', null, ['id' => 'lang', 'style' => 'display: none', 'class' => 'form-control', 'placeholder' => 'Other Language']) }}
+
                         </div>
                     </div>
 
@@ -205,6 +207,17 @@
 
     </div><!-- row -->
     <script>
+        $("#other_lang").change(function () {
+            var val = $(this).val();
+            if(val === "Yes") {
+                //console.log(val);
+                $("#lang").show('fade').attr('required');
+            }
+            else if(val === "No"){
+                console.log(val);
+                $("#lang").hide('fade').removeAttr('required');
+            }
+        });
         function medicalConditions() {
             $("#medical_conditions").change(function () {
                 var val = $(this).val();
