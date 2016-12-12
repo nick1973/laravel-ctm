@@ -109,10 +109,6 @@ class ManagerController extends Controller
         //return $result[1];
         //dd($result);
 
-        $headers = array(
-            'Content-Type: text/plain',
-            'Content-disposition: attachment'
-        );
 
         Storage::put('payroll/test1.txt', $result[0]);
         for ($i=1; $i<count($result);$i++)
@@ -120,6 +116,21 @@ class ManagerController extends Controller
             Storage::append('payroll/test1.txt', $result[$i]);
         }
         $path = base_path(). "/storage/app/docs/payroll/test1.txt";
-        return Response::download($path, 'test1.txt', $headers);
+
+        if (file_exists($path)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($path).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($path));
+            // add these two lines
+            ob_clean();   // discard any data in the output buffer (if possible)
+            flush();      // flush headers (if possible)
+            readfile($path);
+            exit;
+        }
+        //return Response::download($path, 'test1.txt', $headers);
     }
 }
