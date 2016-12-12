@@ -122,12 +122,12 @@
                         <td class="rightToWork">{{ $ref->summer_term_ends }}</td>
                     </tr>
 
-                    {{--<tr>--}}
-                        {{--<th>{{ trans('labels.general.actions') }}</th>--}}
-                        {{--<td>--}}
-                            {{--{{ link_to_route('frontend.user.profile.edit_righttowork', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
+                    <tr>
+                        <th>{{ trans('labels.general.actions') }}</th>
+                        <td>
+                            {{ link_to_route('frontend.user.profile.edit_righttowork', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+                        </td>
+                    </tr>
             </table>
         </div>
     </div>
