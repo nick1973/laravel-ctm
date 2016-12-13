@@ -138,7 +138,7 @@
     <body id="app-layout">
         @include('includes.partials.logged-in-as')
         @if (!Request::is('login'))
-            {{--@include('frontend.includes.nav')--}}
+            @include('frontend.includes.nav')
         @endif
         @if (access()->hasRole('Administrator') || access()->hasRole('User'))
                 <div class="jumbotron">
