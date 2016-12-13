@@ -137,12 +137,14 @@
     </head>
     <body id="app-layout">
         @include('includes.partials.logged-in-as')
-        @include('frontend.includes.nav')
+        @if (!Request::is('login'))
+            {{--@include('frontend.includes.nav')--}}
+        @endif
         @if (access()->hasRole('Administrator') || access()->hasRole('User'))
                 <div class="jumbotron">
                     <div class="container">
                         <div class="col-md-6">
-                            <h1>Welcome back to your profile {{ access()->user()->name }}.</h1>
+                            <h1>Welcome to your profile {{ access()->user()->name }}.</h1>
                         </div>
                         <div class="col-md-12">
                             <h3>Please fill out the form below to complete your application</h3>
@@ -200,6 +202,7 @@
                     </div>
                 </div>
             @else
+            @if (Request::is('/'))
                 <div class="jumbotron">
                     <div class="container">
                         <h1>Create Your New CTM Account.</h1>
@@ -210,6 +213,9 @@
                         </button>
                     </div>
                 </div>
+                @else
+                <div style="padding-top: 75px"></div>
+            @endif
         @endif
             <div class="container">
                 @include('includes.partials.messages')

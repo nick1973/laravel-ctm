@@ -66,7 +66,7 @@
                 <td class="bg-success">{{ $user->townofbirth }}</td>
             @else
                 <td class="">{{ $user->townofbirth }}</td>
-            @endif
+            @endif+
         </tr>
         <tr>
             <th>Gender</th>
