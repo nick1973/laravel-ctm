@@ -34,39 +34,56 @@
                             {{ Form::input('text', 'address_line_1', null, ['class' => 'form-control', 'placeholder' => 'House Number/Name']) }}
                         </div>
                     </div>
+                    <?php
+                    if($address['street']==''){
+                        $address['street'] = null;
+                    }
+                    if($address['town']==''){
+                        $address['town'] = null;
+                    }
+                    if($address['county']==''){
+                        $address['county'] = null;
+                    }
+                    if($address['country']==''){
+                        $address['country'] = null;
+                    }
+                    if($address['postcode']==''){
+                        $address['postcode'] = null;
+                    }
+                    ?>
 
                     <div class="form-group">
                         {{ Form::label('address_line_2', 'Street:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'address_line_2', null, ['class' => 'form-control', 'placeholder' => 'Street']) }}
+                            {{ Form::input('text', 'address_line_2', $address['street'], ['class' => 'form-control', 'placeholder' => 'Street']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('city', 'Town / City:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'city', null, ['class' => 'form-control', 'placeholder' => 'Town / City']) }}
+                            {{ Form::input('text', 'city', $address['town'], ['class' => 'form-control', 'placeholder' => 'Town / City']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('county', 'County:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'county', null, ['class' => 'form-control', 'placeholder' => 'County']) }}
+                            {{ Form::input('text', 'county', $address['county'], ['class' => 'form-control', 'placeholder' => 'County']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('country', 'Country:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'country', null, ['class' => 'form-control', 'placeholder' => 'Country']) }}
+                            {{ Form::input('text', 'country', $address['country'], ['class' => 'form-control', 'placeholder' => 'Country']) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('postcode', 'Postcode:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'postcode', null, ['class' => 'form-control', 'placeholder' => 'Postcode']) }}
+                            {{ Form::input('text', 'postcode', $address['postcode'], ['class' => 'form-control', 'placeholder' => 'Postcode']) }}
                         </div>
                     </div>
 

@@ -252,6 +252,7 @@ Route::group(['middleware' => 'auth'], function () {
             //Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
 
             Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
+            Route::post('profile/get_postcode_ref', 'ProfileController@get_postcode_ref')->name('frontend.user.profile.get_postcode_ref');
 
             Route::patch('profile/submit_profile/{submit_profile}', 'ProfileController@submit_profile')->name('frontend.user.profile.submit_profile');
 

@@ -68,16 +68,45 @@ class ProfileController extends Controller
                 //->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         }
         //return $address;
-
         return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+            ->withUser(access()->user());
+    }
+
+    public function get_postcode_ref(Request $request)
+    {
+        $postcode = $request->input('postcode');
+        $apikey = 'AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs';
+        $address = Postcode::lookup($postcode);
+        $reference = References::where('user_id', access()->id())->get();
+        if($postcode=='' || empty($address))
+        {
+            $address = [
+                'street'=>'',
+                'town'=>'',
+                'county'=>'',
+                'country'=>'',
+                'postcode'=>''
+            ];
+            return redirect()->route('frontend.user.profile.edit_employer_reference',compact('apikey', 'address', 'reference'))->withErrors('Postcode Returned No Results');
+            //return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+            //->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        }
+        //return $address;
+        return view('frontend.user.profile.edit_employer_reference', compact('apikey', 'address', 'reference'))
             ->withUser(access()->user());
     }
 
     public function edit_employer_reference()
     {
-        //$reference = access()->user()->references();
+        $address = [
+            'street'=>'',
+            'town'=>'',
+            'county'=>'',
+            'country'=>'',
+            'postcode'=>''
+        ];
         $reference = References::where('user_id', access()->id())->get();
-        return view('frontend.user.profile.edit_employer_reference', compact('reference'));
+        return view('frontend.user.profile.edit_employer_reference', compact('reference', 'address'));
 
 //        return view('frontend.user.profile.edit_character_reference')
 //            ->withUser(access()->user())->references();
@@ -85,8 +114,15 @@ class ProfileController extends Controller
 
     public function edit_character_reference()
     {
+        $address = [
+            'street'=>'',
+            'town'=>'',
+            'county'=>'',
+            'country'=>'',
+            'postcode'=>''
+        ];
         $reference = References::where('user_id', access()->id())->get();
-        return view('frontend.user.profile.edit_character_reference', compact('reference'));
+        return view('frontend.user.profile.edit_character_reference', compact('reference', 'address'));
     }
 
     public function edit_righttowork()

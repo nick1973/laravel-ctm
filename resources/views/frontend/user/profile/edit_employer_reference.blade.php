@@ -12,6 +12,35 @@
                 </div>
 
                 <div class="panel-body">
+                    {!! Form::open(array('url' => '/profile/get_postcode_ref','class'=>'form-inline')) !!}
+                    <div class="form-group">
+                        <label class="sr-only">Postcode</label>
+                        <p class="form-control-static">Postcode</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword2" class="sr-only">Postcode</label>
+                        <input type="text" class="form-control" id="postcode" name="postcode" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Auto Fill Address</button>
+                    {!! Form::close() !!}
+                    <br/>
+                    <?php
+                    if($address['street']==''){
+                        $address['street'] = null;
+                    }
+                    if($address['town']==''){
+                        $address['town'] = null;
+                    }
+                    if($address['county']==''){
+                        $address['county'] = null;
+                    }
+                    if($address['country']==''){
+                        $address['country'] = null;
+                    }
+                    if($address['postcode']==''){
+                        $address['postcode'] = null;
+                    }
+                    ?>
                     @foreach($reference as $ref)
                     {{ Form::model($reference, ['route' => ['frontend.user.profile.update_employer_reference', $ref->user_id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
 
