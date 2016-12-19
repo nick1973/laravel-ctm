@@ -15,18 +15,18 @@
         <tr>
             <th>Title</th>
             @if(isset($user->title))
-                <td>{{ $user->title }}</td>
+                <td class="required">{{ $user->title }}</td>
                 @else
                 <td></td>
             @endif
         </tr>
         <tr>
             <th>First Name</th>
-            <td>{{ $user->name }}</td>
+            <td class="required">{{ $user->name }}</td>
         </tr>
         <tr>
             <th>Last Name</th>
-            <td>{{ $user->lastname }}</td>
+            <td class="required">{{ $user->lastname }}</td>
         </tr>
         <tr>
             <th>Mobile No</th>
@@ -38,59 +38,59 @@
         </tr>
         <tr>
             <th>Date of Birth</th>
-            <td>{{ $user->dob }}</td>
+            <td class="required">{{ $user->dob }}</td>
         </tr>
         <tr>
             <th>Gender</th>
-            <td>{{ $user->gender }}</td>
+            <td class="required">{{ $user->gender }}</td>
         </tr>
         <tr>
             <th>Ethnic Origin</th>
-            <td>{{ $user->origin }}</td>
+            <td class="required">{{ $user->origin }}</td>
         </tr>
         <tr>
             <th>Nationality</th>
-            <td>{{ $user->nationality }}</td>
+            <td class="required">{{ $user->nationality }}</td>
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.email') }}</th>
-            <td>{{ $user->email }}</td>
+            <td class="required">{{ $user->email }}</td>
         </tr>
         <tr>
             <th>Emergency Contact Name</th>
-            <td>{{ $user->emergency_contact_name }}</td>
+            <td class="required">{{ $user->emergency_contact_name }}</td>
         </tr>
         <tr>
             <th>Emergency Contact Relationship</th>
-            <td>{{ $user->emergency_contact_rel }}</td>
+            <td class="required">{{ $user->emergency_contact_rel }}</td>
         </tr>
         <tr>
             <th>Emergency Contact Number</th>
-            <td>{{ $user->emergency_contact_number }}</td>
+            <td class="required">{{ $user->emergency_contact_number }}</td>
         </tr>
         <tr>
             <th>Emergency Contact Mobile</th>
-            <td>{{ $user->emergency_contact_mobile }}</td>
+            <td class="required">{{ $user->emergency_contact_mobile }}</td>
         </tr>
         <tr>
             <th>Do you speak other languages?</th>
-            <td>{{ $user->other_lang }}</td>
+            <td class="required">{{ $user->other_lang }}</td>
         </tr>
         <tr>
             <th>Do you have a full UK driving Licence?</th>
-            <td>{{ $user->uk_driving_license }}</td>
+            <td class="required">{{ $user->uk_driving_license }}</td>
         </tr>
         <tr>
             <th>Do you have qualifications under the NRSWA 1991?</th>
-            <td>{{ $user->nrswa }}</td>
+            <td class="required">{{ $user->nrswa }}</td>
         </tr>
         <tr>
             <th>Do you have any unspent criminal convictions?</th>
-            <td>{{ $user->convictions }}</td>
+            <td class="required">{{ $user->convictions }}</td>
         </tr>
         <tr>
             <th>Do you have any medical conditions we should be aware of?</th>
-            <td>{{ $user->medical_conditions }}</td>
+            <td class="required">{{ $user->medical_conditions }}</td>
         </tr>
         <tr>
             <th>{{ trans('labels.frontend.user.profile.created_at') }}</th>
@@ -105,7 +105,7 @@
 
 <script>
 
-    $( "td:empty" )
+    $( "td.required:empty" )
             .text( "Information Required!" )
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');

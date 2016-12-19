@@ -8,7 +8,7 @@
             <div class="col-md-8 col-md-offset-2">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ trans('labels.frontend.auth.register_box_title') }}</div>
+                    <div class="panel-heading">Register <a href="/login" class="btn btn-success"style="margin-left: 500px">Login to Staff Area </a></div>
 
                     <div class="panel-body">
 
