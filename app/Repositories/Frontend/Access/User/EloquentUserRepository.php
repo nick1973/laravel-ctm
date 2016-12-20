@@ -312,6 +312,7 @@ class EloquentUserRepository implements UserRepositoryContract
         $user->emergency_contact_mobile = $input['emergency_contact_mobile'];
         $user->other_lang = $input['other_lang'];
         $user->uk_driving_license = $input['uk_driving_license'];
+        $user->d1 = $input['d1'];
         $user->nrswa = $input['nrswa'];
         $user->convictions = $input['convictions'];
         $user->convictions_info = $input['convictions_info'];

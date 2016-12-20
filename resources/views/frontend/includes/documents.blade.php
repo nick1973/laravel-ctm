@@ -4,7 +4,7 @@
         <tr>
             <th>{{ trans('labels.general.actions') }}</th>
             <td>
-                {{ link_to_route('frontend.user.profile.edit_documents', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
+                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
             </td>
             <td>Preview</td>
         </tr>
@@ -67,7 +67,7 @@
 
     $("td.gp2.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
-            $("#gp2_tick").addClass('hidden');
+            $("#gp1_tick").addClass('hidden');
             console.log("has Class");
         }
     });

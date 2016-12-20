@@ -12,7 +12,7 @@
                     <div role="tabpanel">
                             {{--{{ dd($dirty) }}--}}
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
+                        <ul id="myTab" class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
                                 <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">General Info
                                     <span id="myInfo">
@@ -56,9 +56,9 @@
                                     <span id="gp1_tick">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
-                                    <span id="gp2_tick">
-                                        <img src="/img/green-tick.png" height="18px">
-                                    </span>
+                                    {{--<span id="gp2_tick">--}}
+                                        {{--<img src="/img/green-tick.png" height="18px">--}}
+                                    {{--</span>--}}
                                 </a>
                             </li>
                             {{--<li role="presentation">--}}

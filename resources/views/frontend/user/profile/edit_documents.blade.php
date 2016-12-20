@@ -8,7 +8,9 @@
                     <h4>Upload Documents</h4>
                 </div>
                 <div class="panel-body">
-                    <a href="/dashboard" class="btn btn-primary">Save</a>
+                    {{--<button class="btn btn-default" onclick="goBack()">Back</button>--}}
+                    <h4>Once you have uploaded your documents click 'Back' to return <a href="/dashboard#documents" class="btn btn-success">Back</a></h4>
+
                     <div class="form-group col-md-12">
                         {{ Form::label('passport_photo', 'Passport Style Photo:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-12">
@@ -82,8 +84,12 @@
     </div><!-- row -->
     <script>
         Dropzone.options.passportPhoto = {
+            init: function() {
+                this.on("success", function(file) { alert("Success file uploaded!"); });
+            },
             maxFilesize: 4,
-            acceptedFiles: '.jpg, .jpeg, .png'
+            acceptedFiles: '.jpg, .jpeg, .png',
+            addRemoveLinks: true
         };
     </script>
 

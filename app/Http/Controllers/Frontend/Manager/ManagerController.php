@@ -22,7 +22,7 @@ class ManagerController extends Controller
 {
     function index()
     {
-        $users = User::where('visible', 1)->where('profile_confirmed', '!=', 'yes')->where('confirmed', 0)->paginate(5);
+        $users = User::where('visible', 1)->where('profile_confirmed', '!=', 'yes')->where('confirmed', 0)->paginate(50);
         return view('frontend.manager.index', compact('users'));
     }
 

@@ -70,7 +70,7 @@
         </tr>
         <tr>
             <th>Emergency Contact Mobile</th>
-            <td class="required">{{ $user->emergency_contact_mobile }}</td>
+            <td>{{ $user->emergency_contact_mobile }}</td>
         </tr>
         <tr>
             <th>Do you speak other languages?</th>
@@ -79,6 +79,10 @@
         <tr>
             <th>Do you have a full UK driving Licence?</th>
             <td class="required">{{ $user->uk_driving_license }}</td>
+        </tr>
+        <tr>
+            <th>Do you have licence to drive D1 vehicles (Minibus)?</th>
+            <td class="required">{{ $user->d1 }}</td>
         </tr>
         <tr>
             <th>Do you have qualifications under the NRSWA 1991?</th>

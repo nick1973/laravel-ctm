@@ -162,6 +162,18 @@
                     </div>
 
                     <div class="form-group">
+                        {{ Form::label('d1', 'Do you have licence to drive D1 vehicles (Minibus)?', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="d1" id="" value="Yes"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="d1" id="" value="No"> No
+                        </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         {{ Form::label('nrswa', 'Do you have qualifications under the NRSWA 1991?', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::select('nrswa', ['No' => 'No', 'Yes' => 'Yes'], null, ['class' => 'form-control',

@@ -1,16 +1,33 @@
 <div role="tabpanel" class="tab-pane" id="submit">
-    {{ Form::model($user, ['route' => ['frontend.user.profile.submit_profile', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH']) }}
+    {{ Form::model($user, ['route' => ['frontend.user.profile.submit_profile', $user->id], 'id' => 'submit_application',
+                            'class' => 'form-horizontal', 'method' => 'PATCH']) }}
         <div class="panel panel-default">
             <div class="panel-body">
-                <p>Once your application has been submitted it will be sent to the CTM admin team to be processed.</p>
+                <p>Once your application has been submitted it will be sent to the CTM resource team to be processed.</p>
                 <p>During this time you will no longer be able to edit your profile.</p>
                 <input name="confirmed" value="0" hidden>
-                {{ Form::submit('Submit Application', ['class' => 'btn btn-primary']) }}
+                {{--{{ Form::submit('Submit Application', ['class' => 'btn btn-primary']) }}--}}
             </div>
         </div>
     </form>
+    <button onclick="submit_application()" class="btn btn-primary">Submit Application</button>
 </div><!--tab panel address-->
 <script>
+
+    function submit_application() {
+        var myInfo = $("#myInfo").hasClass('hidden');
+        var address_tick = $("#address_tick").hasClass('hidden');
+        var reference_tick =  $("#reference_tick").hasClass('hidden');
+        var account_tick = $("#account_tick").hasClass('hidden');
+        var gp1_tick = $("#gp1_tick").hasClass('hidden');
+        var gp2_tick = $("#gp2_tick").hasClass('hidden');
+        console.log(address_tick)
+        if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true && (gp1_tick || gp2_tick)==true){
+            alert('The Application is not Complete! Please complete to be able to submit.')
+        } else {
+            $("#submit_application").submit()
+        }
+    }
 
     $( "td.address:empty" )
             .text( "Information Required!" )

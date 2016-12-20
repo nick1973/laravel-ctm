@@ -33,6 +33,8 @@ class RegisterRequest extends Request
             'name' => 'required|max:255',
             'dob' => 'required|before:' . $date,
             'email' => 'required|email|max:255|unique:users',
+            'mobile' => 'required|numeric',
+            'heard_about_us' => 'required',
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required_if:captcha_status,true|captcha',
         ];

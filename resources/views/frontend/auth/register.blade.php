@@ -71,7 +71,7 @@
                             {{ Form::label('email', 'Select Your University', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
                                 <select name="uni" class="form-control empty">
-                                    <option selected disabled>Please Select</option>
+                                    {{--<option selected disabled>Please Select</option>--}}
                                     @foreach($unis as $res)
                                         <option>{{ $res->uni_name }}</option>
                                     @endforeach
@@ -83,7 +83,7 @@
                             {{ Form::label('email', 'Please select', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
                                 <select name="promotion" class="form-control empty">
-                                    <option selected disabled>Please Select</option>
+                                    {{--<option selected disabled>Please Select</option>--}}
                                     @foreach($promotions as $res)
                                         <option>{{ $res->promo_name }}</option>
                                     @endforeach
