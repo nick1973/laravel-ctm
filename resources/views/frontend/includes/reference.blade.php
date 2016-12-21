@@ -163,7 +163,7 @@
 
     $("td.character_reference.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
-            $("#character_reference_tick").addClass('hidden');
+            $("#reference_tick").addClass('hidden');
         }
     });
 

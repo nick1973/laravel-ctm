@@ -165,10 +165,10 @@
                         {{ Form::label('d1', 'Do you have licence to drive D1 vehicles (Minibus)?', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                         <label class="radio-inline">
-                            <input type="radio" name="d1" id="" value="Yes"> Yes
+                            <input type="radio" name="d1" id="" value="Yes" <?php if($user->d1=='Yes') echo "checked" ?>> Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="d1" id="" value="No"> No
+                            <input type="radio" name="d1" id="" value="No" <?php if($user->d1=='No'||$user->d1!='No') echo "checked" ?>> No
                         </label>
                         </div>
                     </div>

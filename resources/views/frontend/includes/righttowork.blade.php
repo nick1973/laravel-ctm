@@ -84,7 +84,7 @@
         <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
             Are you a student?
         </label>
-        <p>{{ $ref->student }}</p>
+        <p id="student">{{ $ref->student }}</p>
         <br/>
         <br/>
         <p>It is important that you answer the above question correctly as it may affect your tax code which could result in overpayment of tax.</p>
@@ -140,11 +140,16 @@
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
 
-//    $("td.rightToWork.bg-danger").each(function(){
-//        if ($(this).hasClass('bg-danger')) {
-//            $("#righttowork_tick").addClass('hidden');
-//            console.log("has Class");
-//        }
-//    });
+        var stu = $("#student").html()
+    //console.log("student " +stu);
+        if(stu=="Yes"){
+            $("td.rightToWork.bg-danger").each(function(){
+                if ($(this).hasClass('bg-danger')) {
+                    $("#righttowork_tick").addClass('hidden');
+                    //console.log("has Class");
+                }
+            });
+        }
+
 
 </script>

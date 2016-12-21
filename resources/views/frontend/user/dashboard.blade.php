@@ -32,9 +32,6 @@
                                     <span id="reference_tick">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
-                                    <span id="character_reference_tick">
-                                        <img src="/img/green-tick.png" height="18px">
-                                    </span>
                                 </a>
                             </li>
                             <li role="presentation">

@@ -31,7 +31,7 @@ class RegisterRequest extends Request
         $date = date('d-m-Y', strtotime('-16 years'));
         return [
             'name' => 'required|max:255',
-            'dob' => 'required|before:' . $date,
+            'dob' => 'date:d/m/Y|required|before:' . $date,
             'email' => 'required|email|max:255|unique:users',
             'mobile' => 'required|numeric',
             'heard_about_us' => 'required',

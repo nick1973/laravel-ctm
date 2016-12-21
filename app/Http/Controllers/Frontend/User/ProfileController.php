@@ -15,6 +15,7 @@ use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Lodge\Postcode\Facades\Postcode;
 use phpDocumentor\Reflection\Types\Object_;
 
@@ -93,6 +94,30 @@ class ProfileController extends Controller
         }
         //return $address;
         return view('frontend.user.profile.edit_employer_reference', compact('apikey', 'address', 'reference'))
+            ->withUser(access()->user());
+    }
+
+    public function get_postcode_ref_char(Request $request)
+    {
+        $postcode = $request->input('postcode');
+        $apikey = 'AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs';
+        $address = Postcode::lookup($postcode);
+        $reference = References::where('user_id', access()->id())->get();
+        if($postcode=='' || empty($address))
+        {
+            $address = [
+                'street'=>'',
+                'town'=>'',
+                'county'=>'',
+                'country'=>'',
+                'postcode'=>''
+            ];
+            return redirect()->route('frontend.user.profile.edit_character_reference',compact('apikey', 'address', 'reference'))->withErrors('Postcode Returned No Results');
+            //return view('frontend.user.profile.edit_address', compact('apikey', 'address'))
+            //->withUser(access()->user())->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        }
+        //return $address;
+        return view('frontend.user.profile.edit_character_reference', compact('apikey', 'address', 'reference'))
             ->withUser(access()->user());
     }
 
@@ -271,6 +296,17 @@ class ProfileController extends Controller
      */
     function update_bank(Request $request, $id)
     {
+        //$input = $request->all();
+        $validator = Validator::make($request->all(), [
+            'account_number' => 'required|numeric',
+            'account_sort_code' => 'required|numeric',
+            'ni_number' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect('/profile/edit_money')
+                ->withErrors($validator)
+                ->withInput();
+        }
         $input = $request->all();
         $user = User::find($id);
         $user->fill($input)->save();
