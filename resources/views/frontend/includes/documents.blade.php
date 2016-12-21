@@ -8,8 +8,17 @@
             </td>
             <td>Preview</td>
         </tr>
-        <tr>
+        @if($user->d1=="Yes")
+            <tr>
+                <th>D1 driving license Photo Uploaded</th>
+                    <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
+                    <td class="gp1"><a target="_blank" href="{{ $ref->passport_photo }}">Preview</a></td>
 
+                    <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+
+            </tr>
+        @endif
+        <tr>
             <th>Passport Photo Uploaded</th>
             @if($ref->passport_photo)
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
