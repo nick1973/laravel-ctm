@@ -66,6 +66,11 @@
                                     <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
                                 </li>
                             @endif
+                            @if($user->profile_confirmed=="Yes")
+                                <li role="presentation">
+                                    <a href="#events" aria-controls="submit" role="tab" data-toggle="tab">Events</a>
+                                </li>
+                            @endif
                         </ul>
 
                         <div class="tab-content">
@@ -78,6 +83,7 @@
                             @include('frontend.includes.documents')
 
                             @include('frontend.includes.submit_application')
+                            @include('frontend.includes.events')
 
 
 

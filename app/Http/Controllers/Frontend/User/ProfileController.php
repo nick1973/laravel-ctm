@@ -15,6 +15,7 @@ use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Lodge\Postcode\Facades\Postcode;
 use phpDocumentor\Reflection\Types\Object_;
@@ -352,7 +353,9 @@ class ProfileController extends Controller
         }
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
+        //Storage::put('payroll/test1.txt', $result[0]);
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
+        //Storage::move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page'. '/' . $file_name, $file_name);
         References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
         $path = References::find(1);
         $ref->passport_photo_page = $file_name;
@@ -426,6 +429,29 @@ class ProfileController extends Controller
         $file_name = $file->getClientOriginalName();
         $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
         References::where('user_id', $user->id)->update(['ni_card' => $file_path]);
+        $path = References::find(1);
+        $user->ni_card = $file_name;
+        $dirty = $user->getDirty();
+        $dirty = json_encode($dirty, true);
+        if($dirty!="[]"){
+            DB::table('users')
+                ->where('id', $id)
+                ->update(['docs_dirty' => $dirty]);
+        }
+        return $path->passport_photo;
+
+    }
+
+    public function update_license_photo(Request $request, $id)
+    {
+        $this->validate($request, [
+            'ni_card' => 'mimes:jpg,jpeg,png'
+        ]);
+        $user = User::find($id);
+        $file = $request->file('file');
+        $file_name = $file->getClientOriginalName();
+        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/driving_license', $file_name);
+        References::where('user_id', $user->id)->update(['d1_photo' => $file_path]);
         $path = References::find(1);
         $user->ni_card = $file_name;
         $dirty = $user->getDirty();

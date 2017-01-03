@@ -63,6 +63,7 @@
                         //className: 'btn-primary',
                         header: false,
                         exportOptions: {
+                            columns: [ 0, 1, 2, 5 ],
                             modifier: {
                                 page: 'current'
                             }

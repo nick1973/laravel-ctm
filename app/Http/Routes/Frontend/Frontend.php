@@ -20,6 +20,28 @@ Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
 
+Route::get('/amazon_docs', function () {
+    //dd(Storage::disk('s3')->exists('file.jpg'));
+
+    $client = new Aws\S3\S3Client([
+        'version'     => 'latest',
+        'region'      => 'eu-west-1',
+        'credentials' => [
+            'key'    => 'AKIAJ55IJY67EKI2TSJA',
+            'secret' => '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'
+        ]
+    ]);
+
+    // Where the files will be source from
+    $source = 's3://ctmuserfiles-production';
+// Where the files will be transferred to
+    $dest = 'public/path';
+    ini_set('max_execution_time', 1000);
+    $manager = new \Aws\S3\Transfer($client, $source, $dest);
+    $manager->transfer();
+
+});
+
 Route::get('/staff', function () {
     $first_name=[];
     $last_name=[];
@@ -249,6 +271,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('profile/update_passport_photo/{id}', 'ProfileController@update_passport_photo')->name('frontend.user.profile.update_passport_photo');
             Route::post('profile/update_birth_cert/{id}', 'ProfileController@update_birth_cert')->name('frontend.user.profile.update_birth_cert');
             Route::post('profile/update_ni_card/{id}', 'ProfileController@update_ni_card')->name('frontend.user.profile.update_ni_card');
+            Route::post('profile/update_license_photo/{id}', 'ProfileController@update_license_photo')->name('frontend.user.profile.update_license_photo');
             //Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
 
             Route::post('profile/get_postcode', 'ProfileController@get_postcode')->name('frontend.user.profile.get_postcode');
@@ -263,6 +286,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
+
+        Route::resource('dashboard/events', 'EventsController');
+
         Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
         Route::resource('dashboard/sbf', 'SBFController');
 

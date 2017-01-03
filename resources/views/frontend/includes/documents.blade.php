@@ -10,12 +10,13 @@
         </tr>
         @if($user->d1=="Yes")
             <tr>
-                <th>D1 driving license Photo Uploaded</th>
+                <th>D1 Driving License Photo Uploaded</th>
+                @if($ref->d1_photo)
                     <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
-                    <td class="gp1"><a target="_blank" href="{{ $ref->passport_photo }}">Preview</a></td>
-
+                    <td class="gp1"><a target="_blank" href="{{ $ref->d1_photo }}">Preview</a></td>
+                    @else
                     <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
-
+                @endif
             </tr>
         @endif
         <tr>

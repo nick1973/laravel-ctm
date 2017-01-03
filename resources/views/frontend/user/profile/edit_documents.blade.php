@@ -11,6 +11,26 @@
                     {{--<button class="btn btn-default" onclick="goBack()">Back</button>--}}
                     <h4>Once you have uploaded your documents click 'Back' to view them. <a href="/dashboard#documents" class="btn btn-success">Back</a></h4>
 
+                    @if($user->d1=="Yes")
+                        <div class="form-group col-md-12">
+                            {{--{{ Form::label('passport_photo', 'Passport Style Photo:', ['class' => 'col-md-4 control-label']) }}--}}
+                            <div class="col-md-4">
+                                <h3>D1 Driving License Photo:</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <form action="update_license_photo/{{ $user->id }}"
+                                      method="post"
+                                      class="dropzone well well-lg"
+                                      id="driving_photo">
+                                    {{ csrf_field() }}
+                                    <div class="dz-default dz-message">
+                                        <h3>Click or drag and drop your D1 driving license photo here!</h3>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group col-md-12">
                         {{--{{ Form::label('passport_photo', 'Passport Style Photo:', ['class' => 'col-md-4 control-label']) }}--}}
                         <div class="col-md-4">

@@ -22,6 +22,9 @@ class ManagerController extends Controller
 {
     function index()
     {
+        if(access()->hasRole('User')){
+            return redirect('dashboard');
+        }
         $users = User::where('visible', 1)->where('profile_confirmed', '!=', 'yes')->where('confirmed', 0)->paginate(50);
         return view('frontend.manager.index', compact('users'));
     }
@@ -61,10 +64,10 @@ class ManagerController extends Controller
                 //$user->fill($input)->save();
             }
             //SEND A SUCCESS EMAIL
-//            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
-//                $m->from('admin@ctm.uk.com', 'CTM Application');
-//                $m->to($user->email, $user->name)->subject('Your CTM Application!');
-//            });
+            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
+                $m->from('admin@ctm.uk.com', 'CTM Application');
+                $m->to($user->email, $user->name)->subject('Your CTM Application!');
+            });
             //SNAPSHOT OF USER
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');

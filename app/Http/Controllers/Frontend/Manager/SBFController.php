@@ -22,6 +22,9 @@ class SBFController extends Controller
      */
     public function index()
     {
+        if(access()->hasRole('User')){
+            return redirect('dashboard');
+        }
         return view('frontend.manager.sbf.index');
     }
 

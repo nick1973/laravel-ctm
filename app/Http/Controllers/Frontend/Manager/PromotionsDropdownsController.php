@@ -13,6 +13,9 @@ class PromotionsDropdownsController extends Controller
 {
     function index()
     {
+        if(access()->hasRole('User')){
+            return redirect('dashboard');
+        }
         $promotions = Promotions::all();
         $uni = Unis::all();
         $hear_about_us = HearAboutUs::all();

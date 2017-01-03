@@ -9,11 +9,29 @@
                 {{--{{ Form::submit('Submit Application', ['class' => 'btn btn-primary']) }}--}}
             </div>
         </div>
+        <p>CTM's Terms & Conditions <a href="/Casual Worker Agreement.pdf" target="_blank">Terms & Conditions</a></p>
+        <h4>Before you can submit your application fist you must tick confirming that you have read CTM's terms & conditions.</h4>
+        <div class="checkbox">
+            <label>
+                <input id="TandC" type="checkbox"> Check here to indicate that you have read and agree to CTM's terms and conditions
+            </label>
+        </div>
     </form>
-    <button onclick="submit_application()" class="btn btn-primary">Submit Application</button>
+    <button disabled id="submit_button" style="margin-top: 10px" onclick="submit_application()" class="btn btn-primary">Submit Application</button>
 </div><!--tab panel address-->
 <script>
+    $(function() {
+        $("#TandC").click(function () {
 
+            if(this.checked){
+                $("#submit_button").removeAttr('disabled')
+                console.log(this.checked)
+            } else {
+                $("#submit_button").attr('disabled', true)
+            }
+
+        });
+    });
     function submit_application() {
         var myInfo = $("#myInfo").hasClass('hidden');
         var address_tick = $("#address_tick").hasClass('hidden');

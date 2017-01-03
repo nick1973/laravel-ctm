@@ -20,7 +20,8 @@
         "lodge/postcode-lookup": "dev-master",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "doctrine/dbal": "^2.5",
-        "sendgrid/sendgrid": "~5.1"
+        "sendgrid/sendgrid": "~5.1",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
