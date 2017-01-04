@@ -89,7 +89,7 @@ class ManagerController extends Controller
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1]
         ])->get();
-        return dd($staff);
+        //return dd($staff);
 
         foreach ($staff as $payroll)
         {
@@ -122,6 +122,9 @@ class ManagerController extends Controller
             Storage::append('payroll/' . $date_time . '.txt', $result[$i]);
         }
         $path = base_path(). "/storage/app/docs/payroll/" . $date_time . ".txt";
+        
+        $staff->update(['payroll_export' => 0]);
+        //return dd($staff);
 
         if (file_exists($path)) {
             header('Content-Description: File Transfer');
@@ -137,10 +140,6 @@ class ManagerController extends Controller
             readfile($path);
             exit;
         }
-        
-        $staff->update(['payroll_export' => 0]);
-        return dd($staff);
-        
         //return Response::download($path, 'test1.txt', $headers);
     }
 }
