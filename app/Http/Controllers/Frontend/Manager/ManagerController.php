@@ -123,6 +123,8 @@ class ManagerController extends Controller
                 Storage::append('payroll/' . $date_time . '.txt', $result[$i]);
             }
             $path = base_path(). "/storage/app/docs/payroll/" . $date_time . ".txt";
+        } else{
+            $path = null;
         }
 
         if (file_exists($path)) {
