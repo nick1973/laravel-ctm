@@ -122,9 +122,6 @@ class ManagerController extends Controller
             Storage::append('payroll/' . $date_time . '.txt', $result[$i]);
         }
         $path = base_path(). "/storage/app/docs/payroll/" . $date_time . ".txt";
-        
-        $staff->update(['payroll_export' => 0]);
-        //return dd($staff);
 
         if (file_exists($path)) {
             header('Content-Description: File Transfer');
@@ -138,8 +135,18 @@ class ManagerController extends Controller
             ob_clean();   // discard any data in the output buffer (if possible)
             flush();      // flush headers (if possible)
             readfile($path);
+            
+            User::where([
+                ['profile_confirmed', '=', 'Yes'],
+                ['confirmed', '=', 1],
+                ['payroll_export', '=', 1]
+            ])->update(['payroll_export' => 0]);
+            
+            
             exit;
         }
+        
+        
         //return Response::download($path, 'test1.txt', $headers);
     }
 }
