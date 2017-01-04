@@ -148,9 +148,11 @@ class ManagerController extends Controller
             
             
             exit;
+        } else{
+            return redirect('dashboard/manager')->withFlashWarning('Nothing to Export!');
         }
         
-        exit;
+        
         //return Response::download($path, 'test1.txt', $headers);
     }
 }
