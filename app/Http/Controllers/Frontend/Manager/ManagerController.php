@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Manager;
 
+use Mail;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
 use App\Models\Access\User\User;
