@@ -17,7 +17,7 @@ Route::get('/spec-staff/{staff}', function ($staff) {
 });
 
 Route::get('/dashboard/exports', function () {
-    dd(Storage::get());
+    dd(Illuminate\Support\Facades\Storage::get());
 });
 
 Route::get('/events', function () {
