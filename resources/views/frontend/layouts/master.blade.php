@@ -178,6 +178,7 @@
                             <a href="/dashboard/manager/staff/search" class="btn btn-primary">User Search</a>
                             <a href="/dashboard/register/dropdowns" class="btn btn-danger">Registration Dropdowns</a>
                             <a href="/dashboard/events" class="btn btn-default">Events</a>
+                            <a href="/dashboard/exports" class="btn btn-success">Exports</a>
                         </div>
                         <div class="col-md-6">
 

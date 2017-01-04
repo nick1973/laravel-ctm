@@ -16,6 +16,10 @@ Route::get('/spec-staff/{staff}', function ($staff) {
     return $spec;
 });
 
+Route::get('/exports', function () {
+    return Storage::get();
+});
+
 Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
