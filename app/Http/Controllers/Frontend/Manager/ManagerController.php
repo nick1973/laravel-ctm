@@ -150,7 +150,7 @@ class ManagerController extends Controller
             exit;
         }
         
-        
+        exit;
         //return Response::download($path, 'test1.txt', $headers);
     }
 }
