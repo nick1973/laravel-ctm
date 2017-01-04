@@ -137,7 +137,13 @@ class ManagerController extends Controller
             readfile($path);
             exit;
         }
-        $staff->update(['payroll_export' => 0]);
+        
+        User::where([
+            ['profile_confirmed', '=', 'Yes'],
+            ['confirmed', '=', 1],
+            ['payroll_export', '=', 1]
+        ])->update(['payroll_export' => 0]);
+        
         
         //return Response::download($path, 'test1.txt', $headers);
     }
