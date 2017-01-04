@@ -138,12 +138,8 @@ class ManagerController extends Controller
             exit;
         }
         
-        User::where([
-            ['profile_confirmed', '=', 'Yes'],
-            ['confirmed', '=', 1],
-            ['payroll_export', '=', 1]
-        ])->update(['payroll_export' => 0]);
-        
+        $staff->update(['payroll_export' => 0]);
+        return $staff;
         
         //return Response::download($path, 'test1.txt', $headers);
     }
