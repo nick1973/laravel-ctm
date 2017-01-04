@@ -21,53 +21,54 @@
                 </div>
             </div>
     </form>
-
-    <div class="col-lg-6 col-md-6">
-        <div class="checkbox">
-            <label>
-            <input onclick="addtomail('references')" id="references" type="checkbox" value="No References">
-            No References
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-            <input onclick="addtomail('passportPhoto')" id="passportPhoto" type="checkbox" value="No Passport Photo">
-            No Passport Photo
-            </label>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6">
-        <div class="checkbox">
-            <label>
-            <input onclick="addtomail('passportPage')" id="passportPage" type="checkbox" value="Passport Photo Page">
-            Passport Photo Page.
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-            <input onclick="addtomail('birthCertificate')" id="birthCertificate" type="checkbox" value="Birth certificate">
-            Birth certificate
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input onclick="addtomail('salutation')" id="salutation" type="checkbox"
-                       value="Thank you for applying to CTM, once your application
-                                has been resubmitted and complete.......Many thanks, CTM">
-                Salutation
-            </label>
-        </div>
-    </div>
-    <form>
     <div id="email" <?php if($user->profile_confirmed=='Yes') echo "style='display: none'" ?>>
-        <h3>Please choose why the application has failed to meet the criteria.</h3>
-        <textarea id="comments">
-            <p>Hi {{ $user->name }},</p>
-            <p>Sorry to inform you that your application has been unsuccessful, due to the following.</p>
-            <h3>Please find a list below that needs your attention:</h3>
-        </textarea>
-    </div>
-    </form>
+
+		<div class="col-lg-6 col-md-6">
+			<div class="checkbox">
+				<label>
+				<input onclick="addtomail('references')" id="references" type="checkbox" value="No References">
+				No References
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+				<input onclick="addtomail('passportPhoto')" id="passportPhoto" type="checkbox" value="No Passport Photo">
+				No Passport Photo
+				</label>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6">
+			<div class="checkbox">
+				<label>
+				<input onclick="addtomail('passportPage')" id="passportPage" type="checkbox" value="Passport Photo Page">
+				Passport Photo Page.
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+				<input onclick="addtomail('birthCertificate')" id="birthCertificate" type="checkbox" value="Birth certificate">
+				Birth certificate
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input onclick="addtomail('salutation')" id="salutation" type="checkbox"
+						   value="Thank you for applying to CTM, once your application
+									has been resubmitted and complete.......Many thanks, CTM">
+					Salutation
+				</label>
+			</div>
+		</div>
+		<form>
+			<h3>Please choose why the application has failed to meet the criteria.</h3>
+			<textarea id="comments">
+				<p>Hi {{ $user->name }},</p>
+				<p>Sorry to inform you that your application has been unsuccessful, due to the following.</p>
+				<h3>Please find a list below that needs your attention:</h3>
+			</textarea>
+		
+		</form>
+	</div>
     <br>
     <div class="form-group">
         <button onclick="content()" class="btn btn-primary" type="submit">Send</button>
