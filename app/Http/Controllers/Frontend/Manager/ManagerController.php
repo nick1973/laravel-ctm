@@ -115,7 +115,7 @@ class ManagerController extends Controller
         //dd($result);
 
 
-        Storage::put('payroll/test1.txt', $result[0]);
+        Storage::put('payroll/' . Carbon::now() . '.txt', $result[0]);
         for ($i=1; $i<count($result);$i++)
         {
             Storage::append('payroll/test1.txt', $result[$i]);
