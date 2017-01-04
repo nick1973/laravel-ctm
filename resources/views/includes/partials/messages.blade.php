@@ -21,6 +21,7 @@
     </div>
 @elseif (session()->get('flash_warning'))
     <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         @if(is_array(json_decode(session()->get('flash_warning'), true)))
             {!! implode('', session()->get('flash_warning')->all(':message<br/>')) !!}
         @else
