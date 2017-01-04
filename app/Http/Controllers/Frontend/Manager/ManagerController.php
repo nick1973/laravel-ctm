@@ -84,10 +84,17 @@ class ManagerController extends Controller
 
     function staff_export()
     {
-        $staff = User::where('profile_confirmed', '=', 'Yes')
-            ->where('confirmed', '=', 1)
-            ->where('payroll_export', '=', 1)
-            ->get();
+        
+        $staff = User::where(function ($query) {
+                $query->where('profile_confirmed', '=', 'Yes')
+                      ->where('confirmed', '=', 1);
+                      ->where('payroll_export', '=', 1);
+            })->get();
+        
+//        $staff = User::where('profile_confirmed', '=', 'Yes')
+//            ->where('confirmed', '=', 1)
+//            ->where('payroll_export', '=', 1)
+//            ->get();
         //return dd($staff);
 
         foreach ($staff as $payroll)
