@@ -114,13 +114,14 @@ class ManagerController extends Controller
         //return $result[1];
         //dd($result);
 
-
-        Storage::put('payroll/' . Carbon::now() . '.txt', $result[0]);
+        $date_time = Carbon::now();
+        
+        Storage::put('payroll/' . $date_time . '.txt', $result[0]);
         for ($i=1; $i<count($result);$i++)
         {
-            Storage::append('payroll/test1.txt', $result[$i]);
+            Storage::append('payroll/' . $date_time . '.txt', $result[$i]);
         }
-        $path = base_path(). "/storage/app/docs/payroll/test1.txt";
+        $path = base_path(). "/storage/app/docs/payroll/" . $date_time . ".txt";
 
         if (file_exists($path)) {
             header('Content-Description: File Transfer');
