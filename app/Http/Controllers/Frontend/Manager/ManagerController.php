@@ -89,7 +89,7 @@ class ManagerController extends Controller
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1]
         ])->get();
-        //return dd($staff);
+        return dd($staff);
 
         foreach ($staff as $payroll)
         {
@@ -139,7 +139,7 @@ class ManagerController extends Controller
         }
         
         $staff->update(['payroll_export' => 0]);
-        dd($staff);
+        return dd($staff);
         
         //return Response::download($path, 'test1.txt', $headers);
     }
