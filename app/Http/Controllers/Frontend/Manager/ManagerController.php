@@ -87,8 +87,8 @@ class ManagerController extends Controller
         
         $staff = User::where(function ($query) {
                 $query->where('profile_confirmed', '=', 'Yes')
-                      ->where('confirmed', '=', 1);
-                      ->where('payroll_export', '=', 1);
+                      ->where('confirmed', '=', 1)
+                      ->where('payroll_export', '=', 1)
             })->get();
         
 //        $staff = User::where('profile_confirmed', '=', 'Yes')
