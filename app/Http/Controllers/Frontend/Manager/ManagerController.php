@@ -139,7 +139,7 @@ class ManagerController extends Controller
         }
         
         $staff->update(['payroll_export' => 0]);
-        return $staff;
+        dd($staff);
         
         //return Response::download($path, 'test1.txt', $headers);
     }
