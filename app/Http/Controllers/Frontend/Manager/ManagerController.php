@@ -137,6 +137,8 @@ class ManagerController extends Controller
             readfile($path);
             exit;
         }
+        $staff->update(['payroll_export',0]);
+        
         //return Response::download($path, 'test1.txt', $headers);
     }
 }
