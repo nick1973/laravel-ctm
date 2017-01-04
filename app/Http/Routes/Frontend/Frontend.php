@@ -17,7 +17,7 @@ Route::get('/spec-staff/{staff}', function ($staff) {
 });
 
 Route::get('/dashboard/exports', function () {
-    return Illuminate\Support\Facades\Storage::files();
+    return Illuminate\Support\Facades\Storage::files('payroll');
 });
 
 Route::get('/events', function () {
