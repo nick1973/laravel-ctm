@@ -206,7 +206,7 @@
             @if (Request::is('/'))
                 <div class="jumbotron">
                     <div class="container">
-                        <h1>Create Your New CTM Account.</h1>
+                        <h1>Create Your New CTM Accoun.</h1>
                         <p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>
                         {{--<p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>--}}
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
