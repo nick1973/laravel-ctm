@@ -102,8 +102,8 @@ class ManagerController extends Controller
             $dt->month = $month;
             $dt->day = $day;
             $result[] = '"'.$payroll->payroll.'",' . '"'.$payroll->title.'",' . '"'.$payroll->name.'",' .
-                '"'.$payroll->lastname.'",' . '"'.$dt->format('d/m/Y').'"' . '"'.$payroll->gender.'"' . '"'.$payroll->email.'"' .
-                '"'.$payroll->postcode.'"' . '"'.$payroll->address_line_1 . ' ' . $payroll->address_line_2 .'",' .
+                '"'.$payroll->lastname.'",' . '"'.$dt->format('d/m/Y').'",' . '"'.$payroll->gender.'",' . '"'.$payroll->email.'",' .
+                '"'.$payroll->postcode.'",' . '",'.$payroll->address_line_1 . ' ' . $payroll->address_line_2 .'",' .
                 '"'.$payroll->city.'",' . '"'.$payroll->county.'",' .
                 '"'.$payroll->country.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->land.'",' .
                 '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
