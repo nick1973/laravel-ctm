@@ -17,7 +17,7 @@ Route::get('/spec-staff/{staff}', function ($staff) {
 });
 
 Route::get('/dashboard/exports', function () {
-    return Storage::get();
+    dd(Storage::get());
 });
 
 Route::get('/events', function () {
