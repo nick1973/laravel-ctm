@@ -91,7 +91,8 @@ class ManagerController extends Controller
         //return dd($staff);
 
         foreach ($staff as $payroll)
-        {$day = substr($payroll->dob,5,2);
+        {
+            $day = substr($payroll->dob,5,2);
             $month = substr($payroll->dob,8,2);
             $year = substr($payroll->dob,0,4);
             $dt = Carbon::now();
@@ -106,7 +107,7 @@ class ManagerController extends Controller
                 '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
                 '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
                 '"'.$payroll->account_name.'",' . '"'.$payroll->account_number.'",' . '"'.$payroll->account_sort_code.'",' .
-                '"'.$payroll->ni_number.'",' . '"BR"' . "\n";
+                '"'.$payroll->ni_number.'",' . '"BR"' . "\\n";
         }
 
         //return $result[1];
