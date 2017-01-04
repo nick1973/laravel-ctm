@@ -16,7 +16,7 @@ Route::get('/spec-staff/{staff}', function ($staff) {
     return $spec;
 });
 
-Route::get('/exports', function () {
+Route::get('/dashboard/exports', function () {
     return Storage::get();
 });
 
