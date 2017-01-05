@@ -299,7 +299,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //header('Expires: 0');
                 //header('Cache-Control: must-revalidate');
                 //header('Pragma: public');
-                header('Content-Length: ' . filesize($path));
+                //header('Content-Length: ' . filesize($path));
                 // add these two lines
                 ob_clean();   // discard any data in the output buffer (if possible)
                 flush();      // flush headers (if possible)
