@@ -14,22 +14,21 @@
                 <div class="panel-body">
                     <table class="table table-striped table-hover table-bordered dashboard-table">
                         <tr>
-                            <th width="33%">File Name</th>
-                            <th width="33%">{{ trans('labels.frontend.user.profile.created_at') }}</th>
-                            <th width="33%">{{ trans('labels.frontend.user.profile.last_updated') }}</th>
+                            <th>File Name</th>
+                            {{--<th>{{ trans('labels.frontend.user.profile.created_at') }}</th>--}}
+                            {{--<th>{{ trans('labels.frontend.user.profile.last_updated') }}</th>--}}
                         </tr>
                         @foreach($files as $file)
                             <tr>
                                 {{--<td><a href="{{ storage_path('app/docs/'.$file) }}">{{ $file }}</a></td>--}}
                                 <td><a href="/dashboard/export_download/{{ $file }}">{{ $file }}</a></td>
-
-                                <td></td>
                                 {{--@endif--}}
                                 {{--<td><a href="/dashboard/manager/{{ $file->id }}">{{ $file->name }} {{ $file->lastname }}</a></td>--}}
                                 {{--<td>{{ $file->created_at }} ({{ $file->created_at->diffForHumans() }})</td>--}}
                                 {{--<td>{{ $file->updated_at }} ({{ $file->updated_at->diffForHumans() }})</td>--}}
                             </tr>
                         @endforeach
+
                     </table>
                 </div><!--panel body-->
             </div><!-- panel -->
