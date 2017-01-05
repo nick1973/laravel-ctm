@@ -16,10 +16,6 @@ Route::get('/spec-staff/{staff}', function ($staff) {
     return $spec;
 });
 
-Route::get('/dashboard/exports', function () {
-    return Illuminate\Support\Facades\Storage::files('payroll');
-});
-
 Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
@@ -253,7 +249,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['namespace' => 'User'], function () {
             Route::resource('dashboard/manager', 'ManagerController');
 
-
             Route::get('dashboard', 'DashboardController@index')->name('frontend.user.dashboard');
             Route::get('profile/edit/', 'ProfileController@edit')->name('frontend.user.profile.edit');
             Route::patch('profile/updates', 'ProfileController@updates')->name('frontend.user.profile.updates');
@@ -290,6 +285,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
+
+        Route::resource('dashboard/exports', 'ExportController');
 
         Route::resource('dashboard/events', 'EventsController');
 
