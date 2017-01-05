@@ -292,21 +292,9 @@ Route::group(['middleware' => 'auth'], function () {
 
             $path = Storage::url('payroll/'.$file);
             $path = $path = base_path(). "/storage/app/docs/payroll/$file";
-            //return $path;
-                //header('Content-Description: File Transfer');
-                //header('Content-Type: application/octet-stream');
-                //header('Content-Disposition: attachment');
-                //header('Expires: 0');
-                //header('Cache-Control: must-revalidate');
-                //header('Pragma: public');
-                //header('Content-Length: ' . filesize($path));
-                // add these two lines
                 ob_clean();   // discard any data in the output buffer (if possible)
                 flush();      // flush headers (if possible)
-                //readfile($path);
-
             $text_file = Storage::get('payroll/'.$file);
-            //return response()->download('/payroll/'.$f);
             return (new \Illuminate\Http\Response($text_file, 200))
                 ->header('Content-Type', 'application/octet-stream');
         });
