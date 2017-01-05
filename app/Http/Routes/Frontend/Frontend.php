@@ -295,11 +295,11 @@ Route::group(['middleware' => 'auth'], function () {
             //return $path;
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                //header('Content-Disposition: attachment; filename="'.basename($path).'"');
-                //header('Expires: 0');
-                //header('Cache-Control: must-revalidate');
-                //header('Pragma: public');
-                //header('Content-Length: ' . filesize($path));
+                header('Content-Disposition: attachment; filename="'.basename($path).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($path));
                 // add these two lines
                 ob_clean();   // discard any data in the output buffer (if possible)
                 flush();      // flush headers (if possible)
