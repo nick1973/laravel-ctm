@@ -297,7 +297,7 @@ Route::group(['middleware' => 'auth'], function () {
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="'.basename($path).'"');
                 //header('Expires: 0');
-                header('Cache-Control: must-revalidate');
+                //header('Cache-Control: must-revalidate');
                 header('Pragma: public');
                 header('Content-Length: ' . filesize($path));
                 // add these two lines
