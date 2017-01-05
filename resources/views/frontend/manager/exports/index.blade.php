@@ -20,8 +20,9 @@
                         </tr>
                         @foreach($files as $file)
                             <tr>
-                                <td><a href="{{ \Illuminate\Support\Facades\Storage::url('app/docs/'.$file) }}">{{ $file }}</a></td>
-                                <td></td>
+                                <td><a href="{{ storage_path('app/docs/'.$file) }}">{{ $file }}</a></td>
+                                <td><a href="/dashboard/export_download/{{ $file }}">{{ $file }}</a></td>
+
                                 <td></td>
                                 {{--@endif--}}
                                 {{--<td><a href="/dashboard/manager/{{ $file->id }}">{{ $file->name }} {{ $file->lastname }}</a></td>--}}
@@ -34,5 +35,4 @@
             </div><!-- panel -->
         </div><!-- col-md-10 -->
     </div><!-- row -->
-
 @endsection

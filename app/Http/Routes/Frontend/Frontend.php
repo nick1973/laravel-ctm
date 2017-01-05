@@ -288,6 +288,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('dashboard/exports', 'ExportController');
 
+        Route::get('dashboard/export_download/payroll/{file}', function ($file) {
+            $f = Storage::url('/payroll/'.$file);
+            //return $f;
+            return Storage::get('/payroll/'.$file);
+            //return response()->download('/payroll/'.$f);
+            return (new \Illuminate\Http\Response($f, 200))
+                ->header('Content-Type', 'plain-txt');
+        });
+
         Route::resource('dashboard/events', 'EventsController');
 
         Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
