@@ -295,7 +295,7 @@ Route::group(['middleware' => 'auth'], function () {
             //return $path;
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                header('filename="'.basename($path).'"');
+                header('Content-Disposition: attachment');
                 //header('Expires: 0');
                 //header('Cache-Control: must-revalidate');
                 //header('Pragma: public');
