@@ -36,7 +36,7 @@ Route::get('/amazon_docs', function () {
     $source = 's3://ctmuserfiles-production';
 // Where the files will be transferred to
     $dest = 'public/path';
-    ini_set('max_execution_time', 1000);
+    ini_set('max_execution_time', 3000);
     $manager = new \Aws\S3\Transfer($client, $source, $dest);
     $manager->transfer();
 
@@ -289,12 +289,26 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/exports', 'ExportController');
 
         Route::get('dashboard/export_download/payroll/{file}', function ($file) {
-            $f = Storage::url('/payroll/'.$file);
-            //return $f;
-            return Storage::get('/payroll/'.$file);
+
+            $path = Storage::url('payroll/'.$file);
+            $path = $path = base_path(). "/storage/app/docs/payroll/$file";
+            //return $path;
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.basename($path).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($path));
+                // add these two lines
+                ob_clean();   // discard any data in the output buffer (if possible)
+                flush();      // flush headers (if possible)
+                readfile($path);
+
+            //$text_file = Storage::get('payroll/'.$file);
             //return response()->download('/payroll/'.$f);
-            return (new \Illuminate\Http\Response($f, 200))
-                ->header('Content-Type', 'plain-txt');
+            //return (new \Illuminate\Http\Response($text_file, 200))
+                //->header('Content-Type', 'application/octet-stream');
         });
 
         Route::resource('dashboard/events', 'EventsController');
