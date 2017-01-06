@@ -24,6 +24,6 @@ class UpdateUserSnapshotTabel extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_snapshot');
     }
 }

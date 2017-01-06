@@ -24,6 +24,6 @@ class UpdateReferencesTableD1 extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('references');
     }
 }

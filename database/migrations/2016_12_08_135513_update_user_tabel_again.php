@@ -12,10 +12,10 @@ class UpdateUserTabelAgain extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
+//       Schema::table('users', function ($table) {
 //            $table->string('payroll');
 //            $table->tinyInteger('payroll_export');
-        });
+//       });
     }
 
     /**
