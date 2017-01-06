@@ -45,7 +45,7 @@ return [
     
         'volume' => [
             'driver' => 'local',
-            'root' => storage_path('mnt/volume-1'),
+            'root' => '~/mnt/volume-1',
         ],
 
         'local' => [
