@@ -61,6 +61,7 @@ class CreateUsersTable extends Migration
             $table->string('student_loan');
             $table->string('profile_confirmed');
             $table->string('payroll');
+            $table->tinyInteger('payroll_export');
             //Marketing
             $table->string('heard_about_us');
             $table->string('uni');
