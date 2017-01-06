@@ -353,8 +353,9 @@ class ProfileController extends Controller
         }
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
+        Storage::disk('volume')->put('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page'./$file_name, $file);
         //Storage::put('payroll/test1.txt', $result[0]);
-        $file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
+        //$file_path = $file->move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
         //Storage::move('docs/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page'. '/' . $file_name, $file_name);
         References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
         $path = References::find(1);

@@ -42,6 +42,11 @@ return [
     */
 
     'disks' => [
+    
+        'volume' => [
+            'driver' => 'local',
+            'root' => '/mnt/volume-1',
+        ],
 
         'local' => [
             'driver' => 'local',
