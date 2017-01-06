@@ -15,7 +15,7 @@ class UpdateUserTabelAgain extends Migration
         Schema::table('users', function ($table) {
 //            $table->string('payroll');
 //            $table->tinyInteger('payroll_export');
-//        });
+        });
     }
 
     /**
