@@ -12,10 +12,10 @@ class UpdateUserTabelAgain extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->string('payroll');
-            $table->tinyInteger('payroll_export');
-        });
+//        Schema::table('users', function ($table) {
+//            $table->string('payroll');
+//            $table->tinyInteger('payroll_export');
+//        });
     }
 
     /**
@@ -25,6 +25,6 @@ class UpdateUserTabelAgain extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+//        Schema::drop('users');
     }
 }
