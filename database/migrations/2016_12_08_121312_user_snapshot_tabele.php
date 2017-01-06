@@ -39,6 +39,7 @@ class UserSnapshotTabele extends Migration
             $table->string('emergency_contact_mobile');
             $table->string('other_lang');
             $table->string('uk_driving_license');
+            $table->text('d1');
             $table->string('nrswa');
             $table->string('convictions');
             $table->string('convictions_info');

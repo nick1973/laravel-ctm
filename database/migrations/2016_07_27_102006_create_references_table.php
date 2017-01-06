@@ -44,6 +44,7 @@ class CreateReferencesTable extends Migration
             $table->string('passport_photo_page');
             $table->string('birth_cert');
             $table->string('ni_card');
+            $table->text('d1_photo');
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at');
