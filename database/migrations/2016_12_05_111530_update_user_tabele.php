@@ -12,11 +12,11 @@ class UpdateUserTabele extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->string('heard_about_us');
-            $table->string('uni');
-            $table->string('promotion');
-        });
+//        Schema::table('users', function ($table) {
+//            $table->string('heard_about_us');
+//            $table->string('uni');
+//            $table->string('promotion');
+//        });
     }
 
     /**
@@ -26,6 +26,6 @@ class UpdateUserTabele extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+//        Schema::drop('users');
     }
 }
