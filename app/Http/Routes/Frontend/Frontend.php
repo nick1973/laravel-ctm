@@ -29,8 +29,7 @@ Route::get('/doc', function () {
             //ob_clean();   // discard any data in the output buffer (if possible)
             //flush();      // flush headers (if possible)
 //            $file = Storage::get('payroll/'.$file);
-            return (new \Illuminate\Http\Response($file, 200))
-                ->header('Content-Type', 'application/octet-stream');
+            return (new \Illuminate\Http\Response($file, 200));
 
     //return response()->download($path);
     
