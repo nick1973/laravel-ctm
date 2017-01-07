@@ -26,13 +26,13 @@ Route::get('/doc', function () {
     $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
     
 
-            ob_clean();   // discard any data in the output buffer (if possible)
-            flush();      // flush headers (if possible)
+            //ob_clean();   // discard any data in the output buffer (if possible)
+            //flush();      // flush headers (if possible)
 //            $file = Storage::get('payroll/'.$file);
             return (new \Illuminate\Http\Response($file, 200))
                 ->header('Content-Type', 'application/octet-stream');
 
-    return response()->download($path);
+    //return response()->download($path);
     
 });
 
