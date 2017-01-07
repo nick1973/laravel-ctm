@@ -22,14 +22,15 @@ Route::get('/events', function () {
 
 Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
-    //Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
-    $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/About.jpg';
+    $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
+    $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
     
-//    $file = File::get($path);
-//    $type = File::mimeType($path);
-//
-//    $response = Response::download($file);
-//    $response->header("Content-Type", $type);
+
+            ob_clean();   // discard any data in the output buffer (if possible)
+            flush();      // flush headers (if possible)
+//            $file = Storage::get('payroll/'.$file);
+            return (new \Illuminate\Http\Response($file, 200))
+                ->header('Content-Type', 'application/octet-stream');
 
     return response()->download($path);
     
