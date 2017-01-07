@@ -22,7 +22,7 @@ Route::get('/events', function () {
 
 Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
-    return Storage::disk('volume/NickAshford.1988-01-20/ni_card')->exists('AboutUs.jpg');//get('file.jpg');
+    return Storage::disk('volume')->exists('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
 });
 
 //Route::get('/amazon_docs', function () {
