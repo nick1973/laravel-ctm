@@ -20,27 +20,31 @@ Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
 
-Route::get('/amazon_docs', function () {
-    //dd(Storage::disk('s3')->exists('file.jpg'));
-
-    $client = new Aws\S3\S3Client([
-        'version'     => 'latest',
-        'region'      => 'eu-west-1',
-        'credentials' => [
-            'key'    => 'AKIAJ55IJY67EKI2TSJA',
-            'secret' => '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'
-        ]
-    ]);
-
-    // Where the files will be source from
-    $source = 's3://ctmuserfiles-production';
-// Where the files will be transferred to
-    $dest = 'public/path';
-    ini_set('max_execution_time', 3000);
-    $manager = new \Aws\S3\Transfer($client, $source, $dest);
-    $manager->transfer();
-
+Route::get('/docs', function () {
+    return Storage::disk('volume/NickAshford.1988-01-20/ni_card')->exists('AboutUs.jpg');//get('file.jpg');
 });
+
+//Route::get('/amazon_docs', function () {
+//    //dd(Storage::disk('s3')->exists('file.jpg'));
+//
+//    $client = new Aws\S3\S3Client([
+//        'version'     => 'latest',
+//        'region'      => 'eu-west-1',
+//        'credentials' => [
+//            'key'    => 'AKIAJ55IJY67EKI2TSJA',
+//            'secret' => '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'
+//        ]
+//    ]);
+//
+//    // Where the files will be source from
+//    $source = 's3://ctmuserfiles-production';
+//// Where the files will be transferred to
+//    $dest = 'public/path';
+//    ini_set('max_execution_time', 3000);
+//    $manager = new \Aws\S3\Transfer($client, $source, $dest);
+//    $manager->transfer();
+//
+//});
 
 Route::get('/staff', function () {
     $first_name=[];
