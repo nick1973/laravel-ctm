@@ -23,7 +23,7 @@ Route::get('/events', function () {
 Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
     //Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
-    $path = Storage::disk('volume')->url('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');
+    $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
     
     $file = File::get($path);
     $type = File::mimeType($path);
