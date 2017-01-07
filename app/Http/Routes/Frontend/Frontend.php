@@ -20,7 +20,8 @@ Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
 
-Route::get('/docs', function () {
+Route::get('/doc', function () {
+    return ['data' => \App\Models\Ops\Events::all()];
     //return Storage::disk('volume/NickAshford.1988-01-20/ni_card')->exists('AboutUs.jpg');//get('file.jpg');
 });
 
