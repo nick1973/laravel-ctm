@@ -28,7 +28,7 @@ Route::get('/doc', function () {
     $file = File::get($path);
     $type = File::mimeType($path);
 
-    $response = Response::make($file, 6000);
+    $response()->download($file);
     $response->header("Content-Type", $type);
 
     return $response;
