@@ -25,13 +25,13 @@ Route::get('/doc', function () {
     //Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
     $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
     
-    $file = File::get($path);
-    $type = File::mimeType($path);
+//    $file = File::get($path);
+//    $type = File::mimeType($path);
+//
+//    $response = Response::download($file);
+//    $response->header("Content-Type", $type);
 
-    $response = Response::download($file);
-    $response->header("Content-Type", $type);
-
-    return $response;
+    return response()->download($path);
     
 });
 
