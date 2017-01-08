@@ -34,7 +34,7 @@ Route::get('/doc', function () {
 
         // Note: You should probably implement some kind 
         // of check on filetype
-        header('Content-type: image/jpeg');
+        header('Content-type: image/png');
 
         echo $contents;
     }
