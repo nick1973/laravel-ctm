@@ -23,7 +23,7 @@ Route::get('/events', function () {
 Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
     $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/birth_cert/computer-people0.png');//get('file.jpg');
-    $path = '/mnt/volume-1/NickAshford.1988-01-20/birth_cert/computer-people0.png';
+    $path = '/mnt/volume-1/About-had-its-chips.jpg';
     
     
     if (file_exists($path))
@@ -34,7 +34,7 @@ Route::get('/doc', function () {
 
         // Note: You should probably implement some kind 
         // of check on filetype
-        header('Content-type: image/png');
+        header('Content-type: image/jpeg');
 
         echo $contents;
     }

@@ -354,9 +354,9 @@ class ProfileController extends Controller
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
         
-        //$file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
+        $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo_page', $file_name);
         
-        $file_path = $file->move('/mnt/volume-1', $file_name);
+        //$file_path = $file->move('/mnt/volume-1', $file_name);
         
         References::where('user_id', $user->id)->update(['passport_photo_page' => $file_path]);
         $path = References::find(1);
