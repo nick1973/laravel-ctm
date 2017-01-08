@@ -22,8 +22,8 @@ Route::get('/events', function () {
 
 Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
-    $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
-    $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
+    $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/birth_cert/computer-people0.png');//get('file.jpg');
+    $path = '/mnt/volume-1/NickAshford.1988-01-20/birth_cert/computer-people0.png';
     
     
     $file = 'privatedir/image.jpg';
