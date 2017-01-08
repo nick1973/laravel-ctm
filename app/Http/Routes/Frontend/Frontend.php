@@ -31,8 +31,9 @@ Route::get('/doc', function () {
 //            $file = Storage::get('payroll/'.$file);
             //return (new \Illuminate\Http\Response($file, 200))
                 //->header('Content-Type', 'application/octet-stream');
-
-    return response()->download($file);
+$data = file_get_contents($path);
+    //dd($file);
+    return $data;
     
 });
 
