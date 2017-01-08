@@ -26,12 +26,18 @@ Route::get('/doc', function () {
     $path = '/mnt/volume-1/NickAshford.1988-01-20/birth_cert/computer-people0.png';
     
     
-    $file = 'privatedir/image.jpg';
-    $type = 'image/jpeg';
-    header('Content-Type:'.$type);
-    header('Content-Length: ' . filesize($path));
-    readfile($path);
-    exit();
+    if (file_exists($path))
+    {
+        // Note: You should probably do some more checks 
+        // on the filetype, size, etc.
+        $contents = file_get_contents($path);
+
+        // Note: You should probably implement some kind 
+        // of check on filetype
+        header('Content-type: image/jpeg');
+
+        echo $contents;
+    }
     
     
     
