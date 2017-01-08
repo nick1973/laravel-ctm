@@ -25,15 +25,26 @@ Route::get('/doc', function () {
     $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/ni_card/AboutUs.jpg');//get('file.jpg');
     $path = '/mnt/volume-1/NickAshford.1988-01-20/ni_card/AboutUs.jpg';
     
+    
+    $file = 'privatedir/image.jpg';
+    $type = 'image/jpeg';
+    header('Content-Type:'.$type);
+    header('Content-Length: ' . filesize($path));
+    readfile($path);
+    exit();
+    
+    
+    
+    
 
             //ob_clean();   // discard any data in the output buffer (if possible)
             //flush();      // flush headers (if possible)
 //            $file = Storage::get('payroll/'.$file);
             //return (new \Illuminate\Http\Response($file, 200))
                 //->header('Content-Type', 'application/octet-stream');
-$data = file_get_contents($path);
+//$data = file_get_contents($path);
     //dd($file);
-    return base64_decode($file);
+    //return base64_decode($file);
     
 });
 
