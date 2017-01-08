@@ -33,7 +33,7 @@ Route::get('/doc', function () {
                 //->header('Content-Type', 'application/octet-stream');
 $data = file_get_contents($path);
     //dd($file);
-    return $data;
+    return base64_decode($data);
     
 });
 
