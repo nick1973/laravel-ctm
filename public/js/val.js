@@ -56,6 +56,7 @@ function BankAccountValidation_Interactive_Validate_v2_00End(response) {
         // Show the error message
         alert(response.Items[0].Description);
     }
+
     else {
         // Check if there were any items found
         if (response.Items.length == 0)
