@@ -28,7 +28,7 @@ $( document ).ready(function() {
 function BankAccountValidation_Interactive_Validate_v2_00Begin(Key, AccountNumber, SortCode) {
     var script = document.createElement("script"),
         head = document.getElementsByTagName("head")[0],
-        url = "http://services.postcodeanywhere.co.uk/BankAccountValidation/Interactive/Validate/v2.00/json3.ws?";
+        url = "https://services.postcodeanywhere.co.uk/BankAccountValidation/Interactive/Validate/v2.00/json3.ws?";
 
     // Build the query string
     url += "&Key=" + encodeURIComponent(Key);
