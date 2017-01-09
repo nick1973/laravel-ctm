@@ -165,8 +165,8 @@ class ProfileController extends Controller
 
     public function edit_documents()
     {
-        return view('frontend.user.profile.edit_documents')
-            ->withUser(access()->user());
+        $rt_work = RTWork::where('user_id', access()->id())->get();
+        return view('frontend.user.profile.edit_documents', compact('rt_work'))->withUser(access()->user());
     }
 
     public function submit_profile(Request $request, $id)

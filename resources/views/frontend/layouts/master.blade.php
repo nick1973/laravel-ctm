@@ -159,7 +159,7 @@
                         <div class="col-md-6">
                             <br/>
                             @if(access()->user()->photo)
-                            <img src="/{{ access()->user()->photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">
+                            <img src="/{{ access()->user()->name . access()->user()->lastname . access()->user()->dob }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">
                                 @else
                                 {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
                             @endif

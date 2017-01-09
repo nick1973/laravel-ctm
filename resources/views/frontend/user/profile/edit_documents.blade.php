@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+    @foreach($rt_work as $ref)
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -48,12 +49,24 @@
                             </form>
                         </div>
                     </div>
-                    <h2>Please provide documents from either group A or B.</h2>
+                    @if($ref->work_status=='European National' || $ref->work_status=='Non European National')
+                        {{--<h2>Please provide documents from both group A and B.</h2>--}}
+                    @else
+                        <h2>Please provide documents from either group A or B.</h2>
+                    @endif
                     <hr>
-                    <h3>Group A:</h3>
+                    @if($ref->work_status=='UK Citizen')
+                        <h3>Group A:</h3>
+                    @endif
                     <div class="form-group col-md-12">
                         <div class="col-md-4">
-                            <h3>Photo Page of Passport:</h3>
+                            @if($ref->work_status=='UK Citizen')
+                                <h3>Photo Page of Passport:</h3>
+                            @elseif($ref->work_status=='European National')
+                                <h3>Photo Page of Passport:</h3>
+                            @elseif($ref->work_status=='Non European National')
+                                <h3>Photo Page of Passport & Visa:</h3>
+                            @endif
                         </div>
                         <div class="col-md-6">
                             <form action="update_passport_photo_page/{{ $user->id }}"
@@ -67,28 +80,37 @@
                             </form>
                         </div>
                     </div>
-                    <h3>Group B:</h3>
+                    @if($ref->work_status=='UK Citizen')
+                        <h3>Group B:</h3>
+                    @endif
                     <hr>
+                    @if($ref->work_status=='UK Citizen')
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <h3>Birth Certificate:</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <form action="update_birth_cert/{{ $user->id }}"
+                                      method="post"
+                                      class="dropzone well well-lg"
+                                      id="my-awesome-dropzone">
+                                    {{ csrf_field() }}
+                                    <div class="dz-default dz-message">
+                                        <h3>Click or drag and drop a Photo of your Birth Certificate here!</h3>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group col-md-12">
                         <div class="col-md-4">
-                            <h3>Birth Certificate:</h3>
-                        </div>
-                        <div class="col-md-6">
-                            <form action="update_birth_cert/{{ $user->id }}"
-                                  method="post"
-                                  class="dropzone well well-lg"
-                                  id="my-awesome-dropzone">
-                                {{ csrf_field() }}
-                                <div class="dz-default dz-message">
-                                    <h3>Click or drag and drop a Photo of your Birth Certificate here!</h3>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <div class="col-md-4">
-                            <h3>National Insurance Document / Card:</h3>
+                            @if($ref->work_status=='UK Citizen')
+                                <h3>National Insurance Document / Card:</h3>
+                            @elseif($ref->work_status=='European National')
+                                    <h3>ID Card:</h3>
+                                @elseif($ref->work_status=='Non European National')
+                                        <h3>Work Permit:</h3>
+                                @endif
                         </div>
                         <div class="col-md-6">
                             <form action="update_ni_card/{{ $user->id }}"
@@ -111,6 +133,7 @@
             </div><!-- panel -->
         </div><!-- col-md-10 -->
     </div><!-- row -->
+    @endforeach
     <script>
         Dropzone.options.passportPhoto = {
             init: function() {
