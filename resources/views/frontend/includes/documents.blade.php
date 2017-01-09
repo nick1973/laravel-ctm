@@ -23,8 +23,9 @@
         <tr>
             <th>Passport Photo Uploaded</th>
             @if($ref->passport_photo)
+                <?php $photo =  substr($ref->passport_photo,14);  ?>
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
-                <td class="gp1"><a target="_blank" href="{{ $ref->passport_photo }}">Preview</a></td>
+                <td class="gp1"><a target="_blank" href="{{ $photo }}">Preview</a></td>
                 @else
                 <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
             @endif
