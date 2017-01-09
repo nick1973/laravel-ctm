@@ -159,7 +159,7 @@
                         <div class="col-md-6">
                             <br/>
                             @if(access()->user()->photo)
-                                <?php $photo =  substr(access()->user()->photo,4);  ?>
+                                <?php $photo =  substr(access()->user()->photo,14);  ?>
                             <img src="/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">
                                 @else
                                 {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
