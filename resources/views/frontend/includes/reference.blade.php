@@ -149,23 +149,30 @@
             .text( "Information Required!" )
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
+
     $( "td.character_reference:empty" )
             .text( "Information Required!" )
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
 
-    $("td.reference.bg-danger").each(function(){
-        if ($(this).hasClass('bg-danger')) {
-            $("#reference_tick").addClass('hidden');
-        }
+    console.log($( "td.character_reference" ).hasClass('bg-danger'))
 
-    });
+    if($( "td.character_reference" ).hasClass('bg-danger')){
+        $("td.reference.bg-danger").each(function(){
+            if ($(this).hasClass('bg-danger')) {
+                $("#reference_tick").addClass('hidden');
+            }
+        });
+    } else {
+        $("td.character_reference.bg-danger").each(function(){
+            if ($(this).hasClass('bg-danger')) {
+                $("#reference_tick").addClass('hidden');
+            }
+        });
+    }
 
-    $("td.character_reference.bg-danger").each(function(){
-        if ($(this).hasClass('bg-danger')) {
-            $("#reference_tick").addClass('hidden');
-        }
-    });
+
+
 
         $('#collapseTwo').each(function () {
             if (!$("td.character_reference.bg-danger").hasClass('bg-danger')) {

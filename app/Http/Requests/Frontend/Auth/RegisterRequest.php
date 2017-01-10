@@ -34,7 +34,7 @@ class RegisterRequest extends Request
             'lastname' => 'required|max:255',
             'dob' => 'date:d/m/Y|required|before:' . $date,
             'email' => 'required|email|max:255|unique:users',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|numeric|digits:11',
             'heard_about_us' => 'required',
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required_if:captcha_status,true|captcha',

@@ -31,6 +31,9 @@ class UpdateProfileRequest extends Request
             'name'  => 'required',
             'lastname'  => 'required',
             'email' => 'sometimes|required|email',
+            'land' => 'digits:11',
+            'emergency_contact_number' => 'digits:11',
+            'emergency_contact_mobile' => 'digits:11'
         ];
     }
 }

@@ -220,6 +220,16 @@ class ProfileController extends Controller
      */
     public function update_employer_reference(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'ref_phone_number' => 'digits:11',
+            'ref_char_phone_number' => 'digits:11'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $reference = References::where('user_id', $id)->get();
         foreach ($reference as $results)
         {
