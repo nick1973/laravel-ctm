@@ -6,12 +6,6 @@
         <div class="row">
 
             <div class="col-md-8 col-md-offset-2">
-
-                <a href="/data/iphone_generated.jpg">
-                    download
-                </a>
-                
-                
                 <div class="panel panel-default">
                     <div class="panel-heading">Register <a href="/login" class="btn btn-success"style="margin-left: 500px">Login to Staff Area </a></div>
 
