@@ -17,7 +17,7 @@
             @if(strpos($user->dirty, 'title'))
                 <td class="bg-success">{{ $user->title }}</td>
             @else
-                <td class="">{{ $user->title }}</td>
+                <td class="manage">{{ $user->title }}</td>
             @endif
         </tr>
         <tr>
@@ -25,7 +25,7 @@
             @if(strpos($user->dirty, 'name'))
                 <td class="bg-success">{{ $user->name }}</td>
             @else
-                <td class="">{{ $user->name }}</td>
+                <td class="manage">{{ $user->name }}</td>
             @endif
         </tr>
         <tr>
@@ -33,7 +33,7 @@
             @if(strpos($user->dirty, 'lastname'))
                 <td class="bg-success">{{ $user->lastname }}</td>
             @else
-                <td class="">{{ $user->lastname }}</td>
+                <td class="manage">{{ $user->lastname }}</td>
             @endif
         </tr>
         <tr>
@@ -41,7 +41,7 @@
             @if(strpos($user->dirty, 'mobile'))
                 <td class="bg-success">{{ $user->mobile }}</td>
             @else
-                <td class="">{{ $user->mobile }}</td>
+                <td class="manage">{{ $user->mobile }}</td>
             @endif
         </tr>
         <tr>
@@ -57,7 +57,7 @@
             @if(strpos($user->dirty, 'dob'))
                 <td class="bg-success">{{ $user->dob }}</td>
             @else
-                <td class="">{{ $user->dob }}</td>
+                <td class="manage">{{ $user->dob }}</td>
             @endif
         </tr>
         <tr>
@@ -65,7 +65,7 @@
             @if(strpos($user->dirty, 'townofbirth'))
                 <td class="bg-success">{{ $user->townofbirth }}</td>
             @else
-                <td class="">{{ $user->townofbirth }}</td>
+                <td class="manage">{{ $user->townofbirth }}</td>
             @endif
         </tr>
         <tr>
@@ -73,7 +73,7 @@
             @if(strpos($user->dirty, 'gender'))
                 <td class="bg-success">{{ $user->gender }}</td>
             @else
-                <td class="">{{ $user->gender }}</td>
+                <td class="manage">{{ $user->gender }}</td>
             @endif
         </tr>
         <tr>
@@ -81,7 +81,7 @@
             @if(strpos($user->dirty, 'origin'))
                 <td class="bg-success">{{ $user->origin }}</td>
             @else
-                <td class="">{{ $user->origin }}</td>
+                <td class="manage">{{ $user->origin }}</td>
             @endif
         </tr>
         <tr>
@@ -89,7 +89,7 @@
             @if(strpos($user->dirty, 'nationality'))
                 <td class="bg-success">{{ $user->nationality }}</td>
             @else
-                <td class="">{{ $user->nationality }}</td>
+                <td class="manage">{{ $user->nationality }}</td>
             @endif
         </tr>
         <tr>
@@ -97,7 +97,7 @@
             @if(strpos($user->dirty, 'email'))
                 <td class="bg-success">{{ $user->email }}</td>
             @else
-                <td class="">{{ $user->email }}</td>
+                <td class="manage">{{ $user->email }}</td>
             @endif
         </tr>
         <tr>
@@ -105,7 +105,7 @@
             @if(strpos($user->dirty, 'emergency_contact_name'))
                 <td class="bg-success">{{ $user->emergency_contact_name }}</td>
                 @else
-                <td class="">{{ $user->emergency_contact_name }}</td>
+                <td class="manage">{{ $user->emergency_contact_name }}</td>
             @endif
         </tr>
         <tr>
@@ -113,7 +113,7 @@
             @if(strpos($user->dirty, 'emergency_contact_rel'))
                 <td class="bg-success">{{ $user->emergency_contact_rel }}</td>
             @else
-                <td class="">{{ $user->emergency_contact_rel }}</td>
+                <td class="manage">{{ $user->emergency_contact_rel }}</td>
             @endif
         </tr>
         <tr>
@@ -121,7 +121,7 @@
             @if(strpos($user->dirty, 'emergency_contact_rel'))
                 <td class="bg-success">{{ $user->emergency_contact_number }}</td>
             @else
-                <td class="">{{ $user->emergency_contact_number }}</td>
+                <td class="manage">{{ $user->emergency_contact_number }}</td>
             @endif
         </tr>
         <tr>
@@ -129,7 +129,7 @@
             @if(strpos($user->dirty, 'emergency_contact_mobile'))
                 <td class="bg-success">{{ $user->emergency_contact_mobile }}</td>
             @else
-                <td class="">{{ $user->emergency_contact_mobile }}</td>
+                <td class="manage">{{ $user->emergency_contact_mobile }}</td>
             @endif
         </tr>
         <tr>
@@ -137,7 +137,7 @@
             @if(strpos($user->dirty, 'other_lang'))
                 <td class="bg-success">{{ $user->other_lang }}</td>
             @else
-                <td class="">{{ $user->other_lang }}</td>
+                <td class="manage">{{ $user->other_lang }}</td>
             @endif
         </tr>
         <tr>
@@ -145,7 +145,7 @@
             @if(strpos($user->dirty, 'uk_driving_license'))
                 <td class="bg-success">{{ $user->uk_driving_license }}</td>
             @else
-                <td class="">{{ $user->uk_driving_license }}</td>
+                <td class="manage">{{ $user->uk_driving_license }}</td>
             @endif
         </tr>
         <tr>
@@ -153,7 +153,7 @@
             @if(strpos($user->dirty, 'nrswa'))
                 <td class="bg-success">{{ $user->nrswa }}</td>
             @else
-                <td class="">{{ $user->nrswa }}</td>
+                <td class="manage">{{ $user->nrswa }}</td>
             @endif
         </tr>
         <tr>
@@ -161,7 +161,7 @@
             @if(strpos($user->dirty, 'convictions'))
                 <td class="bg-success">{{ $user->convictions }}</td>
             @else
-                <td class="">{{ $user->convictions }}</td>
+                <td class="manage">{{ $user->convictions }}</td>
             @endif
         </tr>
         <tr>
@@ -169,7 +169,7 @@
             @if(strpos($user->dirty, 'medical_conditions'))
                 <td class="bg-success">{{ $user->medical_conditions }}</td>
             @else
-                <td class="">{{ $user->medical_conditions }}</td>
+                <td class="manage">{{ $user->medical_conditions }}</td>
             @endif
         </tr>
         <tr>
@@ -186,7 +186,7 @@
 
 <script>
 
-    $( "td:empty" )
+    $( "td.manage:empty" )
             .text( "Information Required!" )
             //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
