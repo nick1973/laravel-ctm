@@ -30,7 +30,7 @@
                         <div class="form-group">
                             {{ Form::label('dob', 'Date of Birth', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
-                                {{ Form::input('date', 'dob', null, ['class' => 'form-control', 'placeholder' => 'Date of Birth']) }}
+                                {{ Form::input('date', 'dob', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) }}
                             </div><!--col-md-6-->
                         </div><!--form-group-->
 
