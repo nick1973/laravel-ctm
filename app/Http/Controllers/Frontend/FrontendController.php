@@ -49,7 +49,8 @@ class FrontendController extends Controller
             $m->from('admin@ctm.uk.com', 'CTM Application');
             $m->to($email, 'nick')->subject('Your CTM Application!');
         });
-        return $email;
+        //return redirect()->back()->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        //return $email;
     }
 
 

@@ -134,12 +134,6 @@
                     <table class="table table-striped table-hover table-bordered dashboard-table">
                         @foreach($reference as $ref)
                             <tr>
-                                <th>{{ trans('labels.general.actions') }}</th>
-                                <td>
-                                    {{ link_to_route('frontend.user.profile.edit_character_reference', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Character Referee Name</th>
                                 <td class="character_reference">{{ $ref->ref_char_name }}</td>
                             </tr>
