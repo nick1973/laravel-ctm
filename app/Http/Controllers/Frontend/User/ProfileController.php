@@ -387,7 +387,7 @@ class ProfileController extends Controller
         $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo', $file_name);
         References::where('user_id', $user->id)->update(['passport_photo' => $file_path]);
         $user->update(['photo' => $file_path]);
-        $path = References::find(1);
+        References::find(1);
         $user->passport_photo = $file_name;
         $dirty = $user->getDirty();
         $dirty = json_encode($dirty, true);
@@ -407,8 +407,9 @@ class ProfileController extends Controller
         $user = User::find($id);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
-        $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/birth_cert', $file_name);
-        References::where('user_id', $user->id)->update(['birth_cert' => $file_path]);
+        $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/birth_cert', $file_name);
+        $path = $user->name . $user->lastname . '.' . $user->dob .'/birth_cert/' . $file_name;
+        References::where('user_id', $user->id)->update(['birth_cert' => $path]);
         $path = References::find(1);
         $user->birth_cert = $file_name;
         $dirty = $user->getDirty();
@@ -429,8 +430,9 @@ class ProfileController extends Controller
         $user = User::find($id);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
-        $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
-        References::where('user_id', $user->id)->update(['ni_card' => $file_path]);
+        $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
+        $path = $user->name . $user->lastname . '.' . $user->dob .'/ni_card/' . $file_name;
+        References::where('user_id', $user->id)->update(['ni_card' => $path]);
         $path = References::find(1);
         $user->ni_card = $file_name;
         $dirty = $user->getDirty();
@@ -452,8 +454,9 @@ class ProfileController extends Controller
         $user = User::find($id);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
-        $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/driving_license', $file_name);
-        References::where('user_id', $user->id)->update(['d1_photo' => $file_path]);
+        $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/driving_license', $file_name);
+        $path = $user->name . $user->lastname . '.' . $user->dob .'/driving_license/' . $file_name;
+        References::where('user_id', $user->id)->update(['d1_photo' => $path]);
         $path = References::find(1);
         $user->ni_card = $file_name;
         $dirty = $user->getDirty();
