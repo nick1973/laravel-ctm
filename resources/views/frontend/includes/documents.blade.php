@@ -14,7 +14,7 @@
                 <th>D1 Driving License Photo Uploaded</th>
                 @if($ref->d1_photo)
                     <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
-                    <td class="gp1"><a target="_blank" href="{{ $ref->d1_photo }}">Preview</a></td>
+                    <td class="gp1"><a target="_blank" href="/volume-1/{{ $ref->d1_photo }}">Preview</a></td>
                     @else
                     <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
                 @endif
@@ -25,7 +25,7 @@
             @if($ref->passport_photo)
                 <?php $photo =  substr($ref->passport_photo,14); ?>
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
-                <td class="gp1"><a target="_blank" href="{{ $photo }}">Preview</a></td>
+                <td class="gp1"><a target="_blank" href="/volume-1/{{ $photo }}">Preview</a></td>
                 @else
                 <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
             @endif
@@ -34,7 +34,7 @@
             <th>Photo Page of Passport Uploaded</th>
             @if($ref->passport_photo_page)
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
-                <td class="gp1"><a target="_blank" href="{{ $ref->passport_photo_page }}">Preview</a></td>
+                <td class="gp1"><a target="_blank" href="/volume-1/{{ $ref->passport_photo_page }}">Preview</a></td>
             @else
                 <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
             @endif
@@ -44,7 +44,7 @@
             <th>Birth Certificate</th>
             @if($ref->birth_cert)
                 <td class="gp2"><img src="/img/green-tick.png" height="18px"></td>
-                <td class="gp2"><a target="_blank" href="{{ $ref->birth_cert }}">Preview</a></td>
+                <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->birth_cert }}">Preview</a></td>
             @else
                 <td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
             @endif
@@ -60,7 +60,7 @@
             @endif
                 @if($ref->ni_card)
                     <td class="gp2"><img src="/img/green-tick.png" height="18px"></td>
-                    <td class="gp2"><a target="_blank" href="{{ $ref->ni_card }}">Preview</a></td>
+                    <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->ni_card }}">Preview</a></td>
                 @else
                     <td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
                 @endif
