@@ -62,7 +62,7 @@ class UserTableNullable extends Migration
             $table->string('student_loan')->nullable()->change();
             $table->string('profile_confirmed')->nullable()->change();
             $table->string('payroll')->nullable()->change();
-            $table->tinyInteger('payroll_export')->nullable()->change();
+            //$table->tinyInteger('payroll_export')->nullable()->change();
             //Marketing
             $table->string('heard_about_us')->nullable()->change();
             $table->string('uni')->nullable()->change();
