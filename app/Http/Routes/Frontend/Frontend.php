@@ -18,6 +18,10 @@ Route::get('/spec-staff/{staff}', function ($staff) {
     return $spec;
 });
 
+Route::get('/phpinfo', function () {
+    return phpinfo();
+});
+
 Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
 });
