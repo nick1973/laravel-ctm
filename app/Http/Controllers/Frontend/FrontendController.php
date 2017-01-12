@@ -61,4 +61,11 @@ class FrontendController extends Controller
     {
         return view('frontend.macros');
     }
+
+    public function users_sql()
+    {
+        return "hello";
+    }
+
+
 }
