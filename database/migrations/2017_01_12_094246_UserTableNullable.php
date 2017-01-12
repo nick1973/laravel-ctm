@@ -13,7 +13,7 @@ class UserTableNullable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            //$table->increments('id');
             $table->tinyInteger('visible')->default(1)->change();
             $table->text('dirty')->nullable()->change();
             $table->text('address_dirty')->nullable()->change();
@@ -70,10 +70,10 @@ class UserTableNullable extends Migration
 
             $table->string('confirmation_code')->nullable()->change();
             $table->boolean('confirmed')->default(1)->change();
-            $table->rememberToken();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at');
-            $table->softDeletes();
+            $table->rememberToken()->nullable()->change();
+            //$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            //$table->timestamp('updated_at');
+            //$table->softDeletes();
         });
     }
 
