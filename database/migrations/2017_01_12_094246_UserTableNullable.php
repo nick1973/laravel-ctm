@@ -44,7 +44,7 @@ class UserTableNullable extends Migration
             $table->string('convictions_info')->nullable()->change();
             $table->string('medical_conditions')->nullable()->change();
             $table->string('medical_conditions_info')->nullable()->change();
-            $table->string('email')->unique();
+            //$table->string('email')->unique();
             $table->string('password')->nullable();
             //ADDRESSES
             $table->string('address_line_1')->nullable()->change();
