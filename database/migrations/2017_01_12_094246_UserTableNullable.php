@@ -12,7 +12,7 @@ class UserTableNullable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //$table->increments('id');
             $table->tinyInteger('visible')->default(1)->change();
             $table->text('dirty')->nullable()->change();
