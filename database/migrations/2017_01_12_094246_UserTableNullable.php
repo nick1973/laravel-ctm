@@ -14,7 +14,7 @@ class UserTableNullable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //$table->increments('id');
-            $table->tinyInteger('visible')->default(1)->change();
+            $table->tinyInteger('visible')->default(true)->change();
             $table->text('dirty')->nullable()->change();
             $table->text('address_dirty')->nullable()->change();
             $table->text('reference_dirty')->nullable()->change();
@@ -69,7 +69,7 @@ class UserTableNullable extends Migration
             $table->string('promotion')->nullable()->change();
 
             $table->string('confirmation_code')->nullable()->change();
-            $table->boolean('confirmed')->default(1)->change();
+            $table->boolean('confirmed')->default(true)->change();
             $table->rememberToken()->nullable()->change();
             //$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             //$table->timestamp('updated_at');
