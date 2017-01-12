@@ -351,7 +351,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
         Route::get('dashboard/manager/staff/search/all', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
-            $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->get();
+            $staff = \App\Models\Access\User\User::all();
+            //$staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->get();
             return ['data'=>$staff];
         });
 
