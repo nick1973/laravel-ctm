@@ -31,6 +31,5 @@ class UpdateReferencesToInt extends Migration
             $table->string('ref_employed_from')->nullable()->change();
             $table->string('ref_employed_to')->nullable()->change();
             });
-        
     }
 }
