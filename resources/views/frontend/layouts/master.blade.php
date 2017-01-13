@@ -140,7 +140,7 @@
         @if (!Request::is('login'))
             @include('frontend.includes.nav')
         @endif
-
+        @if (access()->hasRole('Administrator') || access()->hasRole(''))
                 <div class="jumbotron">
                     <div class="container">
                         <div class="col-md-6">
@@ -167,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-            @if(access()->hasRole('Executive'))
+            @elseif(access()->hasRole('Executive'))
                 <div class="jumbotron">
                     <div class="container">
                         <div class="col-md-12 col-ld-12">
