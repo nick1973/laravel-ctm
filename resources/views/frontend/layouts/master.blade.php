@@ -140,9 +140,10 @@
         @if (!Request::is('login'))
             @include('frontend.includes.nav')
         @endif
-        @if (Auth::check() || access()->hasRole('Executive'))
+        @if (access()->hasRole('Executive'))
                 
-            @else
+        
+            @elseif(Auth::check())
         
                 <div class="jumbotron">
                     <div class="container">
