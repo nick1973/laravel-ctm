@@ -72,7 +72,8 @@ class FrontendController extends Controller
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1]
         ])->get();
-        return $staff;
+        $foo = User::where('id', 7230);
+        return $foo;
         //ini_set('max_execution_time', 10000);
         //ini_set('request_terminate_timeout ', 10000);
         //ini_set('memory_limit','2048M');
