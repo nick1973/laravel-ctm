@@ -51,7 +51,7 @@ class ManagerController extends Controller
         $collection->forget('id');
         //Inserts a copy of the user
         return $request->input('profile_confirmed');
-        
+
         if($request->input('profile_confirmed')=="Yes"){
             //ISSUE PAYROLL IF EMPTY
             $last_payroll = User::latest('payroll')->first();
