@@ -39,13 +39,13 @@
         <tr>
             <th>Date of Birth</th>
                 <?php
-                    list($dd,$mm,$yyyy) = explode('/',$user->dob);
-                    if (!checkdate($mm,$dd,$yyyy)) { ?>
-            <td class="required">{{ gmdate($user->dob) }}</td>
-            <?php   } else{ ?>
+                    //list($dd,$mm,$yyyy) = explode('/',$user->dob);
+                    //if (!checkdate($mm,$dd,$yyyy)) { ?>
+            
+            <?php   //} else{ ?>
             <td class="required">{{ $user->dob }}</td>
 
-            <?php        }
+            <?php        //}
                 ?>
 
 
