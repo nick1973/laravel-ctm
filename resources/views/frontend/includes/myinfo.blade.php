@@ -38,8 +38,8 @@
         </tr>
         <tr>
             <th>Date of Birth</th>
-
-            @if (strpos($user->dob, '/')!== false)
+            <?php $dob = (string)$user->dob ?>
+            @if (strpos($dob, '/')!== false)
                 <td class="required">{{ $user->dob }}</td>
             @else
                 <td class="required">{{ gmdate($user->dob) }}</td>
