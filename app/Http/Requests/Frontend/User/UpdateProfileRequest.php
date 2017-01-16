@@ -27,12 +27,16 @@ class UpdateProfileRequest extends Request
      */
     public function rules()
     {
+        $messages = [
+            'date_format' => 'The date needs to be yyyy-dd-mm.',
+        ];
+
         return [
             'name'  => 'required',
             'lastname'  => 'required',
             'email' => 'sometimes|required|email',
             'land' => 'digits:11',
-            'dob' => 'date_format:Y/m/d',
+            'dob' => 'date_format:Y-m-d',
             'emergency_contact_number' => 'digits:11',
             'emergency_contact_mobile' => 'digits:11'
         ];
