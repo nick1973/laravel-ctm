@@ -51,6 +51,7 @@ class ManagerController extends Controller
         $collection->forget('id');
         //Inserts a copy of the user
         return $request->input('profile_confirmed');
+        
         if($request->input('profile_confirmed')=="Yes"){
             //ISSUE PAYROLL IF EMPTY
             $last_payroll = User::latest('payroll')->first();
@@ -76,7 +77,7 @@ class ManagerController extends Controller
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning
-        return redirect('dashboard/manager')->withFlashWarning($user->name . '\'s application has been declined');
+        return redirect('dashboard/manager')->withFlashWarning($user->name . '\'s application has been declined!');
     }
 
     function staff_search()
