@@ -89,7 +89,7 @@ class ManagerController extends Controller
             ['profile_confirmed', '=', 'Yes'],
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1],
-            ['payroll', '!=', '']
+            ['payroll', '!=', 0]
         ])->get();
         //return dd($staff);
 
