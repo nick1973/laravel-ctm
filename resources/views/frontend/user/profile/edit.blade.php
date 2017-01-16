@@ -66,9 +66,9 @@
                             <?php
                             list($dd,$mm,$yyyy) = explode('/',$user->dob);
                             if (!checkdate($mm,$dd,$yyyy)) { ?>
-                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
-                            <?php   } else{ ?>
                                 <input name="dob" class="form-control" value="{{ gmdate("d/m/Y", $user->dob) }}" placeholder="dd/mm/yyyy">
+                            <?php   } else{ ?>
+                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                             <?php        }
                             ?>
                         </div>
