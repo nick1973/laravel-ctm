@@ -50,7 +50,6 @@ class ManagerController extends Controller
         // remove ID
         $collection->forget('id');
         //Inserts a copy of the user
-        return $request->input('profile_confirmed');
         if($request->input('profile_confirmed')=="Yes"){
             //ISSUE PAYROLL IF EMPTY
             $last_payroll = User::latest('payroll')->first();
@@ -73,8 +72,6 @@ class ManagerController extends Controller
             //SNAPSHOT OF USER
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
-        } else{
-            User::find($id)->update(['payroll_export'=>0]);
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning
