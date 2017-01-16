@@ -70,7 +70,8 @@ class FrontendController extends Controller
         $staff = User::where([
             ['profile_confirmed', '=', 'Yes'],
             ['confirmed', '=', 1],
-            ['payroll_export', '=', 1]
+            ['payroll_export', '=', 1],
+            ['payroll', '!=', '']
         ])->get();
         $foo = User::where('id', 34416)->get();
         return $foo;
