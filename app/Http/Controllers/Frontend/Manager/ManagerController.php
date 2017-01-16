@@ -72,6 +72,8 @@ class ManagerController extends Controller
             //SNAPSHOT OF USER
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
+        } else{
+            User::find($id)->update(['payroll_export'=>0]);
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning
