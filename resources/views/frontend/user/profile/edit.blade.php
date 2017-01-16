@@ -67,7 +67,7 @@
                             @if (strpos($dob, '-')!== false)
                                 {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                             @else
-                                <input name="dob" class="form-control" value="{{ gmdate("Y/m/d", $dobint) }}" placeholder="yyyy/mm/dd">
+                                <input name="dob" class="form-control" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy/mm/dd">
                             @endif
                         </div>
                     </div>
