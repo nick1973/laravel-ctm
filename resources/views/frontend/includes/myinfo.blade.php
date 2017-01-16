@@ -41,9 +41,10 @@
                 <?php
                     list($dd,$mm,$yyyy) = explode('/',$user->dob);
                     if (!checkdate($mm,$dd,$yyyy)) { ?>
-                        <td class="required">{{ $user->dob }}</td>
+            <td class="required">{{ gmdate($user->dob) }}</td>
             <?php   } else{ ?>
-                        <td class="required">{{ gmdate($user->dob) }}</td>
+            <td class="required">{{ $user->dob }}</td>
+
             <?php        }
                 ?>
 
