@@ -63,6 +63,7 @@
                     <div class="form-group">
                         {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
+                            <?php $dob = (string)$user->dob ?>
                             @if (strpos($dob, '/')!== false)
                                 {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                             @else
