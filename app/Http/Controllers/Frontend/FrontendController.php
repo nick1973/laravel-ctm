@@ -46,8 +46,8 @@ class FrontendController extends Controller
     {
         $input = $request->except('e_address');
         $email = $request->input('e_address');
-        return $input;
-        User::find($id)->update(['payroll'=>$last_payroll_number]);
+        //return $input;
+        User::find(access()->id())->update(['payroll_export'=>0]);
 
         Mail::send('emails.welcome', ['input'=>$input], function ($m) use ($input, $email) {
             $m->from('admin@ctm.uk.com', 'CTM Application');
