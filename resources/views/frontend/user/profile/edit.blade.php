@@ -64,10 +64,10 @@
                         {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             <?php $dob = (string)$user->dob;  $dobint = (int)$user->dob; ?>
-                            @if (strpos($dob, '/')!== false)
+                            @if (strpos($dob, '-')!== false)
                                 {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                             @else
-                                <input type="date" name="dob" class="form-control" value="{{ gmdate("Y/m/d", $dobint) }}" placeholder="dd/mm/yyyy">
+                                <input name="dob" class="form-control" value="{{ gmdate("Y/m/d", $dobint) }}" placeholder="dd/mm/yyyy">
                             @endif
                         </div>
                     </div>
