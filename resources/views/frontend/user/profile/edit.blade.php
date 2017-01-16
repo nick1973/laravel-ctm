@@ -63,8 +63,14 @@
                     <div class="form-group">
                         {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{--<input name="dob" class="form-control" value="{{ gmdate("d/m/Y", $user->dob) }}" placeholder="dd/mm/yyyy">--}}
-                            {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                            <?php
+                            list($dd,$mm,$yyyy) = explode('/',$user->dob);
+                            if (!checkdate($mm,$dd,$yyyy)) { ?>
+                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                            <?php   } else{ ?>
+                                <input name="dob" class="form-control" value="{{ gmdate("d/m/Y", $user->dob) }}" placeholder="dd/mm/yyyy">
+                            <?php        }
+                            ?>
                         </div>
                     </div>
 
