@@ -67,7 +67,12 @@ class FrontendController extends Controller
 
     public function users_sql()
     {
-        //return User::where('id', 34338)->get();
+        $staff = User::where([
+            ['profile_confirmed', '=', 'Yes'],
+            ['confirmed', '=', 1],
+            ['payroll_export', '=', 1]
+        ])->get();
+        return $staff;
         //ini_set('max_execution_time', 10000);
         //ini_set('request_terminate_timeout ', 10000);
         //ini_set('memory_limit','2048M');
