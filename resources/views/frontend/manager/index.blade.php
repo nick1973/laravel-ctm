@@ -21,7 +21,7 @@
                         @foreach($users as $user)
                         <tr>
                             @if($user->profile_confirmed=="Yes")
-                                <td>{{ 6000 + $user->id }}</td>
+                                <td>{{ $user->payroll }}</td>
                                 @else
                                 <td></td>
                             @endif
