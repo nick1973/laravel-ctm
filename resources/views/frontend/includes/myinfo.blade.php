@@ -39,8 +39,8 @@
         <tr>
             <th>Date of Birth</th>
 
-                        <td class="required">{{ date("d/m/Y", $user->dob) }}</td>
-                    
+                        <td class="required">{{ $user->dob }}</td>
+
 
         </tr>
         <tr>
