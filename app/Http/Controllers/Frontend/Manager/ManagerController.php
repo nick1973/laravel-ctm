@@ -76,7 +76,7 @@ class ManagerController extends Controller
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning
-        return redirect('dashboard/manager')->withFlashWarning($user->name . '\'s application has been declined!');
+        return redirect('dashboard/manager')->withFlashWarning($user->name . '\'s application has been declined');
     }
 
     function staff_search()
