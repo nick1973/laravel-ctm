@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th>Date of Birth</th>
-            <td class="required">{{ gmdate("Y-m-d\TH:i:s\Z", $user->dob) }}</td>
+            <td class="required">{{ gmdate("d-m-Y", $user->dob) }}</td>
         </tr>
         <tr>
             <th>Gender</th>
