@@ -67,13 +67,10 @@ class FrontendController extends Controller
 
     public function users_sql()
     {
-        
-        return User::where('id', 34338)->get();
+        //return User::where('id', 34338)->get();
         //ini_set('max_execution_time', 10000);
         //ini_set('request_terminate_timeout ', 10000);
         //ini_set('memory_limit','2048M');
-        
-          
     }
 
 

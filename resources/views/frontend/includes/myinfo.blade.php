@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th>Date of Birth</th>
-            <td class="required">{{ $user->dob }}</td>
+            <td class="required">{{ strtotime($user->dob) }}</td>
         </tr>
         <tr>
             <th>Gender</th>
