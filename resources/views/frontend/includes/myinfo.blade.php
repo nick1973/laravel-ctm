@@ -44,9 +44,6 @@
             @else
                 <td class="required">{{ gmdate($user->dob) }}</td>
             @endif
-
-
-
         </tr>
         <tr>
             <th>Gender</th>
