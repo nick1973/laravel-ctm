@@ -131,6 +131,7 @@
                                 //return dd+'-'+mm+'-'+yyyy;
 
                                 var difference = today - dob;
+                                return difference + ' ' + today + ' ' + dob
                                 var t = new Date(difference);
                                 return t.getMinutes()*60*60 + ' days';
                             }
