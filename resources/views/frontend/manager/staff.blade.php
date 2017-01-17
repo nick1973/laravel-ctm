@@ -69,10 +69,9 @@
 
         $(document).ready( function () {
             var table = $('#staff_table').DataTable( {
-
-
                 "ajax": "/dashboard/manager/staff/search/all",
-                dom: '<"top"Blf>rT<"bottom"p><"clear">',
+                //dom: '<"top"Blf>rT<"bottom"p><"clear">',
+                dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'copyHtml5',
