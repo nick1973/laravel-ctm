@@ -116,7 +116,7 @@
                                 if(month<10) {
                                     month='0'+month
                                 }
-                                return day + '-' + month + '-' + year;
+                                //return day + '-' + month + '-' + year;
 
                                 var today = new Date();
                                 var dd = today.getDate();
@@ -130,6 +130,9 @@
                                 }
                                 return dd+'-'+mm+'-'+yyyy;
 
+                                var difference = today - dob;
+                                var t = new Date(difference);
+                                return t.getMinutes()*60*60 + ' days';
                             }
                         }
                     },
