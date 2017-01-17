@@ -100,7 +100,26 @@
                     { "data": "profile_confirmed" , className: "centre get" },
                     { "data": "medical_conditions_info" , className: "centre get",
                         "visible": false },
-                    { "data": "dob" , className: "centre get" },
+                    {
+                        "data": function (data) {
+                            if (data.dob.indexOf("-") > 1){
+                                var date = new Date(data.dob*1000);
+// Hours part from the timestamp
+                                var hours = date.getHours();
+// Minutes part from the timestamp
+                                var minutes = "0" + date.getMinutes();
+// Seconds part from the timestamp
+                                var seconds = "0" + date.getSeconds();
+
+// Will display time in 10:30:23 format
+                                return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+                            } else
+                            {
+                                return data.dob;
+                            }
+                        }
+                    },
+                    //{ "data": "dob" , className: "centre get" },
                     { "data": "emergency_contact_name" , className: "centre get",
                         "visible": false },
                     { "data": "emergency_contact_rel" , className: "centre get",
