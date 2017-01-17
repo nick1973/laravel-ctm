@@ -108,10 +108,10 @@
                             {
                                 var dob = new Date(Number(data.dob)*1000);
                                 var now = new Date(now);
-                                return now;
-                                var day = dob.getDay();
-                                var month = dob.getMonth();
-                                var year = dob.getFullYear();
+
+                                var day = now.getDay();
+                                var month = now.getMonth();
+                                var year = now.getFullYear();
 
 
 
