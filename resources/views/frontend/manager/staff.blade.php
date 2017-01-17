@@ -80,7 +80,7 @@
                         //className: 'btn-primary',
                         header: false,
                         exportOptions: {
-                            columns: [ 0, 1, 2, 5 ],
+                            columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13 ],
                             modifier: {
                                 page: 'current'
                             }
@@ -90,7 +90,8 @@
 
                     //18 columns
                 "columns": [
-                    { "data": "payroll" , className: "centre get" },
+                    { "data": "payroll" , className: "centre get",
+                        "visible": false },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
                     { "defaultContent": ""},
