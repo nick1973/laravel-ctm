@@ -12,6 +12,7 @@
                 <table id="staff_table" class="table table-bordered table-hover table-striped">
                     <thead>
                     <tr>
+                        <th>Payroll number</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Postcode</th>
@@ -27,6 +28,7 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -73,6 +75,7 @@
 
 
                 "columns": [
+                    { "data": "payroll" , className: "centre get" },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
                     { "data": "postcode" , className: "centre get" },
