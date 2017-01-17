@@ -96,7 +96,7 @@
                     { "data": "" , className: "centre get" },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "email" , className: "centre get" },
-                    { "data": "rtw" , className: "centre get" },
+                    { "data": "profile_confirmed" , className: "centre get" },
                     { "data": "medical_conditions_info" , className: "centre get" },
                     { "data": "dob" , className: "centre get" },
                     { "data": "emergency_contact_name" , className: "centre get" },
