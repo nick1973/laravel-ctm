@@ -113,8 +113,10 @@
                         "visible": false },
                     { "data": "postcode" , className: "centre get" },
                     { "data": "land" , className: "centre" },
-                    { "data": "d1" , className: "centre" },
-                    { "data": "uk_driving_license" , className: "centre" }
+                    { "data": "d1" , className: "centre",
+                        "visible": false },
+                    { "data": "uk_driving_license" , className: "centre",
+                        "visible": false }
 //                    {
 //                        "data": function (data) {
 //                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
