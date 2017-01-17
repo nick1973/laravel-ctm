@@ -106,7 +106,7 @@
                                 return data.dob;
                             } else
                             {
-                                var date = new Date(data.dob);
+                                var date = new Date(Number(data.dob));
                                 var day = date.getDay();
                                 var month = date.getMonth();
                                 var year = date.getFullYear();
