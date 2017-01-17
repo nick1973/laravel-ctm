@@ -15,11 +15,17 @@
                         <th>Payroll number</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Postcode</th>
-                        <th>Email</th>
                         <th>Mobile</th>
-                        <th>Land Line</th>
+                        <th>Medical Notes</th>
+                        <th>Age</th>
+                        <th>Emergency contact name</th>
                         <th>DOB</th>
+                        <th>Emergency contact relationship</th>
+                        <th>Emergency contact number</th>
+                        <th>Emergency contact mobile</th>
+                        <th>Notes</th>
+                        <th>postcode</th>
+                        <th>D1</th>
                         <th>UK Driving License</th>
 
 
@@ -28,6 +34,12 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -78,11 +90,17 @@
                     { "data": "payroll" , className: "centre get" },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
-                    { "data": "postcode" , className: "centre get" },
-                    { "data": "email" , className: "centre get" },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "land" , className: "centre" },
-                    { "data": "dob" , className: "centre" },
+                    { "data": "email" , className: "centre get" },
+                    { "data": "medical_conditions_info" , className: "centre get" },
+                    { "data": "dob" , className: "centre get" },
+                    { "data": "emergency_contact_name" , className: "centre get" },
+                    { "data": "emergency_contact_rel" , className: "centre get" },
+                    { "data": "emergency_contact_number" , className: "centre get" },
+                    { "data": "emergency_contact_mobile" , className: "centre get" },
+                    { "data": "postcode" , className: "centre get" },
+                    { "data": "d1" , className: "centre" },
                     { "data": "uk_driving_license" , className: "centre" }
 //                    {
 //                        "data": function (data) {
