@@ -103,7 +103,11 @@
                     {
                         "data": function (data) {
                             if (data.dob.indexOf("-") > 1){
-                                var dob = new Date.parse(data.dob)
+                                var dob = data.dob
+
+                                var d = new Date();
+                                d.setFullYear(Number(dob.substr(6,4)), Number(dob.substr(3,2)), Number(dob.substr(0,2)));
+                                return d
                                 var ageDifMs = Date.now() - dob.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
                                 return Math.abs(ageDate.getUTCFullYear() - 1970);
