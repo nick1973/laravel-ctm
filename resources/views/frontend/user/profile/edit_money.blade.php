@@ -10,6 +10,17 @@
                 <div class="panel-body">
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_bank', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH',
                                             'id' => 'addressForm']) }}
+                    <div class="form-group hidden">
+                        {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            <?php $dob = (string)$user->dob;  $dobint = (int)$user->dob; ?>
+                            @if (strpos($dob, '-')!== false)
+                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                            @else
+                                <input name="dob" class="form-control" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy-mm-dd">
+                            @endif
+                        </div>
+                    </div>
                     <input name="payroll_export" value="1" hidden>
                     <div class="form-group">
                         {{ Form::label('account_name', 'Account Holder\'s Name:', ['class' => 'col-md-4 control-label']) }}
