@@ -354,6 +354,7 @@ Route::group(['middleware' => 'auth'], function () {
             ini_set('memory_limit','2048M');
             $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('payroll', '!=', '0')->get();
             return ['data'=>$staff];
+            
         });
 
         Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
