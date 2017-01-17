@@ -107,9 +107,8 @@
                                 var yyyy = Number(dob.substr(0,4))
                                 var mm = Number(dob.substr(5,2))
                                 var dd = Number(dob.substr(8,2))
-                                return data.dob + ' ' + yyyy + ' ' + mm + ' ' + dd
                                 var d = new Date();
-                                d.setFullYear(Number(dob.substr(6,4)), Number(dob.substr(3,2)), Number(dob.substr(0,2)));
+                                d.setFullYear(yyyy, mm, dd);
                                 return d
                                 var ageDifMs = Date.now() - dob.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
