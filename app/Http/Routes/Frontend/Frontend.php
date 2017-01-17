@@ -352,7 +352,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/all', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
-            $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->get();
+            $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('payroll', '!=', '0')->get();
             return ['data'=>$staff];
         });
 
