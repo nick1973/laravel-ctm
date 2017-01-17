@@ -107,7 +107,7 @@
                             } else
                             {
                                 var dob = new Date(Number(data.dob)*1000);
-                                var now = new Date(Number(now));
+                                var now = new Date.now();
 
                                 var day = now.getDay();
                                 var month = now.getMonth();
