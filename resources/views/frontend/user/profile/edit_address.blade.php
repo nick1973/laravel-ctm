@@ -28,6 +28,19 @@
                     <br/>
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
                     <input name="payroll_export" value="1" hidden>
+
+                    <div class="form-group">
+                        {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            <?php $dob = (string)$user->dob;  $dobint = (int)$user->dob; ?>
+                            @if (strpos($dob, '-')!== false)
+                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                            @else
+                                <input name="dob" class="form-control" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy-mm-dd">
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         {{ Form::label('address_line_1', 'House Number/Name:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
