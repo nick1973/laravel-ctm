@@ -88,7 +88,6 @@
                         }
                     },
                 ],
-                select: true,
                     //18 columns
                 "columns": [
                     { "data": "payroll" , className: "centre get",
@@ -115,7 +114,8 @@
 //                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
 //                        }
 //                    }
-                ]
+                ],
+                select: true
             } );
         } );
 
