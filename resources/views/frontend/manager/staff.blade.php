@@ -130,7 +130,7 @@
                                 }
                                 //return dd+'-'+mm+'-'+yyyy;
 
-                                var difference = today - dob;
+                                var difference = today.getUTCSeconds() - data.dob;
                                 return difference + ' ' + today + ' ' + dob
                                 var t = new Date(difference);
                                 return t.getMinutes()*60*60 + ' days';
