@@ -108,8 +108,8 @@
                             {
                                 var date = new Date(data.dob);
                                 var day = date.getDay();
-                                var month = "0" + date.getMonth();
-                                var year = "0" + date.getFullYear();
+                                var month = date.getMonth();
+                                var year = date.getFullYear();
                                 return day + '-' + month + '-' + year;
                             }
                         }
