@@ -131,7 +131,7 @@
                                 //return dd+'-'+mm+'-'+yyyy;
                                 var foo = + new Date();
                                 var difference = foo - data.dob;
-                                return difference + ' ' + foo + ' ' + dob
+                                return difference + ' ' + foo + ' ' + data.dob
                                 var t = new Date(difference);
                                 return t.getMinutes()*60*60 + ' days';
                             }
