@@ -106,10 +106,15 @@
                                 return data.dob;
                             } else
                             {
-                                var date = new Date(Number(data.dob)*1000);
-                                var day = date.getDay();
-                                var month = date.getMonth();
-                                var year = date.getFullYear();
+                                var dob = new Date(Number(data.dob)*1000);
+                                var now = new Date(now);
+                                return now;
+                                var day = dob.getDay();
+                                var month = dob.getMonth();
+                                var year = dob.getFullYear();
+
+
+
                                 return day + '-' + month + '-' + year;
                             }
                         }
