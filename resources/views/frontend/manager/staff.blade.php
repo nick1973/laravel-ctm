@@ -104,9 +104,9 @@
                         "data": function (data) {
                             if (data.dob.indexOf("-") > 1){
                                 var dob = data.dob
-                                var yyyy = dob.substr(0,4)
-                                var mm = dob.substr(5,2)
-                                var dd = dob.substr(7,2)
+                                var yyyy = Number(dob.substr(0,4))
+                                var mm = Number(dob.substr(5,2))
+                                var dd = Number(dob.substr(8,2))
                                 return data.dob + ' ' + yyyy + ' ' + mm + ' ' + dd
                                 var d = new Date();
                                 d.setFullYear(Number(dob.substr(6,4)), Number(dob.substr(3,2)), Number(dob.substr(0,2)));
