@@ -289,6 +289,7 @@ class ProfileController extends Controller
         $user->country = $request->input('country');
         $user->postcode = $request->input('postcode');
         $user->payroll_export = $request->input('payroll_export');
+        $user->dob = $request->input('dob');
         $dirty = $user->getDirty();
         if($dirty!=[]){
             $dirty = json_encode($dirty, true);
