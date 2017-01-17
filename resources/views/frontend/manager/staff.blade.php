@@ -133,7 +133,16 @@
                                 var difference = foo - Number(data.dob);
                                 return difference + ' ' + foo + ' ' + data.dob
                                 var t = new Date(difference);
-                                return t.getMinutes()*60*60 + ' days';
+                                //return t.getMinutes()*60*60 + ' days';
+
+
+                                    var ageDifMs = Date.now() - data.dob.getTime();
+                                    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                                    return Math.abs(ageDate.getUTCFullYear() - 1970);
+
+
+
+
                             }
                         }
                     },
