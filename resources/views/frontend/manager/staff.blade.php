@@ -93,7 +93,7 @@
                     { "data": "payroll" , className: "centre get" },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
-                    { "data": "d1" , className: "centre get" },
+                    { "data": "<td></td>" },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "email" , className: "centre get" },
                     { "data": "profile_confirmed" , className: "centre get" },
