@@ -106,7 +106,7 @@
                                 var dob = data.dob
                                 var dd = dob.substr(0,2)
                                 var mm = dob.substr(2,2)
-                                return dd + ' ' + mm
+                                return data.dob + ' ' + dd + ' ' + mm
                                 var d = new Date();
                                 d.setFullYear(Number(dob.substr(6,4)), Number(dob.substr(3,2)), Number(dob.substr(0,2)));
                                 return d
