@@ -123,7 +123,7 @@
                                 if(mm<10) {
                                     mm='0'+mm
                                 }
-                                return mm+'/'+dd+'/'+yyyy;
+                                return dd+'-'+mm+'-'+yyyy;
 
                             }
                         }
