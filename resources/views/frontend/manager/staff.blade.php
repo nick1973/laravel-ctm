@@ -129,9 +129,9 @@
                                     mm='0'+mm
                                 }
                                 //return dd+'-'+mm+'-'+yyyy;
-
-                                var difference = today.getUTCSeconds() - data.dob;
-                                return difference + ' ' + today + ' ' + dob
+                                var foo = + new Date();
+                                var difference = foo - data.dob;
+                                return difference + ' ' + foo + ' ' + dob
                                 var t = new Date(difference);
                                 return t.getMinutes()*60*60 + ' days';
                             }
