@@ -103,6 +103,9 @@
                     {
                         "data": function (data) {
                             if (data.dob.indexOf("-") > 1){
+                                return data.dob;
+                            } else
+                            {
                                 var date = new Date(data.dob*1000);
 // Hours part from the timestamp
                                 var hours = date.getHours();
@@ -113,9 +116,6 @@
 
 // Will display time in 10:30:23 format
                                 return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-                            } else
-                            {
-                                return data.dob;
                             }
                         }
                     },
