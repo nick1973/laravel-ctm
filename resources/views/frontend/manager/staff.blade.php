@@ -107,7 +107,10 @@
                             } else
                             {
                                 var date = new Date(data.dob);
-                                return date.format("dd-mm-yyyy");
+                                var day = date.getDay();
+                                var month = "0" + date.getMonth();
+                                var year = "0" + date.getFullYear();
+                                return day + '-' + month + '-' + year;
                             }
                         }
                     },
