@@ -109,8 +109,7 @@
                                 var dd = Number(dob.substr(8,2))
                                 var d = new Date();
                                 d.setFullYear(yyyy, mm, dd);
-                                return d
-                                var ageDifMs = Date.now() - dob.getTime();
+                                var ageDifMs = Date.now() - d.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
                                 return Math.abs(ageDate.getUTCFullYear() - 1970);
                             } else
