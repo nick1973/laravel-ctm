@@ -26,7 +26,8 @@ class ManagerController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $users = User::where('visible', 1)->where('payroll_export', 1)->paginate(50);
+        $users = User::where('visible', 1)->where('confirmed', 0)->orWhere('profile_confirmed', 'yes')
+            ->paginate(50); //confirmed 0 = NEW
         return view('frontend.manager.index', compact('users'));
     }
 
@@ -73,7 +74,7 @@ class ManagerController extends Controller
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
         } else {
-            User::find($id)->update(['payroll_export'=>0]);
+            //User::find($id)->update(['payroll_export'=>0]);
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning

@@ -27,7 +27,7 @@
 
                     <br/>
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_address', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
-                    <input name="payroll_export" value="1" hidden>
+<!--                    <input name="payroll_export" value="1" hidden>-->
 
                     <div class="form-group hidden">
                         {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
