@@ -354,8 +354,9 @@ class ProfileController extends Controller
 
     public function update_passport_photo_page(Request $request, $id)
     {
+        ini_set('max_execution_time', 2);
         $this->validate($request, [
-            'passport_photo_page' => 'mimes:jpg,jpeg,png'
+            'upload_max_filesize ' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
         $user->fill(['profile_confirmed'=>'no'])->save();
