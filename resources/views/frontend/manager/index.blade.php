@@ -41,6 +41,7 @@
 
         <div class="col-lg-12">
             <h3>Use the 'Export' button below to download the payroll file:</h3>
+            <h4>There are {{ $staff }} to be exported.</h4>
             <form action="/dashboard/manager/staff/export" method="get">
                 <button type="submit" id="export" class="btn btn-success">Export</button>
             </form>
