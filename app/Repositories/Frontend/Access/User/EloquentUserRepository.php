@@ -320,7 +320,7 @@ class EloquentUserRepository implements UserRepositoryContract
         $user->medical_conditions_info = $input['medical_conditions_info'];
         $user->townofbirth = $input['townofbirth'];
         $user->countryofbirth = $input['countryofbirth'];
-        $user->confirmed = $input['confirmed'];
+        $user->profile_confirmed = $input['profile_confirmed'];
 
         if ($user->canChangeEmail()) {
             //Address is not current address
