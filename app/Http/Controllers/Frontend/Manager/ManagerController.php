@@ -78,6 +78,9 @@ class ManagerController extends Controller
                 $m->to($user->email, $user->name)->subject('Your CTM Application!');
             });
             //SNAPSHOT OF USER
+            $user = User::find($id);
+            $collection = collect($user);
+            $collection->forget('id');
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
         } else {
