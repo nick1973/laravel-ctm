@@ -396,6 +396,7 @@ class ProfileController extends Controller
             'passport_photo' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
+        $user->update(['profile_confirmed'=>'no']);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
         $file_path = $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/passport_photo', $file_name);
@@ -419,6 +420,7 @@ class ProfileController extends Controller
             'birth_cert' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
+        $user->update(['profile_confirmed'=>'no']);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
         $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/birth_cert', $file_name);
@@ -442,6 +444,7 @@ class ProfileController extends Controller
             'ni_card' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
+        $user->update(['profile_confirmed'=>'no']);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
         $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/ni_card', $file_name);
@@ -466,6 +469,7 @@ class ProfileController extends Controller
             'ni_card' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
+        $user->update(['profile_confirmed'=>'no']);
         $file = $request->file('file');
         $file_name = $file->getClientOriginalName();
         $file->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/driving_license', $file_name);
