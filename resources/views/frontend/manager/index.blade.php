@@ -20,7 +20,7 @@
                         </tr>
                         @foreach($users as $user)
                         <tr>
-                            @if($user->profile_confirmed=="Yes")
+                            @if($user->profile_confirmed=="Yes" || $user->profile_confirmed=="no")
                                 <td>{{ $user->payroll }}</td>
                                 @else
                                 <td></td>
