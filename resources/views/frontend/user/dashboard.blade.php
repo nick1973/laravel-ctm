@@ -61,7 +61,7 @@
                             {{--<li role="presentation">--}}
                                 {{--<a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>--}}
                             {{--</li>--}}
-                            @if($user->profile_confirmed=="" || $user->profile_confirmed=="No")
+                            @if($user->profile_confirmed=="" || $user->profile_confirmed=="No" || $user->profile_confirmed=="no")
                                 <li role="presentation">
                                     <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
                                 </li>
