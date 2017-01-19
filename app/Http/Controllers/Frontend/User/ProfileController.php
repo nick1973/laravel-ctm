@@ -356,7 +356,7 @@ class ProfileController extends Controller
     {
         
         $this->validate($request, [
-            'passport_photo_page' => 'mimes:jpg,jpeg,png'
+            'passport_photo_page' => 'mimes:jpg,jpeg,png',
             'passport_photo_page' => 'size:1M'
         ]);
         $user = User::find($id);
