@@ -23,6 +23,15 @@
                         {{--</div>--}}
                     {{--</div>--}}
                     <input name="confirm" value="0" hidden>
+                    
+                    <div class="form-group">
+                        {{ Form::label('title', 'Title:', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',
+                                                       'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',
+                            'id' => 'title'])}}
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         {{ Form::label('name', 'First Name:', ['class' => 'col-md-4 control-label']) }}
