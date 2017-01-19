@@ -2,13 +2,7 @@
     @foreach($reference as $ref)
     @foreach($rt_work as $rtw)
     <table class="table table-striped table-hover table-bordered dashboard-table">
-        <tr>
-            <th>{{ trans('labels.general.actions') }}</th>
-            <td>
-                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
-            </td>
-            <td>Preview</td>
-        </tr>
+        
         @if($user->d1=="Yes")
             <tr>
                 <th>D1 Driving License Photo Uploaded</th>
