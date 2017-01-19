@@ -22,6 +22,7 @@
                             {{--{!! Form::file('photo', ['class' => 'form-control',]) !!}--}}
                         {{--</div>--}}
                     {{--</div>--}}
+                    <input name="confirm" value="0" hidden>
 
                     <div class="form-group">
                         {{ Form::label('name', 'First Name:', ['class' => 'col-md-4 control-label']) }}
