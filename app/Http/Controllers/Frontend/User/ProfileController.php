@@ -358,7 +358,7 @@ class ProfileController extends Controller
             'passport_photo_page' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
-        $user->updateProfile($id, ['profile_confirmed'=>'no']);
+        $user->fill(['profile_confirmed'=>'no'])->save();
         $reference = References::where('user_id', $id)->get();
         foreach ($reference as $results)
         {
