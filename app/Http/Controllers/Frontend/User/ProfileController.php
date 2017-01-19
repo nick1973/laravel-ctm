@@ -356,11 +356,10 @@ class ProfileController extends Controller
     {
         
         $this->validate($request, [
-            'passport_photo_page' => 'mimes:jpg,jpeg,png',
-            'passport_photo_page' => 'size:1M'
+            'passport_photo_page' => 'mimes:jpg,jpeg,png'
         ]);
         $user = User::find($id);
-        $user->fill(['profile_confirmed'=>'no'])->save();
+        $user->update(['profile_confirmed'=>'no']);
         $reference = References::where('user_id', $id)->get();
         foreach ($reference as $results)
         {
