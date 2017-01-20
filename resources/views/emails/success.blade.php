@@ -11,7 +11,7 @@
 <p>The CTM Team.</p>
 <p>Follow us…</p>
 
-<span><img src="http://ctmstaff.uk.com/img/facebook.png"></span>
+<span><a href="http://en-gb.facebook.com/ctm.uk/"><img src="http://ctmstaff.uk.com/img/facebook.png"></a><a href="https://twitter.com/ctm_uk?lang=en"><img src="http://ctmstaff.uk.com/img/twitter.png"></a><a href="https://www.instagram.com/ctm_uk/"><img src="http://ctmstaff.uk.com/img/instergram.png"></a></span>
 
 
 
