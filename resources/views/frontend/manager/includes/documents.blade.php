@@ -72,6 +72,7 @@
     $("td.gp1.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#gp1_tick").addClass('hidden');
+            $("#documents_tick").addClass('hidden');
             console.log("has Class");
         }
     });
@@ -83,6 +84,7 @@
     $("td.gp2.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#gp1_tick").addClass('hidden');
+            $("#documents_tick").addClass('hidden');
             console.log("has Class");
         }
     });
