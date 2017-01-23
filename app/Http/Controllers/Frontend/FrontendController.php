@@ -66637,7 +66637,7 @@ class FrontendController extends Controller
 
 
 foreach($pFortyFive as $res){
-            return $res['id'];
+            echo $res['id'];
             //User::find($res['id'])->update(['p45'=>$res['p45']]);
         }
 
