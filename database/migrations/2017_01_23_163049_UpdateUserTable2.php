@@ -13,7 +13,7 @@ class UpdateUserTable2 extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->tinyInteger('p45')->change();
+            $table->integer('markAsp45');
         });
     }
 
