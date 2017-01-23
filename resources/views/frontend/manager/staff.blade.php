@@ -111,7 +111,15 @@
                                 d.setFullYear(yyyy, mm, dd);
                                 var ageDifMs = Date.now() - d.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
-                                return Math.abs(ageDate.getUTCFullYear() - 1970);
+                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                                if(age < 18){
+                                    return "Under 18"
+                                }
+                                if(age >= 18 && age < 25){
+                                    return "Under 25"
+                                } else {
+                                    return "Over 25"
+                                }
                             } else
                             {
                                 var dob = new Date(Number(data.dob)*1000);

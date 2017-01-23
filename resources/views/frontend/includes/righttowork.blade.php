@@ -79,15 +79,14 @@
     </div>
 {{--COL TWO--}}
     <div class="col-md-6 form-group">
-
         <br/>
-        <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
-            Are you a student?
-        </label>
-        <p id="student">{{ $ref->student }}</p>
+        @if($ref->student == 'Yes')
+            <label for="inputEmail3" class="col-sm-4 col-lg-4 col-md-4 control-label">
+                You have declared you are a student
+            </label>
+        @endif
         <br/>
         <br/>
-        <p>It is important that you answer the above question correctly as it may affect your tax code which could result in overpayment of tax.</p>
 
         <div id="ru_student" class="col-lg-12 <?php if($ref->student!='Yes') echo 'collapse' ?> animated fadeIn">
             <table class="table table-striped table-hover table-bordered dashboard-table">

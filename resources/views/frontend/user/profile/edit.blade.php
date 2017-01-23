@@ -65,9 +65,13 @@
                         <div class="col-md-6">
                             <?php $dob = (string)$user->dob;  $dobint = (int)$user->dob; ?>
                             @if (strpos($dob, '-')!== false)
-                                {{ Form::input('text', 'dob', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
+                                    <?php  $year = substr($user->dob,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                                    {{--<td class="required">{{ $day . '-' . $month . '-' . $year }}</td>--}}
+                                    <input class="form-control" value="{{ $day . '-' . $month . '-' . $year }}">
+                                {{ Form::input('text', 'dob', null, ['class' => 'form-control hidden', 'placeholder' => trans('validation.attributes.frontend.name')]) }}
                             @else
-                                <input name="dob" class="form-control" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy-mm-dd">
+                                <input name="dob" class="form-control hidden" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy-mm-dd">
+                                <input class="form-control" value="{{ gmdate("d-m-Y", $dobint) }}" placeholder="yyyy-mm-dd">
                             @endif
                         </div>
                     </div>

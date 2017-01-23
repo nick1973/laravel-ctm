@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 use App\Models\Access\User\User;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -220,15 +222,15 @@ class ProfileController extends Controller
      */
     public function update_employer_reference(Request $request, $id)
     {
-//        $validator = Validator::make($request->all(), [
-//            'ref_phone_number' => 'digits:11',
-//            'ref_char_phone_number' => 'digits:11'
-//        ]);
-//        if ($validator->fails()) {
-//            return redirect()->back()
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
+        $validator = Validator::make($request->all(), [
+            'ref_phone_number' => 'digits:11',
+            'ref_char_phone_number' => 'digits:11'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $reference = References::where('user_id', $id)->get();
         foreach ($reference as $results)
@@ -311,8 +313,8 @@ class ProfileController extends Controller
     {
         //$input = $request->all();
         $validator = Validator::make($request->all(), [
-            'account_number' => 'required|numeric',
-            'account_sort_code' => 'required|numeric',
+            //'account_number' => 'required|numeric',
+            //'account_sort_code' => 'required|numeric',
             'ni_number' => 'required'
         ]);
         if ($validator->fails()) {
@@ -320,9 +322,16 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $input = $request->all();
+        //$input = $request->all();
         $user = User::find($id);
-        $user->fill($input)->save();
+        $user->fill([
+            'account_number' => Crypt::encrypt($request->account_number),
+            'account_sort_code' => Crypt::encrypt($request->account_sort_code),
+            'ni_number' => $request->input('ni_number'),
+            'account_name' => $request->input('account_name'),
+            'job_status' => $request->input('job_status'),
+            'student_loan' => $request->input('student_loan')
+        ])->save();
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
     }
 

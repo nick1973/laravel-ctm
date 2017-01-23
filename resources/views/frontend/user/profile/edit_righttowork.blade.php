@@ -48,7 +48,7 @@
 
                                     <p>As you are a UK Citizen you automatically have the right to work in the UK, but you must supply one of the following:</p>
                                     <ul>
-                                        <li>(a)	The front cover and photo page of your Passport.; or</li>
+                                        <li>(a)	The photo page of your Passport.; or</li>
                                         <li>(b)	Your birth certificate along with proof of your National Insurance number. You can find this on any document/correspondence from the HMRC or the DWP, your NI Card or a previous payslip.</li>
                                     </ul>
                                     <p>You will be required to upload these documents at the end of the application process.</p>
@@ -60,7 +60,7 @@
                                     <h4>European National</h4>
 
                                     <p>As you are a European National, you automatically have the right to work in the UK, but you must supply one of the following:</p>
-                                    <li>(a)	The front cover and photo page of your valid Passport;</li>
+                                    <li>(a)	The photo page of your valid Passport;</li>
                                     <li>(b)	Your valid ID card or equivalent.</li>
                                     <br/>
                                     <p>You will be required to upload these documents at the end of the application process.</p>
@@ -72,7 +72,7 @@
                                     <h4>Non European National</h4>
 
                                     <p>As you are a Non-European National, you will be required to prove that you have the right to work in the UK. To prove this you can use either option (a) or (b) below: -</p>
-                                    <li>(a)	The front page and photo page of your valid Passport along with a valid Visa.</li>
+                                    <li>(a)	The photo page of your valid Passport along with a valid Visa.</li>
                                     <li>(b)	Valid Work Permit or Residency Document.</li>
                                     <br/>
                                     <p>Please note, if you currently hold a Student Visa and wish to use this as proof of your right to work in the UK, then you will also need to send us a letter from your University confirming your course dates.</p>
@@ -89,7 +89,8 @@
                                 <div class="onoffswitch">
                                     <input name="student" type="hidden" value="No">
                                     <input type="checkbox" value="Yes" name="student" class="toggleBtn onoffswitch-checkbox" id="on-hold"
-                                           onclick="visible(this.id,'ru_student')" <?php if($ref->student=='Yes') echo "checked" ?> >
+                                           onclick="visible(this.id,'ru_student')" <?php if($ref->student=='Yes') echo "checked" ?>
+                                           data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">
                                     <label for="on-hold" class="onoffswitch-label">
                                         <div class="onoffswitch-inner"></div>
                                         <div class="onoffswitch-switch"></div>
@@ -97,56 +98,57 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            {{ Form::label('teaching_establishment', 'Teaching Establishment Name:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('text', 'teaching_establishment', $ref->teaching_establishment, ['class' => 'form-control', 'placeholder' => 'Your Job Title']) }}
-                                {{--{{ Form::input('text', 'student', $ref->teaching_establishment, ['class' => 'hidden', 'value' => 'Yes']) }}--}}
+                        <div class="collapse" id="collapseExample4">
+                            <div class="form-group">
+                                {{ Form::label('teaching_establishment', 'Teaching Establishment Name:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('text', 'teaching_establishment', $ref->teaching_establishment, ['class' => 'form-control', 'placeholder' => 'Teaching Establishment Name']) }}
+                                    {{--{{ Form::input('text', 'student', $ref->teaching_establishment, ['class' => 'hidden', 'value' => 'Yes']) }}--}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('autumn_term_starts', 'Autumn Term Starts:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'autumn_term_starts', $ref->autumn_term_starts, ['class' => 'form-control', 'placeholder' => 'Employment From Date']) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('autumn_term_ends', 'Autumn Term Ends:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'autumn_term_ends', $ref->autumn_term_ends, ['class' => 'form-control', 'placeholder' => 'Employment To Date']) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('spring_term_starts', 'Spring Term Starts:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'spring_term_starts', $ref->spring_term_starts, ['class' => 'form-control', 'placeholder' => 'Employer Company Name']) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('spring_term_ends', 'Spring Term Ends:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'spring_term_ends', $ref->spring_term_ends, ['class' => 'form-control', 'placeholder' => 'Employer Referee Contact']) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('summer_term_starts', 'Summer Term Starts:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'summer_term_starts', $ref->summer_term_starts, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number']) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('summer_term_ends', 'Summer Term Ends:', ['class' => 'col-md-4 control-label']) }}
+                                <div class="col-md-6">
+                                    {{ Form::input('date', 'summer_term_ends', $ref->summer_term_ends, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number']) }}
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            {{ Form::label('autumn_term_starts', 'Autumn Term Starts:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'autumn_term_starts', $ref->autumn_term_starts, ['class' => 'form-control', 'placeholder' => 'Employment From Date']) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('autumn_term_ends', 'Autumn Term Ends:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'autumn_term_ends', $ref->autumn_term_ends, ['class' => 'form-control', 'placeholder' => 'Employment To Date']) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('spring_term_starts', 'Spring Term Starts:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'spring_term_starts', $ref->spring_term_starts, ['class' => 'form-control', 'placeholder' => 'Employer Company Name']) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('spring_term_ends', 'Spring Term Ends:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'spring_term_ends', $ref->spring_term_ends, ['class' => 'form-control', 'placeholder' => 'Employer Referee Contact']) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('summer_term_starts', 'Summer Term Starts:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'summer_term_starts', $ref->summer_term_starts, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number']) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('summer_term_ends', 'Summer Term Ends:', ['class' => 'col-md-4 control-label']) }}
-                            <div class="col-md-6">
-                                {{ Form::input('date', 'summer_term_ends', $ref->summer_term_ends, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number']) }}
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {{ Form::submit('Save Right to Work', ['class' => 'btn btn-primary']) }}

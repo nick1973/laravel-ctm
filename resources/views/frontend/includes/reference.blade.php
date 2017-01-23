@@ -6,7 +6,7 @@
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <b>Employer Reference</b>
+                        <b>Employer Reference <span class="caret"></span></b>
                     </a>
                 </h4>
             </div>
@@ -27,11 +27,13 @@
                             </tr>
                             <tr>
                                 <th>Employment From Date</th>
-                                <td class="reference">{{ $ref->ref_employed_from }}</td>
+                                <?php  $year = substr($ref->ref_employed_from,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                                <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
                             </tr>
                             <tr>
                                 <th>Employment To Date</th>
-                                <td class="reference">{{ $ref->ref_employed_to }}</td>
+                                <?php  $year = substr($ref->ref_employed_to,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                                <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
                             </tr>
                             <tr>
                                 <th>Employer Company Name</th>
@@ -79,7 +81,7 @@
             <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <b>Character Reference</b>
+                        <b>Character Reference <span class="caret"></span></b>
                     </a>
                 </h4>
             </div>

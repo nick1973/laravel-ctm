@@ -145,33 +145,7 @@
         
             @elseif(Auth::check())
         
-                <div class="jumbotron">
-                    <div class="container">
-                        <div class="col-md-6">
-                            <h1>Welcome to your profile {{ access()->user()->name }}.</h1>
-                        </div>
-                        <div class="col-md-12">
-                            <h3>Please fill out the form below to complete your application</h3>
-                        </div>
-                        <div class="col-md-6">
-                            <p>You can view and edit your profile below.</p>
-                            {{--<p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>--}}
-                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                New to CTM? Learn more &raquo;
-                            </button>
-                        </div>
-                        <div class="col-md-6">
-                            <br/>
-                            <?php $photo = ''; ?>
-                            @if(access()->user()->photo)
-                                <?php $photo =  substr(access()->user()->photo,14);  ?>
-                            <img src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded">
-                                @else
-                                {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
-                            @endif
-                        </div>
-                    </div>
-                </div>
+
         
             @endif
         

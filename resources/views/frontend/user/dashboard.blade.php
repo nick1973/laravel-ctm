@@ -6,7 +6,22 @@
         <div class="col-md-12 col-lg-12">
 
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('navs.frontend.dashboard') }}</div>
+                <div class="panel-heading">
+                        <h1>Welcome to your profile {{ access()->user()->name }}.
+                            <button style="vertical-align: middle;" type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+                            New to CTM? Learn more &raquo;
+                            </button>
+                        </h1>
+                    <h3>You can create, view and edit your profile here.
+                        <?php $photo = ''; ?>
+                        @if(access()->user()->photo)
+                            <?php $photo =  substr(access()->user()->photo,14);  ?>
+                            <img src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded pull-right">
+                        @else
+                            {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
+                        @endif
+                    </h3>
+                </div>
 
                 <div class="panel-body">
                     <div role="tabpanel">

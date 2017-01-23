@@ -126,7 +126,7 @@
                             <div class="form-group">
                                 {{ Form::label('ref_phone_number', 'Employer Phone Number:', ['class' => 'col-md-4 control-label']) }}
                                 <div class="col-md-6">
-                                    {{ Form::input('text', 'ref_phone_number', $ref->ref_phone_number, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number']) }}
+                                    {{ Form::input('text', 'ref_phone_number', $ref->ref_phone_number, ['class' => 'form-control', 'placeholder' => 'Employer Phone Number', 'required']) }}
                                 </div>
                             </div>
                             <div class="form-group">

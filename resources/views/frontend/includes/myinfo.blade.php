@@ -5,10 +5,6 @@
                 <th>{{ trans('labels.general.actions') }}</th>
                 <td>
                     {{ link_to_route('frontend.user.profile.edit', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-
-                    @if ($user->canChangePassword())
-                        {{ link_to_route('auth.password.change', trans('navs.frontend.user.change_password'), [], ['class' => 'btn btn-warning btn-sm']) }}
-                    @endif
                 </td>
             </tr>
         {{--@endauth--}}
@@ -40,7 +36,8 @@
             <th>Date of Birth</th>
             <?php $dob = (string)$user->dob ?>
             @if (strpos($dob, '-')!== false)
-                <td class="required">{{ $user->dob }}</td>
+                <?php  $year = substr($user->dob,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
             @else
                 <td class="required">{{ gmdate($user->dob) }}</td>
             @endif

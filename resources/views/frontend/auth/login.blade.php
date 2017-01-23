@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="panel panel-default">
-                <div class="panel-heading">Login to CTM Staff Area <a href="/" class="btn btn-success"style="margin-left: 400px">Need to Register?</a></div>
+                <div class="panel-heading">Login to CTM Staff Area <a href="/" class="btn btn-success"style="margin-left: 55%">Need to Register?</a></div>
 
                 <div class="panel-body">
 

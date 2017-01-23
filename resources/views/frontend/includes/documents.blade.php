@@ -5,7 +5,7 @@
         <tr>
             <th>{{ trans('labels.general.actions') }}</th>
             <td>
-                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
+                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload All Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
             </td>
             <td>Preview</td>
         </tr>
@@ -16,7 +16,8 @@
                     <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
                     <td class="gp1"><a target="_blank" href="/volume-1/{{ $ref->d1_photo }}">Preview</a></td>
                     @else
-                    <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+                    {{--<td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
+                    <td class="gp1 bg-danger">Awaiting Upload</td>
                 @endif
             </tr>
         @endif
@@ -27,7 +28,8 @@
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
                 <td class="gp1"><a target="_blank" href="/volume-1/{{ $photo }}">Preview</a></td>
                 @else
-                <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+                {{--<td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
+                <td class="gp1 bg-danger">Awaiting Upload</td>
             @endif
         </tr>
         <tr>
@@ -36,7 +38,8 @@
                 <td class="gp1"><img src="/img/green-tick.png" height="18px"></td>
                 <td class="gp1"><a target="_blank" href="/volume-1/{{ $ref->passport_photo_page }}">Preview</a></td>
             @else
-                <td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+                {{--<td class="gp1 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
+                <td class="gp1 bg-danger">Awaiting Upload</td>
             @endif
         </tr>
         @if($rtw->work_status=='UK Citizen')
@@ -46,7 +49,8 @@
                 <td class="gp2"><img src="/img/green-tick.png" height="18px"></td>
                 <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->birth_cert }}">Preview</a></td>
             @else
-                <td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+                {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
+                <td class="gp1 bg-danger">Awaiting Upload</td>
             @endif
         </tr>
         @endif
@@ -62,7 +66,8 @@
                     <td class="gp2"><img src="/img/green-tick.png" height="18px"></td>
                     <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->ni_card }}">Preview</a></td>
                 @else
-                    <td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>
+                    {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
+                    <td class="gp1 bg-danger">Awaiting Upload</td>
                 @endif
         </tr>
     </table>

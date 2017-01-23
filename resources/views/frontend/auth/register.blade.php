@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-    
+
     @if(access()->guest())
         <div class="row">
 

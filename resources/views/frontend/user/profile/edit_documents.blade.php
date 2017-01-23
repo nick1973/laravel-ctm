@@ -6,11 +6,12 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Upload Documents</h4>
+                    <h3>Upload Documents</h3>
+                    <h4>Your document will be automatically saved once they have been uploaded.</h4>
                 </div>
                 <div class="panel-body">
                     {{--<button class="btn btn-default" onclick="goBack()">Back</button>--}}
-                    <h4>Once you have uploaded your documents click 'Back' to view them. <a href="/dashboard#documents" class="btn btn-success">Back</a></h4>
+                    <h4>Click here to return to the dashboard. <a href="/dashboard#documents" class="btn btn-success">Back to Dashboard</a></h4>
 
                     @if($user->d1=="Yes")
                         <div class="form-group col-md-12">
@@ -25,7 +26,7 @@
                                       id="driving_photo">
                                     {{ csrf_field() }}
                                     <div class="dz-default dz-message">
-                                        <h3>Click or drag and drop your D1 driving license photo here!</h3>
+                                        <h3>Drag and drop your D1 driving license photo here!</h3>
                                     </div>
                                 </form>
                             </div>
@@ -44,7 +45,7 @@
                                   id="passportPhoto">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Click or drag and drop your passport photo here!</h3>
+                                    <h3>Drag and drop your passport photo here!</h3>
                                 </div>
                             </form>
                         </div>
@@ -72,10 +73,10 @@
                             <form action="update_passport_photo_page/{{ $user->id }}"
                                   method="post"
                                   class="dropzone well well-lg"
-                                  id="my-awesome-dropzone">
+                                  id="passportPhotoPage">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Click or drag and drop a Photo of your photo page of passport here!</h3>
+                                    <h3>Drag and drop a Photo of your photo page of passport here!</h3>
                                 </div>
                             </form>
                         </div>
@@ -96,7 +97,7 @@
                                       id="my-awesome-dropzone">
                                     {{ csrf_field() }}
                                     <div class="dz-default dz-message">
-                                        <h3>Click or drag and drop a Photo of your Birth Certificate here!</h3>
+                                        <h3>Drag and drop a Photo of your Birth Certificate here!</h3>
                                     </div>
                                 </form>
                             </div>
@@ -116,14 +117,15 @@
                             <form action="update_ni_card/{{ $user->id }}"
                                   method="post"
                                   class="dropzone well well-lg"
-                                  id="my-awesome-dropzone">
+                                  id="NICard">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Click or drag and drop a Photo of your National Insurance Document / Card here!</h3>
+                                    <h3>Drag and drop a Photo of your National Insurance Document / Card here!</h3>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <h4>Click here to return to the dashboard. <a href="/dashboard#documents" class="btn btn-success">Back to Dashboard</a></h4>
                     {{--<div class="form-group">--}}
                         {{--<div class="col-md-6 col-md-offset-4">--}}
                             {{--{{ Form::submit('Save My Information', ['class' => 'btn btn-primary']) }}--}}
@@ -136,12 +138,40 @@
     @endforeach
     <script>
         Dropzone.options.passportPhoto = {
-            init: function() {
-                this.on("success", function(file) { alert("Success file uploaded!"); });
-            },
+//            init: function() {
+//                this.on("success", function(file) { alert("Success file uploaded!"); });
+//            },
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
-            addRemoveLinks: true
+            addRemoveLinks: true,
+            clickable: false
+        };
+        Dropzone.options.passportPhotoPage = {
+//            init: function() {
+//                this.on("success", function(file) { alert("Success file uploaded!"); });
+//            },driving_photo
+            maxFilesize: 4,
+            acceptedFiles: '.jpg, .jpeg, .png',
+            addRemoveLinks: true,
+            clickable: false
+        };
+        Dropzone.options.driving_photo = {
+//            init: function() {
+//                this.on("success", function(file) { alert("Success file uploaded!"); });
+//            },NICard
+            maxFilesize: 4,
+            acceptedFiles: '.jpg, .jpeg, .png',
+            addRemoveLinks: true,
+            clickable: false
+        };
+        Dropzone.options.NICard = {
+//            init: function() {
+//                this.on("success", function(file) { alert("Success file uploaded!"); });
+//            },
+            maxFilesize: 4,
+            acceptedFiles: '.jpg, .jpeg, .png',
+            addRemoveLinks: true,
+            clickable: false
         };
     </script>
 

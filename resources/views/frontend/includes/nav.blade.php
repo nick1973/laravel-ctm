@@ -29,6 +29,11 @@
                     </ul>
                 @endif
             <ul class="nav navbar-nav navbar-right">
+                @if(Auth::check())
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="/password/change">Change Password<span class="sr-only">(current)</span></a></li>
+                </ul>
+                @endif
                 {{--@if (config('locale.status') && count(config('locale.languages')) > 1)--}}
                     {{--<li class="dropdown">--}}
                         {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}

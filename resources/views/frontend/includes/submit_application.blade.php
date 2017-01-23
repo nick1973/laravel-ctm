@@ -41,7 +41,7 @@
         var gp2_tick = $("#gp2_tick").hasClass('hidden');
         console.log(address_tick)
         if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true && (gp1_tick || gp2_tick)==true){
-            alert('The Application is not Complete! Please complete to be able to submit.')
+            alert('Your application is not ready to submit, Please complete un-ticked sections to complete.')
         } else {
             $("#submit_application").submit()
         }

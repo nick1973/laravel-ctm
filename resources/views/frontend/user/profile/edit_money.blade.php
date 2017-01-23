@@ -32,15 +32,15 @@
                     <div class="form-group">
                         {{ Form::label('account_number', 'Account Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            <input id="account_number" name="account_number" max="8" type="text" value="{{ $user->account_number }}"
-                                   class="form-control" placeholder="Account Number">
+                                <input id="account_number" name="account_number" max="8" type="text" value=""
+                                       class="form-control" placeholder="Account Number">
                         </div>
                     </div>
 
                     <div class="form-group">
                         {{ Form::label('account_sort_code', 'Sort Code:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            <input id="sortcode_number" name="account_sort_code" type="text" value="{{ $user->account_sort_code }}"
+                            <input id="sortcode_number" name="account_sort_code" type="text" value=""
                                    class="form-control" placeholder="Sort Code">
                         </div>
                     </div>
@@ -48,7 +48,8 @@
                     <div class="form-group">
                         {{ Form::label('ni_number', 'National Insurance Number:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::input('text', 'ni_number', null, ['class' => 'form-control', 'placeholder' => 'National Insurance Number']) }}
+                            <input id="ni_number" name="ni_number" type="text" value=""
+                                   class="form-control" placeholder="NI Number">
                         </div>
                     </div>
                     <h4>Read all the following statements carefully and select the one box that applies to you.</h4>
@@ -76,7 +77,8 @@
                             I have another job or receive a state or occupational pension.
                         </label>
                     </div>
-                    <hr>
+
+                    <h4>In addition to the above please tick box below if it applies to you.</h4>
                     <div class="checkbox">
                         <label>
                             {{ Form::checkbox('student_loan', 'D') }}

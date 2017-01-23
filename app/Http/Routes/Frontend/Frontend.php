@@ -352,7 +352,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/all', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
-            $staff= \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('payroll', '!=', '0')->get();
+            $columns =  DB::getSchemaBuilder()->getColumnListing('users');
+            unset($columns['visible']);
+            $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,18,23,25,26,32,33,40,41,42,43,44,45,48,49,51,52,53,54,55,56,57]);
+            //dd($columnsNeeded);
+
+            $staff = \App\Models\Access\User\User::where('profile_confirmed', 'yes')
+                ->where(function ($query) use ($columnsNeeded) {
+                    foreach($columnsNeeded as $column){
+                        $query->where($column, '!=', '');
+                        $query->orWhere($column, '!=', '0');
+                    }
+                })
+                ->get();
+
+
+
             return ['data'=>$staff];
 
         });
