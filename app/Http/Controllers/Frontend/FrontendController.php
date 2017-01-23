@@ -66637,10 +66637,10 @@ class FrontendController extends Controller
 	]
 ];
 
-foreach($pFortyFive as $res){
-            //echo $res['p45'];
-            User::where('id',$res['id'])->update(['markAsp45'=>$res['markAsp45']]);
-        }
+//foreach($pFortyFive as $res){
+//            //echo $res['p45'];
+//            User::where('id',$res['id'])->update(['markAsp45'=>$res['markAsp45']]);
+//        }
         //User::where('id',117)->update(['markAsp45'=>1]);
         //User::insert($pFortyFive);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
