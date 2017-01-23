@@ -355,7 +355,7 @@ Route::group(['middleware' => 'auth'], function () {
             $columns =  DB::getSchemaBuilder()->getColumnListing('users');
             unset($columns['visible']);
             $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,18,23,25,26,32,33,40,41,42,43,44,45,48,49,51,52,53,54,55,56,57]);
-            //dd($columnsNeeded);
+            dd($columnsNeeded);
 
             $staff = \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('markAsp45',0)
                 ->where(function ($query) use ($columnsNeeded) {
