@@ -12,7 +12,7 @@ class UpdateUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::table('users', function ($table) {
             $table->text('p45');
         });
     }
