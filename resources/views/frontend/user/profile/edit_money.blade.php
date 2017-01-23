@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     {{ Form::model($user, ['route' => ['frontend.user.profile.update_bank', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH',
                                             'id' => 'addressForm']) }}
+                    <input name="profile_confirmed" value="no" hidden>
                     <div class="form-group hidden">
                         {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
@@ -21,7 +22,7 @@
                             @endif
                         </div>
                     </div>
-                    <input name="payroll_export" value="1" hidden>
+<!--                    <input name="payroll_export" value="1" hidden>-->
                     <div class="form-group">
                         {{ Form::label('account_name', 'Account Holder\'s Name:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">

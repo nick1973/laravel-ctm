@@ -23,11 +23,19 @@ class ManagerController extends Controller
 {
     function index()
     {
+        $staff = User::where([
+            ['profile_confirmed', '=', 'Yes'],
+            ['confirmed', '=', 1],
+            ['payroll_export', '=', 1],
+            ['payroll', '!=', 0]
+        ])->count();
+        
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $users = User::where('visible', 1)->where('payroll_export', 1)->paginate(50);
-        return view('frontend.manager.index', compact('users'));
+        $users = User::where('visible', 1)->where('confirmed', 0)->orWhere('profile_confirmed', 'no')
+            ->paginate(50); //confirmed 0 = NEW
+        return view('frontend.manager.index', compact('users', 'staff'));
     }
 
     function show($id)
@@ -70,10 +78,13 @@ class ManagerController extends Controller
                 $m->to($user->email, $user->name)->subject('Your CTM Application!');
             });
             //SNAPSHOT OF USER
+            $user = User::find($id);
+            $collection = collect($user);
+            $collection->forget('id');
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
         } else {
-            User::find($id)->update(['payroll_export'=>0]);
+            //User::find($id)->update(['payroll_export'=>0]);
         }
         //return $this->index();
         //return redirect()->route('frontend.index')->withFlashSuccess('Your Applications has been submitted!');flash_warning

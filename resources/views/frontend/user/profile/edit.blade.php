@@ -14,15 +14,6 @@
                 <div class="panel-body">
 
                     {{ Form::model($user, ['route' => 'frontend.user.profile.updates', $user->id, 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
-                    <input name="payroll_export" value="1" hidden>
-                    <div class="form-group">
-                        {{ Form::label('title', 'Title:', ['class' => 'col-md-4 control-label']) }}
-                        <div class="col-md-6">
-                            {{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',
-                                                       'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',
-                            'id' => 'title'])}}
-                        </div>
-                    </div>
 
                     {{--<div class="form-group">--}}
                         {{--{{ Form::label('photo', 'Photo:', ['class' => 'col-md-4 control-label']) }}--}}
@@ -31,6 +22,16 @@
                             {{--{!! Form::file('photo', ['class' => 'form-control',]) !!}--}}
                         {{--</div>--}}
                     {{--</div>--}}
+                    <input name="profile_confirmed" value="no" hidden>
+                    
+                    <div class="form-group">
+                        {{ Form::label('title', 'Title:', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',
+                                                       'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',
+                            'id' => 'title'])}}
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         {{ Form::label('name', 'First Name:', ['class' => 'col-md-4 control-label']) }}

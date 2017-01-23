@@ -12,13 +12,16 @@ class UpdateSnapshotTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
+        Schema::table('user_snapshot', function ($table) {
             $table->text('dirty')->nullable()->change();
             $table->text('address_dirty')->nullable()->change();
             $table->text('reference_dirty')->nullable()->change();
             $table->text('rtw_dirty')->nullable()->change();
             $table->text('docs_dirty')->nullable()->change();
             $table->string('photo')->nullable()->change();
+            $table->string('student_loan')->nullable()->change();
+            $table->string('payroll')->nullable()->change();
+            $table->string('promotion')->nullable()->change();
         });
     }
 
