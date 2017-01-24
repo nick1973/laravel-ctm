@@ -73,6 +73,7 @@
                 //dom: '<"top"Blf>rTi<"bottom"p><"clear">',
                 dom: 'Bfrtip',
                 buttons: [
+                    'csv',
                     {
                         extend: 'copyHtml5',
                         text: 'Copy Staff',
