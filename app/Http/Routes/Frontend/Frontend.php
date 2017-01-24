@@ -358,42 +358,16 @@ Route::group(['middleware' => 'auth'], function () {
             //dd($columnsNeeded);
 
             $staff = \App\Models\Access\User\User::
-//            where(
-//                    [
-//                    //['title','!=',''],
-//                    ['name','!=',''],
-//                    ['lastname','!=',''],
-//                    ['mobile','!=',''],
-//                    ['land','!=',''],
-//                    ['dob','!=',''],
-//                    //['nationality','!=',''],
-//                    //['townofbirth','!=',''],
-//                    ['emergency_contact_name','!=',''],
-//                    ['emergency_contact_rel','!=',''],
-//                    ['emergency_contact_number','!=',''],
-//                    ['emergency_contact_mobile','!=',''],
-//                    ['uk_driving_license','!=',''],
-//                    ['convictions','!=',''],
-//                    ['medical_conditions','!=',''],
-//                    ['email','!=',''],
-//                    ['address_line_1','!=',''],
-//                    ['address_line_2','!=',''],
-//                    ['city','!=',''],
-//                    ['county','!=',''],
-//                    //['country','!=',''],
-//                    ['postcode','!=',''],
-//                    ['payroll','!=',''],
-//            ])
                 where([
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
-
             ])
-//                ->orWhere([
-//                ['profile_confirmed', '=', 'yes'],
-//                ['markAsp45', '=' ,0],
-//            ])
+                ->orWhere([
+                    ['profile_confirmed', '=', 'yes'],
+                    ['payroll','!=','0'],
+                    ['markAsp45', '=' ,0],
+            ])
                 ->get();
 
             return ['data'=>$staff];
