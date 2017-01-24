@@ -357,7 +357,7 @@ Route::group(['middleware' => 'auth'], function () {
             $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,15,18,23,25,26,28,30,32,33,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56,57,58,59]);
             //dd($columnsNeeded);
 
-            $staff = \App\Models\Access\User\User::
+            $staff = \App\Models\Access\User\User::all();
 //            where(
 //                    [
 //                    //['title','!=',''],
@@ -384,7 +384,7 @@ Route::group(['middleware' => 'auth'], function () {
 //                    ['postcode','!=',''],
 //                    ['payroll','!=',''],
 //            ])
-                where('app_status', 3)
+                //where('app_status', 3)
                 //['markAsp45', '=' ,0],
                 //['payroll','!=',''],
 
@@ -392,7 +392,7 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['profile_confirmed', '=', 'yes'],
 //                ['markAsp45', '=' ,0],
 //            ])
-                ->get();
+                //get();
 
             return ['data'=>$staff];
 
