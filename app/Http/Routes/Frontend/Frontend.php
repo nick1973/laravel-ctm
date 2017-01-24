@@ -362,12 +362,13 @@ Route::group(['middleware' => 'auth'], function () {
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
+                ['profile_confirmed', '=', 'yes'],
             ])
-                ->orWhere([
-                    ['profile_confirmed', '=', 'yes'],
-                    ['payroll','!=','0'],
-                    ['markAsp45', '=' ,0],
-            ])
+//                ->orWhere([
+//                    ['profile_confirmed', '=', 'yes'],
+//                    ['payroll','!=','0'],
+//                    ['markAsp45', '=' ,0],
+//            ])
                 ->get();
 
             return ['data'=>$staff];
