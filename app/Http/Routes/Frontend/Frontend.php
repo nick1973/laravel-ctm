@@ -388,7 +388,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['markAsp45', '=' ,0],
                 //['exportP45', '=', 0],
             ])
-                ->where('payroll','!=','0')
+                //->where('payroll','!=','0')
                 ->get();
 
             return ['data'=>$staff];
