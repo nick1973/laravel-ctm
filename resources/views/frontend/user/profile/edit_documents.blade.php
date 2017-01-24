@@ -26,7 +26,7 @@
                                       id="driving_photo">
                                     {{ csrf_field() }}
                                     <div class="dz-default dz-message">
-                                        <h3>Drag and drop your D1 driving license photo here!</h3>
+                                        <h3>Click to upload your D1 driving license photo here!</h3>
                                     </div>
                                 </form>
                             </div>
@@ -45,7 +45,7 @@
                                   id="passportPhoto">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Drag and drop your passport photo here!</h3>
+                                    <h3>Click to upload your passport photo here!</h3>
                                 </div>
                             </form>
                         </div>
@@ -76,7 +76,7 @@
                                   id="passportPhotoPage">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Drag and drop a Photo of your photo page of passport here!</h3>
+                                    <h3>Click to upload a Photo of your photo page of passport here!</h3>
                                 </div>
                             </form>
                         </div>
@@ -97,7 +97,7 @@
                                       id="my-awesome-dropzone">
                                     {{ csrf_field() }}
                                     <div class="dz-default dz-message">
-                                        <h3>Drag and drop a Photo of your Birth Certificate here!</h3>
+                                        <h3>Click to upload a Photo of your Birth Certificate here!</h3>
                                     </div>
                                 </form>
                             </div>
@@ -120,7 +120,7 @@
                                   id="NICard">
                                 {{ csrf_field() }}
                                 <div class="dz-default dz-message">
-                                    <h3>Drag and drop a Photo of your National Insurance Document / Card here!</h3>
+                                    <h3>Click to upload a Photo of your National Insurance Document / Card here!</h3>
                                 </div>
                             </form>
                         </div>
@@ -153,7 +153,7 @@
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //clickable: false
+            draggable: false
         };
         Dropzone.options.driving_photo = {
 //            init: function() {
@@ -162,7 +162,7 @@
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //clickable: false
+            draggable: false
         };
         Dropzone.options.NICard = {
 //            init: function() {
@@ -171,7 +171,7 @@
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //clickable: false
+            draggable: false
         };
     </script>
 
