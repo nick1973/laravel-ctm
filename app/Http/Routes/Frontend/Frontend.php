@@ -378,7 +378,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ->where('address_line_2','!=','')
                 ->where('city','!=','')
                 ->where('county','!=','')
-                ->where('country','!=','')
+                //->where('country','!=','')
                 ->where('postcode','!=','')
                 ->where('payroll','!=','')
             ->get();
