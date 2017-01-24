@@ -358,12 +358,18 @@ Route::group(['middleware' => 'auth'], function () {
             //dd($columnsNeeded);
 
             $staff = \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('markAsp45',0)
-                ->where(function ($query) use ($columnsNeeded) {
-                    foreach($columnsNeeded as $column){
-                        $query->where($column, '!=', '');
-                        $query->orWhere($column, '!=', '0');
-                    }
-                })->get();
+                //->where(function ($query) use ($columnsNeeded) {
+//                    foreach($columnsNeeded as $column){
+//                        $query->where($column, '!=', '');
+//                        $query->orWhere($column, '!=', '0');
+//                    }
+                //})
+                ->where('title','!=','')
+                ->where('name','!=','')
+                ->where('lastname','!=','')
+                ->where('mobile','!=','')
+                ->where('land','!=','')
+            ->get();
 
 
 
