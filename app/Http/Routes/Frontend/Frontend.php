@@ -385,7 +385,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['postcode','!=',''],
                 ['payroll','!=',''],
             ])->orWhere('payroll','!=','0')
-                ->orWhereNotNull('land')
+                //->orWhereNotNull('land')
                 //->orWhere('markAsp45','!=','0')
                 //->orWhere('exportP45','!=','0')
                 ->get();
