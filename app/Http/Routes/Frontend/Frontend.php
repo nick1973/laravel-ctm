@@ -395,6 +395,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //get();
 
             return ['data'=>$staff];
+            
 
         });
 
