@@ -364,11 +364,6 @@ Route::group(['middleware' => 'auth'], function () {
                 ['payroll','!=','0'],
                 ['profile_confirmed', '=', 'yes'],
             ])
-//                ->orWhere([
-//                    ['profile_confirmed', '=', 'yes'],
-//                    ['payroll','!=','0'],
-//                    ['markAsp45', '=' ,0],
-//            ])
                 ->get();
 
             return ['data'=>$staff];
