@@ -359,7 +359,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             $staff = \App\Models\Access\User\User::where(
                 [
-                    ['title','!=',''],
+                    //['title','!=',''],
                     ['name','!=',''],
                     ['lastname','!=',''],
                     ['mobile','!=',''],
