@@ -73,6 +73,9 @@
                                     {{--</span>--}}
                                 </a>
                             </li>
+                            <li role="presentation">
+                                <a href="#events" aria-controls="submit" role="tab" data-toggle="tab">Events</a>
+                            </li>
                             {{--<li role="presentation">--}}
                                 {{--<a href="#eventslist" aria-controls="eventslist" role="tab" data-toggle="tab">Events List</a>--}}
                             {{--</li>--}}
@@ -82,9 +85,7 @@
                                 </li>
                             @endif
                             {{--@if($user->profile_confirmed=="Yes")--}}
-                                <li role="presentation">
-                                    <a href="#events" aria-controls="submit" role="tab" data-toggle="tab">Events</a>
-                                </li>
+
                             {{--@endif--}}
                         </ul>
 
