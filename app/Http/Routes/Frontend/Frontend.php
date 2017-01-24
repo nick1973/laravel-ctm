@@ -363,6 +363,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ->where('lastname','!=','')
                 ->where('mobile','!=','')
                 ->where('land','!=','')
+                ->orWhere('land','!=',null)
                 ->where('dob','!=','')
                 ->where('nationality','!=','')
                 ->where('townofbirth','!=','')
