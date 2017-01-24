@@ -366,7 +366,6 @@ Route::group(['middleware' => 'auth'], function () {
                 ['lastname','!=',''],
                 ['mobile','!=',''],
                 ['land','!=',''],
-                //->orWhere('land','!=',null)
                 ['dob','!=',''],
                 ['nationality','!=',''],
                 ['townofbirth','!=',''],
@@ -385,8 +384,12 @@ Route::group(['middleware' => 'auth'], function () {
                 ['country','!=',''],
                 ['postcode','!=',''],
                 ['payroll','!=',''],
-            ])->orWhere('payroll','!=','0')->get();
-            
+            ])->orWhere('payroll','!=','0')
+                ->orWhereNotNull('land')
+                //->orWhere('markAsp45','!=','0')
+                //->orWhere('exportP45','!=','0')
+                ->get();
+
             return ['data'=>$staff];
 
         });
