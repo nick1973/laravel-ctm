@@ -145,7 +145,9 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //clickable: false
-        };
+        }.bind('drop dragover', function (e) {
+            e.preventDefault();
+        });
         Dropzone.options.passportPhotoPage = {
 //            init: function() {
 //                this.on("success", function(file) { alert("Success file uploaded!"); });
