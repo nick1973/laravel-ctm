@@ -159,19 +159,19 @@
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //draggable: false
+            drop: false
         };
         Dropzone.options.driving_photo = {
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //draggable: false
+            drop: false
         };
         Dropzone.options.NICard = {
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //draggable: false
+            drop: false
         };
     </script>
 
