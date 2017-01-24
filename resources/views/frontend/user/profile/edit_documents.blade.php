@@ -137,6 +137,16 @@
     </div><!-- row -->
     @endforeach
     <script>
+
+        window.addEventListener("dragover",function(e){
+            e = e || event;
+            e.preventDefault();
+        },false);
+        window.addEventListener("drop",function(e){
+            e = e || event;
+            e.preventDefault();
+        },false);
+
         Dropzone.options.passportPhoto = {
 //            init: function() {
 //                this.on("success", function(file) { alert("Success file uploaded!"); });
@@ -145,7 +155,6 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
-            dropzone:false
         };
         Dropzone.options.passportPhotoPage = {
 //            init: function() {
@@ -155,7 +164,6 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
-            dropzone:false
         };
         Dropzone.options.driving_photo = {
 //            init: function() {
@@ -165,7 +173,6 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
-            dropzone:false
         };
         Dropzone.options.NICard = {
 //            init: function() {
@@ -175,7 +182,6 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
-            dropzone:false
         };
     </script>
 
