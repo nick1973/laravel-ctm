@@ -150,36 +150,24 @@
 
 
         Dropzone.options.passportPhoto = {
-            init: function(e) {
-                e.preventDefault();
-            },
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
-            //draggable: false
+            drop: false
         };
         Dropzone.options.passportPhotoPage = {
-//            init: function() {
-//                this.on("success", function(file) { alert("Success file uploaded!"); });
-//            },driving_photo
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
         };
         Dropzone.options.driving_photo = {
-//            init: function() {
-//                this.on("success", function(file) { alert("Success file uploaded!"); });
-//            },NICard
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
         };
         Dropzone.options.NICard = {
-//            init: function() {
-//                this.on("success", function(file) { alert("Success file uploaded!"); });
-//            },
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
