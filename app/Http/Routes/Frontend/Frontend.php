@@ -30,24 +30,24 @@ Route::get('/doc', function () {
     //return ['data' => \App\Models\Ops\Events::all()];
     $file = Storage::disk('volume')->get('/NickAshford.1988-01-20/birth_cert/computer-people0.png');//get('file.jpg');
     $path = '/mnt/volume-1/About-had-its-chips.jpg';
-    
-    
+
+
     if (file_exists($path))
     {
-        // Note: You should probably do some more checks 
+        // Note: You should probably do some more checks
         // on the filetype, size, etc.
         $contents = file_get_contents($path);
 
-        // Note: You should probably implement some kind 
+        // Note: You should probably implement some kind
         // of check on filetype
         header('Content-type: image/jpeg');
 
         echo $contents;
     }
-    
-    
-    
-    
+
+
+
+
 
             //ob_clean();   // discard any data in the output buffer (if possible)
             //flush();      // flush headers (if possible)
@@ -57,7 +57,7 @@ Route::get('/doc', function () {
 //$data = file_get_contents($path);
     //dd($file);
     //return base64_decode($file);
-    
+
 });
 
 //Route::get('/amazon_docs', function () {
@@ -357,36 +357,36 @@ Route::group(['middleware' => 'auth'], function () {
             $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,15,18,23,25,26,28,30,32,33,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56,57,58,59]);
             //dd($columnsNeeded);
 
-            $staff = \App\Models\Access\User\User::where('profile_confirmed', 'yes')->where('markAsp45',0)->where('exportP45',0)
-                ->where('title','!=','')
-                ->where('name','!=','')
-                ->where('lastname','!=','')
-                ->where('mobile','!=','')
-                ->where('land','!=','')
+            $staff = \App\Models\Access\User\User::where([
+                ['profile_confirmed', '=', 'yes'],
+                ['markAsp45', '=' ,0],
+                ['exportP45', '=', 0],
+                ['title','!=',''],
+                ['name','!=',''],
+                ['lastname','!=',''],
+                ['mobile','!=',''],
+                ['land','!=',''],
                 //->orWhere('land','!=',null)
-                ->where('dob','!=','')
-                ->where('nationality','!=','')
-                ->where('townofbirth','!=','')
-                ->where('emergency_contact_name','!=','')
-                ->where('emergency_contact_rel','!=','')
-                ->where('emergency_contact_number','!=','')
-                ->where('emergency_contact_mobile','!=','')
-                ->where('uk_driving_license','!=','')
-                ->where('convictions','!=','')
-                ->where('medical_conditions','!=','')
-                ->where('email','!=','')
-                ->where('address_line_1','!=','')
-                ->where('address_line_2','!=','')
-                ->where('city','!=','')
-                ->where('county','!=','')
-                ->where('country','!=','')
-                ->where('postcode','!=','')
-                ->where('payroll','!=','')
-                ->orWhere('payroll','!=','0')
-            ->get();
-
-
-
+                ['dob','!=',''],
+                ['nationality','!=',''],
+                ['townofbirth','!=',''],
+                ['emergency_contact_name','!=',''],
+                ['emergency_contact_rel','!=',''],
+                ['emergency_contact_number','!=',''],
+                ['emergency_contact_mobile','!=',''],
+                ['uk_driving_license','!=',''],
+                ['convictions','!=',''],
+                ['medical_conditions','!=',''],
+                ['email','!=',''],
+                ['address_line_1','!=',''],
+                ['address_line_2','!=',''],
+                ['city','!=',''],
+                ['county','!=',''],
+                ['country','!=',''],
+                ['postcode','!=',''],
+                ['payroll','!=',''],
+            ])->orWhere('payroll','!=','0')->get();
+            
             return ['data'=>$staff];
 
         });
