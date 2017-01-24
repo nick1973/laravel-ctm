@@ -81,11 +81,11 @@
                                     <a href="#submit" aria-controls="submit" role="tab" data-toggle="tab">Submit Application</a>
                                 </li>
                             @endif
-                            @if($user->profile_confirmed=="Yes")
+                            {{--@if($user->profile_confirmed=="Yes")--}}
                                 <li role="presentation">
                                     <a href="#events" aria-controls="submit" role="tab" data-toggle="tab">Events</a>
                                 </li>
-                            @endif
+                            {{--@endif--}}
                         </ul>
 
                         <div class="tab-content">
