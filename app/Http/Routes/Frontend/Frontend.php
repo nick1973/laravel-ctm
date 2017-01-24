@@ -357,41 +357,41 @@ Route::group(['middleware' => 'auth'], function () {
             $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,15,18,23,25,26,28,30,32,33,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56,57,58,59]);
             //dd($columnsNeeded);
 
-            $staff = \App\Models\Access\User\User::leftJoin('references', 'users.id', '=', 'references.user_id')
-                //->where('users.id', '=', 'references.user_id')
-                ->where(
-                    [
-                    //['title','!=',''],
-                    ['name','!=',''],
-                    ['lastname','!=',''],
-                    ['mobile','!=',''],
-                    ['land','!=',''],
-                    ['dob','!=',''],
-                    //['nationality','!=',''],
-                    //['townofbirth','!=',''],
-                    ['emergency_contact_name','!=',''],
-                    ['emergency_contact_rel','!=',''],
-                    ['emergency_contact_number','!=',''],
-                    ['emergency_contact_mobile','!=',''],
-                    ['uk_driving_license','!=',''],
-                    ['convictions','!=',''],
-                    ['medical_conditions','!=',''],
-                    ['email','!=',''],
-                    ['address_line_1','!=',''],
-                    ['address_line_2','!=',''],
-                    ['city','!=',''],
-                    ['county','!=',''],
-                    //['country','!=',''],
-                    ['postcode','!=',''],
-                    ['payroll','!=',''],
-            ])
-                ->where([
-                ['profile_confirmed', '=', 'yes'],
+            $staff = \App\Models\Access\User\User::
+//            where(
+//                    [
+//                    //['title','!=',''],
+//                    ['name','!=',''],
+//                    ['lastname','!=',''],
+//                    ['mobile','!=',''],
+//                    ['land','!=',''],
+//                    ['dob','!=',''],
+//                    //['nationality','!=',''],
+//                    //['townofbirth','!=',''],
+//                    ['emergency_contact_name','!=',''],
+//                    ['emergency_contact_rel','!=',''],
+//                    ['emergency_contact_number','!=',''],
+//                    ['emergency_contact_mobile','!=',''],
+//                    ['uk_driving_license','!=',''],
+//                    ['convictions','!=',''],
+//                    ['medical_conditions','!=',''],
+//                    ['email','!=',''],
+//                    ['address_line_1','!=',''],
+//                    ['address_line_2','!=',''],
+//                    ['city','!=',''],
+//                    ['county','!=',''],
+//                    //['country','!=',''],
+//                    ['postcode','!=',''],
+//                    ['payroll','!=',''],
+//            ])
+                where([
+                ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 //['exportP45', '=', 0],
-            ])
-                ->where('payroll','=','0')
-                ->get();
+            ])->orWhere([
+                ['profile_confirmed', '=', 'yes'],
+                ['markAsp45', '=' ,0],
+            ])->get();
 
             return ['data'=>$staff];
 
