@@ -137,22 +137,22 @@
     </div><!-- row -->
     @endforeach
     <script>
-        $(function() {
-            window.addEventListener("dragover",function(e){
-                e = e || event;
-                e.preventDefault();
-            },false);
-            window.addEventListener("drop",function(e){
-                e = e || event;
-                e.preventDefault();
-            },false);
-        });
+//        $(function() {
+//            window.addEventListener("dragover",function(e){
+//                e = e || event;
+//                e.preventDefault();
+//            },false);
+//            window.addEventListener("drop",function(e){
+//                e = e || event;
+//                e.preventDefault();
+//            },false);
+//        });
 
 
         Dropzone.options.passportPhoto = {
-//            init: function() {
-//                this.on("success", function(file) { alert("Success file uploaded!"); });
-//            },
+            init: function(e) {
+                e.preventDefault();
+            },
             maxFilesize: 4,
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
