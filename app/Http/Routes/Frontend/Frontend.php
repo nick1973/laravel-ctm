@@ -382,11 +382,12 @@ Route::group(['middleware' => 'auth'], function () {
                     ['country','!=',''],
                     ['postcode','!=',''],
                     ['payroll','!=',''],
-            ])->where([
-                ['profile_confirmed', '=', 'yes'],
-                ['markAsp45', '=' ,0],
-                ['exportP45', '=', 0],
             ])
+//                ->where([
+//                ['profile_confirmed', '=', 'yes'],
+//                ['markAsp45', '=' ,0],
+//                ['exportP45', '=', 0],
+//            ])
                 //->orWhere('payroll','!=','0')
                 ->get();
 
