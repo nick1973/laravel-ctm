@@ -378,8 +378,8 @@ Route::group(['middleware' => 'auth'], function () {
                     ['address_line_1','!=',''],
                     ['address_line_2','!=',''],
                     ['city','!=',''],
-                    //['county','!=',''],
-                    //['country','!=',''],
+                    ['county','!=',''],
+                    ['country','!=',''],
                     ['postcode','!=',''],
                     ['payroll','!=',''],
             ])
