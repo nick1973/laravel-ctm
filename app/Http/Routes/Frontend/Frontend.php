@@ -359,6 +359,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             $staff = \App\Models\Access\User\User::
                 where([
+                ['visible', '=', 1],
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
