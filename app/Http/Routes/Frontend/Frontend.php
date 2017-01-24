@@ -378,16 +378,16 @@ Route::group(['middleware' => 'auth'], function () {
                     ['address_line_1','!=',''],
                     ['address_line_2','!=',''],
                     ['city','!=',''],
-                    ['county','!=',''],
-                    ['country','!=',''],
+                    //['county','!=',''],
+                    //['country','!=',''],
                     ['postcode','!=',''],
                     ['payroll','!=',''],
             ])
-//                ->where([
-//                ['profile_confirmed', '=', 'yes'],
-//                ['markAsp45', '=' ,0],
-//                ['exportP45', '=', 0],
-//            ])
+                ->where([
+                ['profile_confirmed', '=', 'yes'],
+                ['markAsp45', '=' ,0],
+                ['exportP45', '=', 0],
+            ])
                 //->orWhere('payroll','!=','0')
                 ->get();
 
