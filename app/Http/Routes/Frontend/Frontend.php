@@ -387,7 +387,7 @@ Route::group(['middleware' => 'auth'], function () {
                 where([
                 ['app_status', '=', 3],
                 //['markAsp45', '=' ,0],
-                ['payroll','!=','0'],
+                ['payroll','!=',''],
             ])
 //                ->orWhere([
 //                ['profile_confirmed', '=', 'yes'],
