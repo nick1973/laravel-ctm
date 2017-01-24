@@ -145,6 +145,7 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
+            dropzone:false
         };
         Dropzone.options.passportPhotoPage = {
 //            init: function() {
@@ -154,6 +155,7 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
+            dropzone:false
         };
         Dropzone.options.driving_photo = {
 //            init: function() {
@@ -163,6 +165,7 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
+            dropzone:false
         };
         Dropzone.options.NICard = {
 //            init: function() {
@@ -172,6 +175,7 @@
             acceptedFiles: '.jpg, .jpeg, .png',
             addRemoveLinks: true,
             //draggable: false
+            dropzone:false
         };
     </script>
 
