@@ -358,8 +358,7 @@ Route::group(['middleware' => 'auth'], function () {
             //dd($columnsNeeded);
 
             $staff = \App\Models\Access\User\User::leftJoin('references', 'users.id', '=', 'references.user_id')
-                ->where('ref_contact', '!=', '')
-                ->orWhere('ref_char_name', '!=', '')
+                ->where('user_id', '!=', '')
                 ->where(
                     [
                     //['title','!=',''],
