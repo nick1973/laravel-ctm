@@ -385,11 +385,11 @@ Route::group(['middleware' => 'auth'], function () {
 //                    ['postcode','!=',''],
 //                    ['payroll','!=',''],
 //            ])
-//                ->where([
-//                ['profile_confirmed', '=', 'yes'],
-//                ['markAsp45', '=' ,0],
-//                //['exportP45', '=', 0],
-//            ])
+                ->where([
+                ['profile_confirmed', '=', 'yes'],
+                ['markAsp45', '=' ,0],
+                //['exportP45', '=', 0],
+            ])
                 //->where('payroll','!=','0')
                 ->get();
 
