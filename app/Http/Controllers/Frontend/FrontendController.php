@@ -6969,7 +6969,7 @@ class FrontendController extends Controller
 
 foreach($app_status as $res){
             //echo $res['p45'];
-            User::where('id',$res['id'])->update(['exportP45'=>$res['app_status']]);
+            User::where('id',$res['id'])->update(['app_status'=>$res['app_status']]);
         }
         //User::where('id',117)->update(['markAsp45'=>1]);
         //User::insert($pFortyFive);
