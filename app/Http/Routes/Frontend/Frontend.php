@@ -381,6 +381,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //->where('country','!=','')
                 ->where('postcode','!=','')
                 ->where('payroll','!=','')
+                ->orWhere('payroll','!=','0')
             ->get();
 
 
