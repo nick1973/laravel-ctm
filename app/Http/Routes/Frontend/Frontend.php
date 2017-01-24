@@ -384,12 +384,10 @@ Route::group(['middleware' => 'auth'], function () {
 //                    ['postcode','!=',''],
 //                    ['payroll','!=',''],
 //            ])
-                where([
-                ['app_status', '=', 3],
+                where('app_status', 3)
                 //['markAsp45', '=' ,0],
                 //['payroll','!=',''],
-                
-            ])
+
 //                ->orWhere([
 //                ['profile_confirmed', '=', 'yes'],
 //                ['markAsp45', '=' ,0],
