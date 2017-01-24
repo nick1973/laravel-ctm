@@ -35,6 +35,10 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
+        if (access()->hasRole('Administrator')) {
+            return route('admin.dashboard');
+        }
+
         if (access()->hasRole('Manager')) {
             return route('frontend.user.dashboard');
         }

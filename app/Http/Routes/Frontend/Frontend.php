@@ -365,8 +365,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
                 ['profile_confirmed', '=', 'yes'],
-            ])
-                ->get();
+            ])->get();
 
             return ['data'=>$staff];
 
