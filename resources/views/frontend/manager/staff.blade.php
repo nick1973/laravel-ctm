@@ -140,7 +140,7 @@
                         "visible": false },
                     { "data": "emergency_contact_mobile" , className: "centre get",
                         "visible": false },
-                    { "defaultContent": "",
+                    { "data": "notes",
                         "visible": false },
                     { "data": "postcode" , className: "centre get" },
                     { "data": "land" , className: "centre" },
