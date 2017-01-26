@@ -12,11 +12,11 @@ class EventUserPivotTable extends Migration
      */
     public function up()
     {
-        Schema::rename('events', 'opsevents');
-        Schema::rename('event_list', 'events');
+        //Schema::rename('events', 'opsevents');
+        //Schema::rename('event_list', 'events');
         Schema::create('event_user', function (Blueprint $table) {
-            $table->increments('event_list_id')->unsigned();
-            $table->foreign('event_list_id')->references('id')->on('event_list')->onDelete('cascade');
+            $table->increments('event_id')->unsigned();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 
             $table->increments('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
