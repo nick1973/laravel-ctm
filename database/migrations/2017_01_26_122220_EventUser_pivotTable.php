@@ -12,6 +12,7 @@ class EventUserPivotTable extends Migration
      */
     public function up()
     {
+        Schema::rename('events', 'opsevents');
         Schema::rename('event_list', 'events');
         Schema::create('event_user', function (Blueprint $table) {
             $table->increments('event_list_id')->unsigned();
