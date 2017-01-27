@@ -16,7 +16,7 @@
                         <?php $photo = ''; ?>
                         @if(access()->user()->photo)
                             <?php $photo =  substr(access()->user()->photo,14);  ?>
-                            <img width="75px" src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded pull-right">
+                            <img width="75px" height="75px" src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded pull-right">
                         @else
                             {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
                         @endif
