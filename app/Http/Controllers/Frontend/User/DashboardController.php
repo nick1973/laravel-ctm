@@ -23,7 +23,7 @@ class DashboardController extends Controller
     {
         $reference = References::where('user_id', access()->id())->get();
         $rt_work = RTWork::where('user_id', access()->id())->get();
-        $events = EventsList::where('visible', 1)->get();
+        $events = Tag::where('visible', 1)->get();
 
         if(access()->hasRole('Executive'))
         {
