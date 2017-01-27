@@ -12,10 +12,10 @@
                     <?php $checked = ''; ?>
                     @if($tags->pivot->tag_id==$event->id)
                             <?php $checked = 'checked'; ?>
+                    @endif
                         <td style="text-align: center" width="50">
                             <input type="checkbox" value="{{ $event->id }}" name="event[]" {{ $checked }}>
                         </td>
-                    @endif
                 @endforeach
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->date }}</td>
