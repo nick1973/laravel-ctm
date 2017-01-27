@@ -10,6 +10,6 @@ class Tag extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot('tag_id')->withTimestamps();
     }
 }
