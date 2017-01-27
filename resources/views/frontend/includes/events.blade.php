@@ -8,9 +8,15 @@
             </thead>
             @foreach($events as $event)
             <tr>
-                <td style="text-align: center" width="50"><input type="checkbox" value="{{ $event->id }}" name="event[]"></td>
-                <td>{{ $event->name }}</td>
-                <td>{{ $event->date }}</td>
+                @foreach($user->tags as $tags)
+                    @if($tags->tag_id==$event->id)
+                        <td style="text-align: center" width="50"><input type="checkbox" value="{{ $event->id }}" name="event[]" checked></td>
+                    @else
+                        <td style="text-align: center" width="50"><input type="checkbox" value="{{ $event->id }}" name="event[]"></td>
+                    @endif
+                @endforeach
+                    <td>{{ $event->name }}</td>
+                    <td>{{ $event->date }}</td>
             </tr>
             @endforeach
         </table>
