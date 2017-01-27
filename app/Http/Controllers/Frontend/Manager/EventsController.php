@@ -34,7 +34,6 @@ class EventsController extends Controller
     function edit($id)
     {
         $event = Tag::find($id);
-        return $event;
         return view('frontend.manager.events.edit', compact('event'));
     }
 
