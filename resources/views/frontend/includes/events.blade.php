@@ -16,6 +16,7 @@
         </table>
         <button type="submit" class="btn btn-default">Save Events</button>
     </form>
+    {{ $user->tags }}
 </div>
 
 
