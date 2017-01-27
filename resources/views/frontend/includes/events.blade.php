@@ -4,7 +4,7 @@
         <table class="table table-striped table-hover table-bordered dashboard-table">
             <thead>
                 <th colspan="2">Events</th>
-                <th>Event Month</th>
+                <th>Event Date</th>
             </thead>
             @foreach($events as $event)
             <tr>
