@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->belongsToMany(Tag::class)->withPivot('tag_id')->withTimestamps();
     }
 
     public function specs()
