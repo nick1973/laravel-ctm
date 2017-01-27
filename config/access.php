@@ -98,6 +98,6 @@ return [
         /*
          * Number of login tries made before showing login captcha
          */
-        'login_tries' => env('LOGIN_CAPTCHA_TRIES', 0),
+        'login_tries' => env('LOGIN_CAPTCHA_TRIES', 3),
      ],
 ];
