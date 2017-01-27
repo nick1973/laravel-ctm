@@ -14,6 +14,7 @@ class EventsController extends Controller
             return redirect('dashboard');
         }
         $events = EventsList::all();
+        
         return view('frontend.manager.events.index', compact('events'));
     }
 
