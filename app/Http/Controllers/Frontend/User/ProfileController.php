@@ -502,7 +502,7 @@ class ProfileController extends Controller
         $user = User::find($id);
         $input = $request->input('event');
         $user->tags()->sync($input);
-        return $user->tags();
+        dd($user->tags());
     }
 
     /**
