@@ -10,7 +10,7 @@
             </div>
         </div>
         <p>CTM's Terms & Conditions <a href="/Casual Worker Agreement.pdf" target="_blank">Terms & Conditions</a></p>
-        <h4>Before you can submit your application fist you must tick confirming that you have read CTM's terms & conditions.</h4>
+        <h4>Before you can submit your application first you must tick confirming that you have read CTM's terms & conditions.</h4>
         <div class="checkbox">
             <label>
                 <input id="TandC" type="checkbox"> Check here to indicate that you have read and agree to CTM's terms and conditions
