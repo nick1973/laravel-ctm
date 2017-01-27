@@ -11,11 +11,11 @@
                 @foreach($user->tags as $tags)
                     @if($tags->tag_id==$event->id)
                         <td style="text-align: center" width="500">
-                            tag_id {{ $tags->tag_id }}
+                            tag_id {{ $tags }}
                             <input type="checkbox" value="{{ $event->id }}" name="event[]" checked></td>
                     @else
                         <td style="text-align: center" width="500">
-                            tag_id {{ $tags->tag_id }}
+                            tag_id {{ $tags }}
                             <input type="checkbox" value="{{ $event->id }}" name="event[]"></td>
                     @endif
                 @endforeach
