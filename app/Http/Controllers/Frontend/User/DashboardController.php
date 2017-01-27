@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
-use App\Models\Dropdowns\EventsList;
+use App\Models\Dropdowns\Tag;
 
 /**
  * Class DashboardController
