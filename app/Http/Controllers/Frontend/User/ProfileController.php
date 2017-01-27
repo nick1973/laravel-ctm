@@ -401,6 +401,11 @@ class ProfileController extends Controller
      */
     public function update_passport_photo(Request $request, $id)
     {
+        ini_set('upload_max_filesize ', 6000);
+        ini_set('file_uploads ', 'On');
+        ini_set('post_max_size', 6000);
+        ini_set('memory_limit','2048M');
+
         $this->validate($request, [
             'passport_photo' => 'mimes:jpg,jpeg,png'
         ]);
