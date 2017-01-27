@@ -8,8 +8,8 @@
             </thead>
             @foreach($events as $event)
             <tr>
+                <?php $checked = ''; ?>
                 @foreach($user->tags as $tags)
-                    <?php $checked = ''; ?>
                     @if($tags->pivot->tag_id==$event->id)
                             <?php $checked = 'checked'; ?>
                     @endif
