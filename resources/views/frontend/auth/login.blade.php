@@ -27,7 +27,7 @@
                         </div><!--col-md-6-->
                     </div><!--form-group-->
 
-                    @if ($captcha)
+                    @if (isset($captcha))
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::captcha() !!}
