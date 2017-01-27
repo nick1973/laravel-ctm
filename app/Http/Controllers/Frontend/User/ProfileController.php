@@ -500,11 +500,11 @@ class ProfileController extends Controller
     public function submit_events(Request $request, $id)
     {
         $user = User::find($id);
-        if($request->input('event') != '')
-        {
+        //if($request->input('event') != '')
+        //{
             $input = $request->input('event');
             $user->tags()->sync($input);
-        }
+        //}
         //return $user->tags;
         return redirect()->back();
     }
