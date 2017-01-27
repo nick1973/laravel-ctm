@@ -9,7 +9,7 @@
             @foreach($events as $event)
             <tr>
                 <td style="text-align: center" width="50"><input type="checkbox" value="{{ $event->id }}" name="event[]"></td>
-                <td>{{ $event->event_name }}</td>
+                <td>{{ $event->name }}</td>
                 <td>{{ $event->month }}</td>
             </tr>
             @endforeach

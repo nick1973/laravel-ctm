@@ -24,7 +24,7 @@
                             'method' => 'DELETE',
                             'route' => ['dashboard.events.destroy', $results->id]
                             ]) !!}
-                            <td>{{ $results->event_name }}</td>
+                            <td>{{ $results->name }}</td>
                             <td>
                                 @if($results->visible==1)
                                     Visible
