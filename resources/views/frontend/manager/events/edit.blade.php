@@ -15,11 +15,11 @@
                 <label for="inputEmail3" class="col-md-2 control-label">Create Event:</label>
                 <div class="col-md-2">
                     <label>Event Name</label>
-                    {!! Form::input('event_name', 'event_name', null, ['class' => 'form-control']) !!}
+                    {!! Form::input('name', 'name', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
                     <label>Month of Event</label>
-                    {!! Form::input('text', 'month', null, ['class' => 'form-control']) !!}
+                    {!! Form::input('text', 'date', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="checkbox col-md-1">
                     <label></label>
