@@ -27,12 +27,12 @@
                             </tr>
                             <tr>
                                 <th>Employment From Date</th>
-                                <?php  $year = substr($ref->ref_employed_from,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                                <?php  $year = substr($ref->ref_employed_from,0,4); $day = substr($ref->ref_employed_from,8,2); $month = substr($ref->ref_employed_from,5,2); ?>
                                 <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
                             </tr>
                             <tr>
                                 <th>Employment To Date</th>
-                                <?php  $year = substr($ref->ref_employed_to,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
+                                <?php  $year = substr($ref->ref_employed_to,0,4); $day = substr($ref->ref_employed_from,8,2); $month = substr($ref->ref_employed_from,5,2); ?>
                                 <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
                             </tr>
                             <tr>
