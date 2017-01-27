@@ -9,13 +9,11 @@
             @foreach($events as $event)
             <tr>
                 @foreach($user->tags as $tags)
+                    <?php $checked = ''; ?>
                     @if($tags->pivot->tag_id==$event->id)
+                            <?php $checked = 'checked'; ?>
                         <td style="text-align: center" width="50">
-                            <input type="checkbox" value="{{ $event->id }}" name="event[]" checked>
-                        </td>
-                    @else
-                        <td style="text-align: center" width="50">
-                            <input type="checkbox" value="{{ $event->id }}" name="event[]">
+                            <input type="checkbox" value="{{ $event->id }}" name="event[]" {{ $checked }}>
                         </td>
                     @endif
                 @endforeach
@@ -26,7 +24,4 @@
         </table>
         <button type="submit" class="btn btn-default">Save Events</button>
     </form>
-    {{ $user->tags }}
 </div>
-
-
