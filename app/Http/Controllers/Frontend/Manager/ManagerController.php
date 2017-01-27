@@ -27,7 +27,8 @@ class ManagerController extends Controller
             ['profile_confirmed', '=', 'Yes'],
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1],
-            ['payroll', '!=', 0]
+            ['payroll', '!=', 0],
+            ['payroll', '!=', '']
         ])->count();
         
         if(access()->hasRole('User')){
