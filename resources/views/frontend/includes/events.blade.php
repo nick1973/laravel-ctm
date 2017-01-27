@@ -16,7 +16,7 @@
         </table>
         <button type="submit" class="btn btn-default">Save Events</button>
     </form>
-    {{ $user->tags }}
+    {{ $user->tags->tag_id }}
 </div>
 
 
