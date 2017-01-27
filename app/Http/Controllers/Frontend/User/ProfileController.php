@@ -497,6 +497,14 @@ class ProfileController extends Controller
 
     }
 
+    public function submit_events(Request $request, $id)
+    {
+//        $user = User::find($id);
+//        $input = $request->input('event');
+//        $user->events()->sync($input);
+//        return $input;
+    }
+
     /**
      * @param UpdateProfileRequest|Request $request
      * @param $id

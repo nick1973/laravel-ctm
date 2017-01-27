@@ -317,6 +317,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('profile/get_postcode_ref', 'ProfileController@get_postcode_ref')->name('frontend.user.profile.get_postcode_ref');
             Route::post('profile/get_postcode_ref_char', 'ProfileController@get_postcode_ref_char')->name('frontend.user.profile.get_postcode_ref_char');
 
+            Route::patch('profile/submit_events/{submit_events}', 'ProfileController@submit_events')->name('frontend.user.profile.submit_events');
             Route::patch('profile/submit_profile/{submit_profile}', 'ProfileController@submit_profile')->name('frontend.user.profile.submit_profile');
 
         });
