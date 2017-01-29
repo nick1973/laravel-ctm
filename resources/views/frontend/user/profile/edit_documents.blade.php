@@ -151,6 +151,11 @@
 
         Dropzone.options.passportPhoto = {
             maxFilesize: 4,
+            init: function() {
+                this.on("uploadprogress", function(file, progress) {
+                    console.log("File progress", progress);
+                });
+            },
             clickable: true,
             acceptedFiles: '.jpg, .jpeg, .png, image/*',
             addRemoveLinks: true,
