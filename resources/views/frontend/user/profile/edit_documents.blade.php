@@ -150,28 +150,28 @@
 
 
         Dropzone.options.passportPhoto = {
-            maxThumbnailFilesize: 4,
+            maxFilesize: 4,
             clickable: true,
             acceptedFiles: '.jpg, .jpeg, .png, image/*',
             addRemoveLinks: true,
             drop: false
         };
         Dropzone.options.passportPhotoPage = {
-            maxThumbnailFilesize: 4,
+            maxFilesize: 4,
             clickable: true,
             acceptedFiles: '.jpg, .jpeg, .png, image/*',
             addRemoveLinks: true,
             drop: false
         };
         Dropzone.options.driving_photo = {
-            maxThumbnailFilesize: 4,
+            maxFilesize: 4,
             clickable: true,
             acceptedFiles: '.jpg, .jpeg, .png, image/*',
             addRemoveLinks: true,
             drop: false
         };
         Dropzone.options.NICard = {
-            maxThumbnailFilesize: 4,
+            maxFilesize: 4,
             clickable: true,
             acceptedFiles: '.jpg, .jpeg, .png, image/*',
             addRemoveLinks: true,

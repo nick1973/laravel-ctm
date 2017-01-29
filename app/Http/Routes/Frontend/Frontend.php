@@ -19,7 +19,7 @@ Route::get('/spec-staff/{staff}', function ($staff) {
 });
 
 Route::get('/phpinfo', function () {
-    return phpinfo();
+    //return phpinfo();
 });
 
 Route::get('/events', function () {
