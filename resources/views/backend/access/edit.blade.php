@@ -40,6 +40,15 @@
 
                 @if ($user->id != 1)
                     <div class="form-group">
+                        {{ Form::label('markAsp45', 'P45', ['class' => 'col-lg-2 control-label']) }}
+
+                        <div class="col-lg-1">
+                            {{--<input type="checkbox" name="markAsp45" value="0">--}}
+                            {{ Form::checkbox('markAsp45', '1', $user->markAsp45 == 1) }}
+                        </div><!--col-lg-1-->
+                    </div><!--form control-->
+
+                    <div class="form-group">
                         {{ Form::label('status', trans('validation.attributes.backend.access.users.active'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-1">

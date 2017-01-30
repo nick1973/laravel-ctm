@@ -32,6 +32,7 @@
                             <th>{{ trans('labels.backend.access.users.table.name') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.email') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.confirmed') }}</th>
+                            <th>P45</th>
                             <th>{{ trans('labels.backend.access.users.table.roles') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.created') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.last_updated') }}</th>
@@ -75,6 +76,13 @@
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'confirmed', name: 'confirmed'},
+                    //{data: 'markAsp45', name: 'markAsp45'},
+                    {"data": function (data) {
+                        if(data.markAsp45==1){
+                            return "Yes"
+                        }
+                        return "No"
+                    }},
                     {data: 'roles', name: 'roles'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},

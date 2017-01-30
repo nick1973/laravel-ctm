@@ -60,7 +60,7 @@ class EloquentUserRepository implements UserRepositoryContract
                 ->get();
         }
 
-        return User::select(['id', 'name', 'email', 'status', 'confirmed', 'created_at', 'updated_at', 'deleted_at'])
+        return User::select(['id', 'name', 'email', 'status', 'confirmed', 'markAsp45', 'created_at', 'updated_at', 'deleted_at'])
             ->where('status', $status)
             ->get();
     }
@@ -110,6 +110,7 @@ class EloquentUserRepository implements UserRepositoryContract
             //For whatever reason this just wont work in the above call, so a second is needed for now
             $user->status    = isset($input['status']) ? 1 : 0;
             $user->confirmed = isset($input['confirmed']) ? 1 : 0;
+            $user->markAsp45 = isset($input['markAsp45']) ? 1 : 0;
             $user->save();
 
             $this->checkUserRolesCount($roles);
