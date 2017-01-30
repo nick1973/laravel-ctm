@@ -3,7 +3,7 @@
     {{ Form::model($user, ['route' => ['frontend.user.profile.submit_events', $user->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files'=>true]) }}
         <table class="table table-striped table-hover table-bordered dashboard-table">
             <thead>
-                <th colspan="2">Events</th>
+                <th colspan="">Events</th>
                 <th>Event Date</th>
                 <th>Postcode</th>
             </thead>
