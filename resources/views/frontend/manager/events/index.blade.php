@@ -33,8 +33,8 @@
                                     Not Visible
                                     @endif
                             </td>
-                            <td>{{ $results->postcode }}</td>
                             <td>{{ $results->date }}</td>
+                            <td>{{ $results->postcode }}</td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.events.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
