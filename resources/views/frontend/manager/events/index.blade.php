@@ -15,7 +15,7 @@
                         <th class="visible-lg" colspan="">Events</th>
                         <th class="visible-lg" colspan="">Visible</th>
                         <th class="visible-lg" colspan="">Start Date</th>
-                        <th class="visible-lg">Postcode</th>
+                        <th class="visible-lg" colspan="2">Postcode</th>
                     </tr>
                     </thead>
                     <tbody>
