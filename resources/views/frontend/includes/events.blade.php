@@ -5,6 +5,7 @@
             <thead>
                 <th colspan="2">Events</th>
                 <th>Event Date</th>
+                <th>Postcode</th>
             </thead>
             @foreach($events as $event)
             <tr>
@@ -19,6 +20,7 @@
                     </td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->date }}</td>
+                    <td>{{ $event->postcode }}</td>
             </tr>
             @endforeach
         </table>

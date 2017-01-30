@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $fillable = ['name', 'visible', 'date'];
+    protected $fillable = ['name', 'visible', 'date', 'postcode'];
 
     public function user()
     {

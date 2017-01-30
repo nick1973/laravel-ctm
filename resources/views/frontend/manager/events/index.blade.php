@@ -14,7 +14,8 @@
                     <tr>
                         <th class="visible-lg" colspan="">Events</th>
                         <th class="visible-lg" colspan="">Visible</th>
-                        <th class="visible-lg" colspan="2">Month</th>
+                        <th class="visible-lg" colspan="2">Start Date</th>
+                        <th class="visible-lg" colspan="2">Postcode</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@
                                     Not Visible
                                     @endif
                             </td>
+                            <td>{{ $results->postcode }}</td>
                             <td>{{ $results->date }}</td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.events.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>

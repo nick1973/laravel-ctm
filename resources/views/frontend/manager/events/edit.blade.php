@@ -18,7 +18,7 @@
                     {!! Form::input('name', 'name', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    <label>Month of Event</label>
+                    <label>Start Date</label>
                     {!! Form::input('text', 'date', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="checkbox col-md-1">
