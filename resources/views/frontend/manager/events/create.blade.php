@@ -20,6 +20,10 @@
                         <label>Start Date</label>
                         {!! Form::input('text', 'date', null, ['class' => 'form-control']) !!}
                     </div>
+                    <div class="col-md-2">
+                        <label>Postcode</label>
+                        {!! Form::input('text', 'postcode', null, ['class' => 'form-control']) !!}
+                    </div>
                     <div class="checkbox col-md-1">
                         <label></label>
                         <label>
