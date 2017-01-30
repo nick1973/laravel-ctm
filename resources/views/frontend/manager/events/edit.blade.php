@@ -28,6 +28,7 @@
                 <div class="checkbox col-md-1">
                     <label></label>
                     <label>
+                        <input name="visible" type="checkbox" value="0" hidden>
                         <input name="visible" type="checkbox" value="1"> Visible
                     </label>
                 </div>
