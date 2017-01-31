@@ -360,12 +360,12 @@ Route::group(['middleware' => 'auth'], function () {
             $staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
             foreach ($staff as $result){
                 //echo $result;
-                echo  $result->id;
-               //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>0]);
+                //echo  $result->id;
+               $foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>0]);
             }
 
             //dd($staff);
-            //return $foo;
+            return $foo;
 
         });
 
