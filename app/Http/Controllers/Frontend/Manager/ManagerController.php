@@ -25,7 +25,7 @@ class ManagerController extends Controller
     {
         $staff = User::where([
             ['profile_confirmed', '=', 'Yes'],
-            ['confirmed', '=', 1],
+            ['confirmed', '=', 0],
             ['payroll_export', '=', 1],
             ['payroll', '!=', 0]
         ])->count();
