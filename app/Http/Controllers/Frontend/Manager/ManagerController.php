@@ -24,7 +24,7 @@ class ManagerController extends Controller
     function index()
     {
         $staff = User::where([
-            ['profile_confirmed', '=', 'Yes'],
+            ['profile_confirmed', '=', 'no'],
             ['confirmed', '=', 1],
             ['payroll_export', '=', 1],
             ['payroll', '!=', 0]
