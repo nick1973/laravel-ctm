@@ -361,7 +361,7 @@ Route::group(['middleware' => 'auth'], function () {
             foreach ($staff as $result){
                 //echo $result;
                 //echo  $result->id;
-               $foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>0]);
+               //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>0]);
             }
 
             //dd($staff);
