@@ -352,10 +352,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
 
 
-        Route::get('dashboard/manager/staff/search/allp45', function () {
+        Route::get('dashboard/manager/staff/search/id100', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
-            //ini_set('memory_limit','2048M');
-            return DB::getSchemaBuilder()->getColumnListing('user_snapshot');
+            ini_set('memory_limit','2048M');
+            $columns =  DB::getSchemaBuilder()->getColumnListing('users');
+            unset($columns['visible']);
+            $columnsNeeded = array_except($columns, [1,2,3,4,5,6,7,14,15,18,23,25,26,28,30,32,33,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56,57,58,59]);
+            //dd($columnsNeeded);
+
+            $staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
+//            foreach ($staff as $result){
+//                //echo $result;
+//                $staff[] = \App\Models\Access\User\User::
+//                where('payroll', $result)->select('markAsp45')->get();
+//            }
+
+            //dd($staff);
+            return $staff;
 
         });
 
