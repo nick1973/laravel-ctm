@@ -18,9 +18,9 @@ Route::get('/spec-staff/{staff}', function ($staff) {
     return $spec;
 });
 
-Route::get('/phpinfo', function () {
+//Route::get('/phpinfo', function () {
     //return phpinfo();
-});
+//});
 
 Route::get('/events', function () {
     return ['data' => \App\Models\Ops\Events::all()];
@@ -365,12 +365,12 @@ Route::group(['middleware' => 'auth'], function () {
             ];
             foreach ($payroll as $result){
                 //echo $result;
-                $staff[] = \App\Models\Access\User\User::
-                where('payroll', $result)->select('markAsp45')->get();
+                $staff = \App\Models\Access\User\User::
+                where('payroll', $result)->update(['markAsp45'=>1]);
             }
 
             //dd($staff);
-            return ['data'=>$staff];
+            return $staff;
 
         });
 
