@@ -24,8 +24,8 @@ class ManagerController extends Controller
     function index()
     {
         $staff = User::where([
-            ['profile_confirmed', '=', 'no'],
-            ['confirmed', '=', 0],
+            ['profile_confirmed', '=', 'Yes'],
+            ['confirmed', '=', 1],
             ['payroll_export', '=', 1],
             ['payroll', '!=', 0]
         ])->count();
@@ -33,7 +33,7 @@ class ManagerController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $users = User::where('visible', 1)->where('confirmed', 0)->orWhere('profile_confirmed', 'no')
+        $users = User::where('visible', 1)->where('confirmed', 0)->where('profile_confirmed', 'no')
             ->paginate(50); //confirmed 0 = NEW
         return view('frontend.manager.index', compact('users', 'staff'));
     }
