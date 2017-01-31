@@ -365,7 +365,7 @@ Route::group(['middleware' => 'auth'], function () {
             }
 
             //dd($staff);
-            return $foo;
+            //return $foo;
 
         });
 
