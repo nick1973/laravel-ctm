@@ -355,8 +355,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/allp45', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             //ini_set('memory_limit','2048M');
-            return DB::getSchemaBuilder()->getColumnListing('users');
-            
+            return DB::getSchemaBuilder()->getColumnListing('user_snapshot');
+
         });
 
 
