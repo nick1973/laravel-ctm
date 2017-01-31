@@ -33,9 +33,10 @@ class ManagerController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $users = User::where('visible', 1)->where('confirmed', 0)->where('profile_confirmed', 'no')
+        $users = User::where('visible', 1)->where('confirmed', 0)->where('profile_confirmed', '!=', 'Yes') //orWhere
             ->paginate(50); //confirmed 0 = NEW
         return view('frontend.manager.index', compact('users', 'staff'));
+
     }
 
     function show($id)
