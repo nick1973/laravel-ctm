@@ -368,7 +368,7 @@ Route::group(['middleware' => 'auth'], function () {
                 where('payroll', $result)->select('markAsp45')->get();
             }
 
-
+            dd($staff);
             return ['data'=>$staff];
 
         });
