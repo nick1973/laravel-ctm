@@ -18,7 +18,7 @@
                             {{--<th>{{ trans('labels.frontend.user.profile.created_at') }}</th>--}}
                             {{--<th>{{ trans('labels.frontend.user.profile.last_updated') }}</th>--}}
                         </tr>
-                        @foreach($files->reverse() as $file)
+                        @foreach($files as $file)
                             <tr>
                                 {{--<td><a href="{{ storage_path('app/docs/'.$file) }}">{{ $file }}</a></td>--}}
                                 <td><a href="/dashboard/export_download/{{ $file }}">{{ $file }}</a></td>
