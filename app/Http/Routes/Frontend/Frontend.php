@@ -358,7 +358,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             $user = \App\Models\Access\User\User::find(28814);
 
-            $user->update(['app_status'=>'3']);
+            $user->update(['app_status'=>3]);
 
             return $user;
 

@@ -31,7 +31,7 @@ class User extends Authenticatable
                             'address_line_1', 'address_line_2', 'city', 'county', 'country', 'postcode',
                             'account_name', 'account_sort_code', 'account_number', 'ni_number', 'job_status', 'student_loan', 'profile_confirmed',
                             'visible', 'dirty', 'address_dirty', 'reference_dirty', 'rtw_dirty', 'docs_dirty', 'heard_about_us', 'uni', 'promotion', 'payroll',
-                            'payroll_export', 'd1', 'p45', 'markAsp45'];
+                            'payroll_export', 'd1', 'p45', 'markAsp45', 'app_status'];
 
     public function tags()
     {
