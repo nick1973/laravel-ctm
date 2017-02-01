@@ -13,7 +13,7 @@ class UpdateSnapshotTable6 extends Migration
     public function up()
     {
         Schema::table('user_snapshot', function ($table) {
-            $table->string('confirmation_code')->nullable();
+            $table->string('confirmation_code')->nullable()->change();
         });
     }
 
