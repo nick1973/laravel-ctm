@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Manager;
 
+use Illuminate\Support\Facades\Crypt;
 use Mail;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
@@ -130,7 +131,7 @@ class ManagerController extends Controller
                 '"'.$payroll->country.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->land.'",' .
                 '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
                 '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
-                '"'.$payroll->account_name.'",' . '"'.$payroll->account_number.'",' . '"'.$payroll->account_sort_code.'",' .
+                '"'.$payroll->account_name.'",' . '"'.Crypt::decrypt($payroll->account_number).'",' . '"'.Crypt::decrypt($payroll->account_sort_code).'",' .
                 '"'.$payroll->ni_number.'",' . '"BR"' . "\r\n";
         }
 
