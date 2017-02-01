@@ -33,7 +33,8 @@ class ManagerController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $users = User::where('visible', 1)->where('confirmed', '=', 0)->where('profile_confirmed', '=', 'no') //orWhere
+        $users = User::where('visible', 1)->where('confirmed', '=', 0)->where('profile_confirmed', '=', 'no')
+         ->where('app_status', '=', 0)//orWhere
             ->paginate(50); //confirmed 0 = NEW
         return view('frontend.manager.index', compact('users', 'staff'));
 
@@ -72,7 +73,9 @@ class ManagerController extends Controller
                 //return $last_payroll_number;
                 User::find($id)->update(['payroll'=>$last_payroll_number]);
                 //$user->fill($input)->save();
+
             }
+
             //SEND A SUCCESS EMAIL
             Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
                 $m->from('admin@ctm.uk.com', 'CTM Application');
@@ -80,6 +83,7 @@ class ManagerController extends Controller
             });
             //SNAPSHOT OF USER
             $user = User::find($id);
+            $user->update(['app_status'=>3]);
             $collection = collect($user);
             $collection->forget('id');
             UserSnapshot::insertGetId($collection->all());
