@@ -50,7 +50,7 @@
                 <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->birth_cert }}">Preview</a></td>
             @else
                 {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
-                <td class="gp1 bg-danger">Awaiting Upload</td>
+                <td class="gp2 bg-danger">Awaiting Upload</td>
             @endif
         </tr>
         @endif
@@ -67,7 +67,7 @@
                     <td class="gp2"><a target="_blank" href="/volume-1/{{ $ref->ni_card }}">Preview</a></td>
                 @else
                     {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
-                    <td class="gp1 bg-danger">Awaiting Upload</td>
+                    <td class="gp2 bg-danger">Awaiting Upload</td>
                 @endif
         </tr>
     </table>
