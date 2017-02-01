@@ -39,7 +39,7 @@
         var account_tick = $("#account_tick").hasClass('hidden');
         var docs = $("#bg-danger").hasClass('hidden');
         //var gp2_tick = $("#gp2_tick").hasClass('hidden');
-        console.log('gp2_tick ' + gp2_tick)
+        console.log('gp2_tick ' + docs)
         if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true || docs==true){
             alert('Your application is not ready to submit, Please complete un-ticked sections to complete.')
             console.log('not submitted')
