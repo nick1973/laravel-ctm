@@ -39,7 +39,7 @@
         var account_tick = $("#account_tick").hasClass('hidden');
         var gp1_tick = $("#gp1_tick").hasClass('hidden');
         var gp2_tick = $("#gp2_tick").hasClass('hidden');
-        console.log('gp1_tick' + gp1_tick)
+        console.log('gp1_tick' + gp1_tick + gp2_tick)
         if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true && (gp1_tick || gp2_tick)==true){
             alert('Your application is not ready to submit, Please complete un-ticked sections to complete.')
         } else {
