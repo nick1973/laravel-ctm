@@ -356,13 +356,13 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
             //dd($columnsNeeded);
-            //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
-            //foreach ($staff as $result){
+            $staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
+            foreach ($staff as $result){
                 //echo $result;
                 //echo  $result->id;
-               //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>1]);
-            //}29144
-            $foo = \App\Models\Access\User\User::find('29144');
+               $foo = \App\Models\Access\User\User::where('id', $result->id)->update(['confirmed'=>1]);
+            }
+            //$foo = \App\Models\Access\User\User::find('29144');
             //dd($staff);
             return $foo;
 
