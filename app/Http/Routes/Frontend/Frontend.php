@@ -356,7 +356,11 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
 
-            return \App\Models\Access\User\User::find(28814);
+            $user = \App\Models\Access\User\User::find(28814);
+
+            $user->update(['app_status'=>3]);
+
+            return $user;
 
             //dd($columnsNeeded);
             //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();

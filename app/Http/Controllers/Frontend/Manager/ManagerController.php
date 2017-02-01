@@ -61,6 +61,8 @@ class ManagerController extends Controller
         $collection->forget('id');
         //Inserts a copy of the user
         if($request->input('profile_confirmed')=="Yes"){
+            //$user = User::find($id);
+            $user->update(['app_status'=>3]);
             //ISSUE PAYROLL IF EMPTY
             $last_payroll = User::latest('payroll')->first();
             if($last_payroll->payroll==""){
@@ -83,7 +85,7 @@ class ManagerController extends Controller
             });
             //SNAPSHOT OF USER
             $user = User::find($id);
-            $user->update(['app_status'=>3]);
+            //$user->update(['app_status'=>3]);
             $collection = collect($user);
             $collection->forget('id');
             UserSnapshot::insertGetId($collection->all());
