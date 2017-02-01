@@ -10,7 +10,7 @@ class ExportController extends Controller
 {
     function index()
     {
-        $files = Storage::files('payroll')->orderBy('desc');
+        $files = Storage::files('payroll');
 //        dd($files);
         return view('frontend.manager.exports.index', compact('files'));
     }
