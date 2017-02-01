@@ -174,7 +174,7 @@ class ProfileController extends Controller
     public function submit_profile(Request $request, $id)
     {
         $user = User::find($id);
-        $user->update(['app_status'=>0]);
+        $user->update(['app_status'=>1]);
         $input = $request->all();
         $user->update($input);
         Auth::logout();

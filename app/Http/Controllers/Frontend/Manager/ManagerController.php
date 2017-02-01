@@ -34,7 +34,7 @@ class ManagerController extends Controller
             return redirect('dashboard');
         }
         $users = User::where('visible', 1)->where('confirmed', '=', 0)->where('profile_confirmed', '=', 'no')
-         ->where('app_status', '=', 0)//orWhere
+         ->where('app_status', '=', 1)//orWhere
             ->paginate(50); //confirmed 0 = NEW
         return view('frontend.manager.index', compact('users', 'staff'));
 
