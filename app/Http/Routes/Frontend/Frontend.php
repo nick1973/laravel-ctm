@@ -355,13 +355,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/id100', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
+
+            return \App\Models\Access\User\User::find(28814);
+
             //dd($columnsNeeded);
-            $staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
-            foreach ($staff as $result){
+            //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
+            //foreach ($staff as $result){
                 //echo $result;
                 //echo  $result->id;
                //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['app_status'=>1]);
-            }
+            //}
             //$foo = \App\Models\Access\User\User::find('29144');
             //dd($staff);
             //return $foo;
