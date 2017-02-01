@@ -37,16 +37,26 @@
         var address_tick = $("#address_tick").hasClass('hidden');
         var reference_tick =  $("#reference_tick").hasClass('hidden');
         var account_tick = $("#account_tick").hasClass('hidden');
-        var docs = $("#bg-danger").hasClass('hidden');
-        //var gp2_tick = $("#gp2_tick").hasClass('hidden');
-        console.log('gp2_tick ' + docs)
-        if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true || docs==true){
-            alert('Your application is not ready to submit, Please complete un-ticked sections to complete.')
-            console.log('not submitted')
-        } else {
-            console.log('submitted')
-            //$("#submit_application").submit()
-        }
+        var gp1_tick = $('td').hasClass('hidden');
+        var gp2_tick = $("#gp2_tick").hasClass('hidden');
+
+        $("td").each(function(){
+            if ($(this).hasClass('bg-danger')) {
+                console.log('not submitted')
+            } else{
+                console.log('submitted')
+            }
+        });
+
+        
+
+//        if(myInfo==true || address_tick==true || reference_tick==true || account_tick==true && (gp1_tick==true && gp2_tick)==true){
+//            alert('Your application is not ready to submit, Please complete un-ticked sections to complete.')
+//            console.log('not submitted')
+//        } else {
+//            console.log('submitted')
+//            //$("#submit_application").submit()
+//        }
     }
 
     $( "td.address:empty" )
