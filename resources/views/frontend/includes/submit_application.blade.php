@@ -46,7 +46,7 @@
             console.log('not submitted')
         } else {
             console.log('submitted')
-            //$("#submit_application").submit()
+            $("#submit_application").submit()
         }
     }
 
