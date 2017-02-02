@@ -134,7 +134,7 @@ class ManagerController extends Controller
                 '"'.$payroll->account_name.'",' . '"'.Crypt::decrypt($payroll->account_number).'",' . '"'.Crypt::decrypt($payroll->account_sort_code).'",' .
                 '"'.$payroll->ni_number.'",' . '"BR"' . "\r";
         }
-
+        //r/n
         //return $result[1];
         //dd($result);
 
