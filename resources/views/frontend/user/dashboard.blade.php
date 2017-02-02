@@ -11,15 +11,16 @@
                             <button style="vertical-align: middle;" type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
                             New to CTM? Learn more &raquo;
                             </button>
+                            <?php $photo = ''; ?>
+                            @if(access()->user()->photo)
+                                <?php $photo =  substr(access()->user()->photo,14);  ?>
+                                <img style="padding-right: 10px" width="100px" src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded pull-right">
+                            @else
+                                {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
+                            @endif
                         </h1>
                     <h3>You can create, view and edit your profile here.
-                        <?php $photo = ''; ?>
-                        @if(access()->user()->photo)
-                            <?php $photo =  substr(access()->user()->photo,14);  ?>
-                            <img width="75px" src="/volume-1/{{ $photo }}" alt="{{ access()->user()->name }}" title="{{ access()->user()->name }}" height="100px" class="img-rounded pull-right">
-                        @else
-                            {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
-                        @endif
+
                     </h3>
                 </div>
 
@@ -68,9 +69,9 @@
                                     <span id="gp1_tick">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
-                                    {{--<span id="gp2_tick">--}}
-                                        {{--<img src="/img/green-tick.png" height="18px">--}}
-                                    {{--</span>--}}
+                                    <span id="gp2_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
                                 </a>
                             </li>
                             <li role="presentation">
