@@ -67,7 +67,7 @@
             @endif
         </tr>
         @endif
-        <tr class="gp4">
+        <tr>
             @if($rtw->work_status=='Non European National')
                 <th>Work Permit</th>
             @elseif($rtw->work_status=='UK Citizen')
