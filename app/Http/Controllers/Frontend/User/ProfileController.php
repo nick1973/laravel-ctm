@@ -343,6 +343,10 @@ class ProfileController extends Controller
      */
     public function updates(UserRepositoryContract $user, UpdateProfileRequest $request)
     {
+        $dob = $request->input('dob');
+        $dob = (string)$dob;
+        $input = $request->all();
+        //dd($dob);
         $photo = User::where('id', access()->id())->first();
         if ($request->hasFile('photo')) {
             $input = $request->all();
@@ -351,12 +355,28 @@ class ProfileController extends Controller
             $request->file('photo')->move('/mnt/volume-1/' . $user->name . $user->lastname . '.' . $user->dob .'/photo', $fileName);
 
             array_pull($input, 'photo');
-            $add_image = array_add($input, 'photo', 'photos/' . $fileName);
 
+            $add_image = array_add($input, 'photo', 'photos/' . $fileName);
+            dd($request->all());
             $user->updateProfile(access()->id(), $add_image);
             return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         }
 
+        if (strpos($dob, '-')!== false) {
+            //dd($input = $request->all());
+//                if(is_numeric(substr($dob, 0, 4))){
+//                    brake;
+//                }
+            array_pull($input, 'dob');
+            $year = substr($dob, 6, 4);
+            $day = substr($dob, 0, 2);
+            $month = substr($dob, 3, 2);
+            $new_input = array_add($input, 'dob', $year . '-' . $month . '-' . $day);
+            //dd($new_input);
+            $user->updateProfile(access()->id(), $new_input);
+            return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        }
+        dd($request->all());
         $user->updateProfile(access()->id(), $request->all());
         //dd($request->all());
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));

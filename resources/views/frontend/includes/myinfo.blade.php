@@ -34,12 +34,14 @@
         </tr>
         <tr>
             <th>Date of Birth</th>
-            <?php $dob = (string)$user->dob ?>
-            @if (strpos($dob, '-')!== false)
+            <?php $dob = (string)$user->dob; $dobint = (int)$user->dob; ?>
+            @if(substr($user->dob,0,1)=='-')
+                <td class="required"></td>
+            @elseif(strpos($dob, '-')!== false)
                 <?php  $year = substr($user->dob,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
                 <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
             @else
-                <td class="required">{{ gmdate($user->dob) }}</td>
+                <td class="required">{{ gmdate("d-m-Y", $dobint) }}</td>
             @endif
         </tr>
         <tr>
