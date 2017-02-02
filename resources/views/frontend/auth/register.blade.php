@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('email', 'How did you hear about us?', ['class' => 'col-md-4 control-label']) }}
+                            {{ Form::label('email', 'Where did you hear about us?', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
                                 <select name="heard_about_us" id="heard" class="form-control empty">
                                     <option selected disabled>Please Select</option>
@@ -133,15 +133,18 @@
         $(function() {
             $("#heard").change(function () {
                 console.log($(this).val())
-                if($(this).val()=='University'){
-                    $("#uni").show('fade')
-                    $("#others").hide('fade')
-                } else {
+                if($(this).val()=='Online Advert'){
                     $("#uni").hide('fade')
                     $("#others").show('fade')
                 }
-
-
+                if($(this).val()=='Friend'){
+                    $("#uni").hide('fade')
+                    $("#others").hide('fade')
+                }
+                else {
+                    $("#uni").show('fade')
+                    $("#others").hide('fade')
+                }
             })
         });
     </script>
