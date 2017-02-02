@@ -80,7 +80,9 @@
                     <td class="gp2 birth_ni_page"><a target="_blank" href="/volume-1/{{ $ref->ni_card }}">Preview</a></td>
                 @else
                     {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
-                    <td class="gp2 bg-danger">Awaiting Upload</td>
+                    @if($rtw->work_status!=='UK Citizen')
+                        <td class="gp2 bg-danger">Awaiting Upload</td>
+                    @endif
                 @endif
         </tr>
     </table>
