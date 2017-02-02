@@ -23,7 +23,7 @@
                             @if($user->profile_confirmed=="Yes" || $user->profile_confirmed=="no")
                                 <td>{{ $user->payroll }}</td>
                                 @else
-                                <td></td>
+                                <td>{{ $user->payroll }}</td>
                             @endif
                             <td><a href="/dashboard/manager/{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</a></td>
                             <td>{{ $user->created_at }} ({{ $user->created_at->diffForHumans() }})</td>
