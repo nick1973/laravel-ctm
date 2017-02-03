@@ -14,7 +14,7 @@ class References extends Model
         'ref_employer_country', 'ref_employer_postcode',
         'ref_char_name', 'ref_char_how_know', 'ref_char_company', 'ref_char_phone_number', 'ref_character_address_line_1',
         'ref_character_address_line_2', 'ref_character_city', 'ref_character_county', 'ref_character_country', 'ref_character_postcode',
-        'd1_photo'];
+        'd1_photo', 'passport_photo'];
 
 
 }
