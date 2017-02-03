@@ -361,7 +361,7 @@ Route::group(['middleware' => 'auth'], function () {
             //$user->update(['app_status'=>3]); lauren's id => 28206
 
             $reference->update(['passport_photo'=>'']);
-            return $user->references;
+            return $reference;
             //dd($columnsNeeded);
             //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
             //foreach ($staff as $result){
