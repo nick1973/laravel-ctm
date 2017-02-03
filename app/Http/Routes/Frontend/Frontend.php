@@ -357,10 +357,10 @@ Route::group(['middleware' => 'auth'], function () {
             ini_set('memory_limit','2048M');
 
             $user = \App\Models\Access\User\User::find(28206);
-            $reference = \App\Models\Access\User\References::where('user_id', 28206);
+            //$reference = \App\Models\Access\User\References::where('user_id', 28206);
             //$user->update(['app_status'=>3]); lauren's id => 28206
 
-            dd($reference) ;
+            return $user->reference;
 
             //dd($columnsNeeded);
             //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
