@@ -360,8 +360,8 @@ Route::group(['middleware' => 'auth'], function () {
             $reference = \App\Models\Access\User\References::find(24897);
             //$user->update(['app_status'=>3]); lauren's id => 28206
 
-            $reference->update(['passport_photo'=>'']);
-            return $reference;
+            return $reference->update(['passport_photo'=>'']);
+            //return $reference;
             //dd($columnsNeeded);
             //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
             //foreach ($staff as $result){
