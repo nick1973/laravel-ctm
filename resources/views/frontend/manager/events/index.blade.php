@@ -8,9 +8,9 @@
             <h3>Event List</h3>
 
             <div class="col-md-8">
-                <a style="padding-bottom: 5px" href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
+                <a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
                 {{--<a href="{{ route('admin.dropdown_management.create') }}" class="btn btn-warning">Add to LOB</a>--}}
-                <table class="table table-striped table-bordered table-hover">
+                <table style="padding-top: 5px" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
                         <th class="visible-lg" colspan="">Events</th>
