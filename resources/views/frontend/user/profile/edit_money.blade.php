@@ -88,7 +88,7 @@
                             Student Loan instalment on or after 1 September 1998 and you have not fully repaid your Student Loan,
                             tick box. (If you are required to repay your Student Loan through your bank or building society account do not tick box).
                         </label>
-                        
+
                     </div>
 
                     <div class="form-group">

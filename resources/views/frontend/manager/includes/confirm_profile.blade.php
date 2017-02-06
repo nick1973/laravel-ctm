@@ -31,19 +31,19 @@
 		<div class="col-lg-6 col-md-6">
 			<div class="checkbox">
 				<label>
-				<input onclick="addtomail('references')" id="references" type="checkbox" value="•	Incorrect Name –  Your Name - The name on your application must read as stated on your passport / birth certificate.">
+				<input onclick="addtomail('references')" id="references" type="checkbox" value="•	Your Name - The name on your application must read as stated on your passport / birth certificate.">
 					Incorrect Name
 				</label>
 			</div>
 			<div class="checkbox">
 				<label>
-				<input onclick="addtomail('dob')" id="dob" type="checkbox" value="•	Incorrect Date of Birth – Date of Birth - The date of birth on your application does not match your passport / birth certificate.">
+				<input onclick="addtomail('dob')" id="dob" type="checkbox" value="•	 Date of Birth - The date of birth on your application does not match your passport / birth certificate.">
 					Incorrect Date of Birth
 				</label>
 			</div>
 			<div class="checkbox">
 				<label>
-				<input onclick="addtomail('passportPhoto')" id="passportPhoto" type="checkbox" value="•	Incomplete Address – Your Address - Your application must have a full and valid UK address">
+				<input onclick="addtomail('passportPhoto')" id="passportPhoto" type="checkbox" value="•	  Your Address - Your application must have a full and valid UK address">
 					Incomplete Address
 				</label>
 			</div>
@@ -51,19 +51,19 @@
 		<div class="col-lg-6 col-md-6">
 			<div class="checkbox">
 				<label>
-				<input onclick="addtomail('passportPage')" id="passportPage" type="checkbox" value="•	Unclear Documents –  Your Documents - The documents that you have uploaded are unclear and cannot be verified. Please upload clear copies of your required documents.">
+				<input onclick="addtomail('passportPage')" id="passportPage" type="checkbox" value="•   Your Documents - The documents that you have uploaded are unclear and cannot be verified. Please upload clear copies of your required documents.">
 					Unclear Documents
 				</label>
 			</div>
 			<div class="checkbox">
 				<label>
-				<input onclick="addtomail('birthCertificate')" id="birthCertificate" type="checkbox" value="•	Invalid Passport Style Photo –  Your Passport Style Photo - Your passport style photo does not meet the criteria.">
+				<input onclick="addtomail('birthCertificate')" id="birthCertificate" type="checkbox" value="•	Your Passport Style Photo - Your passport style photo does not meet the criteria.">
 					Invalid Passport Style Photo
 				</label>
 			</div>
 			<div class="checkbox">
 				<label>
-					<input onclick="addtomail('invalid_documents')" id="invalid_documents" type="checkbox" value="•	Invalid Documents – Your Documents - The documents which you have uploaded do not meet the requirements to enable us to verify your right to work in the UK. Please amend XYZ.">
+					<input onclick="addtomail('invalid_documents')" id="invalid_documents" type="checkbox" value="•	  Your Documents - The documents which you have uploaded do not meet the requirements to enable us to verify your right to work in the UK. Please amend XYZ.">
 					Invalid Documents
 				</label>
 			</div>
