@@ -9,6 +9,7 @@
 
             <div class="col-md-8">
                 <a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
+                </br>
                 {{--<a href="{{ route('admin.dropdown_management.create') }}" class="btn btn-warning">Add to LOB</a>--}}
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
