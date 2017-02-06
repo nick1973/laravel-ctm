@@ -5,12 +5,14 @@
     <div class="row">
 
         <div class="col-md-12 col-lg-12">
-            <h3>Event List</h3>
+            <h3>Event List
+                <a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
+            </h3>
 
             <div class="col-md-8">
-                <a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
+                {{--<a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>--}}
                 {{--<a href="{{ route('admin.dropdown_management.create') }}" class="btn btn-warning">Add to LOB</a>--}}
-                <table style="padding-top: 5px" class="table table-striped table-bordered table-hover">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
                         <th class="visible-lg" colspan="">Events</th>
