@@ -4,11 +4,10 @@
         <table class="table table-striped table-hover table-bordered dashboard-table">
             <thead>
                 <th colspan="2">Events</th>
-                <th>Event Date</th>
+                <th>Event Date (dd/mm/yyyy)</th>
                 <th>Postcode</th>
             </thead>
             @foreach($events as $event)
-            <tr>
                 <?php $checked = ''; ?>
                 @foreach($user->tags as $tags)
                     @if($tags->pivot->tag_id==$event->id)

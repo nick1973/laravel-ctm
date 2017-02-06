@@ -86,7 +86,7 @@
                             {{--<input type="checkbox" name="job_status" id="" value="D">--}}
                             If you left a course of Higher Education before last 6 April and received your first
                             Student Loan instalment on or after 1 September 1998 and you have not fully repaid your Student Loan,
-                            tick box D. (If you are required to repay your Student Loan through your bank or building society account do not tick box D).
+                            tick box. (If you are required to repay your Student Loan through your bank or building society account do not tick box).
                         </label>
                     </div>
 

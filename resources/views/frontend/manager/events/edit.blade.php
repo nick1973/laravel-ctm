@@ -18,8 +18,8 @@
                     {!! Form::input('name', 'name', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    <label>Start Date</label>
-                    {!! Form::input('text', 'date', null, ['class' => 'form-control']) !!}
+                    <label>Start Date (dd/mm/yyyy)</label>
+                    {!! Form::input('date', 'date', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
                     <label>Postcode</label>
