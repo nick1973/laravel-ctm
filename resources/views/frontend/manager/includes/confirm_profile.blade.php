@@ -47,6 +47,12 @@
 					Incomplete Address
 				</label>
 			</div>
+			<div class="checkbox">
+				<label>
+					<input onclick="addtomail('citizen')" id="citizen" type="checkbox" value="•	  Your Citizenship - Your application has the wrong citizenship ticked">
+					Wrong Citizenship
+				</label>
+			</div>
 		</div>
 		<div class="col-lg-6 col-md-6">
 			<div class="checkbox">
