@@ -31,7 +31,7 @@
                     <h4>UK Citizen</h4>
                     <p>As you are a UK Citizen you automatically have the right to work in the UK, but you must supply one of the following:</p>
                     <ul>
-                        <li>(a)	The front cover and photo page of your Passport.; or</li>
+                        <li>(a)	The photo page of your Passport.; or</li>
                         <li>(b)	Your birth certificate along with proof of your National Insurance number. You can find this on any document/correspondence from the HMRC or the DWP, your NI Card or a previous payslip.</li>
                     </ul>
                     <p>You will be required to upload these documents at the end of the application process.</p>
@@ -48,7 +48,7 @@
                     <h4>European National</h4>
 
                     <p>As you are a European National, you automatically have the right to work in the UK, but you must supply one of the following:</p>
-                        <li>(a)	The front cover and photo page of your valid Passport;</li>
+                        <li>(a)	The photo page of your valid Passport;</li>
                         <li>(b)	Your valid ID card or equivalent.</li>
                     <br/>
                     <p>You will be required to upload these documents at the end of the application process.</p>
@@ -65,7 +65,7 @@
                     <h4>Non European National</h4>
 
                     <p>As you are a Non-European National, you will be required to prove that you have the right to work in the UK. To prove this you can use either option (a) or (b) below: -</p>
-                        <li>(a)	The front page and photo page of your valid Passport along with a valid Visa.</li>
+                        <li>(a)	The photo page of your valid Passport along with a valid Visa.</li>
                         <li>(b)	Valid Work Permit or Residency Document.</li>
                     <br/>
                     <p>Please note, if you currently hold a Student Visa and wish to use this as proof of your right to work in the UK, then you will also need to send us a letter from your University confirming your course dates.</p>

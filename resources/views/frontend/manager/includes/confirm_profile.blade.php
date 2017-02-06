@@ -49,7 +49,7 @@
 			</div>
 			<div class="checkbox">
 				<label>
-					<input onclick="addtomail('citizen')" id="citizen" type="checkbox" value="•	  Your Citizenship - Your application has the wrong citizenship ticked">
+					<input onclick="addtomail('citizen')" id="citizen" type="checkbox" value="•	  Your Citizenship - Your application has the wrong citizenship selected">
 					Wrong Citizenship
 				</label>
 			</div>
