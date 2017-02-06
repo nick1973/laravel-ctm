@@ -79,14 +79,14 @@
                         </label>
                     </div>
 
-                    <h4>In addition to the above please tick box below if it applies to you.</h4>
+                    <h4>In addition to the above, please tick the box below if it applies to you.</h4>
                     <div class="checkbox">
                         <label>
                             {{ Form::checkbox('student_loan', 'D') }}
                             {{--<input type="checkbox" name="job_status" id="" value="D">--}}
                             If you left a course of Higher Education before last 6 April and received your first
                             Student Loan instalment on or after 1 September 1998 and you have not fully repaid your Student Loan,
-                            tick box. (If you are required to repay your Student Loan through your bank or building society account do not tick box).
+                            tick this box. (If you are required to repay your Student Loan through your bank or building society account do not tick this box).
                         </label>
 
                     </div>
