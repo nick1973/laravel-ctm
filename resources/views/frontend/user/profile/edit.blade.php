@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('dob', 'Date of Birth:', ['class' => 'col-md-4 control-label']) }}
+                        {{ Form::label('dob', 'Date of Birth (dd-mm-yyyy):', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             <?php $dob = (string)$user->dob;  $dobint = (int)$user->dob; ?>
                             @if(substr($user->dob,0,1)=='-')

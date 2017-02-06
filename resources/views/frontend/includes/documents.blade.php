@@ -42,7 +42,11 @@
             <th colspan="3" style="text-align: center; font-size: 16px"><b>Group A</b></th>
         </tr>
         @endif
-        <tr class="gp3">
+        @if($rtw->work_status=='UK Citizen')
+            <tr class="gp3">
+            @else
+                <tr>
+                    @endif
             <th>Photo Page of Passport Uploaded</th>
             @if($ref->passport_photo_page)
                 <td class="gp1 passport_page"><img src="/img/green-tick.png" height="18px"></td>
@@ -82,6 +86,8 @@
                     {{--<td class="gp2 bg-danger"><img src="/img/red_cross.png" height="18px"></td>--}}
                     @if($rtw->work_status!=='UK Citizen')
                         <td class="gp2 bg-danger">Awaiting Upload</td>
+                        @else
+                        <td class="gp2 gp99 bg-danger">Awaiting Upload</td>
                     @endif
                 @endif
         </tr>
@@ -116,6 +122,7 @@
     $("td.gp1").each(function(){
         if ($(this).hasClass('passport_page')) {
             $(".gp4").remove();
+            $(".gp99").remove();
             $("#gp2_tick").addClass('hidden');
             console.log("passport_page");
         }
