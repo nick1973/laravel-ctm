@@ -190,14 +190,14 @@
                 </div>
             @else
             @if (Request::is('/'))
-                <div class="jumbotron">
-                    <div class="container">
-                        <h1>Create Your New CTM Account.</h1>
-                        <p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>
+                <div class="">
+                    <div style="padding-top: 75px" class="container">
+                        {{--<h1>Create Your New CTM Account.</h1>--}}
+                        {{--<p>Please complete the information below to create your CTM account, or login above if you have already created one.</p>--}}
                         {{--<p><a class="btn btn-primary btn-lg" href="http://www.ctm.uk.com/join-us/" role="button">New to CTM? Learn more &raquo;</a></p>--}}
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            New to CTM? Learn more &raquo;
-                        </button>
+                        {{--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">--}}
+                            {{--New to CTM? Learn more &raquo;--}}
+                        {{--</button>--}}
                     </div>
                 </div>
                 @else
