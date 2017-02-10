@@ -356,7 +356,7 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
 
-            $staff = User::where([
+            $staff = \App\Models\Access\User\User::where([
                 ['profile_confirmed', '=', 'Yes'],
                 ['confirmed', '=', 1],
                 ['payroll_export', '=', 1],
