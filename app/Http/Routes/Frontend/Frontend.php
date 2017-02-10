@@ -356,13 +356,15 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
 
-            $staff = \App\Models\Access\User\User::where([
-                ['profile_confirmed', '=', 'Yes'],
-                ['confirmed', '=', 1],
-                ['payroll_export', '=', 1],
-                ['payroll', '!=', 0]
-            ])->get();
+//            $staff = \App\Models\Access\User\User::where([
+//                ['profile_confirmed', '=', 'Yes'],
+//                ['confirmed', '=', 1],
+//                ['payroll_export', '=', 1],
+//                ['payroll', '!=', 0]
+//            ])->get();
 
+            $staff = \App\Models\Access\User\User::find(27314);
+            $staff->update(['dob'=>'1948-12-12']);
             return $staff;
 
         });
