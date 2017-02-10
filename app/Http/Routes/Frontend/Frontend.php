@@ -356,22 +356,14 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
 
-            //$user = \App\Models\Access\User\User::find(28206);
-            //$reference = \App\Models\Access\User\References::find(24897);
-            //$user->update(['app_status'=>3]); lauren's id => 28206
+            $staff = User::where([
+                ['profile_confirmed', '=', 'Yes'],
+                ['confirmed', '=', 1],
+                ['payroll_export', '=', 1],
+                ['payroll', '!=', 0]
+            ])->get();
 
-            //$reference->update(['passport_photo_page'=>'']);
-            //return $reference;
-            //dd($columnsNeeded);
-            //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
-            //foreach ($staff as $result){
-                //echo $result;
-                //echo  $result->id;
-               //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['app_status'=>1]);
-            //}
-            //$foo = \App\Models\Access\User\User::find('29144');
-            //dd($staff);
-            //return $foo;
+            return $staff;
 
         });
 
