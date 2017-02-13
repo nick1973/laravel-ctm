@@ -419,6 +419,12 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['payroll_export', '=', 1],
 //                ['payroll', '!=', 0]
 //            ])->get();
+            //$staff = \App\Models\Access\User\User::find(12);
+            //foreach ($staff as $res){
+            //return str_replace(' ', '', decrypt($staff->account_sort_code));
+                //return decrypt($staff->account_sort_code);
+            //}
+
 
             //$staff =  \App\Models\Access\User\User::where('payroll','38629')->get();
             //$staff = \App\Models\Access\User\User::find(28584);
