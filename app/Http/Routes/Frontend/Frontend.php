@@ -423,7 +423,7 @@ Route::group(['middleware' => 'auth'], function () {
             $staff =  \App\Models\Access\User\User::where('payroll','38629')->get();
             //$staff = \App\Models\Access\User\User::find(27314);
             //$staff->update(['dob'=>'1948-12-12']);
-            return $staff;
+            return $staff->account_sort_code;
 
         });
 
