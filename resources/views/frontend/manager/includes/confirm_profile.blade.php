@@ -53,6 +53,12 @@
 					Wrong Citizenship
 				</label>
 			</div>
+			<div class="checkbox">
+				<label>
+					<input onclick="addtomail('title')" id="title" type="checkbox" value="•	  Your Title - Your application has the wrong title selected (Mr,Miss,Mrs).">
+					Wrong Title
+				</label>
+			</div>
 		</div>
 		<div class="col-lg-6 col-md-6">
 			<div class="checkbox">
