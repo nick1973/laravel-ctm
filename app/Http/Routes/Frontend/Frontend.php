@@ -66982,13 +66982,13 @@ Route::group(['middleware' => 'auth'], function () {
             ];
 
             foreach ($title as $result){
-                //echo $result;
-                //echo  $result->id;
-                $foo = \App\Models\Access\User\User::where('id', $result->id)->update(['title'=>$result->Title]);
+                echo $result->Title;
+                echo  $result->id;
+                //$foo = \App\Models\Access\User\User::where('id', $result->id)->update(['title'=>$result->Title]);
             }
             //$foo = \App\Models\Access\User\User::find('29144');
             //dd($staff);
-            return $foo;
+            //return $foo;
 
         });
 
