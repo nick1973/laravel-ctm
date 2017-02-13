@@ -420,6 +420,7 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['payroll', '!=', 0]
 //            ])->get();
             $staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
+            $staff->update(['work_status'=>'0']);
             foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
