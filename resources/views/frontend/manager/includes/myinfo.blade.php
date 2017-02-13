@@ -53,11 +53,12 @@
             @endif
         </tr>
         <tr>
+        <?php  $year = substr($user->dob,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
             <th>Date of Birth</th>
             @if(strpos($user->dirty, 'dob'))
-                <td class="bg-success">{{ $user->dob }}</td>
+                <td class="bg-success">{{ $day . '-' . $month . '-' . $year }}</td>
             @else
-                <td class="manage">{{ $user->dob }}</td>
+                <td class="manage">{{ $day . '-' . $month . '-' . $year }}</td>
             @endif
         </tr>
         <tr>

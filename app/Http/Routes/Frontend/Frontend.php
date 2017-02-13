@@ -352,6 +352,63 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
 
 
+        Route::get('dashboard/map', function () {
+
+            //$geo = new \MatthiasMullie\Geo\Geo('km');
+
+// coord of Kortrijk railway station
+            //$coord = new \MatthiasMullie\Geo\Coordinate(52.551645, -1.196195);
+
+// calculate bounding box of 10km around this coordinate
+            //$bounds = $geo->bounds($coord, 10);
+            //dd($bounds) ;
+            //dd($bounds->ne->longitude);
+//            $results = DB::table('postcodes')->whereBetween('lat',[$bounds->sw->latitude,$bounds->sw->longitude])
+//                    ->whereBetween('lng', [$bounds->ne->latitude,$bounds->ne->longitude])->get();
+
+//            $results = DB::select('SELECT *
+//                  FROM postcodes
+//                  WHERE
+//                      lat BETWEEN :swlat AND :nelat
+//                      lng BETWEEN :swlng AND :nelng
+//              :swlat being $bounds->sw->latitude
+//              :swlng being $bounds->sw->longitude
+//              :nelat being $bounds->ne->latitude
+//              :nelng being $bounds->ne->longitude
+//              ');
+
+            //dd($results) ;
+            /*
+             * Now pass this on this the database, so it executes a query like:
+             *     SELECT *
+             *     FROM coordinates
+             *     WHERE
+             *         lat BETWEEN :swlat AND :nelat
+             *         lng BETWEEN :swlng AND :nelng
+             *
+             * :swlat being $bounds->sw->latitude
+             * :swlng being $bounds->sw->longitude
+             * :nelat being $bounds->ne->latitude
+             * :nelng being $bounds->ne->longitude
+             *
+             * Assume we have the database results in a variable called $results
+             */
+
+// now weed out entries that fit in the bounding box, but not exactly in
+// the radius we want them to be in
+//            foreach ($results as $i => $result) {
+//                $resultCoord = new Geo\Coordinate($result['lat'], $result['lng']);
+//
+//                // actual distance between source coordinate & result from DB
+//                $distance = $geo->distance($coord, $resultCoord);
+//
+//                // if distance is too large, get rid of the result
+//                if ($distance > 10) {
+//                    unset($results[$i]);
+//                }
+//            }
+        });
+
         Route::get('dashboard/manager/staff/search/id100', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
