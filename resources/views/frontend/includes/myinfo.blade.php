@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <th>Mobile No</th>
-            <td>{{ $user->mobile }}</td>
+            <td class="required">{{ $user->mobile }}</td>
         </tr>
         <tr>
             <th>Land/Alternative Number</th>

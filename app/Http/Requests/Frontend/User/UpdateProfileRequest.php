@@ -34,6 +34,7 @@ class UpdateProfileRequest extends Request
         return [
             'name'  => 'required',
             'lastname'  => 'required',
+            'mobile'  => 'required|digits:11',
             'email' => 'sometimes|required|email',
             'land' => 'digits:11',
             'dob' => 'date_format:"d-m-Y"',
