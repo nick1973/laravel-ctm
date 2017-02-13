@@ -426,7 +426,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //return $res->id.'Work Status '.$res->work_status;
             }
 
-            return $staff;
+            return $staff->work_status;
 
             //$staff =  \App\Models\Access\User\User::where('payroll','38629')->get();
             //$staff = \App\Models\Access\User\User::find(28584);
