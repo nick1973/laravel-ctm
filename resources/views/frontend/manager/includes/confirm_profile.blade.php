@@ -49,7 +49,7 @@
 			</div>
 			<div class="checkbox">
 				<label>
-					<input onclick="addtomail('citizen')" id="citizen" type="checkbox" value="•	  Your Citizenship - Your application has the wrong citizenship selected">
+					<input onclick="addtomail('citizen')" id="citizen" type="checkbox" value="•	  Your Citizenship - Your application has the wrong citizenship selected. Please amend this in the Right to Work section and check your documents">
 					Wrong Citizenship
 				</label>
 			</div>
