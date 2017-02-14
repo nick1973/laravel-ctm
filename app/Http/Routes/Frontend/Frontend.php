@@ -432,7 +432,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //$ref->update(['work_status'=>'0']);
 
             }
-            return $ref;
+            dd($ref) ;
             //return $staff;
             //return $staff->work_status;
 
