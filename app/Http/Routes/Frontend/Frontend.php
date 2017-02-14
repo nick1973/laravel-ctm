@@ -415,14 +415,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 //            $staff = \App\Models\Access\User\User::where([
 //                ['profile_confirmed', '=', 'Yes'],
-//                ['confirmed', '=', 1],
+//                ['confirmed', '=', 1],            profile_confirmed
 //                ['payroll_export', '=', 1],
 //                ['payroll', '!=', 0]
 //            ])->get();
             //$staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
-            $staff = \App\Models\Access\User\User::find(34489);
+            $staff = \App\Models\Access\User\User::where('profile_confirmed', '!=', 'yes');
             //$staff->update(['work_status'=>'0']);
-            return $staff->references;
+            return $staff;
             //foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
