@@ -430,7 +430,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //echo 'User ID ' . $result->id . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$result->id)->get();
                 //$ref->update(['work_status'=>'0']);
-                echo $ref;
+                echo $ref['id'];
             }
             //dd($ref) ;
             //return $staff;
