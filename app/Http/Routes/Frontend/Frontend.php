@@ -428,10 +428,10 @@ Route::group(['middleware' => 'auth'], function () {
                 //return decrypt($staff->account_sort_code);
                 //echo $res->id . ' Work Status ' . $res->references . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$res->id)->get();
-                //$ref->update(['work_status'=>'0']);
-                echo $ref;
+                $ref->update(['work_status'=>'0']);
+                //echo $ref;
             }
-
+            return $staff;
             //return $staff->work_status;
 
             //$staff =  \App\Models\Access\User\User::where('payroll','38629')->get();
