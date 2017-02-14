@@ -376,7 +376,7 @@ class ProfileController extends Controller
             $user->updateProfile(access()->id(), $new_input);
             return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         }
-        dd($request->all());
+        //dd($request->all());
         $user->updateProfile(access()->id(), $request->all());
         //dd($request->all());
         return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
