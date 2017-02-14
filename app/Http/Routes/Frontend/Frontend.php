@@ -428,7 +428,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //return decrypt($staff->account_sort_code);
                 //echo $res->id . ' Work Status ' . $res->references . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$res->id)->get();
-                echo $ref->work_status;
+                echo $ref['work_status'];
             }
 
             //return $staff->work_status;
