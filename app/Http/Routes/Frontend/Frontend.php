@@ -423,11 +423,11 @@ Route::group(['middleware' => 'auth'], function () {
             $staff = \App\Models\Access\User\User::where('profile_confirmed', '!=', 'yes')->get();
             //$staff->update(['work_status'=>'0']);
             return $staff;
-            //foreach ($staff as $res){
+            foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
-                //echo $res->id.' Work Status '.$res->work_status.'</br>';
-            //}
+                echo $res->id . ' Work Status ' . $res->references . '</br>';
+            }
 
             //return $staff->work_status;
 
