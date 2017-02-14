@@ -49,7 +49,7 @@
             @if(strpos($user->dirty, 'land'))
                 <td class="bg-success">{{ $user->land }}</td>
             @else
-                <td class="">{{ $user->land }}</td>
+                <td>{{ $user->land }}</td>
             @endif
         </tr>
         <tr>
@@ -130,7 +130,7 @@
             @if(strpos($user->dirty, 'emergency_contact_mobile'))
                 <td class="bg-success">{{ $user->emergency_contact_mobile }}</td>
             @else
-                <td class="manage">{{ $user->emergency_contact_mobile }}</td>
+                <td class="">{{ $user->emergency_contact_mobile }}</td>
             @endif
         </tr>
         <tr>

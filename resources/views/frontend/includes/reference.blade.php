@@ -28,12 +28,28 @@
                             <tr>
                                 <th>Employment From Date</th>
                                 <?php  $year = substr($ref->ref_employed_from,0,4); $day = substr($ref->ref_employed_from,8,2); $month = substr($ref->ref_employed_from,5,2); ?>
-                                <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
+                                @if($ref->ref_employed_from != "")
+                                    @if(substr($ref->ref_employed_to,0,1) == "-" || strpos($ref->ref_employed_to, '-') == false)
+                                        <td class="required">{{ gmdate("d-m-Y", $ref->ref_employed_from) }}</td>
+                                    @else
+                                        <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
+                                    @endif
+                                @else
+                                    <td class="reference"></td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Employment To Date</th>
-                                <?php  $year = substr($ref->ref_employed_to,0,4); $day = substr($ref->ref_employed_from,8,2); $month = substr($ref->ref_employed_from,5,2); ?>
-                                <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
+                                <?php  $year = substr($ref->ref_employed_to,0,4); $day = substr($ref->ref_employed_to,8,2); $month = substr($ref->ref_employed_to,5,2); ?>
+                                @if($ref->ref_employed_to != "")
+                                        @if(substr($ref->ref_employed_to,0,1) == "-" || strpos($ref->ref_employed_to, '-') == false)
+                                            <td class="required">{{ gmdate("d-m-Y", $ref->ref_employed_to) }}</td>
+                                        @else
+                                            <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
+                                        @endif
+                                    @else
+                                    <td class="reference"></td>
+                                @endif
                             </tr>
                             <tr>
                                 <th>Employer Company Name</th>

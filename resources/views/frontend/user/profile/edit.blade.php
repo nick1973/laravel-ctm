@@ -27,9 +27,16 @@
                     <div class="form-group">
                         {{ Form::label('title', 'Title:', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',
-                                                       'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',
-                            'id' => 'title'])}}
+                            {{--{{ Form::select('title', ['Mr' => 'Mr', 'Mrs' => 'Mrs',--}}
+                                                       {{--'Ms' => 'Ms', 'Miss' => 'Miss'], null, ['class' => 'form-control',--}}
+                            {{--'id' => 'title'])}}--}}
+                            <select id="title" name="title" class="form-control">
+                                <option>{{ $user->title }}</option>
+                                <option>Mr</option>
+                                <option>Mrs</option>
+                                <option>Ms</option>
+                                <option>Miss</option>
+                            </select>
                         </div>
                     </div>
 

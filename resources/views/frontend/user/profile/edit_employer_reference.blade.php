@@ -96,16 +96,16 @@
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('ref_employed_from', 'Employment From Date:', ['class' => 'col-md-4 control-label']) }}
+                                {{ Form::label('ref_employed_from', 'Employment From Date: (dd-mm-yyyy)', ['class' => 'col-md-4 control-label']) }}
                                 <div class="col-md-6">
-                                    {{ Form::input('date', 'ref_employed_from', $ref->ref_employed_to, ['class' => 'form-control', 'placeholder' => 'Employment From Date']) }}
+                                    {{ Form::input('date', 'ref_employed_from', $ref->ref_employed_from, ['class' => 'form-control', 'placeholder' => 'Employment From Date']) }}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('ref_employed_to', 'Employment To Date:', ['class' => 'col-md-4 control-label']) }}
+                                {{ Form::label('ref_employed_to', 'Employment To Date: (dd-mm-yyyy)', ['class' => 'col-md-4 control-label']) }}
                                 <div class="col-md-6">
-                                    {{ Form::input('date', 'ref_employed_to', $ref->ref_employed_from, ['class' => 'form-control', 'placeholder' => 'Employment To Date']) }}
+                                    {{ Form::input('date', 'ref_employed_to', $ref->ref_employed_to, ['class' => 'form-control', 'placeholder' => 'Employment To Date']) }}
                                 </div>
                             </div>
 
