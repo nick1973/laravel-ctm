@@ -430,7 +430,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //echo 'User ID ' . $result->id . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$result->id)->get();
                 foreach ($ref as $rtw){
-                    echo $rtw['id'];
+                    echo $rtw['id'] . '</br>';
                 }
                 //$ref->update(['work_status'=>'0']);
 
