@@ -426,10 +426,11 @@ Route::group(['middleware' => 'auth'], function () {
             foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
-                echo $res->id . ' User ID ' . $res->references['id'] . '</br>';
-                //$ref = \App\Models\Access\User\RTWork::where('user_id',$res->id)->get();
+                //echo $res->id . ' User ID ' . $res->references['id'] . '</br>';
+                $ref = \App\Models\Access\User\RTWork::find($res->references['id'])->count();
                 //$ref->update(['work_status'=>'0']);
                 //echo $ref;
+                return $ref;
             }
             return $staff;
             //return $staff->work_status;
