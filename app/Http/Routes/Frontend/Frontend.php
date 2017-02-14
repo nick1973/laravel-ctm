@@ -423,14 +423,16 @@ Route::group(['middleware' => 'auth'], function () {
             $staff = \App\Models\Access\User\User::where('app_status', '!=', 3)->get();
             //$staff->update(['work_status'=>'0']);
             //return $staff->references;
+            $ref = [];
             foreach ($staff as $result){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
                 echo 'User ID ' . $result->id . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$result->id);
                 //$ref->update(['work_status'=>'0']);
-                echo $ref;
+
             }
+            return $ref;
             //return $staff;
             //return $staff->work_status;
 
