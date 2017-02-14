@@ -422,7 +422,7 @@ Route::group(['middleware' => 'auth'], function () {
             //$staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
             $staff = \App\Models\Access\User\User::find(34489);
             //$staff->update(['work_status'=>'0']);
-            return $staff;
+            return $staff->references;
             //foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
