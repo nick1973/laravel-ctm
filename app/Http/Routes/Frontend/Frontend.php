@@ -420,14 +420,15 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['payroll', '!=', 0]
 //            ])->get();
             //$staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
-            $staff = \App\Models\Access\User\User::where('profile_confirmed', '!=', 'yes')->get();
+            $staff = \App\Models\Access\User\User::where('profile_confirmed', '!=', 'Yes')->get();
             //$staff->update(['work_status'=>'0']);
-            //return $staff;
+            return $staff;
             foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
                 //echo $res->id . ' Work Status ' . $res->references . '</br>';
                 $ref = \App\Models\Access\User\RTWork::where('user_id',$res->id)->get();
+                //$ref->update(['work_status'=>'0']);
                 echo $ref;
             }
 
