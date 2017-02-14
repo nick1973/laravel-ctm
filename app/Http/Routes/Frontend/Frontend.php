@@ -426,7 +426,7 @@ Route::group(['middleware' => 'auth'], function () {
             foreach ($staff as $res){
                 //return str_replace(' ', '', decrypt($staff->account_sort_code));
                 //return decrypt($staff->account_sort_code);
-                echo $res->id . ' Work Status ' . $res->references . '</br>';
+                echo $res->id . ' Work Status ' . $res->references->work_status . '</br>';
             }
 
             //return $staff->work_status;
