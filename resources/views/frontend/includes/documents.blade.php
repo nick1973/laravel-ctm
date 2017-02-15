@@ -5,7 +5,7 @@
         <tr>
             <th>{{ trans('labels.general.actions') }}</th>
             <td>
-                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload All Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
+                {{ link_to_route('frontend.user.profile.edit_documents', 'Upload Documents', [], ['class' => 'btn btn-primary btn-sm']) }}
             </td>
             <td>Preview</td>
         </tr>
@@ -22,9 +22,9 @@
             </tr>
         @endif
         @if($rtw->work_status=='UK Citizen')
-            <tr class="gp4 gp3">
-                <th colspan="3" style="text-align: center; font-size: 16px"><b>Please provide Passport Photo and documents from either group A or B.</b></th>
-            </tr>
+            {{--<tr class="gp4 gp3">--}}
+                {{--<th colspan="3" style="text-align: center; font-size: 16px"><b>Please provide Passport Photo and documents from either group A or B.</b></th>--}}
+            {{--</tr>--}}
         @endif
         <tr>
             <th>Passport Photo Uploaded</th>
@@ -38,9 +38,9 @@
             @endif
         </tr>
         @if($rtw->work_status=='UK Citizen')
-        <tr class="gp4 gp3">
-            <th colspan="3" style="text-align: center; font-size: 16px"><b>Group A</b></th>
-        </tr>
+        {{--<tr class="gp4 gp3">--}}
+            {{--<th colspan="3" style="text-align: center; font-size: 16px"><b>Group A</b></th>--}}
+        {{--</tr>--}}
         @endif
         @if($rtw->work_status=='UK Citizen')
             <tr class="gp3">
@@ -57,9 +57,9 @@
             @endif
         </tr>
         @if($rtw->work_status=='UK Citizen')
-            <tr class="gp4 gp3">
-                <th colspan="3" style="text-align: center; font-size: 16px"><b>Group B</b></th>
-            </tr>
+            {{--<tr class="gp4 gp3">--}}
+                {{--<th colspan="3" style="text-align: center; font-size: 16px"><b>Group B</b></th>--}}
+            {{--</tr>--}}
         <tr class="gp4">
             <th>Birth Certificate</th>
             @if($ref->birth_cert)
