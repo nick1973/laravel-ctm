@@ -427,7 +427,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //foreach ($ref as $rtw){
                     //echo $rtw['id'] . '</br>';
                     //$foo = \App\Models\Access\User\RTWork::find($rtw['id']);
-                    echo $result->payroll . ' ' . $result->title . ' ' . $result->name . ' ' . $result->lastname . ' ' . $result->gender . '</br>';
+                    //echo $result->payroll . ' ' . $result->title . ' ' . $result->name . ' ' . $result->lastname . ' ' . $result->gender . '</br>';
                     //$foo->update(['work_status'=>'0']);
                 //}
             }
