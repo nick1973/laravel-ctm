@@ -421,37 +421,17 @@ Route::group(['middleware' => 'auth'], function () {
 //            ])->get();
             //$staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
 
-            $staff = \App\Models\Access\User\User::where('app_status', '!=', 3)->get();
+            $staff = \App\Models\Access\User\User::where('app_status', '=', 3)->get();
             foreach ($staff as $result){
-                $ref = \App\Models\Access\User\RTWork::where('user_id',$result->id)->get();
-                foreach ($ref as $rtw){
+                //$ref = \App\Models\Access\User\RTWork::where('user_id',$result->id)->get();
+                //foreach ($ref as $rtw){
                     //echo $rtw['id'] . '</br>';
-                    $foo = \App\Models\Access\User\RTWork::find($rtw['id']);
-                    echo $foo;
+                    //$foo = \App\Models\Access\User\RTWork::find($rtw['id']);
+                    echo $result->payroll . ' ' . $result->title . ' ' . $result->name . ' ' . $result->lastname . ' ' . $result->gender . '</br>';
                     //$foo->update(['work_status'=>'0']);
-                }
+                //}
             }
 
-
-            //dd($ref) ;
-            //return $staff;
-            //return $staff->work_status;
-
-            //$staff =  \App\Models\Access\User\User::where('payroll','38629')->get();
-            //$staff = \App\Models\Access\User\User::find(28584);
-            //$staff->update(['dob'=>'1948-12-12']);
-            //return $staff;
-
-            //$staff = \App\Models\Access\User\User::where('id', '>', 100)->get();
-
-//            foreach ($staff as $result){
-//                //echo $result;
-//                //echo  $result->id;
-//                $foo = \App\Models\Access\User\User::where('id', $result->id)->update(['title'=>$result->Title]);
-//            }
-            //$foo = \App\Models\Access\User\User::find('29144');
-            //dd($staff);
-            //return $foo;
 
         });
 
