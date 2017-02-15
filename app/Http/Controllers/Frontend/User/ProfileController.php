@@ -316,7 +316,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             //'account_number' => 'required|numeric',
             'account_sort_code' => 'required|numeric|digits:6',
-            'ni_number' => 'required'
+            'ni_number' => 'required|digits:9'
         ]);
         if ($validator->fails()) {
             return redirect('/profile/edit_money')
