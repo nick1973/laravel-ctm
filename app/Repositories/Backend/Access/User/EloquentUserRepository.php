@@ -60,7 +60,7 @@ class EloquentUserRepository implements UserRepositoryContract
                 ->get();
         }
 
-        return User::select(['id', 'name', 'email', 'status', 'confirmed', 'markAsp45', 'created_at', 'updated_at', 'deleted_at'])
+        return User::select(['id', 'name', 'lastname', 'email', 'status', 'confirmed', 'markAsp45', 'created_at', 'updated_at', 'deleted_at'])
             ->where('status', $status)
             ->get();
     }

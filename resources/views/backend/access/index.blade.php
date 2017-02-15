@@ -30,6 +30,7 @@
                         <tr>
                             <th>{{ trans('labels.backend.access.users.table.id') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.name') }}</th>
+                            <th>Surname</th>
                             <th>{{ trans('labels.backend.access.users.table.email') }}</th>
                             <th>{{ trans('labels.backend.access.users.table.confirmed') }}</th>
                             <th>P45</th>
@@ -73,7 +74,15 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    //{data: 'name', name: 'name'},
+                    {"data": function (data) {
+                        if(data.id > 100){
+                            return "<a href='/dashboard/manager/" + data.id + "'>" + data.name + "</a>"
+                        } else {
+                            return data.name
+                        }
+                    }},
+                    {data: 'lastname', name: 'lastname'},
                     {data: 'email', name: 'email'},
                     {data: 'confirmed', name: 'confirmed'},
                     //{data: 'markAsp45', name: 'markAsp45'},
