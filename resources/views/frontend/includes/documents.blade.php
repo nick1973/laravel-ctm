@@ -121,15 +121,15 @@
 
     $("td.gp1").each(function(){
         if ($(this).hasClass('passport_page')) {
-            //$(".gp4").remove();
-            //$(".gp99").remove();
+            $(".gp4").remove();
+            $(".gp99").remove();
             $("#gp2_tick").addClass('hidden');
             console.log("passport_page");
         }
     });
     $("td.gp2").each(function(){
         if ($(this).hasClass('birth_ni_page')) {
-            //$(".gp3").remove();
+            $(".gp3").remove();
             console.log("passport_page");
         }
     });
