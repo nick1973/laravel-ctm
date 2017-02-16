@@ -351,67 +351,38 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/register/uni-dropdowns', 'UniDropdownsController');
         Route::resource('dashboard/register/hearaboutus-dropdowns', 'HearAboutUsDropdownsController');
 
+        Route::get('dashboard/manager/reports/map', 'ManagerController@postcodes_search')->name('dashboard.manager.reports.map');
 
         Route::get('dashboard/map', function () {
-
-            //$geo = new \MatthiasMullie\Geo\Geo('km');
-
-// coord of Kortrijk railway station
-            //$coord = new \MatthiasMullie\Geo\Coordinate(52.551645, -1.196195);
-
-// calculate bounding box of 10km around this coordinate
-            //$bounds = $geo->bounds($coord, 10);
-            //dd($bounds) ;
-            //dd($bounds->ne->longitude);
-//            $results = DB::table('postcodes')->whereBetween('lat',[$bounds->sw->latitude,$bounds->sw->longitude])
-//                    ->whereBetween('lng', [$bounds->ne->latitude,$bounds->ne->longitude])->get();
-
-//            $results = DB::select('SELECT *
-//                  FROM postcodes
-//                  WHERE
-//                      lat BETWEEN :swlat AND :nelat
-//                      lng BETWEEN :swlng AND :nelng
-//              :swlat being $bounds->sw->latitude
-//              :swlng being $bounds->sw->longitude
-//              :nelat being $bounds->ne->latitude
-//              :nelng being $bounds->ne->longitude
-//              ');
-
-            //dd($results) ;
-            /*
-             * Now pass this on this the database, so it executes a query like:
-             *     SELECT *
-             *     FROM coordinates
-             *     WHERE
-             *         lat BETWEEN :swlat AND :nelat
-             *         lng BETWEEN :swlng AND :nelng
-             *
-             * :swlat being $bounds->sw->latitude
-             * :swlng being $bounds->sw->longitude
-             * :nelat being $bounds->ne->latitude
-             * :nelng being $bounds->ne->longitude
-             *
-             * Assume we have the database results in a variable called $results
-             */
-
-// now weed out entries that fit in the bounding box, but not exactly in
-// the radius we want them to be in
-//            foreach ($results as $i => $result) {
-//                $resultCoord = new Geo\Coordinate($result['lat'], $result['lng']);
-//
-//                // actual distance between source coordinate & result from DB
-//                $distance = $geo->distance($coord, $resultCoord);
-//
-//                // if distance is too large, get rid of the result
-//                if ($distance > 10) {
-//                    unset($results[$i]);
-//                }
-//            }
+            //return "foo";
+            ini_set('memory_limit','2048M');
+            $postcodes = DB::select('select postcode, sqrt(pow(abs(454599 - easting),2) + pow(abs(295170 - northing),2)) 
+                as distance from open_postcode_geo where status = "live"
+                and easting is not null 
+                and northing is not null 
+                and easting between 454599 - 80467 and 454599 + 80467 
+                and northing between 295170 - 80467 and 295170 + 80467 and postcode != "LE9 1RR"
+                order by distance');
+            //return $postcodes;
+            foreach ($postcodes as $postcode){
+                echo $postcode->postcode . '<br>';
+            }
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
             //$staff= \App\Models\Access\User\User::where('visible', 1);
             ini_set('memory_limit','2048M');
+            return "foo";
+            $postcodes = DB::select('select postcode, sqrt(pow(abs(454599 - easting),2) + pow(abs(295170 - northing),2)) 
+                as distance from open_postcode_geo where status = "live"
+                and easting is not null 
+                and northing is not null 
+                and easting between 454599 - 500 and 454599 + 500 
+                and northing between 295170 - 500 and 295170 + 500 and postcode != "LE9 1RR"
+                order by distance');
+
+            return $postcodes;
+
 
 //            $staff = \App\Models\Access\User\User::where([
 //                ['profile_confirmed', '=', 'Yes'],
@@ -421,8 +392,8 @@ Route::group(['middleware' => 'auth'], function () {
 //            ])->get();
             //$staff = \App\Models\Access\User\RTWork::where('user_id',34489)->get();
 
-            $staff = \App\Models\Access\User\User::where('app_status', '=', 3)->get();
-            foreach ($staff as $result){
+            //$staff = \App\Models\Access\User\User::where('app_status', '=', 3)->get();
+            //foreach ($staff as $result){
                 //$ref = \App\Models\Access\User\RTWork::where('user_id',$result->id)->get();
                 //foreach ($ref as $rtw){
                     //echo $rtw['id'] . '</br>';
@@ -430,7 +401,7 @@ Route::group(['middleware' => 'auth'], function () {
                     //echo $result->payroll . ' ' . $result->title . ' ' . $result->name . ' ' . $result->lastname . ' ' . $result->gender . '</br>';
                     //$foo->update(['work_status'=>'0']);
                 //}
-            }
+            //}
 
 
         });

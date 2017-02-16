@@ -179,4 +179,21 @@ class ManagerController extends Controller
         
         //return Response::download($path, 'test1.txt', $headers);
     }
+
+    function postcodes_search(){
+        return "foo";
+        ini_set('memory_limit','2048M');
+        $postcodes = DB::select('select postcode, sqrt(pow(abs(454599 - easting),2) + pow(abs(295170 - northing),2)) 
+                as distance from open_postcode_geo where status = "live"
+                and easting is not null 
+                and northing is not null 
+                and easting between 454599 - 80467 and 454599 + 80467 
+                and northing between 295170 - 80467 and 295170 + 80467 and postcode != "LE9 1RR"
+                order by distance');
+        //return $postcodes;
+//        foreach ($postcodes as $postcode){
+//            echo $postcode->postcode . '<br>';
+//        }
+        //dd($postcodes);
+    }
 }
