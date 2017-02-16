@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Manager;
 
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Mail;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
@@ -70,7 +71,7 @@ class ManagerController extends Controller
                 $last_payroll_number = 6000;
             }
             //return $last_payroll_number->payroll;
-            if($user->payroll=="" || $user->payroll=='0')
+            if($user->payroll=="" || $user->payroll=='0' || $user->markAsp45=='1')
             {
                 $last_payroll_number = (int)$last_payroll->payroll + 1;
                 //return $last_payroll_number;
@@ -181,7 +182,7 @@ class ManagerController extends Controller
     }
 
     function postcodes_search(){
-        return "foo";
+        //return "foo";
         ini_set('memory_limit','2048M');
         $postcodes = DB::select('select postcode, sqrt(pow(abs(454599 - easting),2) + pow(abs(295170 - northing),2)) 
                 as distance from open_postcode_geo where status = "live"
@@ -189,7 +190,8 @@ class ManagerController extends Controller
                 and northing is not null 
                 and easting between 454599 - 80467 and 454599 + 80467 
                 and northing between 295170 - 80467 and 295170 + 80467 and postcode != "LE9 1RR"
-                order by distance');
+                order by distance limit 10');
+        return view('frontend.manager.reports.postcode_search', compact('postcodes'));
         //return $postcodes;
 //        foreach ($postcodes as $postcode){
 //            echo $postcode->postcode . '<br>';
