@@ -318,6 +318,7 @@ class ProfileController extends Controller
             'account_sort_code' => 'required|numeric|digits:6',
             'ni_number' => 'required|max:9'
         ]);
+        
         if ($validator->fails()) {
             return redirect('/profile/edit_money')
                 ->withErrors($validator)
