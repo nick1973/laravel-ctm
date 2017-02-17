@@ -79,24 +79,12 @@ class FrontendController extends Controller
         ini_set('max_execution_time', 10000);
         ini_set('request_terminate_timeout ', 10000);
         ini_set('memory_limit','2048M');
-
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-//
+        DB::table('users')
+            ->where('app_status', '!=', 3)
+            ->update(['dob' => '']);
 
-
-
-
-        foreach($flags as $res){
-            //echo $res['p45'];
-            User::where('id',$res['id'])->update(['d1'=>$res['d1'],
-                                                'nrswa'=>$res['nrswa'],
-                                                'other_lang'=>$res['other_lang'],
-                                                'convictions'=>$res['convictions'],
-                                                'convictions_info'=>$res['convictions_info'],
-                                                'gender'=>$res['gender']
-                                                ]);
-        }
         //User::where('id',117)->update(['markAsp45'=>1]);
         //User::insert($pFortyFive);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
