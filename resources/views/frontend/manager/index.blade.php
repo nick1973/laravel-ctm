@@ -20,7 +20,7 @@
                         </tr>
                         @foreach($users as $user)
                         <tr>
-                            @if($user->markAsp45 == 1)
+                            @if( $user->markAsp45 == 1 )
                                 <td></td>
                                 @else
                                 <td>{{ $user->payroll }}</td>
