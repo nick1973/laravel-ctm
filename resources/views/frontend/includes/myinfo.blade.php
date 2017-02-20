@@ -41,7 +41,7 @@
                 <?php  $year = substr($user->dob,0,4); $day = substr($user->dob,8,2); $month = substr($user->dob,5,2); ?>
                 <td class="required">{{ $day . '-' . $month . '-' . $year }}</td>
             @else
-                <td class="required">{{ gmdate("d-m-Y", $dobint) }}</td>
+                <td class="required"></td>
             @endif
         </tr>
         <tr>

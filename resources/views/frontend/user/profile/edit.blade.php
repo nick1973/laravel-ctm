@@ -84,7 +84,7 @@
 
                                 @else
                                 {{--<input name="dob" class="form-control hidden" value="{{ gmdate("Y-m-d", $dobint) }}" placeholder="yyyy-mm-dd">--}}
-                                <input name="dob" class="form-control" value="{{ gmdate("d-m-Y", $dobint) }}" placeholder="yyyy-mm-dd">
+                                <input name="dob" class="form-control" value="" placeholder="dd-mm-yyyy">
                             @endif
 
                         </div>
