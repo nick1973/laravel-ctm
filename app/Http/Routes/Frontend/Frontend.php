@@ -337,7 +337,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
-                ['uk_driving_license', '=', 'Yes'],
+                //['uk_driving_license', '=', 'Yes'],
             ])->get();
             return ['data'=>$staff];
         });
@@ -465,12 +465,12 @@ Route::group(['middleware' => 'auth'], function () {
             ini_set('memory_limit','2048M');
             $staff = \App\Models\Access\User\User::
             where([
-                ['confirmed', '=', 1],
+                //['confirmed', '=', 1],
                 ['visible', '=', 1],
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
-                //['uk_driving_license', '=', 'yes'],
+                ['uk_driving_license', '=', 'Yes'],
             ])->get();
             return ['data'=>$staff];
         });
