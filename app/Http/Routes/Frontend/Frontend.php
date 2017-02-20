@@ -337,7 +337,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
-                //['uk_driving_license', '=', 'yes'],
+                ['uk_driving_license', '=', 'yes'],
             ])->get();
             return ['data'=>$staff];
         });
