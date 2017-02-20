@@ -20,8 +20,8 @@
                         </tr>
                         @foreach($users as $user)
                         <tr>
-                            @if($user->profile_confirmed=="Yes" || $user->profile_confirmed=="no")
-                                <td>{{ $user->payroll }}</td>
+                            @if($user->markAsp45 == 1)
+                                <td></td>
                                 @else
                                 <td>{{ $user->payroll }}</td>
                             @endif
