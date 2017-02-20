@@ -12,27 +12,35 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0m8NKIAMw2DjvBRRS76z82ZVNxdW9bg"></script>
     <script type="text/javascript">
 
-        function getPosition(callback) {
-            var geocoder = new google.maps.Geocoder();
-            var postcode = document.getElementById("postcode").value;
+        var js_array = <?php echo json_encode($postcodes);?>;
 
-            geocoder.geocode({'address': postcode}, function(results, status)
-            {
-                if (status == google.maps.GeocoderStatus.OK)
+        for (var i = 0; i < js_array.length; i++) {
+
+
+            function getPosition(callback) {
+                var geocoder = new google.maps.Geocoder();
+                //var postcode = document.getElementById("postcode").value;
+
+                geocoder.geocode({'address': js_array[i]['postcode']}, function(results, status)
                 {
-                    callback({
-                        latt: results[0].geometry.location.lat(),
-                        long: results[0].geometry.location.lng()
-                    });
-                }
-            });
+                    if (status == google.maps.GeocoderStatus.OK)
+                    {
+                        callback({
+                            latt: results[0].geometry.location.lat(),
+                            long: results[0].geometry.location.lng()
+                        });
+                        console.log(callback)
+                    }
+                });
+            }
+
         }
 
         function setup_map(latitude, longitude) {
             var _position = { lat: latitude, lng: longitude};
 
             var mapOptions = {
-                zoom: 16,
+                zoom: 8,
                 center: _position
             }
 

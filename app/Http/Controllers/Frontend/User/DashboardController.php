@@ -29,6 +29,10 @@ class DashboardController extends Controller
         {
             return redirect('dashboard/manager');
         }
+        if(access()->hasRole('drivers'))
+        {
+            return redirect('dashboard/drivers');
+        }
         return view('frontend.user.dashboard', compact('reference', 'rt_work', 'events'))
             ->withUser(access()->user());
     }

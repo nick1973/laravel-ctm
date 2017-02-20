@@ -327,6 +327,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
 
+        Route::resource('dashboard/rtw', 'RTWController');
+        Route::get('dashboard/rtw/search/rtw', function () {
+            ini_set('memory_limit','2048M');
+            $staff = \App\Models\Access\User\User::
+            where([
+                //['confirmed', '=', 1],
+                ['visible', '=', 1],
+                ['app_status', '=', 3],
+                ['markAsp45', '=' ,0],
+                ['payroll','!=','0'],
+                //['uk_driving_license', '=', 'yes'],
+            ])->get();
+            return ['data'=>$staff];
+        });
         Route::resource('dashboard/exports', 'ExportController');
 
         Route::get('dashboard/export_download/payroll/{file}', function ($file) {
@@ -361,8 +375,9 @@ Route::group(['middleware' => 'auth'], function () {
                 and easting is not null 
                 and northing is not null 
                 and easting between 454599 - 80467 and 454599 + 80467 
-                and northing between 295170 - 80467 and 295170 + 80467 and postcode != "LE9 1RR"
-                order by distance');
+                and northing between 295170 - 80467 and 295170 + 80467 
+                and postcode != "LE9 1RR"
+                order by distance limit 10');
             //return $postcodes;
             foreach ($postcodes as $postcode){
                 echo $postcode->postcode . '<br>';
@@ -438,6 +453,27 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/ops', 'OpsController');
         Route::resource('dashboard/specs', 'SpecsController');
 
+    });
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['namespace' => 'Drivers'], function () {
+
+        Route::resource('dashboard/drivers', 'DriversController');
+
+        Route::get('dashboard/search/drivers', function () {
+            ini_set('memory_limit','2048M');
+            $staff = \App\Models\Access\User\User::
+            where([
+                ['confirmed', '=', 1],
+                ['visible', '=', 1],
+                ['app_status', '=', 3],
+                ['markAsp45', '=' ,0],
+                ['payroll','!=','0'],
+                //['uk_driving_license', '=', 'yes'],
+            ])->get();
+            return ['data'=>$staff];
+        });
     });
 });
 

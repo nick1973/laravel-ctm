@@ -164,6 +164,7 @@
                             <a href="/dashboard/register/dropdowns" class="btn btn-danger">Registration Dropdowns</a>
                             <a href="/dashboard/events" class="btn btn-default">Events</a>
                             <a href="/dashboard/exports" class="btn btn-success">Exports</a>
+                            <a href="/dashboard/rtw" class="btn btn-primary">RTW</a>
                         </div>
                         <div class="col-md-6">
 
