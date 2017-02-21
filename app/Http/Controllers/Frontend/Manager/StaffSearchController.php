@@ -47,7 +47,7 @@ class StaffSearchController extends Controller
         foreach ($postcodes as $postcode){
             $post_code[] = $postcode->postcode;
         }
-        return $post_code;
+        //return $post_code;
         $users = User::whereIn('postcode',$post_code)
             //->where('app_status', 3)
             ->where('nrswa', $nrswa)
