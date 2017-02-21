@@ -50,8 +50,8 @@ class StaffSearchController extends Controller
         //return $post_code;
         $users = User::whereIn('postcode',$post_code)
             //->where('app_status', 3)
-            ->where('nrswa', $nrswa)
-            ->where('uk_driving_license', $uk_driving_license)
+            //->where('nrswa', $nrswa)
+            //->where('uk_driving_license', $uk_driving_license)
             ->get();
         return $users;
     }
