@@ -43,12 +43,12 @@ class StaffSearchController extends Controller
                 and northing between '$northing' - '$meters' and '$northing' + '$meters'
                 and postcode != ''
                 order by distance
-                limit 1000");
+                ");
         $post_code = [];
         foreach ($postcodes as $postcode){
             $post_code[] = $postcode->postcode;
         }
-        //return $post_code;
+        return $post_code;
 
         $users = User::whereIn('postcode',$post_code)
             ->where(function ($query) {
