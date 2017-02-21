@@ -42,7 +42,8 @@ class StaffSearchController extends Controller
                 and easting between '$easting' - '$meters' and '$easting' + '$meters'
                 and northing between '$northing' - '$meters' and '$northing' + '$meters'
                 and postcode != ''
-                order by distance");
+                order by distance
+                limit 1000");
         $post_code = [];
         foreach ($postcodes as $postcode){
             $post_code[] = $postcode->postcode;
@@ -56,7 +57,7 @@ class StaffSearchController extends Controller
                 $query->where('app_status', 3)
                         ->where('nrswa', $nrswa)
                         ->where('uk_driving_license', $uk_driving_license);
-            })->get();
+            })->limit(500)->get();
         return $users;
     }
 }
