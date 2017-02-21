@@ -165,6 +165,7 @@
                             <a href="/dashboard/events" class="btn btn-default">Events</a>
                             <a href="/dashboard/exports" class="btn btn-success">Exports</a>
                             <a href="/dashboard/rtw" class="btn btn-primary">RTW</a>
+                            <a href="/dashboard/staff-search" class="btn btn-warning">Staff Search</a>
                         </div>
                         <div class="col-md-6">
 
