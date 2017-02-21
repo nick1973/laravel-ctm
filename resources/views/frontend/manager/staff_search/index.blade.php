@@ -35,6 +35,10 @@
                                     <option>5</option>
                                     <option>10</option>
                                     <option>15</option>
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>40</option>
+                                    <option>50</option>
                                 </select>
                             </div>
                     </div>
@@ -51,10 +55,10 @@
                             <div class="form-group" style="padding-left: 50px">
                                 <label for="exampleInputEmail2">NRWSA Qualified</label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="nrswa" value="1"> Yes
+                                    <input type="radio" name="nrswa" value="Yes"> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="nrswa" value="0" checked> No
+                                    <input type="radio" name="nrswa" value="No" checked> No
                                 </label>
                             </div>
                             <div class="form-group" style="padding-left: 50px">

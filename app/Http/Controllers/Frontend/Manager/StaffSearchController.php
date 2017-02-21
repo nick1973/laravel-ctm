@@ -17,7 +17,7 @@ class StaffSearchController extends Controller
         return view('frontend.manager.staff_search.index', compact('events'));
     }
 
-    function staff_search(Request $request){
+        function staff_search(Request $request){
         //return $request->all();
         $pc = $request->input('postcode');
         $radius = $request->input('radius');// in miles
@@ -48,11 +48,14 @@ class StaffSearchController extends Controller
             $post_code[] = $postcode->postcode;
         }
         //return $post_code;
+
         $users = User::whereIn('postcode',$post_code)
             ->where(function ($query) {
-                $query->where('app_status', 3);
-                        //->where('nrswa', $nrswa)
-                        //->where('uk_driving_license', $uk_driving_license)
+                global $nrswa;
+                global $uk_driving_license;
+                $query->where('app_status', 3)
+                        ->where('nrswa', $nrswa)
+                        ->where('uk_driving_license', $uk_driving_license);
             })->get();
         return $users;
     }
