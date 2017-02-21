@@ -357,7 +357,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('dashboard/events', 'EventsController');
 
         Route::resource('dashboard/staff-search', 'StaffSearchController');
-        Route::post('dashboard/manager/staff-search/approved', 'StaffSearchController@staff_search')->name('dashboard.manager.staff-search.approved');
+        Route::any('dashboard/manager/staff-search/approved', 'StaffSearchController@staff_search')->name('dashboard.manager.staff-search.approved');
 
         Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
         Route::resource('dashboard/sbf', 'SBFController');

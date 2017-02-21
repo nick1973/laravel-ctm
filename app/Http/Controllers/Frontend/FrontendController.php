@@ -79,15 +79,14 @@ class FrontendController extends Controller
         ini_set('max_execution_time', 10000);
         ini_set('request_terminate_timeout ', 10000);
         ini_set('memory_limit','2048M');
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        //phpinfo();
+        //$sql = file_get_contents('http://localhost/open_postcode_geo.txt');
 
-        DB::table('users')
-            ->where('app_status', '!=', 3)
-            ->update(['dob' => '']);
-
+        //return $sql;
         //User::where('id',117)->update(['markAsp45'=>1]);
         //User::insert($pFortyFive);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        //DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 }
 
 

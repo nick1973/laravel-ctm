@@ -20,7 +20,7 @@
                                 <select class="form-control" name="event_name">
                                     <option>Please Choose an Event</option>
                                     @foreach($events as $event)
-                                        <option id="{{ $event->id }}">{{ $event->event_name }}</option>
+                                        <option id="{{ $event->id }}">{{ $event->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -95,7 +95,7 @@
         var ar = <?php echo json_encode($events) ?>;
         function search(nameKey, myArray){
             for (var i=0; i < myArray.length; i++) {
-                if (myArray[i].event_name === nameKey) {
+                if (myArray[i].name === nameKey) {
                     return myArray[i];
                 }
             }
@@ -104,14 +104,10 @@
         $("#postcode").val(resultObject.postcode)
         //console.log(resultObject)
     });
-
     function submitForm(form){
         var formData = $(form).serializeArray();
-        //console.log($(form['name="id"']).val())
         var url = '/dashboard/manager/staff-search/approved'
         console.log(formData[1]['value'])
-        //var url = form.attr("action");
-        //var formData = $(form).serializeArray();
         $.post(url, formData).done(function (data) {
             console.log(formData);
         });
