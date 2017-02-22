@@ -59,6 +59,7 @@ class StaffSearchController extends Controller
                    })
             ->get();
             $filtered = $users->whereIn('postcode', $post_code);
-            return $filtered->all();
+            //return $filtered->all();
+            return $users;
     }
 }
