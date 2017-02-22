@@ -48,16 +48,17 @@ class StaffSearchController extends Controller
         foreach ($postcodes as $postcode){
             $post_code[] = $postcode->postcode;
         }
-        //return $post_code;
-
-        $users = User::whereIn('postcode',$post_code)
-            ->where(function ($query) {
+            //ini_set('max_execution_time', 600);
+            $users = User:://whereIn('postcode',$post_code)
+                    where(function ($query) {
                 global $nrswa;
                 global $uk_driving_license;
-                $query->where('app_status', 3)
+                    $query->where('app_status', 0)
                         ->where('nrswa', $nrswa)
                         ->where('uk_driving_license', $uk_driving_license);
-            })->limit(500)->get();
-        return $users;
+                   })
+            ->get();
+            $filtered = $users->whereIn('postcode', $post_code);
+            return $filtered->all();
     }
 }
