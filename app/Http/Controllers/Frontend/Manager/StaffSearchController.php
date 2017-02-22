@@ -53,9 +53,9 @@ class StaffSearchController extends Controller
                     where(function ($query) {
                 global $nrswa;
                 global $uk_driving_license;
-                    $query->where('app_status', 3)
-                        ->where('nrswa', $nrswa)
-                        ->where('uk_driving_license', $uk_driving_license);
+                    $query->where('app_status', 3);
+                        //->where('nrswa', $nrswa)
+                        //->where('uk_driving_license', $uk_driving_license);
                    })
             ->get();
             $filtered = $users->whereIn('postcode', $post_code);
