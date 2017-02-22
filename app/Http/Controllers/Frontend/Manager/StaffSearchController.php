@@ -49,11 +49,11 @@ class StaffSearchController extends Controller
             $post_code[] = $postcode->postcode;
         }
             //ini_set('max_execution_time', 600);
-            $users = User::$query->where('app_status', 3)
+            $users = User::where('app_status', 3)
                         ->where('nrswa', $nrswa)
                         ->where('uk_driving_license', $uk_driving_license)
                         ->get();
-            //$filtered = $users->whereIn('postcode', $post_code);
+            //$filtered = $users->whereInLoose('postcode', $post_code);
             //return $filtered->all();
             return $users;
     }
