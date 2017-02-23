@@ -115,7 +115,7 @@
         $.post(url, formData).done(function (results) {
             console.log(results.data);
 
-            table = $('#events').DataTable( {
+            var table = $('#events').DataTable( {
                 //paging: false,
                 //searching: false,
                 data: results.data,
@@ -130,7 +130,7 @@
 //                    }
                 ]
             });
-            //table.destroy();
+            table.destroy();
         });
     }
 </script>
