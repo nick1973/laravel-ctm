@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
+    <?php $id = ''; ?>
     <div>
 
         <!-- Nav tabs -->
@@ -121,7 +121,8 @@
         table.destroy();
         var formData = $(form).serializeArray();
         var url = '/dashboard/manager/staff-search/approved'
-        console.log(formData[1]['value'])
+        //console.log(formData[1]['value'])
+        console.log(formData[0]['value'])
         $.post(url, formData).done(function (results) {
             console.log(results.data);
 
@@ -167,7 +168,7 @@
                             if(data.nrswa == "Yes"){
                                 return '<img src="/img/green-tick.png" height="20px">'
                             }
-                            return '<img src="/img/red_cross.png" height="20px">'
+                            return ''//'<img src="/img/red_cross.png" height="20px">'
                         }, className: "centre get"
                     },
                     {
@@ -175,15 +176,26 @@
                             if(data.driver_paper_work == 1){
                                 return '<img src="/img/green-tick.png" height="20px">'
                             }
-                            return '<img src="/img/red_cross.png" height="20px">'
+                            return ''//'<img src="/img/red_cross.png" height="20px">'
                         }, className: "centre get"
                     },
                     {
                         "data": function (data) {
-                            if(data.driver_paper_work == 1){
-                                return '<img src="/img/green-tick.png" height="20px">'
+                            <?php $users = \App\Models\Access\User\User::all(); ?>
+                                    <?php foreach($users as $user){ ?>
+                                    if(data.id == '<?php echo $user->id ?>'){
+                                <?php foreach($user->tags as $tags){ ?>
+                                    if(formData[0]['value'].toString() == '<?php echo $tags->name ?>')
+                                {
+                                    return '<img src="/img/green-tick.png" height="20px">'
+                                }
+                                    return ''
+
+                                <?php } ?>
                             }
-                            return '<img src="/img/red_cross.png" height="20px">'
+                            //return ''
+                            <?php } ?>
+                                    return ''
                         }, className: "centre get"
                     }
                     //{ "data": "nrswa" , className: "centre get" },
