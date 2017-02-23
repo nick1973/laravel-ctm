@@ -87,6 +87,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                     </div>
@@ -149,7 +150,6 @@
                             } else
                             {
                                 var dob = new Date(Number(data.dob)*1000);
-
                                 var ageDifMs = Date.now() - dob.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
                                 return Math.abs(ageDate.getUTCFullYear() - 1970);

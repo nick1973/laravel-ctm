@@ -68,13 +68,8 @@ class StaffSearchController extends Controller
                 $users = User::where('app_status', 3)
                     ->get();
             }
-
-
-
-
             $filtered = $users->whereInLoose('postcode', $post_code);
             //values() resets the keys
             return ['data'=>$filtered->values()];
-            //return $users;
     }
 }
