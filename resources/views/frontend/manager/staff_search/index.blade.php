@@ -114,7 +114,10 @@
         console.log(formData[1]['value'])
         $.post(url, formData).done(function (results) {
             console.log(results.data);
-            var table = $('#events').DataTable( {
+
+            table = $('#events').DataTable( {
+                paging: false,
+                searching: false,
                 data: results.data,
                 "columns": [
                     { "data": "title" , className: "centre get" },
@@ -126,7 +129,8 @@
 //                        }
 //                    }
                 ]
-            } );
+            });
+            table.destroy();
         });
     }
 </script>
