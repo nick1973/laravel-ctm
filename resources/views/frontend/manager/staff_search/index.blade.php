@@ -83,7 +83,7 @@
                                         <th>Age</th>
                                         <th>NRSWA</th>
                                         <th>Driver</th>
-                                        <th>Chosen Event</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tr>
@@ -93,7 +93,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+
                                 </tr>
                             </table>
                     </div>
@@ -116,6 +116,7 @@
         var resultObject = search(this.value, ar);
         $("#postcode").val(resultObject.postcode)
     });
+
     function submitForm(form){
         var table = $('#events').DataTable( { });
         table.destroy();
@@ -165,7 +166,7 @@
                     },
                     {
                         "data": function (data) {
-                            if(data.nrswa == "Yes"){
+                            if(data.nrswa == 'Yes'){
                                 return '<img src="/img/green-tick.png" height="20px">'
                             }
                             return ''//'<img src="/img/red_cross.png" height="20px">'
@@ -179,31 +180,7 @@
                             return ''//'<img src="/img/red_cross.png" height="20px">'
                         }, className: "centre get"
                     },
-                    {
-                        "data": function (data) {
-                            <?php $users = \App\Models\Access\User\User::all(); ?>
-                                    <?php foreach($users as $user){ ?>
-                                    if(data.id == '<?php echo $user->id ?>'){
-                                <?php foreach($user->tags as $tags){ ?>
-                                    if(formData[0]['value'].toString() == '<?php echo $tags->name ?>')
-                                {
-                                    return '<img src="/img/green-tick.png" height="20px">'
-                                }
-                                    return ''
-                                <?php } ?>
-                            }
-                            //return ''
-                            <?php } ?>
-                                    return ''
-                        }, className: "centre get"
-                    }
-                    //{ "data": "nrswa" , className: "centre get" },
-                    //{ "data": "lastname" , className: "centre get" }
-//                    {
-//                        "data": function (data) {
-//                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
-//                        }
-//                    }
+
                 ]
             });
             //table.destroy();
