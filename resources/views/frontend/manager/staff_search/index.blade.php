@@ -190,7 +190,6 @@
                                     return '<img src="/img/green-tick.png" height="20px">'
                                 }
                                     return ''
-
                                 <?php } ?>
                             }
                             //return ''
