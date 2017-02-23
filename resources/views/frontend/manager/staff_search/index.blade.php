@@ -109,6 +109,8 @@
         $("#postcode").val(resultObject.postcode)
     });
     function submitForm(form){
+        var table = $('#events').DataTable( { });
+        table.destroy();
         var formData = $(form).serializeArray();
         var url = '/dashboard/manager/staff-search/approved'
         console.log(formData[1]['value'])
@@ -130,7 +132,7 @@
 //                    }
                 ]
             });
-            table.destroy();
+            //table.destroy();
         });
     }
 </script>
