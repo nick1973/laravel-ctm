@@ -54,8 +54,9 @@ class StaffSearchController extends Controller
                         ->where('uk_driving_license', $uk_driving_license)
                         ->get();
             $filtered = $users->whereInLoose('postcode', $post_code);
-            $result[] =  $filtered->toJson();
-            return ['data'=>$filtered->toArray()];
+            $new = json_decode($filtered);
+
+            return ['data'=>$new];
             //return $users;
     }
 }
