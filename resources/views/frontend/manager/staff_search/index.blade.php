@@ -73,9 +73,7 @@
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
                         </div>
                     </form>
-                    <?php $event = \App\Models\Dropdowns\Tag::find(2);
-                        echo $event->users;
-                    ?>
+                    
                     <div class="col-md-12 col-lg-12" style="padding-top: 40px">
                             <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
                                 <thead>
