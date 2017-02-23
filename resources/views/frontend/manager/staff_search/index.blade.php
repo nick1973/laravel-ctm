@@ -17,7 +17,7 @@
                     <div class="col-lg-12" style="padding-top: 15px">
                             <div class="form-group">
                                 <label for="exampleInputName2">Event</label>
-                                <select class="form-control" name="event_name">
+                                <select id="event_name" class="form-control" name="event_name">
                                     <option>Please Choose an Event</option>
                                     @foreach($events as $event)
                                         <option id="{{ $event->id }}">{{ $event->name }}</option>
@@ -70,20 +70,22 @@
                                     <input type="radio" name="uk_driving_license" value="No" checked> No
                                 </label>
                             </div>
-                            <input type="button" onclick="return submitForm(this.form)">
+                            <input type="button" onclick="return submitForm(this.form)" value="">
                         </div>
                     </form>
-                    <div class="col-md-12 col-lg-12" style="padding-top: 150px">
-                            <table class="table table-striped table-hover table-bordered dashboard-table">
+                    <div class="col-md-12 col-lg-12" style="padding-top: 40px">
+                            <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                    </tr>
+                                </thead>
                                 <tr>
-                                    <th>payroll</th>
-                                    <th width="33%">Name</th>
-                                    <th width="33%">{{ trans('labels.frontend.user.profile.created_at') }}</th>
-                                    <th width="33%">{{ trans('labels.frontend.user.profile.last_updated') }}</th>
-                                </tr>
-                                <td><a href="/dashboard/manager/"></a></td>
-                                <td></td>
-                                <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                     </div>
@@ -91,11 +93,10 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">...</div>
         </div>
-
     </div>
 
 <script>
-    $('select').on('change', function() {
+    $('#event_name').on('change', function() {
         var ar = <?php echo json_encode($events) ?>;
         function search(nameKey, myArray){
             for (var i=0; i < myArray.length; i++) {
@@ -106,18 +107,28 @@
         }
         var resultObject = search(this.value, ar);
         $("#postcode").val(resultObject.postcode)
-        //console.log(resultObject)
     });
     function submitForm(form){
         var formData = $(form).serializeArray();
         var url = '/dashboard/manager/staff-search/approved'
         console.log(formData[1]['value'])
-        $.post(url, formData).done(function (data) {
-            console.log(formData);
+        $.post(url, formData).done(function (results) {
+            console.log(results.data);
+            var table = $('#events').DataTable( {
+                data: results.data,
+                "columns": [
+                    { "data": "title" , className: "centre get" },
+                    { "data": "name" , className: "centre get" },
+                    { "data": "lastname" , className: "centre get" },
+//                    {
+//                        "data": function (data) {
+//                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
+//                        }
+//                    }
+                ]
+            } );
         });
     }
 </script>
-
-
 
 @endsection
