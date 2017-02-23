@@ -48,14 +48,32 @@ class StaffSearchController extends Controller
         foreach ($postcodes as $postcode){
             $post_code[] = $postcode->postcode;
         }
-            //ini_set('max_execution_time', 600);
-            $users = User::where('app_status', 3)
-                        ->where('nrswa', $nrswa)
-                        ->where('uk_driving_license', $uk_driving_license)
-                        ->get();
+            if($nrswa == "Yes" && $uk_driving_license =="Yes"){
+                $users = User::where('app_status', 3)
+                    ->where('nrswa', 'Yes')
+                    ->where('uk_driving_license', 'Yes')
+                    ->get();
+            }
+            if($nrswa == "Yes" && $uk_driving_license =="No"){
+                $users = User::where('app_status', 3)
+                    ->where('nrswa', 'Yes')
+                    ->get();
+            }
+            if($nrswa == "No" && $uk_driving_license =="Yes"){
+                $users = User::where('app_status', 3)
+                    ->where('uk_driving_license', 'Yes')
+                    ->get();
+            }
+            if($nrswa == "No" && $uk_driving_license =="No"){
+                $users = User::where('app_status', 3)
+                    ->get();
+            }
+
+
+
+
             $filtered = $users->whereInLoose('postcode', $post_code);
-
-
+            //values() resets the keys
             return ['data'=>$filtered->values()];
             //return $users;
     }

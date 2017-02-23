@@ -70,7 +70,7 @@
                                     <input type="radio" name="uk_driving_license" value="No" checked> No
                                 </label>
                             </div>
-                            <input type="button" onclick="return submitForm(this.form)" value="">
+                            <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
                         </div>
                     </form>
                     <div class="col-md-12 col-lg-12" style="padding-top: 40px">
@@ -80,6 +80,7 @@
                                         <th>Title</th>
                                         <th>Name</th>
                                         <th>Surname</th>
+                                        <th>Age</th>
                                     </tr>
                                 </thead>
                                 <tr>
@@ -125,6 +126,36 @@
                     { "data": "title" , className: "centre get" },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
+                    {
+                        "data": function (data) {
+                            if (data.dob.indexOf("-") > 1){
+                                var dob = data.dob
+                                var yyyy = Number(dob.substr(0,4))
+                                var mm = Number(dob.substr(5,2))
+                                var dd = Number(dob.substr(8,2))
+                                var d = new Date();
+                                d.setFullYear(yyyy, mm, dd);
+                                var ageDifMs = Date.now() - d.getTime();
+                                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                                if(age < 18){
+                                    return "Under 18"
+                                }
+                                if(age >= 18 && age < 25){
+                                    return "Under 25"
+                                } else {
+                                    return "Over 25"
+                                }
+                            } else
+                            {
+                                var dob = new Date(Number(data.dob)*1000);
+
+                                var ageDifMs = Date.now() - dob.getTime();
+                                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                                return Math.abs(ageDate.getUTCFullYear() - 1970);
+                            }
+                        }
+                    }
 //                    {
 //                        "data": function (data) {
 //                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
