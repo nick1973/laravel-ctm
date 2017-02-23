@@ -73,6 +73,9 @@
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
                         </div>
                     </form>
+                    <?php $event = \App\Models\Dropdowns\Tag::find(2);
+                        echo $event->users;
+                    ?>
                     <div class="col-md-12 col-lg-12" style="padding-top: 40px">
                             <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
                                 <thead>
@@ -83,7 +86,7 @@
                                         <th>Age</th>
                                         <th>NRSWA</th>
                                         <th>Driver</th>
-                                        
+                                        <th>Chosen Event</th>
                                     </tr>
                                 </thead>
                                 <tr>
@@ -93,7 +96,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-
+                                    <td></td>
                                 </tr>
                             </table>
                     </div>
@@ -180,7 +183,26 @@
                             return ''//'<img src="/img/red_cross.png" height="20px">'
                         }, className: "centre get"
                     },
+                    {
+                        "data": function (data) {
 
+                            <?php $events = \App\Models\Dropdowns\Tag::all(); ?>
+                                    <?php foreach($events as $event){ ?>
+
+                                <?php foreach($event->users as $user){ ?>
+
+                            if(data.id == '<?php echo $user->id ?>') {
+                                if (formData[0]['value'].toString() == '<?php echo $event->name ?>') {
+                                    return '<img src="/img/green-tick.png" height="20px">'
+                                }
+                                return 'else'
+                            }
+                                <?php } ?>
+
+                            <?php } ?>
+                                    return ''
+                        }, className: "centre get"
+                    }
                 ]
             });
             //table.destroy();
