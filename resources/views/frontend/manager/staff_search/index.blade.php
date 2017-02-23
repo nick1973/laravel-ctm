@@ -58,7 +58,7 @@
                                     <input type="radio" name="nrswa" value="Yes"> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="nrswa" value="No" checked> No
+                                    <input type="radio" name="nrswa" value="No" checked> Any
                                 </label>
                             </div>
                             <div class="form-group" style="padding-left: 50px">
@@ -67,7 +67,7 @@
                                     <input type="radio" name="uk_driving_license" value="Yes"> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="uk_driving_license" value="No" checked> No
+                                    <input type="radio" name="uk_driving_license" value="No" checked> Any
                                 </label>
                             </div>
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
@@ -172,7 +172,7 @@
                     },
                     {
                         "data": function (data) {
-                            if(data.driver_paper_work == "Yes"){
+                            if(data.driver_paper_work == 1){
                                 return '<img src="/img/green-tick.png" height="20px">'
                             }
                             return '<img src="/img/red_cross.png" height="20px">'
@@ -180,7 +180,7 @@
                     },
                     {
                         "data": function (data) {
-                            if(data.driver_paper_work == "Yes"){
+                            if(data.driver_paper_work == 1){
                                 return '<img src="/img/green-tick.png" height="20px">'
                             }
                             return '<img src="/img/red_cross.png" height="20px">'
