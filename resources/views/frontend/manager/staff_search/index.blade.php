@@ -116,8 +116,8 @@
             console.log(results.data);
 
             table = $('#events').DataTable( {
-                paging: false,
-                searching: false,
+                //paging: false,
+                //searching: false,
                 data: results.data,
                 "columns": [
                     { "data": "title" , className: "centre get" },
@@ -130,7 +130,7 @@
 //                    }
                 ]
             });
-            table.destroy();
+            //table.destroy();
         });
     }
 </script>
