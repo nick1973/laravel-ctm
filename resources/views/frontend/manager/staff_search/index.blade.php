@@ -81,9 +81,15 @@
                                         <th>Name</th>
                                         <th>Surname</th>
                                         <th>Age</th>
+                                        <th>NRSWA</th>
+                                        <th>Driver</th>
+                                        <th>Chosen Event</th>
                                     </tr>
                                 </thead>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -154,8 +160,34 @@
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
                                 return Math.abs(ageDate.getUTCFullYear() - 1970);
                             }
-                        }
+                        }, className: "centre get"
+                    },
+                    {
+                        "data": function (data) {
+                            if(data.nrswa == "Yes"){
+                                return '<img src="/img/green-tick.png" height="20px">'
+                            }
+                            return '<img src="/img/red_cross.png" height="20px">'
+                        }, className: "centre get"
+                    },
+                    {
+                        "data": function (data) {
+                            if(data.driver_paper_work == "Yes"){
+                                return '<img src="/img/green-tick.png" height="20px">'
+                            }
+                            return '<img src="/img/red_cross.png" height="20px">'
+                        }, className: "centre get"
+                    },
+                    {
+                        "data": function (data) {
+                            if(data.driver_paper_work == "Yes"){
+                                return '<img src="/img/green-tick.png" height="20px">'
+                            }
+                            return '<img src="/img/red_cross.png" height="20px">'
+                        }, className: "centre get"
                     }
+                    //{ "data": "nrswa" , className: "centre get" },
+                    //{ "data": "lastname" , className: "centre get" }
 //                    {
 //                        "data": function (data) {
 //                            return '<a href="/dashboard/sbf/' + data.id + '" class="btn btn-warning">SBF</a>';
@@ -167,5 +199,13 @@
         });
     }
 </script>
-
+    <style>
+        .centre {
+            text-align: center;
+        }
+        .centandcaps{
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
 @endsection
