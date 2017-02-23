@@ -73,7 +73,7 @@
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
                         </div>
                     </form>
-                    
+
                     <div class="col-md-12 col-lg-12" style="padding-top: 40px">
                             <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
                                 <thead>
@@ -193,7 +193,7 @@
                                 if (formData[0]['value'].toString() == '<?php echo $event->name ?>') {
                                     return '<img src="/img/green-tick.png" height="20px">'
                                 }
-                                return 'else'
+                                return ''
                             }
                                 <?php } ?>
 
