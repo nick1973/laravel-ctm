@@ -147,7 +147,7 @@
                 "bPaginate": true,
                 "bLengthChange": true,
                 "bFilter": true,
-                "bSort": false,
+                "bSort": true,
                 "bInfo": true,
                 "bAutoWidth": false,
                 "bProcessing": true,
