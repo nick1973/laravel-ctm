@@ -150,7 +150,7 @@
                 "bSort": true,
                 "bInfo": true,
                 "bAutoWidth": false,
-                "bProcessing": true,
+                //"bProcessing": true,
                 data: results.data,
                 dom: 'Bflrtip',
                 buttons: [
