@@ -143,13 +143,13 @@
             setTimeout(self.timeoutHandler, 750);
 
             var table = $('#events').DataTable( {
-                //"sPaginationType": "full_numbers",
-                //"bPaginate": true,
-                //"bLengthChange": true,
+                "sPaginationType": "full_numbers",
+                "bPaginate": true,
+                "bLengthChange": true,
                 "bFilter": true,
                 "bSort": true,
-                //"bInfo": true,
-                //"bAutoWidth": false,
+                "bInfo": true,
+                "bAutoWidth": false,
                 "bProcessing": true,
                 data: results.data,
                 dom: 'Bflrtip',
