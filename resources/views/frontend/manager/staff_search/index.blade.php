@@ -13,7 +13,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
                 <div class="row">
-                    <form class="form-inline">
+                    <form id="filers" class="form-inline">
                     <div class="col-lg-12" style="padding-top: 15px">
                             <div class="form-group">
                                 <label for="exampleInputName2">Event</label>
@@ -132,7 +132,7 @@
         } else {
             // not a datatable... do other stuff
         }
-        var formData = $(form).serializeArray();
+        var formData = $('#filers').serializeArray();
         var url = '/dashboard/manager/staff-search/approved'
         //console.log(formData[1]['value'])
         console.log(formData[0]['value'])
@@ -141,6 +141,7 @@
             $('.loaderImage').hide();
             console.log(results.data);
             setTimeout(self.timeoutHandler, 750);
+
             var table = $('#events').DataTable( {
                 //paging: false,
                 //searching: false,
@@ -149,21 +150,22 @@
                 buttons: [
                     //'csv',
                     {
-                        extend: 'copyHtml5',
                         text: 'Email Staff',
-                        //text: 'Text Staff'
-                        //className: 'btn btn-primary',
+                        action: function ( e, dt, node, config ) {
+                                send_user('email')
+                        }
                     },
                     {
-                        extend: 'copyHtml5',
-                        text: 'Text Staff'
-                        //className: 'btn btn-primary',
+                        text: 'Text Staff',
+                        action: function ( e, dt, node, config ) {
+                            send_user('text')
+                        }
                     }
                 ],
                 "columns": [
                     {
                         "data": function (data) {
-                                return '<input type="checkbox" checked>'
+                                return '<input class="user" type="checkbox" name="'+data.email+'" checked>'
                         }, className: "centre get"
                     },
                     { "data": "email" , className: "centre get", "visible": false },
@@ -244,6 +246,20 @@
                 alert("Non valid postcode. Eg. CV1 8MD")
                 });
     }
+
+    function send_user(message){
+        var selected = [];
+        $('.user:input:checked').each(function() {
+            selected.push($(this).attr('name'));
+        });
+        console.log(selected)
+        if(message=='email'){
+            $('#emailModal').modal('show')
+        } else{
+            $('#textModal').modal('show')
+        }
+
+    }
 </script>
     <style>
         .centre {
@@ -254,4 +270,45 @@
             text-transform: uppercase;
         }
     </style>
+    <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Email</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>send emails via post</p>
+                        <input type="button" value="send">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Text</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>send emails via post</p>
+                        <input type="button" value="send">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
