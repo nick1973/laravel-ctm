@@ -30,7 +30,7 @@ class StaffSearchController extends Controller
             if($pc==''){
                 $users = User::where('app_status', 3)
                     ->get();
-                return ['data'=>''];
+                return ['data'=>$users];
             }
             $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
 
