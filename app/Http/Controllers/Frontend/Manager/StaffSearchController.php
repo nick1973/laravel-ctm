@@ -20,6 +20,7 @@ class StaffSearchController extends Controller
 
         function staff_search(Request $request)
         {
+            ini_set('memory_limit', '2048M');
             //return $request->all();
             $pc = $request->input('postcode');
             $radius = $request->input('radius');// in miles
@@ -41,7 +42,7 @@ class StaffSearchController extends Controller
             if ($easting == '' || $northing == '') {
                 return;
             }
-            ini_set('memory_limit', '2048M');
+
             $postcodes = DB::select("select postcode, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
                 as distance from open_postcode_geo where status = 'live'
                 and easting is not null
