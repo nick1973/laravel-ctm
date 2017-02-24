@@ -140,10 +140,26 @@
         $.post(url, formData).done(function (results) {
             $('.loaderImage').hide();
             console.log(results.data);
+            setTimeout(self.timeoutHandler, 750);
             var table = $('#events').DataTable( {
                 //paging: false,
                 //searching: false,
                 data: results.data,
+                dom: 'Bfrtip',
+                buttons: [
+                    //'csv',
+                    {
+                        extend: 'copyHtml5',
+                        text: 'Email Staff',
+                        //text: 'Text Staff'
+                        //className: 'btn btn-primary',
+                    },
+                    {
+                        extend: 'copyHtml5',
+                        text: 'Text Staff'
+                        //className: 'btn btn-primary',
+                    }
+                ],
                 "columns": [
                     {
                         "data": function (data) {
