@@ -143,10 +143,16 @@
             setTimeout(self.timeoutHandler, 750);
 
             var table = $('#events').DataTable( {
-                //paging: false,
-                //searching: false,
+                "sPaginationType": "full_numbers",
+                "bPaginate": true,
+                "bLengthChange": true,
+                "bFilter": true,
+                "bSort": false,
+                "bInfo": true,
+                "bAutoWidth": false,
+                "bProcessing": true,
                 data: results.data,
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
                 buttons: [
                     //'csv',
                     {
