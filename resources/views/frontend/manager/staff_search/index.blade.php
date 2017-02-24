@@ -120,8 +120,12 @@
     });
 
     function submitForm(form){
-        var table = $('#events').DataTable( { });
-        table.destroy();
+        var table = $('#events').DataTable();
+        if (table instanceof $.fn.dataTable.Api) {
+            table.destroy();
+        } else {
+            // not a datatable... do other stuff
+        }
         var formData = $(form).serializeArray();
         var url = '/dashboard/manager/staff-search/approved'
         //console.log(formData[1]['value'])
