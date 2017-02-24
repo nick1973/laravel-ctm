@@ -26,7 +26,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Postcode</label>
-                                <input type="text" class="form-control" id="postcode" placeholder="Postcode" name="postcode">
+                                <input type="text" class="form-control" id="postcode"
+                                       placeholder="Postcode" name="postcode">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Catchment Radius</label>
@@ -39,6 +40,7 @@
                                     <option>30</option>
                                     <option>40</option>
                                     <option>50</option>
+                                    <option>50+</option>
                                 </select>
                             </div>
                     </div>
@@ -46,10 +48,10 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Limit to staff who have selected this event</label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="staff_event" value="1"> Yes
+                                    <input type="radio" name="staff_event" value="1" disabled> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="staff_event" value="0" checked> No
+                                    <input type="radio" name="staff_event" value="0" checked disabled> No
                                 </label>
                             </div>
                             <div class="form-group" style="padding-left: 50px">
@@ -79,6 +81,8 @@
                             <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
                                 <thead>
                                     <tr>
+                                        <th></th>
+                                        <th></th>
                                         <th>Title</th>
                                         <th>Name</th>
                                         <th>Surname</th>
@@ -89,6 +93,8 @@
                                     </tr>
                                 </thead>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -134,12 +140,17 @@
         $.post(url, formData).done(function (results) {
             $('.loaderImage').hide();
             console.log(results.data);
-
             var table = $('#events').DataTable( {
                 //paging: false,
                 //searching: false,
                 data: results.data,
                 "columns": [
+                    {
+                        "data": function (data) {
+                                return '<input type="checkbox" checked>'
+                        }, className: "centre get"
+                    },
+                    { "data": "email" , className: "centre get", "visible": false },
                     { "data": "title" , className: "centre get" },
                     { "data": "name" , className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
@@ -211,7 +222,11 @@
                 ]
             });
             //table.destroy();
-        });
+        }).fail(function(xhr, status, error) {
+                    // error handling
+            $('.loaderImage').hide();
+                alert("Non valid postcode. Eg. CV1 8MD")
+                });
     }
 </script>
     <style>
