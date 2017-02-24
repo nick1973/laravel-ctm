@@ -20,7 +20,7 @@ class StaffSearchController extends Controller
 
         function staff_search(Request $request)
         {
-            ini_set('memory_limit', '2048M');
+            //ini_set('memory_limit', '2048M');
             //return $request->all();
             $pc = $request->input('postcode');
             $radius = $request->input('radius');// in miles
