@@ -141,8 +141,8 @@
             $('.loaderImage').hide();
             console.log(results.data);
             var table = $('#events').DataTable( {
-                paging: false,
-                searching: false,
+                //paging: false,
+                //searching: false,
                 data: results.data,
                 "columns": [
                     {

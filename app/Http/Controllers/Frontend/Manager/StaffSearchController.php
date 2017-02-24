@@ -30,7 +30,7 @@ class StaffSearchController extends Controller
             if($pc==''){
                 $users = User::where('app_status', 3)
                     ->get();
-                return ['data'=>$users];
+                return ['data'=>''];
             }
             $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
 
@@ -84,9 +84,9 @@ class StaffSearchController extends Controller
             if ($nrswa == "No" && $uk_driving_license == "No") {
                 $users = User::where('app_status', 3)
                     ->get();
-//                if($radius==0 || $radius=='50+'){
-//                    return ['data'=>$users];
-//                }
+                if($radius==0 || $radius=='50+'){
+                    return ['data'=>$users];
+                }
             }
             $filtered = $users->whereInLoose('postcode', $post_code);
             //values() resets the keys
