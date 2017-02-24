@@ -144,6 +144,8 @@
                 //paging: false,
                 //searching: false,
                 data: results.data,
+                datatype: "json",
+                async: false,
                 "columns": [
                     {
                         "data": function (data) {
