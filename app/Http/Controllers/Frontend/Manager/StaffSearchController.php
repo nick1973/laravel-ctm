@@ -27,11 +27,11 @@ class StaffSearchController extends Controller
             $nrswa = $request->input('nrswa');// in miles
             $uk_driving_license = $request->input('uk_driving_license');// in miles
             $meters = $radius / .00062137;
-//            if($pc==''){
-//                $users = User::where('app_status', 3)
-//                    ->get();
-//                return ['data'=>$users];
-//            }
+            if($pc==''){
+                $users = User::where('app_status', 3)
+                    ->get();
+                return ['data'=>$users->values()];
+            }
             $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
 
             foreach ($coords as $results) {
@@ -81,7 +81,7 @@ class StaffSearchController extends Controller
 //                    return ['data'=>$users];
 //                }
             }
-            if ($nrswa == "No" && $uk_driving_license == "No" && $pc == '' && ($radius == '50+' || $radius == '0')) {
+            if ($nrswa == "No" && $uk_driving_license == "No") {
                 $users = User::where('app_status', 3)
                     ->get();
                 if($radius==0 || $radius=='50+'){
