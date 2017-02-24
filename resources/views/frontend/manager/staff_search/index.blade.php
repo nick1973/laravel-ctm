@@ -71,6 +71,7 @@
                                 </label>
                             </div>
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form)" value="Apply Filter">
+                            <img style="display: none" class="loaderImage" src="/ajax-loader.gif">
                         </div>
                     </form>
 
@@ -125,7 +126,9 @@
         var url = '/dashboard/manager/staff-search/approved'
         //console.log(formData[1]['value'])
         console.log(formData[0]['value'])
+        $('.loaderImage').show();
         $.post(url, formData).done(function (results) {
+            $('.loaderImage').hide();
             console.log(results.data);
 
             var table = $('#events').DataTable( {
