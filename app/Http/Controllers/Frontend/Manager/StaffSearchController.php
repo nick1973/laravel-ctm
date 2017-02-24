@@ -61,32 +61,32 @@ class StaffSearchController extends Controller
                     ->where('nrswa', 'Yes')
                     ->where('uk_driving_license', 'Yes')
                     ->get();
-                if($radius==0 || $radius=='50+'){
-                    return ['data'=>$users];
-                }
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
             }
             if ($nrswa == "Yes" && $uk_driving_license == "No") {
                 $users = User::where('app_status', 3)
                     ->where('nrswa', 'Yes')
                     ->get();
-                if($radius==0 || $radius=='50+'){
-                    return ['data'=>$users];
-                }
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
             }
             if ($nrswa == "No" && $uk_driving_license == "Yes") {
                 $users = User::where('app_status', 3)
                     ->where('uk_driving_license', 'Yes')
                     ->get();
-                if($radius==0 || $radius=='50+'){
-                    return ['data'=>$users];
-                }
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
             }
             if ($nrswa == "No" && $uk_driving_license == "No") {
                 $users = User::where('app_status', 3)
                     ->get();
-                if($radius==0 || $radius=='50+'){
-                    return ['data'=>$users];
-                }
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
             }
             $filtered = $users->whereInLoose('postcode', $post_code);
             //values() resets the keys
