@@ -156,7 +156,7 @@
                     { "data": "lastname" , className: "centre get" },
                     {
                         "data": function (data) {
-                            if (data.dob.indexOf("-") > 1){
+                            //if (data.dob.indexOf("-") > 1){
                                 var dob = data.dob
                                 var yyyy = Number(dob.substr(0,4))
                                 var mm = Number(dob.substr(5,2))
@@ -174,13 +174,13 @@
                                 } else {
                                     return "Over 25"
                                 }
-                            } else
-                            {
-                                var dob = new Date(Number(data.dob)*1000);
-                                var ageDifMs = Date.now() - dob.getTime();
-                                var ageDate = new Date(ageDifMs); // miliseconds from epoch
-                                return Math.abs(ageDate.getUTCFullYear() - 1970);
-                            }
+                            //} else
+//                            {
+//                                var dob = new Date(Number(data.dob)*1000);
+//                                var ageDifMs = Date.now() - dob.getTime();
+//                                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+//                                return Math.abs(ageDate.getUTCFullYear() - 1970);
+//                            }
                         }, className: "centre get"
                     },
                     {
