@@ -4,6 +4,7 @@
     <?php $id = ''; ?>
     <div>
 
+        <div id="bal"></div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Approved</a></li>
@@ -318,7 +319,8 @@
             }
         }).done(function(data) {
             //$( this ).addClass( "done" );
-            console.log([data])
+            console.log(data)
+            $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
         });
         //location.reload();
         //$("#confirm_form").submit();

@@ -218,6 +218,8 @@ class ManagerController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         // Process your response here
-        echo $response;
+        $responseArray = json_decode($response, true);
+        $cost = $responseArray['balance'];
+        return $cost;
     }
 }
