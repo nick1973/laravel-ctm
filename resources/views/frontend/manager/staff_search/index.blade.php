@@ -252,7 +252,7 @@
                 alert("Non valid postcode. Eg. CV1 8MD")
                 });
     }
-
+    var selected = [];
     function send_user(message){
         var selected = [];
         $('.user:input:checked').each(function() {
@@ -266,6 +266,30 @@
         }
 
     }
+
+    function content() {
+
+        // Get the HTML contents of the currently active editor
+        console.debug(tinyMCE.activeEditor.getContent());
+        //method1 getting the content of the active editor
+        $.ajax({
+            type: "POST",
+            url: '/email',
+            data: {email: tinyMCE.activeEditor.getContent(),
+                e_address: selected}
+        });
+        //location.reload();
+        $("#confirm_form").submit();
+        alert('Email has been sent to ' + '<?php echo $user->email ?>');
+    }
+
+    tinymce.init({
+        selector: '#comments',
+        plugins: "fullpage",
+        fullpage_default_font_family: "'Open Sans', sans-serif;",
+        content_css : "/css/content.css",
+        height : "480"
+    });
 </script>
     <style>
         .centre {
@@ -277,7 +301,7 @@
         }
     </style>
     <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -285,20 +309,26 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <p>send emails via post</p>
-                        <input type="button" value="send">
+                        <h3>Please choose why the application has failed to meet the criteria.</h3>
+                        <textarea id="comments">
+				<p>Hi {{ $user->name }},</p>
+				<p>Thank you for applying to join CTM.</p>
+				<p>Before we can accept your application you will need to amend the following:</p>
+			</textarea>
+
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button onclick="content()" class="btn btn-primary" type="submit">Send</button>
+                    {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
