@@ -264,7 +264,7 @@
     function deselect() {
         var dataTable = $('#events').dataTable()
         $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-            $(".user").attr('checked',false)
+            $(this).attr('checked',false)
         })
     }
 
