@@ -7,7 +7,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Approved</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">None Approved</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Non Approved</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -156,6 +156,12 @@
                 buttons: [
                     //'csv',
                     {
+                        text: 'Deselect All',
+                        action: function ( e, dt, node, config ) {
+                            deselect()
+                        }
+                    },
+                    {
                         text: 'Email Staff',
                         action: function ( e, dt, node, config ) {
                                 send_user('email')
@@ -254,6 +260,14 @@
     }
     var email_selected = [];
     var mobile_selected = [];
+
+    function deselect() {
+        var dataTable = $('#events').dataTable()
+        $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+            $(".user").attr('checked',false)
+        })
+    }
+
     function send_user(message){
         var selected = [];
         var mobile = [];
