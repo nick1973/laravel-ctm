@@ -25,7 +25,7 @@ class StaffSearchController extends Controller
             $pc = $request->input('postcode');
             $radius = $request->input('radius');// in miles
             $nrswa = $request->input('nrswa');// in miles
-            $uk_driving_license = $request->input('uk_driving_license');// in miles
+            $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work
             $meters = $radius / .00062137;
             if($pc==''){
                 $users = User::where('app_status', 3)
@@ -59,7 +59,7 @@ class StaffSearchController extends Controller
             if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
                 $users = User::where('app_status', 3)
                     ->where('nrswa', 'Yes')
-                    ->where('uk_driving_license', 'Yes')
+                    ->where('driver_paper_work', 1)
                     ->get();
 //                if($radius==0 || $radius=='50+'){
 //                    return ['data'=>$users];
@@ -75,7 +75,7 @@ class StaffSearchController extends Controller
             }
             if ($nrswa == "No" && $uk_driving_license == "Yes") {
                 $users = User::where('app_status', 3)
-                    ->where('uk_driving_license', 'Yes')
+                    ->where('driver_paper_work', 1)
                     ->get();
 //                if($radius==0 || $radius=='50+'){
 //                    return ['data'=>$users];
