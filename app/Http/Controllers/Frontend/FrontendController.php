@@ -46,7 +46,6 @@ class FrontendController extends Controller
     {
         $input = $request->except('e_address');
         $email = $request->input('e_address');
-        return $email;
             //return $input;
         //User::find(access()->id())->update(['payroll_export'=>0]);
 
