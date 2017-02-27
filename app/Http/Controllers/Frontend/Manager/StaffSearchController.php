@@ -23,6 +23,7 @@ class StaffSearchController extends Controller
             //ini_set('memory_limit', '2048M');
             //return $request->all();
             $pc = $request->input('postcode');
+            $pc = trim($pc);
             $radius = $request->input('radius');// in miles
             $nrswa = $request->input('nrswa');// in miles
             $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work

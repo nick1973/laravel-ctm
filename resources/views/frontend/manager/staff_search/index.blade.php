@@ -316,6 +316,9 @@
             data: {numbers: mobile_selected,
                 message: tinyMCE.get('textcomments').getContent({ format: 'text' })
             }
+        }).done(function(data) {
+            //$( this ).addClass( "done" );
+            console.log([data])
         });
         //location.reload();
         //$("#confirm_form").submit();
