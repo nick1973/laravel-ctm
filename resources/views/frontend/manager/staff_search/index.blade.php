@@ -171,7 +171,7 @@
                 "columns": [
                     {
                         "data": function (data) {
-                                return '<input class="user" type="checkbox" name="'+data.email+'" checked>'
+                                return '<input class="user" type="checkbox" name="'+data.email+'" id="'+data.mobile+'" checked>'
                         }, className: "centre get"
                     },
                     { "data": "email" , className: "centre get", "visible": false },
@@ -252,22 +252,61 @@
                 alert("Non valid postcode. Eg. CV1 8MD")
                 });
     }
-    var selected = [];
+    var email_selected = [];
+    var mobile_selected = [];
     function send_user(message){
-        //var selected = [];
-        $('.user:input:checked').each(function() {
+        var selected = [];
+        var mobile = [];
+        var dataTable = $('#events').dataTable()
+        $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
             selected.push($(this).attr('name'));
-            //selected.unique($(this).attr('name'));
-        });
-        $.each(selected, function(i, el){
-            if($.inArray(el, selected) === -1) selected.push(el);
-        });
-        console.log(selected)
+            mobile.push($(this).attr('id'));
+        })
+//        $('.user:input:checked').each(function() {
+//            selected.push($(this).attr('name'));
+//            mobile.push($(this).attr('id'));
+//        });
+        var sorted_arr = selected.slice().sort();
+        var text_sorted_arr = mobile.slice().sort();
+        var emailresults = [];
+        var textresults = [];
+        for (var i = 0; i < selected.length - 1; i++) {
+            if (sorted_arr[i + 1] == sorted_arr[i]) {
+                emailresults.push(sorted_arr[i]);
+            }
+        }
+        for (var i = 0; i < mobile.length - 1; i++) {
+            if (text_sorted_arr[i + 1] == text_sorted_arr[i]) {
+                textresults.push(text_sorted_arr[i]);
+            }
+        }
+        email_selected = sorted_arr
+        mobile_selected = mobile
+        console.log(email_selected)
+        console.log(mobile_selected)
         if(message=='email'){
             $('#emailModal').modal('show')
         } else{
             $('#textModal').modal('show')
         }
+    }
+
+    function textcontent() {
+
+        // Get the HTML contents of the currently active editor
+        console.debug(tinyMCE.activeEditor.getContent());
+        //method1 getting the content of the active editor
+        $.ajax({
+            type: "POST",
+            url: '/dashboard/manager/text',
+            data: {numbers: mobile_selected,
+                message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+            }
+        });
+        //location.reload();
+        //$("#confirm_form").submit();
+        alert('Text been sent to ' + mobile_selected);
+        $('#textModal').modal('hide')
     }
 
     function content() {
@@ -278,13 +317,14 @@
         $.ajax({
             type: "POST",
             url: '/email',
-            data: {email: tinyMCE.activeEditor.getContent(),
-                e_address: selected
+            data: {email: tinyMCE.get('comments').getContent(),
+                e_address: email_selected
             }
         });
         //location.reload();
         //$("#confirm_form").submit();
-        alert('Email has been sent to ' + selected);
+        alert('Email has been sent to ' + email_selected);
+        $('#emailModal').modal('hide')
     }
 
     tinymce.init({
@@ -292,6 +332,11 @@
         plugins: "fullpage",
         fullpage_default_font_family: "'Open Sans', sans-serif;",
         content_css : "/css/content.css",
+        height : "480"
+    });
+
+    tinymce.init({
+        selector: '#textcomments',
         height : "480"
     });
 </script>
@@ -313,7 +358,6 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <h3>Please choose why the application has failed to meet the criteria.</h3>
                         <textarea id="comments">
 				<p>Hi,</p>
                 <p>We are currently staffing the following event. Spaces are limited to 1 booking per call.</p>
@@ -350,13 +394,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <p>send emails via post</p>
-                        <input type="button" value="send">
+                        <textarea id="textcomments"></textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button onclick="textcontent()" class="btn btn-primary" type="submit">Send</button>
+                    {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
                 </div>
             </div>
         </div>

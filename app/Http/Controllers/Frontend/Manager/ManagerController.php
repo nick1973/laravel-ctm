@@ -198,4 +198,26 @@ class ManagerController extends Controller
 //        }
         //dd($postcodes);
     }
+
+    public function text(Request $request)
+    {
+        // Textlocal account details
+        $apiKey = 'ccUfPpurJas-sUlwgsQwtus4X7WNaUXdcam3jMKL1L';
+        // Message details
+        $numbers = $request->input('numbers');
+        $sender = urlencode('CTM');
+        $message = rawurlencode($request->input('message'));
+        $numbers = implode(',', $numbers);
+        // Prepare data for POST request
+        $data = array('apiKey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+        // Send the POST request with cURL
+        $ch = curl_init('http://api.txtlocal.com/send/');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        // Process your response here
+        echo $response;
+    }
 }
