@@ -254,9 +254,13 @@
     }
     var selected = [];
     function send_user(message){
-        var selected = [];
+        //var selected = [];
         $('.user:input:checked').each(function() {
             selected.push($(this).attr('name'));
+            //selected.unique($(this).attr('name'));
+        });
+        $.each(selected, function(i, el){
+            if($.inArray(el, selected) === -1) selected.push(el);
         });
         console.log(selected)
         if(message=='email'){
@@ -264,7 +268,6 @@
         } else{
             $('#textModal').modal('show')
         }
-
     }
 
     function content() {
@@ -276,11 +279,12 @@
             type: "POST",
             url: '/email',
             data: {email: tinyMCE.activeEditor.getContent(),
-                e_address: selected}
+                e_address: selected
+            }
         });
         //location.reload();
-        $("#confirm_form").submit();
-        alert('Email has been sent to ' + '<?php echo $user->email ?>');
+        //$("#confirm_form").submit();
+        alert('Email has been sent to ' + selected);
     }
 
     tinymce.init({
@@ -311,11 +315,10 @@
                     <form>
                         <h3>Please choose why the application has failed to meet the criteria.</h3>
                         <textarea id="comments">
-				<p>Hi {{ $user->name }},</p>
+				<p>Hi,</p>
 				<p>Thank you for applying to join CTM.</p>
 				<p>Before we can accept your application you will need to amend the following:</p>
 			</textarea>
-
                     </form>
                 </div>
                 <div class="modal-footer">
