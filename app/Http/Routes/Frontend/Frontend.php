@@ -12,6 +12,33 @@ Route::post('/email', 'FrontendController@e_mail');
 
 Route::get('/users_sql', 'FrontendController@users_sql');
 
+//Route::get('/text', function ($staff) {
+//    // Textlocal account details
+//    $username = 'youremail@address.com';
+//    $hash = 'Your API hash';
+//
+//    // Message details
+//    $numbers = array(447555186500);
+//    $sender = urlencode('Jims Autos');
+//    $message = rawurlencode('This is your message');
+//
+//    $numbers = implode(',', $numbers);
+//
+//    // Prepare data for POST request
+//    $data = array('username' => $username, 'hash' => $hash, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+//
+//    // Send the POST request with cURL
+//    $ch = curl_init('http://api.txtlocal.com/send/');
+//    curl_setopt($ch, CURLOPT_POST, true);
+//    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//    $response = curl_exec($ch);
+//    curl_close($ch);
+//
+//    // Process your response here
+//    echo $response;
+//});
+
 Route::get('/spec-staff/{staff}', function ($staff) {
     $spec = \App\Models\Ops\Specs::where('events_id',$staff)->first();
     //$collection = collect($spec->staff);
@@ -388,18 +415,9 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
-            //$staff= \App\Models\Access\User\User::where('visible', 1);
-            ini_set('memory_limit','2048M');
-            return "foo";
-            $postcodes = DB::select('select postcode, sqrt(pow(abs(454599 - easting),2) + pow(abs(295170 - northing),2)) 
-                as distance from open_postcode_geo where status = "live"
-                and easting is not null 
-                and northing is not null 
-                and easting between 454599 - 500 and 454599 + 500 
-                and northing between 295170 - 500 and 295170 + 500 and postcode != "LE9 1RR"
-                order by distance');
-
-            return $postcodes;
+            $staff= \App\Models\Access\User\User::where('payroll', 50966)->get();
+            //ini_set('memory_limit','2048M');
+            return $staff;
 
 
 //            $staff = \App\Models\Access\User\User::where([
