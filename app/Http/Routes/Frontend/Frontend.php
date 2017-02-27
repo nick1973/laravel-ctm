@@ -415,8 +415,9 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
-            $staff= \App\Models\Access\User\User::where('payroll', 50744)->get();
-            //ini_set('memory_limit','2048M');
+            //$staff= \App\Models\Access\User\User::where('payroll', 50744)->get();
+            $staff= \App\Models\Access\User\User::find(32319);
+            $staff->update(['dob'=>'1998-01-27']);
             return $staff;
 
 
