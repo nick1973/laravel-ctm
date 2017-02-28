@@ -173,7 +173,7 @@ class StaffSearchController extends Controller
     {
         //ini_set('memory_limit', '2048M');
         //return $request->all();
-        $app_status = [0,3];
+        $app_status = [0,1,2,3];
         $pc = $request->input('postcode');
         $staff_event = $request->input('staff_event');
         $event_name = $request->input('event_name');
