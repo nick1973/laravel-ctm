@@ -250,7 +250,7 @@
                                         <?php } ?>
                                     <?php } ?>
                                         if (jQuery.inArray( formData[0]['value'].toString(), name ) >= 0){
-                                            return name
+                                            //return name
                                             return '<img src="/img/green-tick.png" height="20px">'
                                         }
                                         return ''
