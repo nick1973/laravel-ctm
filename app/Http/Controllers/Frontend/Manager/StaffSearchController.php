@@ -396,7 +396,7 @@ class StaffSearchController extends Controller
             }
         }
 
-        $filtered = $users->whereInLoose('postcode', $post_code)->whereIn('app_status',[0,1]);
+        $filtered = $users->whereInLoose('postcode', $post_code)->whereIn('app_status',[1]);
         //values() resets the keys
         if($radius==0 || $radius=='50+'){
             //return ['data'=>$users];
