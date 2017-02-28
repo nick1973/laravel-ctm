@@ -173,6 +173,7 @@ class StaffSearchController extends Controller
     {
         //ini_set('memory_limit', '2048M');
         //return $request->all();
+        $app_status = [0,3];
         $pc = $request->input('postcode');
         $staff_event = $request->input('staff_event');
         $event_name = $request->input('event_name');
@@ -185,14 +186,14 @@ class StaffSearchController extends Controller
         if($pc==''){
             if ($nrswa == "Yes" && $uk_driving_license == "No") {
                 $users = User::where('nrswa', 'yes')
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->where('visible', 1)
                     ->get();
                 return ['data'=>$users->values()];
             }
             if ($nrswa == "No" && $uk_driving_license == "Yes") {
                 $users = User::where('driver_paper_work', 1)
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->where('visible', 1)
                     ->get();
                 return ['data'=>$users->values()];
@@ -201,13 +202,13 @@ class StaffSearchController extends Controller
                 $users = User::where('driver_paper_work', 1)
                     ->where('visible', 1)
                     ->where('nrswa', 'yes')
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->get();
                 return ['data'=>$users->values()];
             }
             $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
-                    ->get();
+                    ->whereIn('app_status', $app_status)
+                ->get();
             return ['data'=>$users->values()];
         }
 
@@ -241,25 +242,25 @@ class StaffSearchController extends Controller
             if ($nrswa == "Yes" && $uk_driving_license == "No") {
                 $users = User::where('nrswa', 'yes')
                     ->where('visible', 1)
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->get();
             }
             if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
                 $users = User::where('driver_paper_work', 1)
                     ->where('visible', 1)
                     ->where('nrswa', 'yes')
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->get();
             }
             if ($nrswa == "No" && $uk_driving_license == "No") {
-                $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                $users = User::whereIn('app_status', $app_status)
+                    ->where('visible', 1)
                     ->get();
             }
             if ($nrswa == "No" && $uk_driving_license == "Yes") {
                 $users = User::where('driver_paper_work', 1)
                     ->where('visible', 1)
-                    //->where('app_status', $app_status)
+                    ->whereIn('app_status', $app_status)
                     ->get();
             }
             //return $users;
@@ -283,27 +284,27 @@ class StaffSearchController extends Controller
         } else {
 
             if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                $users = User::whereIn('app_status', $app_status)
+                    ->where('visible', 1)
                     ->where('nrswa', 'Yes')
                     ->where('driver_paper_work', 1)
                     ->get();
             }
             if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                $users = User::whereIn('app_status', $app_status)
+                    ->where('visible', 1)
                     ->where('nrswa', 'Yes')
                     ->get();
             }
             if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                $users = User::whereIn('app_status', $app_status)
+                    ->where('visible', 1)
                     ->where('driver_paper_work', 1)
                     ->get();
             }
             if ($nrswa == "No" && $uk_driving_license == "No") {
-                $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                $users = User::whereIn('app_status', $app_status)
+                    ->where('visible', 1)
                     ->get();
                 if ($radius == 0 || $radius == '50+') {
                     return ['data' => $users->values()];
