@@ -31,6 +31,56 @@ class StaffSearchController extends Controller
             $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work
             $meters = $radius / .00062137;
             //$events = [];
+            if($pc==''){
+                if ($nrswa == "Yes" && $uk_driving_license == "No") {
+                    $users = User::where('nrswa', 'yes')
+                        ->where('app_status', 3)
+                        ->get();
+                    return ['data'=>$users->values()];
+                }
+                if ($nrswa == "No" && $uk_driving_license == "Yes") {
+                    $users = User::where('driver_paper_work', 1)
+                        ->where('app_status', 3)
+                        ->get();
+                    return ['data'=>$users->values()];
+                }
+                if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
+                    $users = User::where('driver_paper_work', 1)
+                        ->where('nrswa', 'yes')
+                        ->where('app_status', 3)
+                        ->get();
+                    return ['data'=>$users->values()];
+                }
+                $users = User::where('app_status', 3)
+                    ->get();
+                return ['data'=>$users->values()];
+            }
+
+            $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
+
+            foreach ($coords as $results) {
+                $easting = $results->easting;
+                $northing = $results->northing;
+            }
+            //return $easting . ' ' . $northing;
+            if ($easting == '' || $northing == '') {
+                return;
+            }
+
+            $postcodes = DB::select("select postcode, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
+                as distance from open_postcode_geo where status = 'live'
+                and easting is not null
+                and northing is not null
+                and easting between '$easting' - '$meters' and '$easting' + '$meters'
+                and northing between '$northing' - '$meters' and '$northing' + '$meters'
+                and postcode != ''
+                order by distance
+                ");
+            $post_code = [];
+            foreach ($postcodes as $postcode) {
+                $post_code[] = $postcode->postcode;
+            }
+
             if($staff_event == 'Yes'){
 
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
@@ -71,88 +121,42 @@ class StaffSearchController extends Controller
                 } else{
                     return ['data'=>[]];
                 }
+            } else {
 
-            }
-            if($pc==''){
-                if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                    $users = User::where('nrswa', 'yes')
-                        ->where('app_status', 3)
+                if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
+                    $users = User::where('app_status', 3)
+                        ->where('nrswa', 'Yes')
+                        ->where('driver_paper_work', 1)
                         ->get();
-                    return ['data'=>$users->values()];
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
+                }
+                if ($nrswa == "Yes" && $uk_driving_license == "No") {
+                    $users = User::where('app_status', 3)
+                        ->where('nrswa', 'Yes')
+                        ->get();
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
                 }
                 if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('app_status', 3)
+                    $users = User::where('app_status', 3)
+                        ->where('driver_paper_work', 1)
                         ->get();
-                    return ['data'=>$users->values()];
+//                if($radius==0 || $radius=='50+'){
+//                    return ['data'=>$users];
+//                }
                 }
-                if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('nrswa', 'yes')
-                        ->where('app_status', 3)
+                if ($nrswa == "No" && $uk_driving_license == "No") {
+                    $users = User::where('app_status', 3)
                         ->get();
-                    return ['data'=>$users->values()];
+                    if ($radius == 0 || $radius == '50+') {
+                        return ['data' => $users->values()];
+                    }
                 }
-                $users = User::where('app_status', 3)
-                    ->get();
-                return ['data'=>$users->values()];
-            }
-            $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
-
-            foreach ($coords as $results) {
-                $easting = $results->easting;
-                $northing = $results->northing;
-            }
-            //return $easting . ' ' . $northing;
-            if ($easting == '' || $northing == '') {
-                return;
             }
 
-            $postcodes = DB::select("select postcode, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
-                as distance from open_postcode_geo where status = 'live'
-                and easting is not null
-                and northing is not null
-                and easting between '$easting' - '$meters' and '$easting' + '$meters'
-                and northing between '$northing' - '$meters' and '$northing' + '$meters'
-                and postcode != ''
-                order by distance
-                ");
-            $post_code = [];
-            foreach ($postcodes as $postcode) {
-                $post_code[] = $postcode->postcode;
-            }
-            if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                $users = User::where('app_status', 3)
-                    ->where('nrswa', 'Yes')
-                    ->where('driver_paper_work', 1)
-                    ->get();
-//                if($radius==0 || $radius=='50+'){
-//                    return ['data'=>$users];
-//                }
-            }
-            if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                $users = User::where('app_status', 3)
-                    ->where('nrswa', 'Yes')
-                    ->get();
-//                if($radius==0 || $radius=='50+'){
-//                    return ['data'=>$users];
-//                }
-            }
-            if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                $users = User::where('app_status', 3)
-                    ->where('driver_paper_work', 1)
-                    ->get();
-//                if($radius==0 || $radius=='50+'){
-//                    return ['data'=>$users];
-//                }
-            }
-            if ($nrswa == "No" && $uk_driving_license == "No") {
-                $users = User::where('app_status', 3)
-                    ->get();
-                if($radius==0 || $radius=='50+'){
-                    return ['data'=>$users->values()];
-                }
-            }
             $filtered = $users->whereInLoose('postcode', $post_code);
             //values() resets the keys
             if($radius==0 || $radius=='50+'){
