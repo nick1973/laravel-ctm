@@ -387,11 +387,11 @@ class StaffSearchController extends Controller
             }
             if ($nrswa == "No" && $uk_driving_license == "No") {
                 $users = User::where('visible', 1)
-                    //->where('app_status', $app_status)
+                    //->whereIn('app_status', [0,1])
                     ->where('markAsp45', 0)
                     ->get();
                 if ($radius == 0 || $radius == '50+') {
-                    return ['data' => $users->values()];
+                    return ['data' => $users->whereIn('app_status',[0,1])->values()];
                 }
             }
         }
