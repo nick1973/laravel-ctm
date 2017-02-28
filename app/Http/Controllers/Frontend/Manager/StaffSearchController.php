@@ -59,11 +59,15 @@ class StaffSearchController extends Controller
                         foreach ($user->tags as $tags){
                             if($tags->name == $event_name) {
                                 $events[] = $tags->pivot->user_id;
-                                $event_users = User::find($events);
+                                $events_users = User::find($events);
                             }
                         }
                     }
-                    return ['data'=>$event_users];
+                    if($radius>0){
+                        $users = $events_users;
+                    } else{
+                        return ['data'=>$events_users];
+                    }
                 } else{
                     return ['data'=>[]];
                 }
