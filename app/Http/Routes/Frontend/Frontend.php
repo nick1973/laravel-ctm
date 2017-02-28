@@ -358,6 +358,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('dashboard/staff-search', 'StaffSearchController');
         Route::any('dashboard/manager/staff-search/approved', 'StaffSearchController@staff_search')->name('dashboard.manager.staff-search.approved');
+        Route::any('dashboard/manager/staff-search/non_approved', 'StaffSearchController@staff_search_non_approved')->name('dashboard.manager.staff-search.staff_search_non_approved');
 
         Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
         Route::resource('dashboard/sbf', 'SBFController');
