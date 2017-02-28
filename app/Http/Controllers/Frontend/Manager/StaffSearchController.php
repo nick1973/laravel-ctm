@@ -391,7 +391,7 @@ class StaffSearchController extends Controller
                     ->where('markAsp45', 0)
                     ->get();
                 if ($radius == 0 || $radius == '50+') {
-                    return ['data' => $users->whereIn('app_status',[0,1])->values()];
+                    return ['data' => $users->values()];
                 }
             }
         }
