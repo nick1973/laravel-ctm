@@ -23,25 +23,69 @@ class StaffSearchController extends Controller
             //ini_set('memory_limit', '2048M');
             //return $request->all();
             $pc = $request->input('postcode');
+            $staff_event = $request->input('staff_event');
+            $event_name = $request->input('event_name');
             $pc = trim($pc);
             $radius = $request->input('radius');// in miles
             $nrswa = $request->input('nrswa');// in miles
             $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work
             $meters = $radius / .00062137;
+            //$events = [];
+            if($staff_event == 'Yes'){
+
+                if ($nrswa == "Yes" && $uk_driving_license == "No") {
+                    $users = User::where('nrswa', 'yes')
+                        ->where('app_status', 3)
+                        ->get();
+                }
+                if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
+                    $users = User::where('driver_paper_work', 1)
+                        ->where('nrswa', 'yes')
+                        ->where('app_status', 3)
+                        ->get();
+                }
+                if ($nrswa == "No" && $uk_driving_license == "No") {
+                    $users = User::where('app_status', 3)
+                        ->get();
+                }
+                if ($nrswa == "No" && $uk_driving_license == "Yes") {
+                    $users = User::where('driver_paper_work', 1)
+                        ->where('app_status', 3)
+                        ->get();
+                }
+                //return $users;
+                if(!$users->isEmpty()){
+                    foreach ($users as $user){
+                        foreach ($user->tags as $tags){
+                            if($tags->name == $event_name) {
+                                $events[] = $tags->pivot->user_id;
+                                $event_users = User::find($events);
+                            }
+                        }
+                    }
+                    return ['data'=>$event_users];
+                } else{
+                    return ['data'=>[]];
+                }
+
+            }
             if($pc==''){
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
                     $users = User::where('nrswa', 'yes')
+                        ->where('app_status', 3)
                         ->get();
                     return ['data'=>$users->values()];
                 }
                 if ($nrswa == "No" && $uk_driving_license == "Yes") {
                     $users = User::where('driver_paper_work', 1)
+                        ->where('app_status', 3)
                         ->get();
                     return ['data'=>$users->values()];
                 }
                 if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
                     $users = User::where('driver_paper_work', 1)
                         ->where('nrswa', 'yes')
+                        ->where('app_status', 3)
                         ->get();
                     return ['data'=>$users->values()];
                 }

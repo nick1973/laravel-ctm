@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Catchment Radius</label>
-                                <select class="form-control" name="radius">
+                                <select class="form-control" name="radius" id="radius">
                                     <option>0</option>
                                     <option>5</option>
                                     <option>10</option>
@@ -49,10 +49,10 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Limit to staff who have selected this event</label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="staff_event" value="1" disabled> Yes
+                                    <input type="radio" name="staff_event" value="Yes"> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="staff_event" value="0" checked disabled> No
+                                    <input type="radio" name="staff_event" value="No" checked> No
                                 </label>
                             </div>
                             <div class="form-group" style="padding-left: 50px">
@@ -113,6 +113,14 @@
     </div>
 
 <script>
+
+    
+    $("#radius").change(function () {
+        if($(this).find(":selected").text()=='50+'){
+            $('#postcode').val('')
+        }
+    });
+
     $('#event_name').on('change', function() {
         var ar = <?php echo json_encode($events) ?>;
         function search(nameKey, myArray){
@@ -232,22 +240,19 @@
                     },
                     {
                         "data": function (data) {
-
+                            var name = []
                             <?php $events = \App\Models\Dropdowns\Tag::all(); ?>
                                     <?php foreach($events as $event){ ?>
-
-                                <?php foreach($event->users as $user){ ?>
-
-                            if(data.id == '<?php echo $user->id ?>') {
-                                if (formData[0]['value'].toString() == '<?php echo $event->name ?>') {
-                                    return '<img src="/img/green-tick.png" height="20px">'
-                                }
-                                return ''
-                            }
-                                <?php } ?>
-
-                            <?php } ?>
-                                    return ''
+                                        <?php foreach($event->users as $user){ ?>
+                                            if(data.id == '<?php echo $user->id ?>') {
+                                                name.push('{{$event->name}}')
+                                            }
+                                        <?php } ?>
+                                    <?php } ?>
+                                        if (jQuery.inArray( formData[0]['value'].toString(), name ) >= 0){
+                                            return '<img src="/img/green-tick.png" height="20px">'
+                                        }
+                                        return ''
                         }, className: "centre get"
                     }
                 ]
