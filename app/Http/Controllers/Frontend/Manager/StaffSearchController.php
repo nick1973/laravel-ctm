@@ -22,7 +22,7 @@ class StaffSearchController extends Controller
         {
             //ini_set('memory_limit', '2048M');
             //return $request->all();
-            $app_status = 3;
+            //$app_status = 3;
             $pc = $request->input('postcode');
             $staff_event = $request->input('staff_event');
             $event_name = $request->input('event_name');
@@ -34,33 +34,53 @@ class StaffSearchController extends Controller
             //$events = [];
             if($pc==''){
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                    $users = User::where('nrswa', 'yes')
-                        ->where('app_status', $app_status)
-                        ->where('markAsp45', 0)
-                        ->where('visible', 1)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['nrswa', '=', 'yes'],
+                        ])
                         ->get();
                     return ['data'=>$users->values()];
                 }
                 if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('app_status', $app_status)
-                        ->where('markAsp45', 0)
-                        ->where('visible', 1)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['driver_paper_work', '=', 1],
+                        ])
                         ->get();
                     return ['data'=>$users->values()];
                 }
                 if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
-                        ->where('nrswa', 'yes')
-                        ->where('app_status', $app_status)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['nrswa', '=', 'yes'],
+                            ['driver_paper_work', '=', 1],
+                        ])
                         ->get();
                     return ['data'=>$users->values()];
                 }
-                $users = User::where('app_status', $app_status)
-                    ->where('visible', 1)
-                    ->where('markAsp45', 0)
+                $users = User::where([
+                    ['confirmed', '=', 1],
+                    ['visible', '=', 1],
+                    ['app_status', '=', 3],
+                    ['markAsp45', '=' ,0],
+                    ['payroll','!=','0'],
+                    ['profile_confirmed', '=', 'yes'],
+                ])
                     ->get();
                 return ['data'=>$users->values()];
             }
@@ -93,31 +113,51 @@ class StaffSearchController extends Controller
             if($staff_event == 'Yes'){
 
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                    $users = User::where('nrswa', 'yes')
-                        ->where('visible', 1)
-                        ->where('app_status', $app_status)
-                        ->where('markAsp45', 0)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['nrswa', '=', 'yes'],
+                        ])
                         ->get();
                 }
                 if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
-                        ->where('nrswa', 'yes')
-                        ->where('app_status', $app_status)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['nrswa', '=', 'yes'],
+                            ['driver_paper_work', '=', 1],
+                        ])
                         ->get();
                 }
                 if ($nrswa == "No" && $uk_driving_license == "No") {
-                    $users = User::where('app_status', $app_status)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
+                    $users = User::where([
+                        ['confirmed', '=', 1],
+                        ['visible', '=', 1],
+                        ['app_status', '=', 3],
+                        ['markAsp45', '=' ,0],
+                        ['payroll','!=','0'],
+                        ['profile_confirmed', '=', 'yes'],
+                    ])
                         ->get();
                 }
                 if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                    $users = User::where('driver_paper_work', 1)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
-                        ->where('app_status', $app_status)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                            ['driver_paper_work', '=', 1],
+                        ])
                         ->get();
                 }
                 //return $users;
@@ -141,31 +181,51 @@ class StaffSearchController extends Controller
             } else {
 
                 if ($nrswa == "Yes" && $uk_driving_license == "Yes") {
-                    $users = User::where('app_status', $app_status)
-                        ->where('visible', 1)
-                        ->where('nrswa', 'Yes')
-                        ->where('markAsp45', 0)
-                        ->where('driver_paper_work', 1)
+                    $users = User::where([
+                        ['confirmed', '=', 1],
+                        ['visible', '=', 1],
+                        ['app_status', '=', 3],
+                        ['markAsp45', '=' ,0],
+                        ['payroll','!=','0'],
+                        ['profile_confirmed', '=', 'yes'],
+                        ['nrswa', '=', 'yes'],
+                        ['driver_paper_work', '=', 1],
+                    ])
                         ->get();
                 }
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
-                    $users = User::where('app_status', $app_status)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
-                        ->where('nrswa', 'Yes')
+                    $users = User::where([
+                        ['confirmed', '=', 1],
+                        ['visible', '=', 1],
+                        ['app_status', '=', 3],
+                        ['markAsp45', '=' ,0],
+                        ['payroll','!=','0'],
+                        ['profile_confirmed', '=', 'yes'],
+                        ['nrswa', '=', 'yes'],
+                    ])
                         ->get();
                 }
                 if ($nrswa == "No" && $uk_driving_license == "Yes") {
-                    $users = User::where('app_status', $app_status)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
-                        ->where('driver_paper_work', 1)
+                    $users = User::where([
+                        ['confirmed', '=', 1],
+                        ['visible', '=', 1],
+                        ['app_status', '=', 3],
+                        ['markAsp45', '=' ,0],
+                        ['payroll','!=','0'],
+                        ['profile_confirmed', '=', 'yes'],
+                        ['driver_paper_work', '=', 1],
+                    ])
                         ->get();
                 }
                 if ($nrswa == "No" && $uk_driving_license == "No") {
-                    $users = User::where('app_status', $app_status)
-                        ->where('visible', 1)
-                        ->where('markAsp45', 0)
+                    $users = User::where([
+                            ['confirmed', '=', 1],
+                            ['visible', '=', 1],
+                            ['app_status', '=', 3],
+                            ['markAsp45', '=' ,0],
+                            ['payroll','!=','0'],
+                            ['profile_confirmed', '=', 'yes'],
+                        ])
                         ->get();
                     if ($radius == 0 || $radius == '50+') {
                         return ['data' => $users->values()];
