@@ -79,6 +79,7 @@ class FrontendController extends Controller
         ini_set('max_execution_time', 10000);
         ini_set('request_terminate_timeout ', 10000);
         ini_set('memory_limit','2048M');
+        $affected = DB::table('users')->where('notes', '!=', '')->update(array('notes' => ''));
         //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         //phpinfo();
         //$sql = file_get_contents('http://localhost/open_postcode_geo.txt');
