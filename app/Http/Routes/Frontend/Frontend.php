@@ -360,6 +360,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('dashboard/manager/staff-search/approved', 'StaffSearchController@staff_search')->name('dashboard.manager.staff-search.approved');
         Route::any('dashboard/manager/staff-search/non_approved', 'StaffSearchController@staff_search_non_approved')->name('dashboard.manager.staff-search.staff_search_non_approved');
 
+        Route::any('dashboard/manager/notes', 'ManagerController@update_notes')->name('dashboard.manager.notes');
+        Route::get('dashboard/manager/notes/{id}', function ($id) {
+            $user = \App\Models\Access\User\User::find($id);
+            return $user;
+        });
         Route::get('dashboard/manager/staff/search', 'ManagerController@staff_search')->name('dashboard.manager.staff_search');
         Route::resource('dashboard/sbf', 'SBFController');
 
@@ -430,11 +435,11 @@ Route::group(['middleware' => 'auth'], function () {
                 where([
                 ['confirmed', '=', 1],
                 ['visible', '=', 1],
-                ['app_status', '=', 3],
+                //['app_status', '=', 3],
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
                 ['profile_confirmed', '=', 'yes'],
-            ])->get();
+            ])->whereIn('app_status',[3,8])->get();
 
             return ['data'=>$staff];
 

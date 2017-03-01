@@ -222,4 +222,14 @@ class ManagerController extends Controller
         $cost = $responseArray['balance'];
         return $cost;
     }
+
+    function update_notes(Request $request){
+        $id = $request->input('id');
+        $notes = $request->input('notes');
+        $app_status = $request->input('app_status');
+        $user = User::find($id);
+        $user->update(['notes'=>$notes,
+                        'app_status'=>$app_status]);
+        //return $request->all();
+    }
 }
