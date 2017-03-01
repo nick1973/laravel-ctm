@@ -110,7 +110,12 @@
                     },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "email" , className: "centre get" },
-                    { "data": "profile_confirmed" , className: "centre get" },
+                    { "data": function (data) {
+                        if(data.rtw_docs==1){
+                            return 'Yes'
+                        }
+                            return 'No'
+                    } , className: "centre get" },
                     { "data": "medical_conditions" , className: "centre get",
                         "visible": false },
                     {
