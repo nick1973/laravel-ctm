@@ -213,11 +213,16 @@
 
         function saveNotes(){
             var formData = $('#notes').serializeArray();
-            console.log(formData[2]['value'])
+            console.log(formData[1]['value'])
             var url = '/dashboard/manager/notes'
             $.post(url, formData).done(function (results) {
                 $('#exampleModal').modal('hide')
             });
+            if(formData[1]['value']!='') {
+                $('#staff_table .selected').find('td:last-child button').removeClass('btn-primary').addClass('btn-success')
+            } else {
+                $('#staff_table .selected').find('td:last-child button').removeClass('btn-success').addClass('btn-primary')
+            }
             if(formData[2]['value']==8){
                 $('#staff_table .selected').addClass('red')
             } else{
@@ -267,7 +272,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                     <button type="button" class="btn btn-primary" onclick="return saveNotes()">Save</button>
                 </div>
             </div>
