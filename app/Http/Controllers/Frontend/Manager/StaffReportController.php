@@ -106,6 +106,7 @@ class StaffReportController extends Controller
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
                     ->where('visible', 1)
+                    ->where('payroll','!=','0')
                     ->get();
             }
 
