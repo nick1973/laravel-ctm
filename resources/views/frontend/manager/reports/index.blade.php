@@ -261,7 +261,31 @@
                         { "data": "lastname" , className: "centre get" },
                         { "data": "mobile" , className: "centre get" },
                         { "data": "email" , className: "centre get" },
-                        { "data": "heard_about_us" , className: "centre get" },
+                        //{ "data": "heard_about_us" , className: "centre get" },
+                        {
+                            "data": "heard_about_us",
+                            "render": function (data) {
+                                if(data=='-1'){
+                                    return ''
+                                }
+                                if(data=='1'){
+                                    return 'Other'
+                                }
+                                if(data=='2'){
+                                    return 'Word of mouth'
+                                }
+                                if(data=='3'){
+                                    return 'Event website'
+                                }
+                                if(data=='4'){
+                                    return 'Online job site e.g. Indeed/Total Jobs etc.'
+                                }
+                                if(data=='5'){
+                                    return 'University job board'
+                                }
+                                    return data
+                            }
+                        },
                         { "data": "promotion" , className: "centre get" },
                         { "data": "uni" , className: "centre get" },
                         {
