@@ -261,6 +261,9 @@
                         { "data": "lastname" , className: "centre get" },
                         { "data": "mobile" , className: "centre get" },
                         { "data": "email" , className: "centre get" },
+                        { "data": "heard_about_us" , className: "centre get" },
+                        { "data": "promotion" , className: "centre get" },
+                        { "data": "uni" , className: "centre get" },
                         {
                             "data": "created_at",
                             "render": function (data) {
@@ -269,9 +272,6 @@
                                 return date.getDate() + "-" + month + "-" + date.getFullYear();
                             }
                         },
-                        { "data": "heard_about_us" , className: "centre get" },
-                        { "data": "promotion" , className: "centre get" },
-                        { "data": "uni" , className: "centre get" },
                         {
                             "data": "updated_at",
                             "render": function (data) {
