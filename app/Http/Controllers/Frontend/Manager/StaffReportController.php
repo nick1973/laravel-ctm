@@ -96,6 +96,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->get();
             }
 
@@ -103,6 +104,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->get();
             }
@@ -111,6 +113,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('promotion', $request->input('promo'))
                     ->get();
             }
@@ -119,6 +122,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('uni', $request->input('uni'))
                     ->get();
             }
@@ -127,6 +131,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('promotion', $request->input('promo'))
                     ->get();
@@ -136,6 +141,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('promotion', $request->input('promo'))
                     ->where('uni', $request->input('uni'))
                     ->get();
@@ -145,6 +151,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('uni', $request->input('uni'))
                     ->get();
@@ -154,6 +161,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 3)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('promotion', $request->input('promo'))
                     ->where('uni', $request->input('uni'))
@@ -170,12 +178,14 @@ class StaffReportController extends Controller
         if($request->input('heard')=='' && $request->input('promo')=='' && $request->input('uni')==''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->get();
         }
 
         if($request->input('heard')!='' && $request->input('promo')=='' && $request->input('uni')==''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('heard_about_us', $request->input('heard'))
                 ->get();
         }
@@ -183,6 +193,7 @@ class StaffReportController extends Controller
         if($request->input('heard')=='' && $request->input('promo')!='' && $request->input('uni')==''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('promotion', $request->input('promo'))
                 ->get();
         }
@@ -190,6 +201,7 @@ class StaffReportController extends Controller
         if($request->input('heard')=='' && $request->input('promo')=='' && $request->input('uni')!=''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('uni', $request->input('uni'))
                 ->get();
         }
@@ -197,6 +209,7 @@ class StaffReportController extends Controller
         if($request->input('heard')!='' && $request->input('promo')!='' && $request->input('uni')==''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('heard_about_us', $request->input('heard'))
                 ->where('promotion', $request->input('promo'))
                 ->get();
@@ -205,6 +218,7 @@ class StaffReportController extends Controller
         if($request->input('heard')=='' && $request->input('promo')!='' && $request->input('uni')!=''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('promotion', $request->input('promo'))
                 ->where('uni', $request->input('uni'))
                 ->get();
@@ -213,6 +227,7 @@ class StaffReportController extends Controller
         if($request->input('heard')!='' && $request->input('promo')=='' && $request->input('uni')!=''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('heard_about_us', $request->input('heard'))
                 ->where('uni', $request->input('uni'))
                 ->get();
@@ -221,6 +236,7 @@ class StaffReportController extends Controller
         if($request->input('heard')!='' && $request->input('promo')!='' && $request->input('uni')!=''){
             $staff = User::where('app_status', 0)
                 ->where('markAsp45', 0)
+                ->where('visible', 1)
                 ->where('heard_about_us', $request->input('heard'))
                 ->where('promotion', $request->input('promo'))
                 ->where('uni', $request->input('uni'))
@@ -235,6 +251,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->get();
             }
 
@@ -242,6 +259,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->get();
             }
@@ -250,6 +268,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('promotion', $request->input('promo'))
                     ->get();
             }
@@ -258,6 +277,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('uni', $request->input('uni'))
                     ->get();
             }
@@ -266,6 +286,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('promotion', $request->input('promo'))
                     ->get();
@@ -275,6 +296,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('promotion', $request->input('promo'))
                     ->where('uni', $request->input('uni'))
                     ->get();
@@ -284,6 +306,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('uni', $request->input('uni'))
                     ->get();
@@ -293,6 +316,7 @@ class StaffReportController extends Controller
                 $staff = User::whereBetween('created_at', [$request->input('from'),$request->input('to')])
                     ->where('app_status', 0)
                     ->where('markAsp45', 0)
+                    ->where('visible', 1)
                     ->where('heard_about_us', $request->input('heard'))
                     ->where('promotion', $request->input('promo'))
                     ->where('uni', $request->input('uni'))
