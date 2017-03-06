@@ -417,8 +417,18 @@
                 textresults.push(text_sorted_arr[i]);
             }
         }
+
         email_selected = sorted_arr
-        mobile_selected = mobile
+        if(mobile.length === 0){
+            $("#free_input input").remove()
+            $("#free_input label").remove()
+            $("#free_input").append('<label for="exampleInputEmail1">Mobile Numbers (must be separated by a comma Eg. 07777777777,07888888888)</label><input name="free_mobile[]" type="text" class="form-control">')
+        } else {
+            $("#free_input input").remove()
+            $("#free_input label").remove()
+            mobile_selected = mobile
+        }
+
         console.log(email_selected)
         console.log(mobile_selected)
         if(message=='email'){
@@ -429,14 +439,21 @@
     }
 
     function textcontent() {
-
+        var formData = $('#text_form').serializeArray();
+        var mobile_free_selected = [];
         // Get the HTML contents of the currently active editor
         console.debug(tinyMCE.activeEditor.getContent());
         //method1 getting the content of the active editor
+        if(mobile_selected.length === 0){
+            mobile_free_selected.push(formData[0]['value'])  //$("#free_input input").val()
+        } else {
+            mobile_free_selected = mobile_selected
+        }
+        console.log(formData[0]['value'])
         $.ajax({
             type: "POST",
             url: '/dashboard/manager/text',
-            data: {numbers: mobile_selected,
+            data: {numbers: mobile_free_selected,
                 message: tinyMCE.get('textcomments').getContent({ format: 'text' })
             }
         }).done(function(data) {
@@ -451,7 +468,6 @@
     }
 
     function content() {
-
         // Get the HTML contents of the currently active editor
         console.debug(tinyMCE.activeEditor.getContent());
         //method1 getting the content of the active editor
@@ -534,7 +550,8 @@
                     <h4 class="modal-title" id="myModalLabel">Text</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="text_form">
+                        <div class="form-group" id="free_input"></div>
                         <textarea id="textcomments"></textarea>
                     </form>
                 </div>
