@@ -13,8 +13,9 @@ class UpdateSnapshotTable9 extends Migration
     public function up()
     {
         Schema::table('user_snapshot', function ($table) {
-            $table->tinyInteger('heard_about_us')->nullable()->change();
-            $table->tinyInteger('uni')->nullable()->change();
+            $table->string('heard_about_us')->nullable()->change();
+            $table->string('uni')->nullable()->change();
+            $table->string('promotion')->nullable()->change();
         });
     }
 
