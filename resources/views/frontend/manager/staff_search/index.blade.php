@@ -15,7 +15,7 @@
             <div role="tabpanel" class="tab-pane active" id="home">
                 <div class="row">
                     <form id="filters" class="form-inline">
-                    <div class="col-lg-12" style="padding-top: 15px">
+                        <div class="col-lg-12" style="padding-top: 15px">
                             <div class="form-group">
                                 <label for="exampleInputName2">Event</label>
                                 <select id="event_name" class="form-control" name="event_name">
@@ -44,7 +44,7 @@
                                     <option>50+</option>
                                 </select>
                             </div>
-                    </div>
+                        </div>
                         <div class="col-lg-12" style="padding-top: 15px">
                             <div class="form-group">
                                 <label for="exampleInputEmail2">Limit to staff who have selected this event</label>
@@ -80,32 +80,32 @@
                     </form>
 
                     <div class="col-md-12 col-lg-12" style="padding-top: 40px">
-                            <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>Title</th>
-                                        <th>Name</th>
-                                        <th>Surname</th>
-                                        <th>Age</th>
-                                        <th>NRSWA</th>
-                                        <th>Driver</th>
-                                        <th>Chosen Event</th>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
+                        <table id="events" class="table table-striped table-hover table-bordered dashboard-table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Title</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Age</th>
+                                <th>NRSWA</th>
+                                <th>Driver</th>
+                                <th>Chosen Event</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
                     </div>
                 </div><!-- row -->
             </div>
@@ -209,109 +209,109 @@
         </div>
     </div>
 
-<script>
+    <script>
 
-    
-    $("#radius").change(function () {
-        if($(this).find(":selected").text()=='50+'){
-            $('#postcode').val('')
-        }
-    });
 
-    $('#event_name').on('change', function() {
-        var ar = <?php echo json_encode($events) ?>;
-        function search(nameKey, myArray){
-            for (var i=0; i < myArray.length; i++) {
-                if (myArray[i].name === nameKey) {
-                    return myArray[i];
-                }
+        $("#radius").change(function () {
+            if($(this).find(":selected").text()=='50+'){
+                $('#postcode').val('')
             }
-        }
-        var resultObject = search(this.value, ar);
-        $("#postcode").val(resultObject.postcode)
-    });
+        });
 
-    $('#event_name_non_approved').on('change', function() {
-        var ar = <?php echo json_encode($events) ?>;
-        function search(nameKey, myArray){
-            for (var i=0; i < myArray.length; i++) {
-                if (myArray[i].name === nameKey) {
-                    return myArray[i];
-                }
-            }
-        }
-        var resultObject = search(this.value, ar);
-        $("#postcode_non_approved").val(resultObject.postcode)
-    });
-
-    function submitForm(form, dTable){
-        var table = $('#'+dTable).DataTable();
-        if (table instanceof $.fn.dataTable.Api) {
-            table.destroy();
-        } else {
-            // not a datatable... do other stuff
-        }
-        if(dTable=='events'){
-            var formData = $('#filters').serializeArray();
-            var url = '/dashboard/manager/staff-search/approved'
-        } else {
-            var formData = $('#filers').serializeArray();
-            var url = '/dashboard/manager/staff-search/non_approved'
-        }
-
-        //console.log(formData[1]['value'])
-        //console.log(formData[0]['value'])
-        $('.loaderImage').show();
-        $.post(url, formData).done(function (results) {
-            $('.loaderImage').hide();
-            console.log(results.data);
-            setTimeout(self.timeoutHandler, 750);
-
-            var table = $('#'+dTable).DataTable( {
-                "sPaginationType": "full_numbers",
-                "bPaginate": true,
-                "bLengthChange": true,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": true,
-                "bAutoWidth": false,
-                "bProcessing": true,
-                data: results.data,
-                dom: 'Bflrtip',
-                buttons: [
-                    //'csv',
-                    {
-                        text: 'Deselect All',
-                        action: function ( e, dt, node, config ) {
-                            deselect()
-                        }
-                    },
-                    {
-                        text: 'Email Staff',
-                        action: function ( e, dt, node, config ) {
-                                send_user('email')
-                        }
-                    },
-                    {
-                        text: 'Text Staff',
-                        action: function ( e, dt, node, config ) {
-                            send_user('text')
-                        }
+        $('#event_name').on('change', function() {
+            var ar = <?php echo json_encode($events) ?>;
+            function search(nameKey, myArray){
+                for (var i=0; i < myArray.length; i++) {
+                    if (myArray[i].name === nameKey) {
+                        return myArray[i];
                     }
-                ],
-                "columns": [
-                    {
-                        "data": function (data) {
+                }
+            }
+            var resultObject = search(this.value, ar);
+            $("#postcode").val(resultObject.postcode)
+        });
+
+        $('#event_name_non_approved').on('change', function() {
+            var ar = <?php echo json_encode($events) ?>;
+            function search(nameKey, myArray){
+                for (var i=0; i < myArray.length; i++) {
+                    if (myArray[i].name === nameKey) {
+                        return myArray[i];
+                    }
+                }
+            }
+            var resultObject = search(this.value, ar);
+            $("#postcode_non_approved").val(resultObject.postcode)
+        });
+
+        function submitForm(form, dTable){
+            var table = $('#'+dTable).DataTable();
+            if (table instanceof $.fn.dataTable.Api) {
+                table.destroy();
+            } else {
+                // not a datatable... do other stuff
+            }
+            if(dTable=='events'){
+                var formData = $('#filters').serializeArray();
+                var url = '/dashboard/manager/staff-search/approved'
+            } else {
+                var formData = $('#filers').serializeArray();
+                var url = '/dashboard/manager/staff-search/non_approved'
+            }
+
+            //console.log(formData[1]['value'])
+            //console.log(formData[0]['value'])
+            $('.loaderImage').show();
+            $.post(url, formData).done(function (results) {
+                $('.loaderImage').hide();
+                console.log(results.data);
+                setTimeout(self.timeoutHandler, 750);
+
+                var table = $('#'+dTable).DataTable( {
+                    "sPaginationType": "full_numbers",
+                    "bPaginate": true,
+                    "bLengthChange": true,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bAutoWidth": false,
+                    "bProcessing": true,
+                    data: results.data,
+                    dom: 'Bflrtip',
+                    buttons: [
+                        //'csv',
+                        {
+                            text: 'Deselect All',
+                            action: function ( e, dt, node, config ) {
+                                deselect()
+                            }
+                        },
+                        {
+                            text: 'Email Staff',
+                            action: function ( e, dt, node, config ) {
+                                send_user('email')
+                            }
+                        },
+                        {
+                            text: 'Text Staff',
+                            action: function ( e, dt, node, config ) {
+                                send_user('text')
+                            }
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "data": function (data) {
                                 return '<input class="user" type="checkbox" name="'+data.email+'" id="'+data.mobile+'" checked>'
-                        }, className: "centre get"
-                    },
-                    { "data": "email" , className: "centre get", "visible": false },
-                    { "data": "title" , className: "centre get" },
-                    { "data": "name" , className: "centre get" },
-                    { "data": "lastname" , className: "centre get" },
-                    {
-                        "data": function (data) {
-                            //if (data.dob.indexOf("-") > 1){
+                            }, className: "centre get"
+                        },
+                        { "data": "email" , className: "centre get", "visible": false },
+                        { "data": "title" , className: "centre get" },
+                        { "data": "name" , className: "centre get" },
+                        { "data": "lastname" , className: "centre get" },
+                        {
+                            "data": function (data) {
+                                //if (data.dob.indexOf("-") > 1){
                                 var dob = data.dob
                                 var yyyy = Number(dob.substr(0,4))
                                 var mm = Number(dob.substr(5,2))
@@ -329,174 +329,158 @@
                                 } else {
                                     return "Over 25"
                                 }
-                            //} else
+                                //} else
 //                            {
 //                                var dob = new Date(Number(data.dob)*1000);
 //                                var ageDifMs = Date.now() - dob.getTime();
 //                                var ageDate = new Date(ageDifMs); // miliseconds from epoch
 //                                return Math.abs(ageDate.getUTCFullYear() - 1970);
 //                            }
-                        }, className: "centre get"
-                    },
-                    {
-                        "data": function (data) {
-                            if(data.nrswa == 'Yes'){
-                                return '<img src="/img/green-tick.png" height="20px">'
-                            }
-                            return ''//'<img src="/img/red_cross.png" height="20px">'
-                        }, className: "centre get"
-                    },
-                    {
-                        "data": function (data) {
-                            if(data.driver_paper_work == 1){
-                                return '<img src="/img/green-tick.png" height="20px">'
-                            }
-                            return ''//'<img src="/img/red_cross.png" height="20px">'
-                        }, className: "centre get"
-                    },
-                    {
-                        "data": function (data) {
-                            var name = []
-                            <?php $events = \App\Models\Dropdowns\Tag::all(); ?>
-                                    <?php foreach($events as $event){ ?>
+                            }, className: "centre get"
+                        },
+                        {
+                            "data": function (data) {
+                                if(data.nrswa == 'Yes'){
+                                    return '<img src="/img/green-tick.png" height="20px">'
+                                }
+                                return ''//'<img src="/img/red_cross.png" height="20px">'
+                            }, className: "centre get"
+                        },
+                        {
+                            "data": function (data) {
+                                if(data.driver_paper_work == 1){
+                                    return '<img src="/img/green-tick.png" height="20px">'
+                                }
+                                return ''//'<img src="/img/red_cross.png" height="20px">'
+                            }, className: "centre get"
+                        },
+                        {
+                            "data": function (data) {
+                                var name = []
+                                <?php $events = \App\Models\Dropdowns\Tag::all(); ?>
+                                        <?php foreach($events as $event){ ?>
                                         <?php foreach($event->users as $user){ ?>
-                                            if(data.id == '<?php echo $user->id ?>') {
-                                                name.push('{{$event->name}}')
-                                            }
+                                if(data.id == '<?php echo $user->id ?>') {
+                                    name.push('{{$event->name}}')
+                                }
+                                <?php } ?>
                                         <?php } ?>
-                                    <?php } ?>
-                                        if (jQuery.inArray( formData[0]['value'].toString(), name ) >= 0){
-                                            //return name
-                                            return '<img src="/img/green-tick.png" height="20px">'
-                                        }
-                                        return ''
-                        }, className: "centre get"
-                    }
-                ]
-            });
-            //table.destroy();
-        }).fail(function(xhr, status, error) {
-                    // error handling
-            $('.loaderImage').hide();
-                alert("Non valid postcode. Eg. CV1 8MD")
+                                if (jQuery.inArray( formData[0]['value'].toString(), name ) >= 0){
+                                    //return name
+                                    return '<img src="/img/green-tick.png" height="20px">'
+                                }
+                                return ''
+                            }, className: "centre get"
+                        }
+                    ]
                 });
-    }
-    var email_selected = [];
-    var mobile_selected = [];
+                //table.destroy();
+            }).fail(function(xhr, status, error) {
+                // error handling
+                $('.loaderImage').hide();
+                alert("Non valid postcode. Eg. CV1 8MD")
+            });
+        }
+        var email_selected = [];
+        var mobile_selected = [];
 
-    function deselect() {
-        var dataTable = $('#events').dataTable()
-        $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-            $(this).attr('checked',false)
-        })
-    }
+        function deselect() {
+            var dataTable = $('#events').dataTable()
+            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+                $(this).attr('checked',false)
+            })
+        }
 
-    function send_user(message){
-        var selected = [];
-        var mobile = [];
-        var dataTable = $('#events').dataTable()
-        $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-            selected.push($(this).attr('name'));
-            mobile.push($(this).attr('id'));
-        })
+        function send_user(message){
+            var selected = [];
+            var mobile = [];
+            var dataTable = $('#events').dataTable()
+            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+                selected.push($(this).attr('name'));
+                mobile.push($(this).attr('id'));
+            })
 //        $('.user:input:checked').each(function() {
 //            selected.push($(this).attr('name'));
 //            mobile.push($(this).attr('id'));
 //        });
-        var sorted_arr = selected.slice().sort();
-        var text_sorted_arr = mobile.slice().sort();
-        var emailresults = [];
-        var textresults = [];
-        for (var i = 0; i < selected.length - 1; i++) {
-            if (sorted_arr[i + 1] == sorted_arr[i]) {
-                emailresults.push(sorted_arr[i]);
+            var sorted_arr = selected.slice().sort();
+            var text_sorted_arr = mobile.slice().sort();
+            var emailresults = [];
+            var textresults = [];
+            for (var i = 0; i < selected.length - 1; i++) {
+                if (sorted_arr[i + 1] == sorted_arr[i]) {
+                    emailresults.push(sorted_arr[i]);
+                }
             }
-        }
-        for (var i = 0; i < mobile.length - 1; i++) {
-            if (text_sorted_arr[i + 1] == text_sorted_arr[i]) {
-                textresults.push(text_sorted_arr[i]);
+            for (var i = 0; i < mobile.length - 1; i++) {
+                if (text_sorted_arr[i + 1] == text_sorted_arr[i]) {
+                    textresults.push(text_sorted_arr[i]);
+                }
             }
-        }
-
-        email_selected = sorted_arr
-        if(mobile.length === 0){
-            $("#free_input input").remove()
-            $("#free_input label").remove()
-            $("#free_input").append('<label for="exampleInputEmail1">Mobile Numbers (must be separated by a comma Eg. 07777777777,07888888888)</label><input name="free_mobile[]" type="text" class="form-control">')
-        } else {
-            $("#free_input input").remove()
-            $("#free_input label").remove()
+            email_selected = sorted_arr
             mobile_selected = mobile
-        }
-
-        console.log(email_selected)
-        console.log(mobile_selected)
-        if(message=='email'){
-            $('#emailModal').modal('show')
-        } else{
-            $('#textModal').modal('show')
-        }
-    }
-
-    function textcontent() {
-        var formData = $('#text_form').serializeArray();
-        var mobile_free_selected = [];
-        // Get the HTML contents of the currently active editor
-        console.debug(tinyMCE.activeEditor.getContent());
-        //method1 getting the content of the active editor
-        if(mobile_selected.length === 0){
-            mobile_free_selected.push(formData[0]['value'])  //$("#free_input input").val()
-        } else {
-            mobile_free_selected = mobile_selected
-        }
-        console.log(formData[0]['value'])
-        $.ajax({
-            type: "POST",
-            url: '/dashboard/manager/text',
-            data: {numbers: mobile_free_selected,
-                message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+            console.log(email_selected)
+            console.log(mobile_selected)
+            if(message=='email'){
+                $('#emailModal').modal('show')
+            } else{
+                $('#textModal').modal('show')
             }
-        }).done(function(data) {
-            //$( this ).addClass( "done" );
-            console.log(data)
-            $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+        }
+
+        function textcontent() {
+
+            // Get the HTML contents of the currently active editor
+            console.debug(tinyMCE.activeEditor.getContent());
+            //method1 getting the content of the active editor
+            $.ajax({
+                type: "POST",
+                url: '/dashboard/manager/text',
+                data: {numbers: mobile_selected,
+                    message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                }
+            }).done(function(data) {
+                //$( this ).addClass( "done" );
+                console.log(data)
+                $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+            });
+            //location.reload();
+            //$("#confirm_form").submit();
+            alert('Text been sent to ' + mobile_selected);
+            $('#textModal').modal('hide')
+        }
+
+        function content() {
+
+            // Get the HTML contents of the currently active editor
+            console.debug(tinyMCE.activeEditor.getContent());
+            //method1 getting the content of the active editor
+            $.ajax({
+                type: "POST",
+                url: '/email',
+                data: {email: tinyMCE.get('comments').getContent(),
+                    e_address: email_selected
+                }
+            });
+            //location.reload();
+            //$("#confirm_form").submit();
+            alert('Email has been sent to ' + email_selected);
+            $('#emailModal').modal('hide')
+        }
+
+        tinymce.init({
+            selector: '#comments',
+            plugins: "fullpage",
+            fullpage_default_font_family: "'Open Sans', sans-serif;",
+            content_css : "/css/content.css",
+            height : "480"
         });
-        //location.reload();
-        //$("#confirm_form").submit();
-        alert('Text been sent to ' + mobile_selected);
-        $('#textModal').modal('hide')
-    }
 
-    function content() {
-        // Get the HTML contents of the currently active editor
-        console.debug(tinyMCE.activeEditor.getContent());
-        //method1 getting the content of the active editor
-        $.ajax({
-            type: "POST",
-            url: '/email',
-            data: {email: tinyMCE.get('comments').getContent(),
-                e_address: email_selected
-            }
+        tinymce.init({
+            selector: '#textcomments',
+            height : "480"
         });
-        //location.reload();
-        //$("#confirm_form").submit();
-        alert('Email has been sent to ' + email_selected);
-        $('#emailModal').modal('hide')
-    }
-
-    tinymce.init({
-        selector: '#comments',
-        plugins: "fullpage",
-        fullpage_default_font_family: "'Open Sans', sans-serif;",
-        content_css : "/css/content.css",
-        height : "480"
-    });
-
-    tinymce.init({
-        selector: '#textcomments',
-        height : "480"
-    });
-</script>
+    </script>
     <style>
         .centre {
             text-align: center;
@@ -550,8 +534,7 @@
                     <h4 class="modal-title" id="myModalLabel">Text</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="text_form">
-                        <div class="form-group" id="free_input"></div>
+                    <form>
                         <textarea id="textcomments"></textarea>
                     </form>
                 </div>
