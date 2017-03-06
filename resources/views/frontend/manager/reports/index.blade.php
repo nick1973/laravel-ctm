@@ -58,15 +58,17 @@
                         <table id="filter_reports" class="table table-striped table-hover table-bordered dashboard-table">
                             <thead>
                             <tr>
-                                <th>Application Created</th>
                                 <th>Payroll</th>
                                 <th>Name</th>
                                 <th>Surname</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
+                                <th>Application Created</th>
+                                <th>Application Updated</th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -124,15 +126,17 @@
                         <table id="non_approved" class="table table-striped table-hover table-bordered dashboard-table">
                             <thead>
                             <tr>
-                                <th>Application Created</th>
                                 <th>Payroll</th>
                                 <th>Name</th>
                                 <th>Surname</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
+                                <th>Application Created</th>
+                                <th>Application Updated</th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -218,7 +222,7 @@
                     data: results.data,
                     dom: 'Bflrtip',
                     buttons: [
-                        //'csv',
+                        'csv',
                         {
                             text: 'Deselect All',
                             action: function ( e, dt, node, config ) {
@@ -239,6 +243,12 @@
                         }
                     ],
                     "columns": [
+                        { "data": "payroll" , className: "centre get" //, "visible": false
+                        },
+                        { "data": "name" , className: "centre get" },
+                        { "data": "lastname" , className: "centre get" },
+                        { "data": "mobile" , className: "centre get" },
+                        { "data": "email" , className: "centre get" },
                         {
                             "data": "created_at",
                             "render": function (data) {
@@ -247,14 +257,14 @@
                                 return date.getDate() + "-" + month + "-" + date.getFullYear();
                             }
                         },
-
-                        //{ "data": "created_at" , className: "centre get" },
-                        { "data": "payroll" , className: "centre get" //, "visible": false
-                        },
-                        { "data": "name" , className: "centre get" },
-                        { "data": "lastname" , className: "centre get" },
-                        { "data": "mobile" , className: "centre get" },
-                        { "data": "email" , className: "centre get" }
+                        {
+                            "data": "updated_at",
+                            "render": function (data) {
+                                var date = new Date(data);
+                                var month = date.getMonth() + 1;
+                                return date.getDate() + "-" + month + "-" + date.getFullYear();
+                            }
+                        }
                     ]
                 });
                 //table.destroy();
