@@ -63,11 +63,17 @@
                                 <th>Surname</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
+                                <th>Heard About</th>
+                                <th>Promo's</th>
+                                <th>Uni's</th>
                                 <th>Application Created</th>
                                 <th>Application Updated</th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -131,11 +137,17 @@
                                 <th>Surname</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
+                                <th>Heard About</th>
+                                <th>Promo's</th>
+                                <th>Uni's</th>
                                 <th>Application Created</th>
                                 <th>Application Updated</th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -257,6 +269,9 @@
                                 return date.getDate() + "-" + month + "-" + date.getFullYear();
                             }
                         },
+                        { "data": "heard_about_us" , className: "centre get" },
+                        { "data": "promotion" , className: "centre get" },
+                        { "data": "uni" , className: "centre get" },
                         {
                             "data": "updated_at",
                             "render": function (data) {
