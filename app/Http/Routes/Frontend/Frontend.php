@@ -360,6 +360,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('dashboard/manager/staff-search/approved', 'StaffSearchController@staff_search')->name('dashboard.manager.staff-search.approved');
         Route::any('dashboard/manager/staff-search/non_approved', 'StaffSearchController@staff_search_non_approved')->name('dashboard.manager.staff-search.staff_search_non_approved');
 
+        Route::resource('dashboard/staff-report', 'StaffReportController');
+        Route::any('dashboard/manager/staff-report/approved', 'StaffReportController@staff_search')->name('dashboard.manager.staff-report.approved');
+        Route::any('dashboard/manager/staff-report/non_approved', 'StaffReportController@staff_search_non_approved')->name('dashboard.manager.staff-report.staff_search_non_approved');
+
         Route::any('dashboard/manager/notes', 'ManagerController@update_notes')->name('dashboard.manager.notes');
         Route::get('dashboard/manager/notes/{id}', function ($id) {
             $user = \App\Models\Access\User\User::find($id);

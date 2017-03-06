@@ -23,7 +23,10 @@
         <script src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
-
+        {{--moment date plugin--}}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+        <script src="//cdn.datatables.net/plug-ins/1.10.13/sorting/datetime-moment.js"></script>
+        {{--moment date plugin end--}}
 
         <script src="https://cdn.jsdelivr.net/vue/1.0.26/vue.min.js"></script>
 
@@ -166,6 +169,7 @@
                             <a href="/dashboard/exports" class="btn btn-success">Exports</a>
                             <a href="/dashboard/rtw" class="btn btn-primary">RTW</a>
                             <a href="/dashboard/staff-search" class="btn btn-warning">Staff Search</a>
+                            <a href="/dashboard/staff-report" class="btn btn-info">Staff Report</a>
                         </div>
                         <div class="col-md-6">
 
