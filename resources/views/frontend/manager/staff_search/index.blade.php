@@ -3,7 +3,7 @@
 @section('content')
     <?php $id = ''; ?>
     <div>
-
+        <h3>Staff Search</h3>
         <div id="bal"></div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
