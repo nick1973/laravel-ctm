@@ -4,7 +4,7 @@
 
     <a href="/dashboard/drivers" class="btn btn-success active">Driver Documents</a>
     <a href="/dashboard/drivers/staff/all" class="btn btn-primary">All Staff</a>
-<h2>Driver Documents</h2>
+    <h2>Driver Documents</h2>
     <div class="row">
 
         <div class="col-md-12 col-lg-12">
@@ -43,7 +43,7 @@
 
         $(document).ready( function () {
             var table = $('#staff_table').DataTable( {
-                "ajax": "/dashboard/search/drivers",
+                "ajax": "/dashboard/search/drivers/all",
                 //dom: '<"top"Blf>rTi<"bottom"p><"clear">',
                 dom: 'Bfrtip',
                 buttons: [
@@ -75,12 +75,12 @@
                     }, className: "centre get" },
                     { "data": "lastname" , className: "centre get" },
                     { "data": function (data) {
-                                var dob = data.dob
-                                var yyyy = Number(dob.substr(0,4))
-                                var mm = Number(dob.substr(5,2))
-                                var dd = Number(dob.substr(8,2))
-                                return dd + '-' + mm + '-' + yyyy
-                        }, className: "centre get"
+                        var dob = data.dob
+                        var yyyy = Number(dob.substr(0,4))
+                        var mm = Number(dob.substr(5,2))
+                        var dd = Number(dob.substr(8,2))
+                        return dd + '-' + mm + '-' + yyyy
+                    }, className: "centre get"
                     },
                     {
                         "data": function (data) {
@@ -105,11 +105,11 @@
                     },
                     {
                         "data": function (data) {
-                                return  '<form method="POST">' +
-                                        '<input type="hidden" name="_method" value="PATCH">' +
-                                        '<input name="id" type="text" value="'+data.id+'" hidden>' +
-                                        '<input class="form-control" onchange="return submitForm(this.form)" onkeyup="return submitForm(this.form)" name="driver_dates" type="date" value="'+data.driver_dates+'">' +
-                                        '</form>'
+                            return  '<form method="POST">' +
+                                    '<input type="hidden" name="_method" value="PATCH">' +
+                                    '<input name="id" type="text" value="'+data.id+'" hidden>' +
+                                    '<input class="form-control" onchange="return submitForm(this.form)" onkeyup="return submitForm(this.form)" name="driver_dates" type="date" value="'+data.driver_dates+'">' +
+                                    '</form>'
                         }, className: "centre get"
                     },
                     { "data": "updated_at" , className: "centre get" },
@@ -129,13 +129,13 @@
                 console.log(formData);
             });
         }
-//        $.ajax({
-//            type: "POST",
-//            url: url,
-//            data: formData,
-//            success: success,
-//            //dataType: dataType
-//        });
+        //        $.ajax({
+        //            type: "POST",
+        //            url: url,
+        //            data: formData,
+        //            success: success,
+        //            //dataType: dataType
+        //        });
     </script>
 
     <style>

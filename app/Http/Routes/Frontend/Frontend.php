@@ -467,6 +467,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Drivers'], function () {
 
         Route::resource('dashboard/drivers', 'DriversController');
+        Route::get('dashboard/drivers/staff/all', 'DriversController@staff_all')->name('dashboard.drivers.staff.all');
 
         Route::get('dashboard/search/drivers', function () {
             ini_set('memory_limit','2048M');
@@ -478,6 +479,19 @@ Route::group(['middleware' => 'auth'], function () {
                 ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
                 ['uk_driving_license', '=', 'Yes'],
+            ])->get();
+            return ['data'=>$staff];
+        });
+        Route::get('dashboard/search/drivers/all', function () {
+            ini_set('memory_limit','2048M');
+            $staff = \App\Models\Access\User\User::
+            where([
+                //['confirmed', '=', 1],
+                ['visible', '=', 1],
+                ['app_status', '=', 3],
+                ['markAsp45', '=' ,0],
+                ['payroll','!=','0'],
+                //['uk_driving_license', '=', 'Yes'],
             ])->get();
             return ['data'=>$staff];
         });

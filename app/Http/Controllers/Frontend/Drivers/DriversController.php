@@ -22,4 +22,8 @@ class DriversController extends Controller
 //        return "doo";
 //        return redirect('dashboard/drivers');
     }
+
+    function staff_all(){
+        return view('frontend.drivers.all_staff');
+    }
 }
