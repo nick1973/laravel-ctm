@@ -4,7 +4,7 @@
 
     <a href="/dashboard/drivers" class="btn btn-success active">Driver Documents</a>
     <a href="/dashboard/drivers/staff/all" class="btn btn-primary">All Staff</a>
-    <h2>Driver Documents</h2>
+    <h2>All Approved Staff</h2>
     <div class="row">
 
         <div class="col-md-12 col-lg-12">
@@ -101,7 +101,7 @@
                                         //'<input onclick="return submitForm(this.form)" type="button" value="Save" >' +
                                         '</form>'
                             }
-                        }, className: "centre get"
+                        } , "visible": false
                     },
                     {
                         "data": function (data) {
@@ -110,7 +110,7 @@
                                     '<input name="id" type="text" value="'+data.id+'" hidden>' +
                                     '<input class="form-control" onchange="return submitForm(this.form)" onkeyup="return submitForm(this.form)" name="driver_dates" type="date" value="'+data.driver_dates+'">' +
                                     '</form>'
-                        }, className: "centre get"
+                        }, "visible": false
                     },
                     { "data": "updated_at" , className: "centre get" },
                 ],
