@@ -283,19 +283,19 @@
                         {
                             text: 'Select All',
                             action: function ( e, dt, node, config ) {
-                                deselect()
+                                deselect(dTable)
                             }
                         },
                         {
                             text: 'Email Staff',
                             action: function ( e, dt, node, config ) {
-                                send_user('email')
+                                send_user('email',dTable)
                             }
                         },
                         {
                             text: 'Text Staff',
                             action: function ( e, dt, node, config ) {
-                                send_user('text')
+                                send_user('text',dTable)
                             }
                         }
                     ],
@@ -384,17 +384,17 @@
         var email_selected = [];
         var mobile_selected = [];
 
-        function deselect() {
-            var dataTable = $('#events').dataTable()
+        function deselect(table) {
+            var dataTable = $('#'+table).dataTable()
             $(".user:input", dataTable.fnGetNodes()).each(function(){
                 $(this).attr('checked',true)
             })
         }
 
-        function send_user(message){
+        function send_user(message, table){
             var selected = [];
             var mobile = [];
-            var dataTable = $('#events').dataTable()
+            var dataTable = $('#'+table).dataTable()
             $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
                 selected.push($(this).attr('name'));
                 mobile.push($(this).attr('id'));

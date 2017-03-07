@@ -58,6 +58,8 @@
                         <table id="filter_reports" class="table table-striped table-hover table-bordered dashboard-table">
                             <thead>
                             <tr>
+                                <th></th>
+                                <th></th>
                                 <th>Payroll</th>
                                 <th>Name</th>
                                 <th>Surname</th>
@@ -71,6 +73,8 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -132,6 +136,8 @@
                         <table id="non_approved" class="table table-striped table-hover table-bordered dashboard-table">
                             <thead>
                             <tr>
+                                <th></th>
+                                <th></th>
                                 <th>Payroll</th>
                                 <th>Name</th>
                                 <th>Surname</th>
@@ -145,6 +151,8 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -236,25 +244,31 @@
                     buttons: [
                         'csv',
                         {
-                            text: 'Deselect All',
+                            text: 'Select All',
                             action: function ( e, dt, node, config ) {
-                                deselect()
+                                selectApproved(dTable)
                             }
                         },
                         {
                             text: 'Email Staff',
                             action: function ( e, dt, node, config ) {
-                                send_user('email')
+                                send_user('email',dTable)
                             }
                         },
                         {
                             text: 'Text Staff',
                             action: function ( e, dt, node, config ) {
-                                send_user('text')
+                                send_user('text',dTable)
                             }
                         }
                     ],
                     "columns": [
+                        {
+                            "data": function (data) {
+                                return '<input class="user" type="checkbox" name="'+data.email+'" id="'+data.mobile+'">'
+                            }, className: "centre get"
+                        },
+                        { "data": "email" , className: "centre get", "visible": false },
                         { "data": "payroll" , className: "centre get" //, "visible": false
                         },
                         { "data": "name" , className: "centre get" },
@@ -316,17 +330,17 @@
         var email_selected = [];
         var mobile_selected = [];
 
-//        function deselect() {
-//            var dataTable = $('#events').dataTable()
-//            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-//                $(this).attr('checked',false)
-//            })
-//        }
+        function selectApproved(table) {
+            var dataTable = $('#'+table).dataTable()
+            $(".user:input", dataTable.fnGetNodes()).each(function(){
+                $(this).attr('checked',true)
+            })
+        }
 
-        function send_user(message){
+        function send_user(message, table){
             var selected = [];
             var mobile = [];
-            var dataTable = $('#events').dataTable()
+            var dataTable = $('#'+table).dataTable()
             $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
                 selected.push($(this).attr('name'));
                 mobile.push($(this).attr('id'));
@@ -349,18 +363,8 @@
                     textresults.push(text_sorted_arr[i]);
                 }
             }
-
             email_selected = sorted_arr
-            if(mobile.length === 0){
-                $("#free_input input").remove()
-                $("#free_input label").remove()
-                $("#free_input").append('<label for="exampleInputEmail1">Mobile Numbers (must be separated by a comma Eg. 07777777777,07888888888)</label><input name="free_mobile[]" type="text" class="form-control">')
-            } else {
-                $("#free_input input").remove()
-                $("#free_input label").remove()
-                mobile_selected = mobile
-            }
-
+            mobile_selected = mobile
             console.log(email_selected)
             console.log(mobile_selected)
             if(message=='email'){
@@ -371,21 +375,14 @@
         }
 
         function textcontent() {
-            var formData = $('#text_form').serializeArray();
-            var mobile_free_selected = [];
+
             // Get the HTML contents of the currently active editor
             console.debug(tinyMCE.activeEditor.getContent());
             //method1 getting the content of the active editor
-            if(mobile_selected.length === 0){
-                mobile_free_selected.push(formData[0]['value'])  //$("#free_input input").val()
-            } else {
-                mobile_free_selected = mobile_selected
-            }
-            console.log(formData[0]['value'])
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/text',
-                data: {numbers: mobile_free_selected,
+                data: {numbers: mobile_selected,
                     message: tinyMCE.get('textcomments').getContent({ format: 'text' })
                 }
             }).done(function(data) {
