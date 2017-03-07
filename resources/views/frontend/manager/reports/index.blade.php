@@ -345,10 +345,6 @@
                 selected.push($(this).attr('name'));
                 mobile.push($(this).attr('id'));
             })
-//        $('.user:input:checked').each(function() {
-//            selected.push($(this).attr('name'));
-//            mobile.push($(this).attr('id'));
-//        });
             var sorted_arr = selected.slice().sort();
             var text_sorted_arr = mobile.slice().sort();
             var emailresults = [];
@@ -365,8 +361,19 @@
             }
             email_selected = sorted_arr
             mobile_selected = mobile
-            console.log(email_selected)
-            console.log(mobile_selected)
+            //console.log(email_selected)
+
+            if(mobile_selected.length == 0){
+                //console.log(mobile_selected)
+                $("#free_input input").remove()
+                $("#free_input label").remove()
+                $("#free_input").append('<label>Mobile (07777777777,07555555555)</label><input id="mobile_numbers" class="form-control" name="mobile_numbers">')
+            } else {
+                $("#free_input label").remove()
+                $("#free_input input").remove()
+            }
+
+
             if(message=='email'){
                 $('#emailModal').modal('show')
             } else{
@@ -375,6 +382,12 @@
         }
 
         function textcontent() {
+            if(mobile_selected.length == 0){
+                var mobile = [];
+                var mobileArray = $("input[name=mobile_numbers]").val().split(',')
+                mobile_selected = mobileArray
+                console.log(mobile_selected)
+            }
 
             // Get the HTML contents of the currently active editor
             console.debug(tinyMCE.activeEditor.getContent());
