@@ -281,7 +281,7 @@
                     buttons: [
                         //'csv',
                         {
-                            text: 'Deselect All',
+                            text: 'Select All',
                             action: function ( e, dt, node, config ) {
                                 deselect()
                             }
@@ -302,7 +302,7 @@
                     "columns": [
                         {
                             "data": function (data) {
-                                return '<input class="user" type="checkbox" name="'+data.email+'" id="'+data.mobile+'" checked>'
+                                return '<input class="user" type="checkbox" name="'+data.email+'" id="'+data.mobile+'">'
                             }, className: "centre get"
                         },
                         { "data": "email" , className: "centre get", "visible": false },
@@ -386,8 +386,8 @@
 
         function deselect() {
             var dataTable = $('#events').dataTable()
-            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-                $(this).attr('checked',false)
+            $(".user:input", dataTable.fnGetNodes()).each(function(){
+                $(this).attr('checked',true)
             })
         }
 
