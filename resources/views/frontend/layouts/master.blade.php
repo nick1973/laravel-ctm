@@ -186,9 +186,9 @@
                                     Staff <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/dashboard/staff-search">Find</a></li>
+                                    <li><a href="/dashboard/manager/staff/search">Find</a></li>
                                     @if(access()->hasRole('Executive'))
-                                        <li><a href="/dashboard/manager/staff/search">Email/Text</a></li>
+                                        <li><a href="/dashboard/staff-search">Email/Text</a></li>
                                         <li><a href="/dashboard/rtw">Verify RTW</a></li>
                                     @endif
                                     @if(access()->hasRole('drivers'))
