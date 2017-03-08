@@ -161,15 +161,59 @@
                             {{--<h1>Welcome to {{ access()->user()->name }}'s profile.</h1>--}}
                             {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
                             <h2>Resource Dashboard</h2>
-                            <a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>
-                            <a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>
-                            <a href="/dashboard/manager/staff/search" class="btn btn-primary">Booking Search</a>
-                            <a href="/dashboard/register/dropdowns" class="btn btn-danger">Registration Dropdowns</a>
-                            <a href="/dashboard/events" class="btn btn-default">Events</a>
-                            <a href="/dashboard/exports" class="btn btn-success">Exports</a>
-                            <a href="/dashboard/rtw" class="btn btn-primary">RTW</a>
-                            <a href="/dashboard/staff-search" class="btn btn-warning">Staff Search</a>
-                            <a href="/dashboard/staff-report" class="btn btn-info">Staff Report</a>
+                            <!-- Single button -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Recruitment <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/dashboard/staff-report">Reports</a></li>
+                                    <li><a href="/dashboard/register/dropdowns">Dropdowns</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Applications <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/dashboard/manager">New</a></li>
+                                    <li><a href="/dashboard/exports">Export</a></li>
+                                </ul>
+                            </div>
+                            @if(access()->hasRole('Executive') || access()->hasRole('drivers'))
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Staff <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/dashboard/staff-search">Find</a></li>
+                                    @if(access()->hasRole('Executive'))
+                                        <li><a href="/dashboard/manager/staff/search">Email/Text</a></li>
+                                        <li><a href="/dashboard/rtw">Verify RTW</a></li>
+                                    @endif
+                                    @if(access()->hasRole('drivers'))
+                                        <li><a href="/dashboard/drivers">Driver Paperwork</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                            @endif
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Events <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/dashboard/events">Event List</a></li>
+                                </ul>
+                            </div>
+                            {{--<a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>--}}
+                            {{--<a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>--}}
+                            {{--<a href="/dashboard/manager/staff/search" class="btn btn-primary">Booking Search</a>--}}
+                            {{--<a href="/dashboard/register/dropdowns" class="btn btn-danger">Registration Dropdowns</a>--}}
+                            {{--<a href="/dashboard/events" class="btn btn-default">Events</a>--}}
+                            {{--<a href="/dashboard/exports" class="btn btn-success">Exports</a>--}}
+                            {{--<a href="/dashboard/rtw" class="btn btn-primary">RTW</a>--}}
+                            {{--<a href="/dashboard/staff-search" class="btn btn-warning">Staff Search</a>--}}
+                            {{--<a href="/dashboard/staff-report" class="btn btn-info">Staff Report</a>--}}
                         </div>
                         <div class="col-md-6">
 
