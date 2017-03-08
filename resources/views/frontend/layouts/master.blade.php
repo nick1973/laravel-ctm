@@ -154,7 +154,7 @@
         
         
         
-            @if(access()->hasRole('Executive'))
+            @if(access()->hasRole('Executive') || access()->hasRole('drivers'))
                 <div class="jumbotron">
                     <div class="container">
                         <div class="col-md-12 col-ld-12">
