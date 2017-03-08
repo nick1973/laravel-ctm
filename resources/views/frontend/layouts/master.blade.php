@@ -160,26 +160,32 @@
                         <div class="col-md-12 col-ld-12">
                             {{--<h1>Welcome to {{ access()->user()->name }}'s profile.</h1>--}}
                             {{--<p>You can view {{ access()->user()->name }}'s profile below.</p>--}}
-                            <h2>Resource Dashboard</h2>
-                            <!-- Single button -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Recruitment <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/dashboard/staff-report">Reports</a></li>
-                                    <li><a href="/dashboard/register/dropdowns">Dropdowns</a></li>
-                                </ul>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Applications <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/dashboard/manager">New</a></li>
-                                    <li><a href="/dashboard/exports">Export</a></li>
-                                </ul>
-                            </div>
+                            @if(access()->hasRole('Executive'))
+                                <h2>Resource Dashboard</h2>
+                            @else
+                                <h2>Karls Dashboard</h2>
+                            @endif
+                            @if(access()->hasRole('Executive'))
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Recruitment <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/dashboard/staff-report">Reports</a></li>
+                                        <li><a href="/dashboard/register/dropdowns">Dropdowns</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Applications <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/dashboard/manager">New</a></li>
+                                        <li><a href="/dashboard/exports">Export</a></li>
+                                    </ul>
+                                </div>
+                            @endif
                             @if(access()->hasRole('Executive') || access()->hasRole('drivers'))
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -197,14 +203,16 @@
                                 </ul>
                             </div>
                             @endif
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Events <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/dashboard/events">Event List</a></li>
-                                </ul>
-                            </div>
+                            @if(access()->hasRole('Executive'))
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Events <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/dashboard/events">Event List</a></li>
+                                    </ul>
+                                </div>
+                            @endif
                             {{--<a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>--}}
                             {{--<a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>--}}
                             {{--<a href="/dashboard/manager/staff/search" class="btn btn-primary">Booking Search</a>--}}
