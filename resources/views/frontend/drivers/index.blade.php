@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <a href="/dashboard/drivers" class="btn btn-success active">Driver Documents</a>
-    <a href="/dashboard/drivers/staff/all" class="btn btn-primary">All Staff</a>
+    {{--<a href="/dashboard/drivers" class="btn btn-success active">Driver Documents</a>--}}
+    {{--<a href="/dashboard/drivers/staff/all" class="btn btn-primary">All Staff</a>--}}
 <h2>Driver Documents</h2>
     <div class="row">
 
