@@ -271,7 +271,12 @@
                         { "data": "email" , className: "centre get", "visible": false },
                         { "data": "payroll" , className: "centre get" //, "visible": false
                         },
-                        { "data": "name" , className: "centre get" },
+                        {
+                            "data": function (data) {
+                                return '<a href="/dashboard/manager/'+data.id+'">'+data.name+'</a>'
+                            }, className: "centre get"
+                        },
+//                        { "data": "name" , className: "centre get" },
                         { "data": "lastname" , className: "centre get" },
                         { "data": "mobile" , className: "centre get" },
                         { "data": "email" , className: "centre get" },

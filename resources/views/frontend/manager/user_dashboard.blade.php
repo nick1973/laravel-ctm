@@ -45,13 +45,13 @@
                                     </span>
                                 </a>
                             </li>
-                            {{--<li role="presentation">--}}
-                                {{--<a href="#money" aria-controls="money" role="tab" data-toggle="tab">The Money Bit--}}
-                                    {{--<span id="account_tick">--}}
-                                        {{--<img src="/img/green-tick.png" height="18px">--}}
-                                    {{--</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
+                            <li role="presentation">
+                                <a href="#money" aria-controls="money" role="tab" data-toggle="tab">Finance
+                                    <span id="account_tick">
+                                        <img src="/img/green-tick.png" height="18px">
+                                    </span>
+                                </a>
+                            </li>
                             <li role="presentation">
                                 <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Documents
                                     <span id="documents_tick">
@@ -69,7 +69,7 @@
                             @include('frontend.manager.includes.address')
                             @include('frontend.manager.includes.reference')
                             @include('frontend.manager.includes.righttowork')
-                            {{--@include('frontend.manager.includes.money')--}}
+                            @include('frontend.manager.includes.money')
                             @include('frontend.manager.includes.documents')
                             @include('frontend.manager.includes.confirm_profile')
 

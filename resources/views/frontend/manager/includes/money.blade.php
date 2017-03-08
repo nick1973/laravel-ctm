@@ -12,15 +12,30 @@
         </tr>
         <tr>
             <th>Account Number</th>
-            <td class="account">{{ $user->account_sort_code }}</td>
+            @if($user->account_number!='')
+                <?php $account_number = Crypt::decrypt($user->account_number); $ac = substr($account_number,4,4); ?>
+                <td class="account">****{{ $ac }}</td>
+            @else
+                <td class="account"></td>
+            @endif
         </tr>
         <tr>
             <th>Sort Code</th>
-            <td class="account">{{ $user->account_number }}</td>
+            @if($user->account_sort_code!='')
+                <?php $account_sort_code = Crypt::decrypt($user->account_sort_code); $sc = substr($account_sort_code,1,2); ?>
+                <td class="account">{{ $account_sort_code }}</td>
+            @else
+                <td class="account"></td>
+            @endif
         </tr>
         <tr>
             <th>National Insurance Number</th>
-            <td class="account">{{ $user->ni_number }}</td>
+            @if($user->ni_number!='')
+                <?php $ac = substr($user->ni_number,4,4); ?>
+                <td class="account">{{ $user->ni_number }}</td>
+            @else
+                <td class="account"></td>
+            @endif
         </tr>
     </table>
 
@@ -59,7 +74,7 @@
 
     $( "td.account:empty" )
             .text( "Information Required!" )
-            //.css( "background", "rgb(238,94,72)"
+        //.css( "background", "rgb(238,94,72)"
             .addClass('bg-danger');
 
     $("td.account.bg-danger").each(function(){
