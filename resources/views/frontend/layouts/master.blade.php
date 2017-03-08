@@ -163,7 +163,7 @@
                             @if(access()->hasRole('Executive'))
                                 <h2>Resource Dashboard</h2>
                             @else
-                                <h2>Karls Dashboard</h2>
+                                <h2>Karl's Dashboard</h2>
                             @endif
                             @if(access()->hasRole('Executive'))
                                 <!-- Single button -->
