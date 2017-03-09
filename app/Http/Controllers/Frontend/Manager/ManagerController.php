@@ -118,8 +118,8 @@ class ManagerController extends Controller
         foreach ($staff as $payroll)
         {
 
-            $day = substr($payroll->dob,5,2);
-            $month = substr($payroll->dob,8,2);
+            $month = substr($payroll->dob,5,2);
+            $day = substr($payroll->dob,8,2);
             $year = substr($payroll->dob,0,4);
             $dt = Carbon::now();
             $dt->year = $year;
