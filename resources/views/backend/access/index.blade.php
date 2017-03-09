@@ -99,7 +99,7 @@
                     {data: 'actions', name: 'actions'}
                 ],
                 order: [[0, "asc"]],
-                searchDelay: 500
+                //searchDelay: 500
             });
         });
     </script>
