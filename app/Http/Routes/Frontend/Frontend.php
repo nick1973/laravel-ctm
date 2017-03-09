@@ -398,7 +398,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
-            $staff= \App\Models\Access\User\User::where('payroll', 51396)->get();
+            $staff= \App\Models\Access\User\User::where('payroll', 50044)->get();
             //$staff= \App\Models\Access\User\User::where('app_status',1)->count();
 //            $staff->update(['dob'=>'1988-04-29']);
             return $staff;
