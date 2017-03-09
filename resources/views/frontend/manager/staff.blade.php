@@ -78,7 +78,7 @@
                 },
                 "ajax": "/dashboard/manager/staff/search/all",
                 //dom: '<"top"Blf>rTi<"bottom"p><"clear">',
-                dom: 'Bfrtip',
+                dom: 'Bfrti',
                 buttons: [
                     'csv',
                     {
