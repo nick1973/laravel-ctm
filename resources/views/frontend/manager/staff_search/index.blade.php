@@ -281,7 +281,7 @@
                     buttons: [
                         //'csv',
                         {
-                            text: 'Select All',
+                            text: 'Toggle Selected',
                             action: function ( e, dt, node, config ) {
                                 deselect(dTable)
                             }
@@ -392,9 +392,16 @@
         function deselect(table) {
             var dataTable = $('#'+table).dataTable()
             $(".user:input", dataTable.fnGetNodes()).each(function(){
-                $(this).attr('checked',true)
+                $(this).prop("checked", !$(this).prop("checked"));
             })
         }
+
+//        function selectall(table) {
+//            var dataTable = $('#'+table).dataTable()
+//            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+//                $(this).attr('checked',false)
+//            })
+//        }
 
         function send_user(message, table){
             var selected = [];

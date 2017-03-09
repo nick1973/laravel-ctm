@@ -244,7 +244,7 @@
                     buttons: [
                         'csv',
                         {
-                            text: 'Select All',
+                            text: 'Toggle Selected',
                             action: function ( e, dt, node, config ) {
                                 selectApproved(dTable)
                             }
@@ -338,7 +338,7 @@
         function selectApproved(table) {
             var dataTable = $('#'+table).dataTable()
             $(".user:input", dataTable.fnGetNodes()).each(function(){
-                $(this).attr('checked',true)
+                $(this).prop("checked", !$(this).prop("checked"));
             })
         }
 
