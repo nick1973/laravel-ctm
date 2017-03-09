@@ -56,11 +56,11 @@ class EloquentUserRepository implements UserRepositoryContract
          */
         if ($trashed == "true") {
             return User::onlyTrashed()
-                ->select(['id', 'name', 'email', 'status', 'confirmed', 'created_at', 'updated_at', 'deleted_at'])
+                ->select(['id', 'payroll', 'name', 'email', 'status', 'confirmed', 'created_at', 'updated_at', 'deleted_at'])
                 ->get();
         }
 
-        return User::select(['id', 'name', 'lastname', 'email', 'status', 'confirmed', 'markAsp45', 'created_at', 'updated_at', 'deleted_at'])
+        return User::select(['id', 'payroll', 'name', 'lastname', 'email', 'status', 'confirmed', 'markAsp45', 'created_at', 'updated_at', 'deleted_at'])
             ->where('status', $status)
             ->get();
     }

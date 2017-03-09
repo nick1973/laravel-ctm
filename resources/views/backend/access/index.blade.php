@@ -29,6 +29,7 @@
                     <thead>
                         <tr>
                             <th>{{ trans('labels.backend.access.users.table.id') }}</th>
+                            <th>Payroll</th>
                             <th>{{ trans('labels.backend.access.users.table.name') }}</th>
                             <th>Surname</th>
                             <th>{{ trans('labels.backend.access.users.table.email') }}</th>
@@ -74,7 +75,7 @@
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    //{data: 'name', name: 'name'},
+                    {data: 'payroll', name: 'payroll'},
                     {"data": function (data) {
                         if(data.id > 100){
                             return "<a href='/dashboard/manager/" + data.id + "'>" + data.name + "</a>"
