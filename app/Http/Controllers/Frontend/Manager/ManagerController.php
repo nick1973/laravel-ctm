@@ -141,11 +141,11 @@ class ManagerController extends Controller
 
         $date_time = Carbon::now();
         if(!empty($result)){
-            Storage::put('payroll/' . $date_time . '.txt', $result[0]);
+            Storage::put('payroll/' . $date_time . '.txt', utf8_encode($result[0]));
         
             for ($i=1; $i<count($result);$i++)
             {
-                Storage::append('payroll/' . $date_time . '.txt', $result[$i]);
+                Storage::append('payroll/' . $date_time . '.txt', utf8_encode($result[$i]));
             }
             $path = base_path(). "/storage/app/docs/payroll/" . $date_time . ".txt";
         } else{
@@ -165,11 +165,11 @@ class ManagerController extends Controller
             flush();      // flush headers (if possible)
             readfile($path);
             
-            User::where([
-                ['profile_confirmed', '=', 'Yes'],
-                ['confirmed', '=', 1],
-                ['payroll_export', '=', 1]
-            ])->update(['payroll_export' => 0]);
+//            User::where([
+//                ['profile_confirmed', '=', 'Yes'],
+//                ['confirmed', '=', 1],
+//                ['payroll_export', '=', 1]
+//            ])->update(['payroll_export' => 0]);
             
             
             exit;
