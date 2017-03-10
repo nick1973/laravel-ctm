@@ -170,11 +170,11 @@ class ManagerController extends Controller
             flush();      // flush headers (if possible)
             readfile($path);
             
-//            User::where([
-//                ['profile_confirmed', '=', 'Yes'],
-//                ['confirmed', '=', 1],
-//                ['payroll_export', '=', 1]
-//            ])->update(['payroll_export' => 0]);
+            User::where([
+                ['profile_confirmed', '=', 'Yes'],
+                ['confirmed', '=', 1],
+                ['payroll_export', '=', 1]
+            ])->update(['payroll_export' => 0]);
             
             
             exit;
