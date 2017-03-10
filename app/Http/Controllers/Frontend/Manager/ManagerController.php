@@ -125,6 +125,9 @@ class ManagerController extends Controller
             $dt->year = $year;
             $dt->month = $month;
             $dt->day = $day;
+            if (strpos(Crypt::decrypt($payroll->account_sort_code), '-') !== false) {
+                $sortcode = str_replace('-', '', Crypt::decrypt($payroll->account_sort_code));
+            }
             $result[] = '"'.$payroll->payroll.'",' . '"'.$payroll->title.'",' . '"'.$payroll->name.'",' .
                 '"'.$payroll->lastname.'",' . '"'.$dt->format('d/m/Y').'",' . '"'.$payroll->gender.'",' . '"'.$payroll->email.'",' .
                 '"'.$payroll->postcode.'",' . '"'.$payroll->address_line_1 . ' ' . $payroll->address_line_2 .'",' .
@@ -132,7 +135,7 @@ class ManagerController extends Controller
                 '"'.$payroll->country.'",' . '"'.$payroll->address_line_5.'",' . '"'.$payroll->land.'",' .
                 '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
                 '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
-                '"'.$payroll->account_name.'",' . '"'.Crypt::decrypt($payroll->account_number).'",' . '"'.Crypt::decrypt($payroll->account_sort_code).'",' .
+                '"'.$payroll->account_name.'",' . '"'.$sortcode.'",' . '"'.Crypt::decrypt($payroll->account_sort_code).'",' .
                 '"'.$payroll->ni_number.'",' . '"BR"' . "\r";
         }
         //r/n
