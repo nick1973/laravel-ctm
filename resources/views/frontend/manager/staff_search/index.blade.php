@@ -657,7 +657,7 @@
 
 
         $('#contact').on('shown.bs.modal', function () {
-            //var locations = []
+            locations = []
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/postcode',
@@ -675,9 +675,13 @@
 
                 });
             });
-            console.log(locations)
-            initMap()
-            google.maps.event.trigger(map, "resize");
+            setTimeout(function(){
+                console.log(locations)
+                initMap()
+                google.maps.event.trigger(map, "resize");
+            }, 1000)
+
+
 
         });
 
