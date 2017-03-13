@@ -619,20 +619,11 @@
     </div>
 
     <script>
-//        function initialize() {
-//            var mapCanvas = document.getElementById('map');
-////            var mapOptions = {
-////                center: new google.maps.LatLng(52,4.3278149),
-////                zoom: 6
-////                //mapTypeId: google.maps.MapTypeId.ROADMAP
-////            }
-//            var map = new google.maps.Map(mapCanvas)
-//        }
         var locations = []
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 58.5, lng: -12.644},
+                center: {lat: 54.5, lng: -3.644},
                 zoom: 6
             });
             // Create an array of alphabetical characters used to label the markers.
@@ -654,8 +645,6 @@
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         }
 
-
-
         $('#contact').on('shown.bs.modal', function () {
             locations = []
             $.ajax({
@@ -663,11 +652,6 @@
                 url: '/dashboard/manager/postcode',
                 data: {postcodes: postcodes}
             }).done(function(data) {
-//                if(data.balance == []){
-//                    $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
-//                    console.log('balance '+data)
-//                }
-
                 $.each( data, function( index, value ){
 //                    {lat: 52.5516451, lng: -1.1961948000000575}
                    //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
