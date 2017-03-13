@@ -239,13 +239,11 @@ class ManagerController extends Controller
     }
 
     function postcode(Request $request){
-        $postcode = $request->input('postcode');
+        $postcode = $request->input('postcodes');
         //$string = str_replace(' ', '', $postcode);
-//        $lng_lat = DB::select("
-//                select latitude, longitude
-//                from open_postcode_geo
-//                where postcode_no_space in = ('".$string."')
-//                ");
-        return $string;
+        $lng_lat = DB::table('open_postcode_geo')->select('latitude', 'longitude')
+            ->whereIn('postcode_no_space', $postcode)
+            ->get();
+        return $lng_lat;
     }
 }

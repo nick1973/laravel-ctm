@@ -652,12 +652,8 @@
             var markerCluster = new MarkerClusterer(map, markers,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         }
-        var locations = [
-            {lat: 52.5516451, lng: -1.1961948000000575},
-            {lat: 52.5516477, lng: -1.1961948000000575},
-            {lat: 52.5516449, lng: -1.1961948000000575},
-        ]
 
+var locations = []
 
         $('#contact').on('shown.bs.modal', function () {
             $.ajax({
@@ -665,14 +661,25 @@
                 url: '/dashboard/manager/postcode',
                 data: {postcodes: postcodes}
             }).done(function(data) {
-                //$( this ).addClass( "done" );
-                console.log(data)
-                $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+//                if(data.balance == []){
+//                    $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+//                    console.log('balance '+data)
+//                }
+                //var locations = []
+                $.each( data, function( index, value ){
+//                    {lat: 52.5516451, lng: -1.1961948000000575}
+                   //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
+                        locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
+
+                });
             });
-            console.log(postcodes)
+            console.log(locations)
+            initMap()
             google.maps.event.trigger(map, "resize");
+
         });
+
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs&callback=initMap"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs"></script>
 @endsection
