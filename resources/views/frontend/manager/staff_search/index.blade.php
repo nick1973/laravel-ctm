@@ -76,6 +76,7 @@
                             <input name="app_status" value="3" hidden>
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form, 'events')" value="Apply Filter">
                             <img style="display: none" class="loaderImage" src="/ajax-loader.gif">
+                            <a class="openmodal btn btn-warning" href="#contact"  data-toggle="modal" data-id="">View Map</a>
                         </div>
                     </form>
 
@@ -92,9 +93,11 @@
                                 <th>NRSWA</th>
                                 <th>Driver</th>
                                 <th>Chosen Event</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -173,6 +176,7 @@
                             <input name="app_status" value="0" hidden>
                             <input class="form-control btn-primary" type="button" onclick="return submitForm(this.form, 'non_approved')" value="Apply Filter">
                             <img style="display: none" class="loaderImage" src="/ajax-loader.gif">
+                            <a class="openmodal btn btn-warning" href="#contact"  data-toggle="modal" data-id="">View Map</a>
                         </div>
                     </form>
 
@@ -189,9 +193,11 @@
                                 <th>NRSWA</th>
                                 <th>Driver</th>
                                 <th>Chosen Event</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -210,8 +216,7 @@
     </div>
 
     <script>
-
-
+        var postcodes = []
         $("#radius").change(function () {
             if($(this).find(":selected").text()=='50+'){
                 $('#postcode').val('')
@@ -245,6 +250,7 @@
         });
 
         function submitForm(form, dTable){
+            postcodes = []
             var table = $('#'+dTable).DataTable();
             if (table instanceof $.fn.dataTable.Api) {
                 table.destroy();
@@ -263,8 +269,15 @@
             //console.log(formData[0]['value'])
             $('.loaderImage').show();
             $.post(url, formData).done(function (results) {
+                var sum = []
                 $('.loaderImage').hide();
-                console.log(results.data);
+                $.each( results.data, function( index, value ){
+                    if(value['postcode'] != ''){
+                        var str = value['postcode'].replace(/\s/g,'');
+                        postcodes.push(str)
+                    }
+                });
+//                console.log( postcodes );
                 setTimeout(self.timeoutHandler, 750);
 
                 var table = $('#'+dTable).DataTable( {
@@ -376,7 +389,16 @@
                                 }
                                 return ''
                             }, className: "centre get"
-                        }
+                        },
+                        {
+                            "data": function (data) {
+                                //if(data.postcode != ''){
+//                                    postcodes.push(data.postcode)
+                                //}
+                                return data.postcode
+                            }, className: "centre get", "visible": true
+                        },
+                        //{ "data": "postcode" , className: "centre get", "visible": true }
                     ]
                 });
                 //table.destroy();
@@ -396,12 +418,12 @@
             })
         }
 
-//        function selectall(table) {
-//            var dataTable = $('#'+table).dataTable()
-//            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-//                $(this).attr('checked',false)
-//            })
-//        }
+        //        function selectall(table) {
+        //            var dataTable = $('#'+table).dataTable()
+        //            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+        //                $(this).attr('checked',false)
+        //            })
+        //        }
 
         function send_user(message, table){
             var selected = [];
@@ -456,7 +478,7 @@
             }
 
             // Get the HTML contents of the currently active editor
-            console.debug(tinyMCE.activeEditor.getContent());
+            //console.debug(tinyMCE.activeEditor.getContent());
             //method1 getting the content of the active editor
             $.ajax({
                 type: "POST",
@@ -466,7 +488,7 @@
                 }
             }).done(function(data) {
                 //$( this ).addClass( "done" );
-                console.log(data)
+                //console.log(data)
                 $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
             });
             //location.reload();
@@ -478,7 +500,7 @@
         function content() {
 
             // Get the HTML contents of the currently active editor
-            console.debug(tinyMCE.activeEditor.getContent());
+            //console.debug(tinyMCE.activeEditor.getContent());
             //method1 getting the content of the active editor
             $.ajax({
                 type: "POST",
@@ -572,4 +594,85 @@
             </div>
         </div>
     </div>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+
+    <div class="modal fade" id="contact" role="dialog" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="back" >
+                <div class="modal-header">
+                    <h4>Contact<h4>
+                </div>
+                <div class="modal-body">
+                    <div id="map"></div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+//        function initialize() {
+//            var mapCanvas = document.getElementById('map');
+////            var mapOptions = {
+////                center: new google.maps.LatLng(52,4.3278149),
+////                zoom: 6
+////                //mapTypeId: google.maps.MapTypeId.ROADMAP
+////            }
+//            var map = new google.maps.Map(mapCanvas)
+//        }
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 58.5, lng: -12.644},
+                zoom: 6
+            });
+            // Create an array of alphabetical characters used to label the markers.
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            // Add some markers to the map.
+            // Note: The code uses the JavaScript Array.prototype.map() method to
+            // create an array of markers based on a given "locations" array.
+            // The map() method here has nothing to do with the Google Maps API.
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+            });
+
+            // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers,
+                    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }
+        var locations = [
+            {lat: 52.5516451, lng: -1.1961948000000575},
+            {lat: 52.5516477, lng: -1.1961948000000575},
+            {lat: 52.5516449, lng: -1.1961948000000575},
+        ]
+
+
+        $('#contact').on('shown.bs.modal', function () {
+            $.ajax({
+                type: "POST",
+                url: '/dashboard/manager/postcode',
+                data: {postcodes: postcodes}
+            }).done(function(data) {
+                //$( this ).addClass( "done" );
+                console.log(data)
+                $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+            });
+            console.log(postcodes)
+            google.maps.event.trigger(map, "resize");
+        });
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs&callback=initMap"></script>
 @endsection
