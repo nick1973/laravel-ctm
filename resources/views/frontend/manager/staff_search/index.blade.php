@@ -665,7 +665,7 @@ var locations = []
 //                    $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
 //                    console.log('balance '+data)
 //                }
-                //var locations = []
+                var locations = []
                 $.each( data, function( index, value ){
 //                    {lat: 52.5516451, lng: -1.1961948000000575}
                    //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
