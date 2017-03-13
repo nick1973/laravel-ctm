@@ -628,6 +628,7 @@
 ////            }
 //            var map = new google.maps.Map(mapCanvas)
 //        }
+        var locations = []
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -653,10 +654,10 @@
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         }
 
-var locations = []
+
 
         $('#contact').on('shown.bs.modal', function () {
-            var locations = []
+            //var locations = []
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/postcode',
