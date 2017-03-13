@@ -451,6 +451,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
         Route::post('dashboard/manager/text', 'ManagerController@text')->name('dashboard.manager.text');
+        Route::post('dashboard/manager/postcode', 'ManagerController@postcode')->name('dashboard.manager.postcode');
 
     });
 });

@@ -237,4 +237,15 @@ class ManagerController extends Controller
                         'app_status'=>$app_status]);
         //return $request->all();
     }
+
+    function postcode(Request $request){
+        $postcode = $request->input('postcode');
+        //$string = str_replace(' ', '', $postcode);
+//        $lng_lat = DB::select("
+//                select latitude, longitude
+//                from open_postcode_geo
+//                where postcode_no_space in = ('".$string."')
+//                ");
+        return $string;
+    }
 }
