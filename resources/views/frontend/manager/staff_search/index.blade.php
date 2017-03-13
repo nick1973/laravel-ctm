@@ -396,7 +396,7 @@
 //                                    postcodes.push(data.postcode)
                                 //}
                                 return data.postcode
-                            }, className: "centre get", "visible": true
+                            }, className: "centre get", "visible": false
                         },
                         //{ "data": "postcode" , className: "centre get", "visible": true }
                     ]
