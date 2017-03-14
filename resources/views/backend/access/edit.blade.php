@@ -38,6 +38,22 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
+                <div class="form-group">
+                    {{ Form::label('ni_number','NI Number', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::text('ni_number', null, ['class' => 'form-control', 'placeholder' => 'NI Number']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('dob','DOB', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-2">
+                        {{ Form::date('dob', null, ['class' => 'form-control', 'placeholder' => 'DOB']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
                 @if ($user->id != 1)
                     <div class="form-group">
                         {{ Form::label('markAsp45', 'P45', ['class' => 'col-lg-2 control-label']) }}
