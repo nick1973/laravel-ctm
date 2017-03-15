@@ -343,6 +343,7 @@ class ProfileController extends Controller
      */
     public function updates(UserRepositoryContract $user, UpdateProfileRequest $request)
     {
+        $staff = User::find(access()->id());
         $dob = $request->input('dob');
         $dob = (string)$dob;
         $input = $request->all();
@@ -372,9 +373,16 @@ class ProfileController extends Controller
             $day = substr($dob, 0, 2);
             $month = substr($dob, 3, 2);
             $new_input = array_add($input, 'dob', $year . '-' . $month . '-' . $day);
-            //dd($new_input);
+            if($staff->email !== $request->input('email')){
+                $user->updateProfile(access()->id(), $new_input);
+                return redirect()->route('frontend.user.dashboard')->withFlashDanger('Your email/username has been changed to '. $request->input('email'). ' used this username/email to login in future!');
+            }
             $user->updateProfile(access()->id(), $new_input);
             return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+        }
+        if($staff->email !== $request->input('email')){
+            $user->updateProfile(access()->id(), $request->all());
+            return redirect()->route('frontend.user.dashboard')->withFlashDanger('Your Email has');
         }
         //dd($request->all());
         $user->updateProfile(access()->id(), $request->all());

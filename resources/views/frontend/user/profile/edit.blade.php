@@ -92,7 +92,7 @@
 
                     @if ($user->canChangeEmail())
                         <div class="form-group">
-                            {{ Form::label('email', trans('validation.attributes.frontend.email'), ['class' => 'col-md-4 control-label']) }}
+                            {{ Form::label('email', 'E-mail Address (this is used as your login username)', ['class' => 'col-md-4 control-label']) }}
                             <div class="col-md-6">
                                 {{ Form::input('email', 'email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.frontend.email')]) }}
                             </div>
@@ -242,6 +242,10 @@
 
     </div><!-- row -->
     <script>
+//        $("#email").on("input", function() {
+//            alert("Change to " + this.value);
+//        });
+
         $("#other_lang").change(function () {
             var val = $(this).val();
             if(val === "Yes") {
