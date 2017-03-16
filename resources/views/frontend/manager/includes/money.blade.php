@@ -1,11 +1,11 @@
 <div role="tabpanel" class="tab-pane" id="money">
     <table class="table table-striped table-hover table-bordered dashboard-table">
-        <tr>
-            <th>{{ trans('labels.general.actions') }}</th>
-            <td>
-                {{ link_to_route('frontend.user.profile.edit_money', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}
-            </td>
-        </tr>
+        {{--<tr>--}}
+            {{--<th>{{ trans('labels.general.actions') }}</th>--}}
+            {{--<td>--}}
+                {{--{{ link_to_route('frontend.user.profile.edit_money', trans('labels.frontend.user.profile.edit_information'), [], ['class' => 'btn btn-primary btn-sm']) }}--}}
+            {{--</td>--}}
+        {{--</tr>--}}
         <tr>
             <th>Account Holder's Name</th>
             <td class="account">{{ $user->account_name }}</td>
