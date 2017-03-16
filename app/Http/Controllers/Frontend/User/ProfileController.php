@@ -314,7 +314,7 @@ class ProfileController extends Controller
     {
         //$input = $request->all();
         $validator = Validator::make($request->all(), [
-            //'account_number' => 'required|numeric',
+            'account_number' => 'required|numeric|digits:8',
             'account_sort_code' => 'required|numeric|digits:6',
             'ni_number' => 'required|max:9'
         ]);
