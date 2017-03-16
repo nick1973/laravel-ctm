@@ -294,9 +294,15 @@
                     buttons: [
                         'csv',
                         {
-                            text: 'Toggle Selected',
+                            text: 'Deselect All',
                             action: function ( e, dt, node, config ) {
                                 deselect(dTable)
+                            }
+                        },
+                        {
+                            text: 'Select All',
+                            action: function ( e, dt, node, config ) {
+                                select(dTable)
                             }
                         },
                         {
@@ -411,19 +417,28 @@
         var email_selected = [];
         var mobile_selected = [];
 
-        function deselect(table) {
+//        function deselect(table) {
+//            var dataTable = $('#'+table).dataTable()
+//            $(".user:input", dataTable.fnGetNodes()).each(function(){
+//                $(this).prop("checked", !$(this).prop("checked"));
+//            })
+//        }
+
+
+        function select(table) {
             var dataTable = $('#'+table).dataTable()
             $(".user:input", dataTable.fnGetNodes()).each(function(){
-                $(this).prop("checked", !$(this).prop("checked"));
+                console.log($(this))
+                $(this).prop('checked',true)
             })
         }
-
-        //        function selectall(table) {
-        //            var dataTable = $('#'+table).dataTable()
-        //            $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-        //                $(this).attr('checked',false)
-        //            })
-        //        }
+                function deselect(table) {
+                    var dataTable = $('#'+table).dataTable()
+                    $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
+                        console.log($(this))
+                        $(this).prop('checked',false)
+                    })
+                }
 
         function send_user(message, table){
             var selected = [];
