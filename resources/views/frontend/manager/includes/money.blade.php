@@ -15,7 +15,7 @@
             @if($user->account_number!='')
                 <?php $account_number = Crypt::decrypt($user->account_number); $ac = substr($account_number,4,4); ?>
                 {{--<td class="account">****{{ $ac }}</td>--}}
-                <td class="account">****{{ $account_number }}</td>
+                <td class="account">{{ $account_number }}</td>
             @else
                 <td class="account"></td>
             @endif
