@@ -398,7 +398,12 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
-            $staff= \App\Models\Access\User\User::where('payroll_export', 1)->get();
+            $staff = \App\Models\Access\User\User::where([
+                ['profile_confirmed', '=', 'Yes'],
+                ['confirmed', '=', 1],
+                ['payroll_export', '=', 1],
+                ['payroll', '!=', 0]
+            ])->get();
             //$staff= \App\Models\Access\User\User::where('app_status',1)->count();
 //            $staff->update(['dob'=>'1988-04-29']);
             return $staff;
@@ -449,7 +454,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
-        Route::get('dashboard/manager/staff/export', 'ManagerController@staff_export')->name('dashboard.manager.staff_export');
+        Route::get('dashboard/manager/staff/export', 'ManagerController@staff_exportstaff_export')->name('dashboard.manager.staff_export');
         Route::post('dashboard/manager/text', 'ManagerController@text')->name('dashboard.manager.text');
         Route::post('dashboard/manager/postcode', 'ManagerController@postcode')->name('dashboard.manager.postcode');
 
