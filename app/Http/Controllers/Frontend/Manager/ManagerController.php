@@ -76,9 +76,8 @@ class ManagerController extends Controller
                 $last_payroll_number = (int)$last_payroll->payroll + 1;
                 //return $last_payroll_number;
                 User::find($id)->update(['payroll'=>$last_payroll_number]);
-                User::find($id)->update(['markAsp45'=>'0']);
+                User::find($id)->update(['markAsp45'=>0]);
                 //$user->fill($input)->save();
-
             }
 
             //SEND A SUCCESS EMAIL
