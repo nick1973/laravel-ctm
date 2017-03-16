@@ -127,6 +127,8 @@ class ManagerController extends Controller
             $dt->day = $day;
             if (strpos(Crypt::decrypt($payroll->account_sort_code), '-') !== false) {
                 $sortcode = str_replace('-', '', Crypt::decrypt($payroll->account_sort_code));
+            } elseif (strpos(Crypt::decrypt($payroll->account_sort_code), ' ') !== false){
+                $sortcode = str_replace(' ', '', Crypt::decrypt($payroll->account_sort_code));
             } else{
                 $sortcode = Crypt::decrypt($payroll->account_sort_code);
             }
