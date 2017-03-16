@@ -51,7 +51,7 @@ class FrontendController extends Controller
 
         Mail::send('emails.welcome', ['input'=>$input], function ($m) use ($input, $email) {
             $m->from('admin@ctm.uk.com', 'CTM Application');
-            $m->to($email, 'nick')->subject('Your CTM Application!');
+            $m->bcc($email)->subject('Your CTM Application!');
         });
         //return redirect()->back()->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
         //return $email;
