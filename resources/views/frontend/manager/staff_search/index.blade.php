@@ -272,7 +272,7 @@
                 var sum = []
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
-                    if(value['postcode'] != '' || value['postcode_non_approved'] != ''){
+                    if(value['postcode'] != ''){
                         var str = value['postcode'].replace(/\s/g,'');
                         postcodes.push(str)
                     }
