@@ -292,7 +292,7 @@
                     data: results.data,
                     dom: 'Bflrtip',
                     buttons: [
-                        //'csv',
+                        'csv',
                         {
                             text: 'Toggle Selected',
                             action: function ( e, dt, node, config ) {
