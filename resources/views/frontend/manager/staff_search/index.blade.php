@@ -572,7 +572,7 @@
                             <p>Uniform: Black trousers, white shirt & sturdy black shoes</p>
                             <p>Transport: None provided (Please check that you can get there before calling to book shifts)</p>
                             <p>Camping:</p>
-                            <p>Please call 01676 549001 for further details and to bo0ok shifts</p>
+                            <p>Please call 01676 549001 for further details and to book shifts</p>
                             <p>Please note we do not book people through emails</p>
                             <p>Regards,</p>
                             <p>Emma & Abbie</p>
