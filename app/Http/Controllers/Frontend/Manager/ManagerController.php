@@ -242,10 +242,22 @@ class ManagerController extends Controller
 
     function postcode(Request $request){
         $postcode = $request->input('postcodes');
-        //$string = str_replace(' ', '', $postcode);
+        $event = $request->input('event');
+        $string = str_replace(' ', '', $event);
+
+//        $ev = DB::select("select lat, lng from open_postcode_geo where postcode = '$postcode'");
+        $ev = DB::table('open_postcode_geo')->select('latitude', 'longitude')
+            ->where('postcode_no_space', $string)
+            ->get();
+//        foreach ($ev as $results) {
+//            $lat = $results->lat;
+//            $lng = $results->lng;
+//            $event = array_add(['lat' => $lat, 'lng' => $lng]);
+//        }
+
         $lng_lat = DB::table('open_postcode_geo')->select('latitude', 'longitude')
             ->whereIn('postcode_no_space', $postcode)
             ->get();
-        return $lng_lat;
+        return ['data'=>$lng_lat, 'ev'=>$ev];
     }
 }

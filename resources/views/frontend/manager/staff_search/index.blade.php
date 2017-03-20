@@ -272,12 +272,12 @@
                 var sum = []
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
-                    if(value['postcode'] !== ''){
-                        var str = value['postcode'].replace(/\s/g,'');
-                        postcodes.push(str)
-                    }
+                    //if(value['postcode'] !== ''){
+                        //var str = value['postcode'].replace(/\s/g,'');
+                        postcodes.push(value['postcode'])
+                    //}
                 });
-//                console.log( postcodes );
+                console.log( postcodes );
                 setTimeout(self.timeoutHandler, 750);
 
                 var table = $('#'+dTable).DataTable( {
