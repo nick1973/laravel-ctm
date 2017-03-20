@@ -272,7 +272,7 @@
                 var sum = []
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
-                    if(value['postcode'] != ''){
+                    if(value['postcode'] !== ''){
                         var str = value['postcode'].replace(/\s/g,'');
                         postcodes.push(str)
                     }
@@ -635,6 +635,7 @@
 
     <script>
         var locations = []
+        var ev = []
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -643,7 +644,8 @@
             });
             // Create an array of alphabetical characters used to label the markers.
             var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
+            console.log(ev)
+            console.log(locations)
             // Add some markers to the map.
             // Note: The code uses the JavaScript Array.prototype.map() method to
             // create an array of markers based on a given "locations" array.
@@ -655,6 +657,14 @@
                 });
             });
 
+            var event_marker = ev.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: location,
+                    //label: "event",
+                    //title: "Hello world"
+                });
+            });
+
             // Add a marker clusterer to manage the markers.
             var markerCluster = new MarkerClusterer(map, markers,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
@@ -662,20 +672,25 @@
 
         $('#contact').on('shown.bs.modal', function () {
             locations = []
+            ev = []
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/postcode',
-                data: {postcodes: postcodes}
+                data: {postcodes: postcodes,
+                        event: $("#postcode").val()}
             }).done(function(data) {
-                $.each( data, function( index, value ){
+                //EVENT needs to go here
+                //console.log(data.ev)
+//                $.each( data.ev, function( index, value ){
+//                    ev.push({'lat': + value['latitude'], 'lng': + value['longitude']})
+//                });
+                $.each( data.data, function( index, value ){
 //                    {lat: 52.5516451, lng: -1.1961948000000575}
                    //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
-                        locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
-
+                    locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
                 });
             });
             setTimeout(function(){
-                console.log(locations)
                 initMap()
                 google.maps.event.trigger(map, "resize");
             }, 1000)
