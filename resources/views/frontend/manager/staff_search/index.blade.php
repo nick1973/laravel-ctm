@@ -272,7 +272,7 @@
                 var sum = []
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
-                    console.log( value['postcode'] )
+                    //console.log( value['postcode'] )
                     if(value['postcode'] == null){
                     } else {
                         if( value['postcode'] != ''){
@@ -649,8 +649,30 @@
             });
             // Create an array of alphabetical characters used to label the markers.
             var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            console.log(ev)
-            console.log(locations)
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var infoWin = new google.maps.InfoWindow();
+            var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                    'sandstone rock formation in the southern part of the '+
+                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
+                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+                    'Aboriginal people of the area. It has many springs, waterholes, '+
+                    'rock caves and ancient paintings. Uluru is listed as a World '+
+                    'Heritage Site.</p>'+
+                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                    '(last visited June 22, 2009).</p>'+
+                    '</div>'+
+                    '</div>';
+            //console.log(ev)
+            //console.log(locations)
             // Add some markers to the map.
             // Note: The code uses the JavaScript Array.prototype.map() method to
             // create an array of markers based on a given "locations" array.
@@ -663,16 +685,37 @@
             });
 
             var event_marker = ev.map(function(location, i) {
-                return new google.maps.Marker({
+                var marker = new google.maps.Marker({
                     position: location,
-                    //label: "event",
-                    //title: "Hello world"
+                    icon: image
                 });
+                google.maps.event.addListener(marker, 'click', function(evt) {
+                    //infoWin.setContent(location.info);
+                    infoWin.setContent($("#event_name").val());
+                    infoWin.open(map, marker);
+                })
+                infoWin.setContent($("#event_name").val());
+                infoWin.open(map, marker);
+                return marker;
             });
+
+
+
+//            var event_marker = ev.map(function(location, i) {
+//                return new google.maps.Marker({
+//                    position: location,
+//                    icon: image,
+//                    title: 'test'
+//                });
+//            });
 
             // Add a marker clusterer to manage the markers.
             var markerCluster = new MarkerClusterer(map, markers,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            var event_markerCluster = new MarkerClusterer(map, event_marker,
+                    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+
         }
 
         $('#contact').on('shown.bs.modal', function () {
@@ -686,9 +729,9 @@
             }).done(function(data) {
                 //EVENT needs to go here
                 //console.log(data.ev)
-//                $.each( data.ev, function( index, value ){
-//                    ev.push({'lat': + value['latitude'], 'lng': + value['longitude']})
-//                });
+                $.each( data.ev, function( index, value ){
+                    ev.push({'lat': + value['latitude'], 'lng': + value['longitude']})
+                });
                 $.each( data.data, function( index, value ){
 //                    {lat: 52.5516451, lng: -1.1961948000000575}
                    //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
