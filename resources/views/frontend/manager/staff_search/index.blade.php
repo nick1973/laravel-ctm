@@ -273,10 +273,14 @@
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
                     console.log( value['postcode'] )
-                    if(value['postcode'] != '' || value['postcode'] != null){
-                        var str = value['postcode'].replace(/\s/g,'');
-                        postcodes.push(str)
+                    if(value['postcode'] == null){
+                    } else {
+                        if( value['postcode'] != ''){
+                            var str = value['postcode'].replace(/\s/g,'');
+                            postcodes.push(str)
+                        }
                     }
+
                 });
 //                console.log( postcodes );
                 setTimeout(self.timeoutHandler, 750);
