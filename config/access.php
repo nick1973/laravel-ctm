@@ -88,12 +88,12 @@ return [
         /*
          * Whether the registration captcha is on or off
          */
-        'registration' => env('REGISTRATION_CAPTCHA_STATUS', true),
+        'registration' => env('REGISTRATION_CAPTCHA_STATUS', false),
 
         /*
          * Whether the login captcha is on or off
          */
-        'login' => env('LOGIN_CAPTCHA_STATUS', true),
+        'login' => env('LOGIN_CAPTCHA_STATUS', false),
 
         /*
          * Number of login tries made before showing login captcha
