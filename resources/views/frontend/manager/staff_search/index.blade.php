@@ -89,6 +89,7 @@
                                 <th>Title</th>
                                 <th>Name</th>
                                 <th>Surname</th>
+                                <th>Postcode</th>
                                 <th>Age</th>
                                 <th>NRSWA</th>
                                 <th>Driver</th>
@@ -97,6 +98,7 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -189,6 +191,7 @@
                                 <th>Title</th>
                                 <th>Name</th>
                                 <th>Surname</th>
+                                <th>Postcode</th>
                                 <th>Age</th>
                                 <th>NRSWA</th>
                                 <th>Driver</th>
@@ -197,6 +200,7 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -216,6 +220,7 @@
     </div>
 
     <script>
+        var staff = []
         var postcodes = []
         $("#radius").change(function () {
             if($(this).find(":selected").text()=='50+'){
@@ -264,15 +269,14 @@
                 var formData = $('#filers').serializeArray();
                 var url = '/dashboard/manager/staff-search/non_approved'
             }
-
-            //console.log(formData[1]['value'])
             //console.log(formData[0]['value'])
             $('.loaderImage').show();
             $.post(url, formData).done(function (results) {
                 var sum = []
+
                 $('.loaderImage').hide();
                 $.each( results.data, function( index, value ){
-                    //console.log( value['postcode'] )
+                    staff.push(value)
                     if(value['postcode'] == null){
                     } else {
                         if( value['postcode'] != ''){
@@ -280,8 +284,8 @@
                             postcodes.push(str)
                         }
                     }
-
                 });
+                //console.log( staff )
 //                console.log( postcodes );
                 setTimeout(self.timeoutHandler, 750);
 
@@ -338,6 +342,7 @@
                         },
 //                        { "data": "name" , className: "centre get" },
                         { "data": "lastname" , className: "centre get" },
+                        { "data": "postcode" , className: "centre get" },
                         {
                             "data": function (data) {
                                 //if (data.dob.indexOf("-") > 1){
@@ -475,7 +480,7 @@
                 //console.log(mobile_selected)
                 $("#free_input input").remove()
                 $("#free_input label").remove()
-                $("#free_input").append('<label>Mobile (07777777777,07555555555)</label><input id="mobile_numbers" class="form-control" name="mobile_numbers">')
+                $("#free_input").append('<label>Mobile (07777777777,07555555555)</label><input onpaste="pasted();" id="mobile_numbers" class="form-control" name="mobile_numbers">')
             } else {
                 $("#free_input label").remove()
                 $("#free_input input").remove()
@@ -545,8 +550,74 @@
 
         tinymce.init({
             selector: '#textcomments',
-            height : "480"
+            height : "480",
+            plugins: "charactercount",
+            //wordcount_cleanregex: /[0-9.(),;:!?%#$?\x27\x22_+=\\\/\-]*/g
+            setup: function (editor) {
+                editor.on('change', function(e) {
+                    var count = this.plugins["charactercount"].getCount();
+                    if (count > 5000)
+                        $('#invalidContentHtml').show();
+                    else
+                        $('#invalidContentHtml').hide();
+                });
+            },
+            init_instance_callback: function (editor) {
+                $('.mce-tinymce').show('fast');
+                $(editor.getContainer()).find(".mce-path").css("display", "none");
+            }
         });
+
+
+        tinymce.PluginManager.add('charactercount', function (editor) {
+            var self = this;
+
+            function update() {
+                editor.theme.panel.find('#charactercount').text(['Characters: {0}', self.getCount()]);
+            }
+
+            editor.on('init', function () {
+                var statusbar = editor.theme.panel && editor.theme.panel.find('#statusbar')[0];
+
+                if (statusbar) {
+                    window.setTimeout(function () {
+                        statusbar.insert({
+                            type: 'label',
+                            name: 'charactercount',
+                            text: ['Characters: {0}', self.getCount()],
+                            classes: 'charactercount',
+                            disabled: editor.settings.readonly
+                        }, 0);
+
+                        editor.on('setcontent beforeaddundo', update);
+
+                        editor.on('keyup', function (e) {
+                            update();
+                        });
+                    }, 0);
+                }
+            });
+
+            self.getCount = function () {
+                var tx = editor.getContent({ format: 'raw' });
+                var decoded = decodeHtml(tx);
+                var decodedStripped = decoded.replace(/(<([^>]+)>)/ig, "").trim();
+                var tc = decodedStripped.length;
+                return tc;
+            };
+
+            function decodeHtml(html) {
+                var txt = document.createElement("textarea");
+                txt.innerHTML = html;
+                return txt.value;
+            }
+        });
+
+        function pasted() {
+            if($("#mobile_numbers").val()!=''){
+                $("#mobile_numbers").val($("#mobile_numbers").val() + ',')
+            }
+        }
     </script>
     <style>
         .centre {
@@ -651,37 +722,48 @@
             var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
             var infoWin = new google.maps.InfoWindow();
-            var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-                    '<div id="bodyContent">'+
-                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                    'sandstone rock formation in the southern part of the '+
-                    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                    'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                    'Aboriginal people of the area. It has many springs, waterholes, '+
-                    'rock caves and ancient paintings. Uluru is listed as a World '+
-                    'Heritage Site.</p>'+
-                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                    '(last visited June 22, 2009).</p>'+
-                    '</div>'+
-                    '</div>';
             //console.log(ev)
             //console.log(locations)
             // Add some markers to the map.
             // Note: The code uses the JavaScript Array.prototype.map() method to
             // create an array of markers based on a given "locations" array.
             // The map() method here has nothing to do with the Google Maps API.
+//            $.each( data.data, function( index, value ){
+//                locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
+//            });
+
+//            var markers = locations.map(function(location, i) {
+//                return new google.maps.Marker({
+//                    position: location
+//                });
+//            });
+
             var markers = locations.map(function(location, i) {
-                return new google.maps.Marker({
+                //var user = ''
+
+                var marker = new google.maps.Marker({
                     position: location,
-                    //label: labels[i % labels.length]
                 });
+                google.maps.event.addListener(marker, 'click', function(evt) {
+                    $.each( staff, function( index, value ){
+                        var pc = value['postcode'].replace(/\s/g,'');
+                        var name = value['name']
+
+                        //console.log(postcodes)
+                        for(var i=0; i < postcodes.length; i++){
+                            if(name == pc){
+                            }
+                            console.log(postcodes[i])
+                                infoWin.setContent(name);
+                                infoWin.open(map, marker);
+                        }
+                    });
+
+                    //console.log(user)
+                })
+                //infoWin.setContent(user);
+                //infoWin.open(map, marker);
+                return marker;
             });
 
             var event_marker = ev.map(function(location, i) {
@@ -699,23 +781,11 @@
                 return marker;
             });
 
-
-
-//            var event_marker = ev.map(function(location, i) {
-//                return new google.maps.Marker({
-//                    position: location,
-//                    icon: image,
-//                    title: 'test'
-//                });
-//            });
-
             // Add a marker clusterer to manage the markers.
             var markerCluster = new MarkerClusterer(map, markers,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
             var event_markerCluster = new MarkerClusterer(map, event_marker,
                     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-
         }
 
         $('#contact').on('shown.bs.modal', function () {
@@ -733,8 +803,6 @@
                     ev.push({'lat': + value['latitude'], 'lng': + value['longitude']})
                 });
                 $.each( data.data, function( index, value ){
-//                    {lat: 52.5516451, lng: -1.1961948000000575}
-                   //console.log('lat: ' + value['latitude'] + ',' + 'lng: ' + value['longitude'])
                     locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
                 });
             });
