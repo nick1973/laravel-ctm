@@ -71,7 +71,8 @@ class FrontendController extends Controller
         ini_set('max_execution_time', 10000);
         ini_set('request_terminate_timeout ', 10000);
         ini_set('memory_limit','2048M');
-        $staff = User::all();
+        $staff = User::where('promotion','!=','')->get();
+
         $staff->update(['promotion'=>'']);
 //        $foo = User::where('id', 34416)->get();
 //        return $foo;
