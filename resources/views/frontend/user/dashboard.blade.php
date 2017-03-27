@@ -66,12 +66,12 @@
                             </li>
                             <li role="presentation">
                                 <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Upload Your Docs
-                                    <span id="gp1_tick">
+                                    <span id="gp1_tick" style="display: none">
                                         <img src="/img/green-tick.png" height="18px">
                                     </span>
-                                    <span id="gp2_tick">
-                                        <img src="/img/green-tick.png" height="18px">
-                                    </span>
+                                    {{--<span id="gp2_tick">--}}
+                                        {{--<img src="/img/green-tick.png" height="18px">--}}
+                                    {{--</span>--}}
                                 </a>
                             </li>
                             <li role="presentation">
