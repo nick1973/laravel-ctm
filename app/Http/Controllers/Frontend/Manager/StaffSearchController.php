@@ -85,7 +85,11 @@ class StaffSearchController extends Controller
                 return ['data'=>$users->values()];
             }
 
-            $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
+            if((strpos($pc, " ") !== false)){
+                $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
+            } else{
+                $coords = DB::select("select easting, northing from open_postcode_geo where postcode_no_space = '$pc'");
+            }
 
             foreach ($coords as $results) {
                 $easting = $results->easting;
@@ -250,6 +254,7 @@ class StaffSearchController extends Controller
         $staff_event = $request->input('staff_event');
         $event_name = $request->input('event_name');
         $pc = trim($pc);
+        //return $pc;
         $radius = $request->input('radius');// in miles
         $nrswa = $request->input('nrswa');// in miles
         $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work
@@ -288,7 +293,12 @@ class StaffSearchController extends Controller
             return ['data'=>$users->values()];
         }
 
-        $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
+        if((strpos($pc, " ") !== false)){
+            $coords = DB::select("select easting, northing from open_postcode_geo where postcode = '$pc'");
+        } else{
+            $coords = DB::select("select easting, northing from open_postcode_geo where postcode_no_space = '$pc'");
+        }
+
 
         foreach ($coords as $results) {
             $easting = $results->easting;
