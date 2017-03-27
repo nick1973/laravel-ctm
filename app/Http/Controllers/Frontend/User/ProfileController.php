@@ -312,7 +312,7 @@ class ProfileController extends Controller
      */
     function update_bank(Request $request, $id)
     {
-        //$input = $request->all();
+        $ni = $request->input('ni_number');
         $validator = Validator::make($request->all(), [
             'account_number' => 'required|numeric|digits:8',
             'account_sort_code' => 'required|numeric|digits:6',
@@ -321,6 +321,24 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return redirect('/profile/edit_money')
                 ->withErrors($validator)
+                ->withInput();
+        }
+        $first_letters = substr($ni, 0, 2);
+        $digits = substr($ni, 2, 6);
+        $last_letter = substr($ni, 8, 1);
+        if (ctype_digit($first_letters)) {
+            return redirect('/profile/edit_money')
+                ->withErrors('NI Number is Incorrect')
+                ->withInput();
+        }
+        if (!ctype_digit($digits)) {
+            return redirect('/profile/edit_money')
+                ->withErrors('NI Number is Incorrect')
+                ->withInput();
+        }
+        if (ctype_digit($last_letter)) {
+            return redirect('/profile/edit_money')
+                ->withErrors('NI Number is Incorrect')
                 ->withInput();
         }
         //$input = $request->all();
