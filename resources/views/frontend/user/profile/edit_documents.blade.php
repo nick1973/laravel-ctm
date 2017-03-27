@@ -8,6 +8,7 @@
                 <div class="panel-heading">
                     <h3>Upload Documents</h3>
                     <h4>Your document will be automatically saved once they have been uploaded.</h4>
+                    <h4><b>Please note that the maximum file size is 4MB.</b></h4>
                 </div>
                 <div class="panel-body">
                     {{--<button class="btn btn-default" onclick="goBack()">Back</button>--}}
