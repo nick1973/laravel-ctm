@@ -68,17 +68,14 @@ class FrontendController extends Controller
 
     public function users_sql()
     {
-//        $staff = User::where([
-//            ['profile_confirmed', '=', 'Yes'],
-//            ['confirmed', '=', 1],
-//            ['payroll_export', '=', 1],
-//            ['payroll', '!=', '']
-//        ])->get();
-//        $foo = User::where('id', 34416)->get();
-//        return $foo;
         ini_set('max_execution_time', 10000);
         ini_set('request_terminate_timeout ', 10000);
         ini_set('memory_limit','2048M');
+        $staff = User::all();
+        $staff->update(['promotion'=>'']);
+//        $foo = User::where('id', 34416)->get();
+//        return $foo;
+
         //$affected = DB::table('users')->where('notes', '!=', '')->update(array('notes' => ''));
         //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         //phpinfo();
