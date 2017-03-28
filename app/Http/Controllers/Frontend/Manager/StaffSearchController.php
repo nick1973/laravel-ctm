@@ -100,7 +100,7 @@ class StaffSearchController extends Controller
                 return;
             }
 
-            $postcodes = DB::select("select postcode, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
+            $postcodes = DB::select("select postcode,postcode_no_space, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
                 as distance from open_postcode_geo where status = 'live'
                 and easting is not null
                 and northing is not null
@@ -110,8 +110,10 @@ class StaffSearchController extends Controller
                 order by distance
                 ");
             $post_code = [];
+            $pc_no_space = [];
             foreach ($postcodes as $postcode) {
                 $post_code[] = $postcode->postcode;
+                $pc_no_space[] = $postcode->postcode_no_space;
             }
 
             if($staff_event == 'Yes'){
@@ -238,11 +240,13 @@ class StaffSearchController extends Controller
             }
 
             $filtered = $users->whereInLoose('postcode', $post_code);
+            $filtered_no_space = $users->whereInLoose('postcode', $pc_no_space);
+            $merged = $filtered->merge($filtered_no_space);
             //values() resets the keys
             if($radius==0 || $radius=='50+'){
                 //return ['data'=>$users];
             }
-            return ['data'=>$filtered->values()];
+            return ['data'=>$merged->values()];
     }
 
     function staff_search_non_approved(Request $request)
@@ -309,7 +313,7 @@ class StaffSearchController extends Controller
             return;
         }
 
-        $postcodes = DB::select("select postcode, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
+        $postcodes = DB::select("select postcode,postcode_no_space, sqrt(pow(abs('$easting' - easting),2) + pow(abs('$northing' - northing),2))
                 as distance from open_postcode_geo where status = 'live'
                 and easting is not null
                 and northing is not null
@@ -319,8 +323,10 @@ class StaffSearchController extends Controller
                 order by distance
                 ");
         $post_code = [];
+        $pc_no_space = [];
         foreach ($postcodes as $postcode) {
             $post_code[] = $postcode->postcode;
+            $pc_no_space[] = $postcode->postcode_no_space;
         }
 
         if($staff_event == 'Yes'){
@@ -407,10 +413,12 @@ class StaffSearchController extends Controller
         }
 
         $filtered = $users->whereInLoose('postcode', $post_code);
+        $filtered_no_space = $users->whereInLoose('postcode', $pc_no_space);
+        $merged = $filtered->merge($filtered_no_space);
         //values() resets the keys
         if($radius==0 || $radius=='50+'){
             //return ['data'=>$users];
         }
-        return ['data'=>$filtered->values()];
+        return ['data'=>$merged->values()];
     }
 }
