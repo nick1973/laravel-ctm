@@ -722,47 +722,17 @@
             var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
             var infoWin = new google.maps.InfoWindow();
-            //console.log(ev)
-            //console.log(locations)
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-//            $.each( data.data, function( index, value ){
-//                locations.push({'lat': + value['latitude'], 'lng': + value['longitude']})
-//            });
-
-//            var markers = locations.map(function(location, i) {
-//                return new google.maps.Marker({
-//                    position: location
-//                });
-//            });
-
             var markers = locations.map(function(location, i) {
-                //var user = ''
-
                 var marker = new google.maps.Marker({
                     position: location,
                 });
                 google.maps.event.addListener(marker, 'click', function(evt) {
-                    $.each( staff, function( index, value ){
-                        var pc = value['postcode'].replace(/\s/g,'');
-                        var name = value['name']
-
-                        //console.log(postcodes)
-                        for(var i=0; i < postcodes.length; i++){
-                            if(name == pc){
-                            }
-                            console.log(postcodes[i])
-                                infoWin.setContent(name);
-                                infoWin.open(map, marker);
-                        }
-                    });
-
-                    //console.log(user)
+                        var info = '<p>Name: ' + staff[i]['name'] + '</p>'
+                                    + '<p>Email: ' + staff[i]['email'] + '</p>'
+                                    + '<p>Mobile: ' + staff[i]['mobile'] + '</p>'
+                        infoWin.setContent(info);
+                        infoWin.open(map, marker);
                 })
-                //infoWin.setContent(user);
-                //infoWin.open(map, marker);
                 return marker;
             });
 
