@@ -728,6 +728,7 @@
                 });
                 google.maps.event.addListener(marker, 'click', function(evt) {
                         var info = '<p>Name: ' + staff[i]['name'] + '</p>'
+                                    + '<p>Surname: ' + staff[i]['lastname'] + '</p>'
                                     + '<p>Email: ' + staff[i]['email'] + '</p>'
                                     + '<p>Mobile: ' + staff[i]['mobile'] + '</p>'
                         infoWin.setContent(info);
