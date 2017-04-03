@@ -88,9 +88,10 @@
                 var marker = new google.maps.Marker({
                     position: location,
                 });
+
                 google.maps.event.addListener(marker, 'click', function(evt) {
                     //infoWin.setContent(location.info);
-                    infoWin.setContent(event_name.reverse()[i]);
+                    infoWin.setContent(event_name[i]);
                     //console.log(event_name.reverse()[i])
                     infoWin.open(map, marker);
                 })
@@ -102,7 +103,8 @@
 
         $('#eventsMap').on('shown.bs.modal', function (event) {
             var post = []
-            $(".eventName").each(function (index, element) {
+
+            $($(".eventName").get().reverse()).each(function (index, element) {
                 event_name.push($( this ).text())
             })
 
