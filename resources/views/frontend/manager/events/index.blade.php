@@ -90,10 +90,9 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function(evt) {
-                    //infoWin.setContent(location.info);
-                    infoWin.setContent(event_name[i]);
-                    //console.log(event_name.reverse()[i])
-                    infoWin.open(map, marker);
+
+                    //infoWin.setContent(event_name[i]);
+                    //infoWin.open(map, marker);
                 })
                 return marker;
             });
