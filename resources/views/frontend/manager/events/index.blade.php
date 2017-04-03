@@ -110,6 +110,7 @@
                 post.push(str)
             })
             console.log(post)
+            console.log(event_name)
             //event_name = button.data('event')
             ev = []
             $.ajax({
