@@ -109,7 +109,7 @@
                 var str = $( this ).text().replace(/\s/g,'');
                 post.push(str)
             })
-
+            console.log(post)
             //event_name = button.data('event')
             ev = []
             $.ajax({
