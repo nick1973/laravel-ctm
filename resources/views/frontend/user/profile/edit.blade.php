@@ -179,7 +179,7 @@
                     <div class="form-group">
                         {{ Form::label('uk_driving_license', 'Do you have a full UK driving Licence?', ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::select('uk_driving_license', ['No' => 'No', 'Yes' => 'Yes'], null, ['class' => 'form-control',
+                            {{ Form::select('uk_driving_license', ['' => '', 'No' => 'No', 'Yes' => 'Yes'], null, ['class' => 'form-control',
                             'id' => 'uk_driving_license'])}}
                         </div>
                     </div>
