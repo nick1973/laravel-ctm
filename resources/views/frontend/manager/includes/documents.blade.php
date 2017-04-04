@@ -104,7 +104,8 @@
     $("td.gp1.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#gp1_tick").addClass('hidden');
-            console.log("has Class");
+            //$("#gp2_tick").addClass('hidden');
+            console.log("has Class g1");
         }
     });
 
@@ -115,7 +116,7 @@
     $("td.gp2.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#gp2_tick").addClass('hidden');
-            console.log("has Class");
+            console.log("has Class g2");
         }
     });
 
@@ -124,13 +125,13 @@
             //$(".gp4").remove();
             //$(".gp99").remove();
             $("#gp2_tick").addClass('hidden');
-            console.log("passport_page");
+            console.log("passport_page g1");
         }
     });
     $("td.gp2").each(function(){
         if ($(this).hasClass('birth_ni_page')) {
             //$(".gp3").remove();
-            console.log("passport_page");
+            console.log("passport_page g2");
         }
     });
 

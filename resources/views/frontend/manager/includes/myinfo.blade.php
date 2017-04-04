@@ -195,7 +195,7 @@
     $("td.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#myInfo").addClass('hidden');
-            console.log("has Class");
+            //console.log("has Class");
         }
     });
 

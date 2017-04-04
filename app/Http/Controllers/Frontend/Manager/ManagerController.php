@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Manager;
 
+use App\Models\Dropdowns\Tag;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Mail;
@@ -255,9 +256,30 @@ class ManagerController extends Controller
 //            $event = array_add(['lat' => $lat, 'lng' => $lng]);
 //        }
 
-        $lng_lat = DB::table('open_postcode_geo')->select('latitude', 'longitude')
+        $lng_lat = DB::table('open_postcode_geo')->select('latitude', 'longitude', 'postcode_no_space')
             ->whereIn('postcode_no_space', $postcode)
             ->get();
         return ['data'=>$lng_lat, 'ev'=>$ev];
+    }
+
+    function postcode_with_event(Request $request){
+        $events = Tag::all();
+        $postcode = $request->input('postcodes');
+        $event = $request->input('event');
+        $string = str_replace(' ', '', $event);
+
+        $ev = DB::table('open_postcode_geo')->select('latitude', 'longitude')
+            ->where('postcode_no_space', $string)
+            ->get();
+
+        $lng_lat = DB::table('open_postcode_geo')->select('latitude', 'longitude', 'postcode')
+            ->whereIn('postcode_no_space', $postcode)
+            ->get();
+
+//        foreach ($lng_lat as $postcode){
+//            $event_name = Tag::select('name')->where('postcode', $postcode->postcode);
+//            $event = array_add($lng_lat, 'event_name', $event_name);
+//        }
+        return ['data'=>$lng_lat, 'events'=>$events];
     }
 }

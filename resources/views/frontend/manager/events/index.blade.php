@@ -91,8 +91,16 @@
 
                 google.maps.event.addListener(marker, 'click', function(evt) {
 
-                    //infoWin.setContent(event_name[i]);
-                    //infoWin.open(map, marker);
+                    //infoWin.setContent(event_name[i]['name']);
+                    //find matching postcodes with loop
+                    for(var x=0;event_name.length > x; x++){
+                        console.log(event_name[x]['postcode'])
+                        console.log(ev[i]['postcode'])
+                        if(event_name[x]['postcode']==ev[i]['postcode']){
+                            infoWin.setContent(event_name[x]['postcode']);
+                        }
+                    }
+                    infoWin.open(map, marker);
                 })
                 return marker;
             });
@@ -103,27 +111,28 @@
         $('#eventsMap').on('shown.bs.modal', function (event) {
             var post = []
 
-            $($(".eventName").get().reverse()).each(function (index, element) {
-                event_name.push($( this ).text())
-            })
-
             $(".postcode").each(function (index, element) {
                 var str = $( this ).text().replace(/\s/g,'');
                 post.push(str)
             })
-            console.log(post)
-            console.log(event_name)
+
             //event_name = button.data('event')
             ev = []
             $.ajax({
                 type: "POST",
-                url: '/dashboard/manager/postcode',
-                data: {
-                    postcodes: post}
+                url: '/dashboard/manager/postcode_with_event',
+                data: {postcodes: post}
             }).done(function(data) {
                 $.each( data.data, function( index, value ){
-                    ev.push({'lat': + value['latitude'], 'lng': + value['longitude']})
+                    ev.push({'lat': + value['latitude'], 'lng': + value['longitude'], 'postcode': "" + value['postcode'] + ""})
+                    //console.log(value)
                 });
+                $.each( data.events, function( index, value ){
+                    //console.log(value)
+                    event_name.push(value)
+
+                });
+                //console.log(ev)
             });
             //console.log(ev)
             setTimeout(function(){

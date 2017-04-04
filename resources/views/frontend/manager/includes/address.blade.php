@@ -61,7 +61,7 @@
     $("td.address.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#address_tick").addClass('hidden');
-            console.log("has Class");
+            //console.log("has Class");
         }
     });
 

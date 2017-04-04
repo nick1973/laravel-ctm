@@ -81,7 +81,7 @@
     $("td.account.bg-danger").each(function(){
         if ($(this).hasClass('bg-danger')) {
             $("#account_tick").addClass('hidden');
-            console.log("has Class");
+            //console.log("has Class");
         }
     });
 

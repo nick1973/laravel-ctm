@@ -26,7 +26,7 @@
         @if($ref->work_status=='UK Citizen')
             <script>
                 $("#righttowork_tick").removeClass('hidden');
-                console.log("has Class");
+                //console.log("has Class");
             </script>
             <br/>
             <div id="collapseExample">
@@ -46,7 +46,7 @@
         @elseif($ref->work_status=='European National')
                 <script>
                     $("#righttowork_tick").removeClass('hidden');
-                    console.log("has Class");
+                    //console.log("has Class");
                 </script>
             <br/>
             <div id="collapseExample2">
@@ -63,7 +63,7 @@
         @elseif($ref->work_status=='Non European National')
                 <script>
                     $("#righttowork_tick").removeClass('hidden');
-                    console.log("has Class");
+                    //console.log("has Class");
                 </script>
             <br/>
             <div id="collapseExample3">
