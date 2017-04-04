@@ -12,7 +12,7 @@
                 <h2>Edit Event:</h2>
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-md-2 control-label">Create Event:</label>
+                <label for="inputEmail3" class="col-md-2 control-label">Edit Event:</label>
                 <div class="col-md-2">
                     <label>Event Name</label>
                     {!! Form::input('name', 'name', null, ['class' => 'form-control']) !!}
@@ -28,13 +28,18 @@
                 <div class="checkbox col-md-1">
                     <label></label>
                     <label>
-                        <input name="visible" value="0" hidden>
-                        <input name="visible" type="checkbox" value="1"> Visible
+                        @if($event->visible==0)
+                            <input name="visible" value="0" hidden>
+                            <input name="visible" type="checkbox" value="1"> Visible
+                        @else
+                            <input name="visible" value="0" hidden>
+                            <input name="visible" type="checkbox" value="1" checked> Visible
+                            @endif
                     </label>
                 </div>
                 <div class="col-md-1">
                     <label></label>
-                    <input type="submit" class="btn btn-success pull-right" value="Create">
+                    <input type="submit" class="btn btn-success pull-right" value="Edit Event">
                 </div>
             </div>
 
