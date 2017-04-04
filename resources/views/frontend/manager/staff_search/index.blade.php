@@ -480,7 +480,7 @@
                 //console.log(mobile_selected)
                 $("#free_input input").remove()
                 $("#free_input label").remove()
-                $("#free_input").append('<label>Mobile (07777777777,07555555555)</label><input onpaste="pasted();" id="mobile_numbers" class="form-control" name="mobile_numbers">')
+                $("#free_input").append('<label>Mobile</label><input onpaste="pasted();" id="mobile_numbers" class="form-control" name="mobile_numbers">')
             } else {
                 $("#free_input label").remove()
                 $("#free_input input").remove()

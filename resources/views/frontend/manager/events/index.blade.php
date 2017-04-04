@@ -90,15 +90,11 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function(evt) {
-
-                    //infoWin.setContent(event_name[i]['name']);
-                    //find matching postcodes with loop
                     for(var x=0;event_name.length > x; x++){
-                        console.log(event_name[x]['postcode'])
-                        console.log(ev[i]['postcode'])
+                        //console.log(event_name[x]['postcode'])
+                        //console.log(ev[i]['postcode'])
                         if(event_name[x]['postcode']==ev[i]['postcode']){
                             infoWin.setContent(event_name[x]['name']);
-
                         }
                     }
                     infoWin.open(map, marker);
