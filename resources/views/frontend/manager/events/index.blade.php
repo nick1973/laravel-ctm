@@ -98,6 +98,7 @@
                         console.log(ev[i]['postcode'])
                         if(event_name[x]['postcode']==ev[i]['postcode']){
                             infoWin.setContent(event_name[x]['postcode']);
+                            
                         }
                     }
                     infoWin.open(map, marker);
