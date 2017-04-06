@@ -16,9 +16,12 @@ class PromotionsDropdownsController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $promotions = Promotions::all();
-        $uni = Unis::all();
-        $hear_about_us = HearAboutUs::all();
+        $promotions = Promotions::orderBy('promo_name', 'asc')
+            ->get();
+        $uni = Unis::orderBy('uni_name', 'asc')
+            ->get();
+        $hear_about_us = HearAboutUs::orderBy('hear_about_us_name', 'asc')
+            ->get();
         $notes = RegistrationNotes::find(1);
         return view('frontend.manager.dropdowns.promotion.index', compact('promotions','uni','hear_about_us','notes'));
     }
