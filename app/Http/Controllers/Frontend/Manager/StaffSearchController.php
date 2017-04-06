@@ -113,9 +113,14 @@ class StaffSearchController extends Controller
                 ");
             $post_code = [];
             $pc_no_space = [];
+            $post_code_tolower = [];
+            $pc_no_space_tolower = [];
+
             foreach ($postcodes as $postcode) {
                 $post_code[] = $postcode->postcode;
                 $pc_no_space[] = $postcode->postcode_no_space;
+                $post_code_tolower[] = strtolower($postcode->postcode);
+                $pc_no_space_tolower[] = strtolower($postcode->postcode_no_space);
             }
 
             if($staff_event == 'Yes'){
@@ -243,7 +248,13 @@ class StaffSearchController extends Controller
 
             $filtered = $users->whereInLoose('postcode', $post_code);
             $filtered_no_space = $users->whereInLoose('postcode', $pc_no_space);
-            $merged = $filtered->merge($filtered_no_space);
+            $merge1 = $filtered->merge($filtered_no_space);
+
+            $filtered_tolower = $users->whereInLoose('postcode', $post_code_tolower);
+            $filtered_no_space_tolower = $users->whereInLoose('postcode', $pc_no_space_tolower);
+            $merge2 = $filtered_tolower->merge($filtered_no_space_tolower);
+
+            $merged = $merge1->merge($merge2);
             //values() resets the keys
             if($radius==0 || $radius=='50+'){
                 //return ['data'=>$users];
