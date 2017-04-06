@@ -27,9 +27,12 @@ class FrontendController extends Controller
         javascript()->put([
             'test' => 'it works!',
         ]);
-        $list = HearAboutUs::all();
-        $promotions = Promotions::all();
-        $unis = Unis::all();
+        $list = HearAboutUs::orderBy('hear_about_us_name', 'asc')
+            ->get();
+        $promotions = Promotions::orderBy('promo_name', 'asc')
+            ->get();
+        $unis = Unis::orderBy('uni_name', 'asc')
+            ->get();
         $notes = RegistrationNotes::find(1);
         return view('frontend.auth.register', compact('list','promotions','unis','notes'));
     }
