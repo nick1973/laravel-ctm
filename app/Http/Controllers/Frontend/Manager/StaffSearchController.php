@@ -233,9 +233,9 @@ class StaffSearchController extends Controller
                             ['profile_confirmed', '=', 'yes'],
                         ])
                         ->get();
-                    if ($radius == 0 || $radius == '50+') {
-                        return ['data' => $users->values()];
-                    }
+//                    if ($radius == 0 || $radius == '50+') {
+//                        return ['data' => $users->values()];
+//                    }
                 }
             }
 
@@ -244,7 +244,7 @@ class StaffSearchController extends Controller
             $merged = $filtered->merge($filtered_no_space);
             //values() resets the keys
             if($radius==0 || $radius=='50+'){
-                //return ['data'=>$users];
+                return ['data'=>$merged->values()];
             }
             return ['data'=>$merged->values()];
     }
