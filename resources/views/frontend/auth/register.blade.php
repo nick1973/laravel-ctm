@@ -144,7 +144,7 @@
                     $("#uni").hide('fade')
                     $("#others").show('fade')
                 }
-                else if($(this).val()=='Friend'){
+                else if($(this).val()=='Friend' || $(this).val()=='Newspaper'){
                     $("#uni").hide('fade')
                     $("#others").hide('fade')
                 }
