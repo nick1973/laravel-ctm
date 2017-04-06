@@ -30,7 +30,9 @@ class StaffSearchController extends Controller
             $radius = $request->input('radius');// in miles
             $nrswa = $request->input('nrswa');// in miles
             $uk_driving_license = $request->input('uk_driving_license');// in miles   driver_paper_work
-            $meters = $radius / .00062137;
+            if($radius!='50+'){
+                $meters = $radius / .00062137;
+            }
             //$events = [];
             if($pc==''){
                 if ($nrswa == "Yes" && $uk_driving_license == "No") {
@@ -233,9 +235,9 @@ class StaffSearchController extends Controller
                             ['profile_confirmed', '=', 'yes'],
                         ])
                         ->get();
-//                    if ($radius == 0 || $radius == '50+') {
-//                        return ['data' => $users->values()];
-//                    }
+                    if ($radius == 0 || $radius == '50+') {
+                        return ['data' => $users->values()];
+                    }
                 }
             }
 
@@ -244,7 +246,7 @@ class StaffSearchController extends Controller
             $merged = $filtered->merge($filtered_no_space);
             //values() resets the keys
             if($radius==0 || $radius=='50+'){
-                return ['data'=>$merged->values()];
+                //return ['data'=>$users];
             }
             return ['data'=>$merged->values()];
     }
