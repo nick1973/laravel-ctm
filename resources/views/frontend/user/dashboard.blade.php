@@ -19,9 +19,12 @@
                                 {{--<img src="{{ access()->user()->picture }}" title="{{ access()->user()->name }}" class="user-profile-image img-rounded" />--}}
                             @endif
                         </h1>
-                    <h3>You can create, view and edit your profile here.
-
-                    </h3>
+                    <h3 style="padding-bottom: 10px">You can create, view and edit your profile here.</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p style="color: red; font-weight: bold">Don’t forget to submit your application every time you edited it. If you don’t complete the process you will not receive information about upcoming events.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="panel-body">
