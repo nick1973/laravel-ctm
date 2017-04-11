@@ -442,15 +442,13 @@ Route::group(['middleware' => 'auth'], function () {
 
             $staff = \App\Models\Access\User\User::
                 where([
-                //['confirmed', '=', 1],
-                //['visible', '=', 1],
+                ['confirmed', '=', 1],
+                ['visible', '=', 1],
                 //['app_status', '=', 3],
-                ['markAsp45', '=' ,1],
+                ['markAsp45', '=' ,0],
                 ['payroll','!=','0'],
-                //['profile_confirmed', '=', 'yes'],
-            ])
-                //->whereIn('app_status',[3,8])
-                ->get();
+                ['profile_confirmed', '=', 'yes'],
+            ])->whereIn('app_status',[3,8])->get();
 
             return ['data'=>$staff];
 
