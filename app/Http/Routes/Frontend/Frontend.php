@@ -446,7 +446,7 @@ Route::group(['middleware' => 'auth'], function () {
                 //['visible', '=', 1],
                 //['app_status', '=', 3],
                 ['markAsp45', '=' ,1],
-                //['payroll','!=','0'],
+                ['payroll','!=','0'],
                 //['profile_confirmed', '=', 'yes'],
             ])
                 //->whereIn('app_status',[3,8])
