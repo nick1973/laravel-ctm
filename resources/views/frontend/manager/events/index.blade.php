@@ -24,6 +24,9 @@
                     </thead>
                     <tbody>
                     @foreach($events as $results)
+                        <?php
+                        $dt = \Carbon\Carbon::createFromFormat('Y-m-d', $results->date)->format('d-m-Y');
+                        ?>
                         <tr>
                             {!! Form::open([
                             'method' => 'DELETE',
@@ -37,7 +40,7 @@
                                     Not Visible
                                     @endif
                             </td>
-                            <td>{{ $results->date }}</td>
+                            <td>{{ $dt }}</td>
                             <td class="postcode">{{ $results->postcode }}</td>
                             <td width="150px">
                                 <a href="{{ route('dashboard.events.edit', $results->id) }}" class="btn btn-primary btn-xs">Edit</a>
