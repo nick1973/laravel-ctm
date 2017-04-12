@@ -306,7 +306,7 @@ class StaffSearchController extends Controller
             $users = User::where('visible', 1)
                     ->where('markAsp45', 0)
                     ->where('app_status', $app_status)
-                    ->where('profile_confirmed', 'no')
+                    //->whereIn('profile_confirmed', ['no',''])
                     ->get();
             return ['data'=>$users->values()];
         }
