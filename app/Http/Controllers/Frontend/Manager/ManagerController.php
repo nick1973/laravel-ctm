@@ -141,7 +141,7 @@ class ManagerController extends Controller
                 '"'.$payroll->mobile.'",' . '"'.$payroll->emergency_contact_name.'",' . '"'.$payroll->emergency_contact_rel.'",' .
                 '"'.$payroll->emergency_contact_number.'",' . '"'.$payroll->emergency_contact_mobile.'",' .
                 '"'.$payroll->account_name.'",' . '"'.Crypt::decrypt($payroll->account_number).'",' . '"'.$sortcode.'",' .
-                '"'.$payroll->ni_number.'",' . '"BR"' . "\r";
+                '"'.mb_strtoupper($payroll->ni_number, 'UTF-8').'",' . '"BR"' . "\r";
         }
         //r/n
         //return $result[1];
