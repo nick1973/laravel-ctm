@@ -348,7 +348,7 @@ class ProfileController extends Controller
         $user->fill([
             'account_number' => Crypt::encrypt($request->account_number),
             'account_sort_code' => Crypt::encrypt($request->account_sort_code),
-            'ni_number' => $request->input('ni_number'),
+            'ni_number' => strtoupper($request->input('ni_number')),
             'account_name' => $request->input('account_name'),
             'job_status' => $request->input('job_status'),
             'student_loan' => $request->input('student_loan')

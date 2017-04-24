@@ -14,11 +14,14 @@
                             <?php $checked = 'checked'; ?>
                     @endif
                 @endforeach
+                    <?php
+                    $dt = \Carbon\Carbon::createFromFormat('Y-m-d', $event->date)->format('d-m-Y');
+                    ?>
                     <td style="text-align: center" width="50">
                         <input type="checkbox" value="{{ $event->id }}" name="event[]" {{ $checked }}>
                     </td>
                     <td>{{ $event->name }}</td>
-                    <td>{{ $event->date }}</td>
+                    <td>{{ $dt }}</td>
                     <td>{{ $event->postcode }}
                         <a class="openmodal btn btn-info pull-right" href="#myModal" data-toggle="modal" data-id="{{ $event->postcode }}"
                            data-whatever="{{ $event->postcode }}" data-event="{{ $event->name }}">View Map</a>

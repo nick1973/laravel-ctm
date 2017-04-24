@@ -14,7 +14,7 @@ class EventsController extends Controller
         if(access()->hasRole('User')){
             return redirect('dashboard');
         }
-        $events = Tag::all();
+        $events = Tag::orderBy('date', 'asc')->get();
 
         return view('frontend.manager.events.index', compact('events'));
     }
