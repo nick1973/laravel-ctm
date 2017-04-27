@@ -91,6 +91,8 @@
                                 <th>Surname</th>
                                 <th>Postcode</th>
                                 <th>Age</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
                                 <th>NRSWA</th>
                                 <th>Driver</th>
                                 <th>Chosen Event</th>
@@ -98,6 +100,8 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -193,6 +197,8 @@
                                 <th>Surname</th>
                                 <th>Postcode</th>
                                 <th>Age</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
                                 <th>NRSWA</th>
                                 <th>Driver</th>
                                 <th>Chosen Event</th>
@@ -200,6 +206,8 @@
                             </tr>
                             </thead>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -372,6 +380,8 @@
 //                            }
                             }, className: "centre get"
                         },
+                        { "data": "mobile" , className: "centre get" },
+                        { "data": "email" , className: "centre get" },
                         {
                             "data": function (data) {
                                 if(data.nrswa == 'Yes'){
