@@ -653,6 +653,7 @@
                             <p>Event: </p>
                             <p>Dates: </p>
                             <p>Positions available: </p>
+                            <p>Pay rate: Under 25's £7.05 (plus Holiday Entitlement) total Gross Pay £7.90. Over 25's £7.50 (plus Holiday Entitlement) total Gross Pay £8.41</p>
                             <p>Pay date: </p>
                             <p>Shifts: </p>
                             <p>Uniform: Black trousers, white shirt & sturdy black shoes</p>
