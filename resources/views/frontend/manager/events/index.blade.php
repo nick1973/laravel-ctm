@@ -45,7 +45,7 @@
                                 @if($results->csas==1)
                                     CSAS
                                 @else
-                                    Not CSAS
+                                    
                                 @endif
                             </td>
                             <td>{{ $dt }}</td>
