@@ -30,6 +30,12 @@
                             <input name="visible" type="checkbox" value="1"> Visible
                         </label>
                     </div>
+                    <div class="checkbox col-md-1">
+                        <label></label>
+                        <label>
+                            <input name="csas" type="checkbox" value="1"> CSAS
+                        </label>
+                    </div>
                     <div class="col-md-1">
                         <label></label>
                         <input type="submit" class="btn btn-success pull-right" value="Create">

@@ -44,10 +44,10 @@
                 <td class="required"></td>
             @endif
         </tr>
-        {{--<tr>--}}
-            {{--<th>Town of Birth</th>--}}
-            {{--<td class="required">{{ $user->townofbirth }}</td>--}}
-        {{--</tr>--}}
+        <tr>
+            <th>Town of Birth</th>
+            <td class="required">{{ $user->townofbirth }}</td>
+        </tr>
         <tr>
             <th>Gender</th>
             <td class="required">{{ $user->gender }}</td>

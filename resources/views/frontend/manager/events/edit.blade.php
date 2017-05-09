@@ -37,6 +37,18 @@
                             @endif
                     </label>
                 </div>
+                <div class="checkbox col-md-1">
+                    <label></label>
+                    <label>
+                        @if($event->csas==0)
+                            <input name="csas" value="0" hidden>
+                            <input name="csas" type="checkbox" value="1"> CSAS
+                        @else
+                            <input name="csas" value="0" hidden>
+                            <input name="csas" type="checkbox" value="1" checked> CSAS
+                        @endif
+                    </label>
+                </div>
                 <div class="col-md-1">
                     <label></label>
                     <input type="submit" class="btn btn-success pull-right" value="Edit Event">

@@ -18,6 +18,7 @@
                     <tr>
                         <th class="visible-lg" colspan="">Events</th>
                         <th class="visible-lg" colspan="">Visible</th>
+                        <th class="visible-lg" colspan="">CSAS</th>
                         <th class="visible-lg" colspan="">Start Date</th>
                         <th class="visible-lg" colspan="2">Postcode</th>
                     </tr>
@@ -36,9 +37,16 @@
                             <td>
                                 @if($results->visible==1)
                                     Visible
-                                    @else
+                                @else
                                     Not Visible
-                                    @endif
+                                @endif
+                            </td>
+                            <td>
+                                @if($results->csas==1)
+                                    CSAS
+                                @else
+                                    Not CSAS
+                                @endif
                             </td>
                             <td>{{ $dt }}</td>
                             <td class="postcode">{{ $results->postcode }}</td>
@@ -52,7 +60,7 @@
                 </table>
                 <a href="{{ route('dashboard.events.create') }}" class="btn btn-warning">Add an Event</a>
             </div>
-    </div><!-- col-md-10 -->
+        </div><!-- col-md-10 -->
 
     </div><!-- row -->
     <style>
@@ -105,7 +113,7 @@
                 return marker;
             });
             var markerCluster = new MarkerClusterer(map, markers,
-                    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         }
 
         $('#eventsMap').on('shown.bs.modal', function (event) {
@@ -145,4 +153,3 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD7jKYXhgDTka8qlsPSqNcU2HV7DCwfUs"></script>
 
 @endsection
-
