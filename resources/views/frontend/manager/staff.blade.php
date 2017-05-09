@@ -130,7 +130,7 @@
 //                        }
 //                    },
 //                ],
-                    //18 columns
+                //18 columns
                 "columns": [
                     { "data": "payroll" , className: "centre get",
                         "visible": true },
@@ -144,9 +144,9 @@
                     { "data": function(data){
                         if(data.driver_paper_work==1){
                             return 'Yes'
-                            }
-                            return 'No'
                         }
+                        return 'No'
+                    }
                     },
                     { "data": "mobile" , className: "centre get" },
                     { "data": "email" , className: "centre get" },
@@ -154,7 +154,7 @@
                         if(data.rtw_docs==1){
                             return 'Yes'
                         }
-                            return 'No'
+                        return 'No'
                     } , className: "centre get" },
                     { "data": "medical_conditions_info" , className: "hidden"},
                     {
@@ -208,14 +208,14 @@
                         "data": function (data) {
                             if(data.notes == ''){
                                 return '<button type="button" class="btn btn-primary" ' +
-                                        'data-toggle="modal" data-target="#exampleModal" ' +
-                                        'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
-                                        'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
-                            }
-                            return '<button type="button" class="btn btn-success" ' +
                                     'data-toggle="modal" data-target="#exampleModal" ' +
                                     'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
                                     'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
+                            }
+                            return '<button type="button" class="btn btn-success" ' +
+                                'data-toggle="modal" data-target="#exampleModal" ' +
+                                'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
+                                'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
                         }
                     }
                 ],
@@ -302,9 +302,9 @@
             text-align: center;
             text-transform: uppercase;
         }
-         .red{
-             color: red;
-         }
+        .red{
+            color: red;
+        }
     </style>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
