@@ -79,12 +79,14 @@
                 "ajax": "/dashboard/manager/staff/search/all",
                 //dom: '<"top"Blf>rTi<"bottom"p><"clear">',
                 dom: 'Bfrtip',
+
                 buttons: [
                     'csv',
                     {
                         extend: 'copyHtml5',
                         text: 'Copy Staff',
-                        //className: 'btn-primary',
+                        className: 'copyBtn',
+                        //action: false,
                         header: false,
                         exportOptions: {
                             columns: [ 0,1,2,3,4,5,6,7,8,17 ],
@@ -93,12 +95,45 @@
                                 page: 'current'
                             }
                         }
-                    },
+                    }
                 ],
+
+                language: {
+                    buttons: {
+                        copyTitle: 'Copy',
+
+//                        copySuccess: {
+//                            1: "Copied one row to clipboard",
+//                            _: "Copied %d rows to clipboard"
+//                        }
+
+                    },
+
+
+                },
+
+
+//                buttons: [
+//                    'csv',
+//                    {
+//                        extend: 'copyHtml5',
+//                        text: 'Copy Staff',
+//
+//                        //className: 'btn-primary',
+//                        header: false,
+//                        exportOptions: {
+//                            columns: [ 0,1,2,3,4,5,6,7,8,17 ],
+//                            modifier: {
+//                                selected: true,
+//                                page: 'current'
+//                            }
+//                        }
+//                    },
+//                ],
                     //18 columns
                 "columns": [
                     { "data": "payroll" , className: "centre get",
-                        "visible": false },
+                        "visible": true },
 //                    { "data": "name" , className: "centre get" },
                     {
                         "data": function (data) {
@@ -121,8 +156,7 @@
                         }
                             return 'No'
                     } , className: "centre get" },
-                    { "data": "medical_conditions" , className: "centre get",
-                        "visible": false },
+                    { "data": "medical_conditions_info" , className: "hidden"},
                     {
                         "data": function (data) {
                             if (data.dob.indexOf("-") > 1){
@@ -162,10 +196,10 @@
                         "visible": false },
                     { "data": "emergency_contact_mobile" , className: "centre get",
                         "visible": false },
-                    { "data": "notes",
-                        "visible": false },
+                    { "data": "notes", className: "hidden"},
                     { "data": "postcode" , className: "centre get" },
-                    { "data": "land" , className: "centre" },
+                    { "data": "land" , className: "centre",
+                        "visible": false  },
                     { "data": "d1" , className: "centre",
                         "visible": false },
                     { "data": "uk_driving_license" , className: "centre",
@@ -185,12 +219,12 @@
                         }
                     }
                 ],
-                select: true
+                select: true,
             });
+
 //            $('#staff_table tbody').on('click', 'td:not(:last-child)', function () {
 //                $(this).closest('tr').toggleClass('selected')
 //            })
-
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 //var notes //= button.data('notes') // Extract info from data-* attributes
@@ -214,6 +248,28 @@
                 modal.find('.modal-title').text('Notes for ' + name)
                 modal.find('#user_id').val(id)
             })
+
+            $('.copyBtn').click( function () {
+                $('tr.selected').each(function(){
+                    var firstName = $(this).find('td').eq(1).text()
+                    var lastName = $(this).find('td').eq(2).text()
+                    var med_info = $(this).find('td').eq(7).text()
+                    var notes = $(this).find('td').eq(9).text()
+                    //console.log(firstName)
+                    $('#copyModal').modal('show')
+                    $('#copyModalLabel').text(firstName+' '+lastName+' copied to clipboard')
+//                        if(med_info!=""){
+//                            $('#med_div').remove()
+//                        }
+//                        if(notes!=""){
+//                            $('#notes_div').remove()
+//                        }
+                    $('#staff_notes').text(notes)
+                    $('#med_notes').text(med_info)
+
+                });
+            });
+
         });
 
         function saveNotes(){
@@ -279,6 +335,35 @@
                 <div class="modal-footer">
                     {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                     <button type="button" class="btn btn-primary" onclick="return saveNotes()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="copyModal" tabindex="-1" role="dialog" aria-labelledby="copyModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="copyModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group" id="notes_div">
+                            <input id="user_id" name="id" hidden>
+                            <label for="message-text" class="control-label">Staff Notes:</label>
+                            <textarea name="" class="form-control" id="staff_notes" readonly></textarea>
+                        </div>
+                        <div class="form-group" id="med_div">
+                            <input id="user_id" name="id" hidden>
+                            <label for="message-text" class="control-label">Medical Notes:</label>
+                            <textarea name="notes" class="form-control" id="med_notes" readonly></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{--<button type="button" class="btn btn-primary" onclick="return saveNotes()">Save</button>--}}
                 </div>
             </div>
         </div>
