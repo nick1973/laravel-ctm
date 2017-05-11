@@ -246,6 +246,7 @@
                 }
             }
             var resultObject = search(this.value, ar);
+            console.log(resultObject)
             $("#postcode").val(resultObject.postcode)
         });
 
