@@ -240,7 +240,7 @@
             var ar = <?php echo json_encode($events) ?>;
             function search(nameKey, myArray){
                 for (var i=0; i < myArray.length; i++) {
-                    if (myArray[i].name === nameKey) {
+                    if (myArray[i].name.trim() === nameKey) {
                         return myArray[i];
                     }
                 }
