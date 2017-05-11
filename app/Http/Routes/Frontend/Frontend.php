@@ -399,15 +399,18 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/id100', function () {
-            $staff = \App\Models\Access\User\User::where([
-                ['payroll', '=', '29184'],
+            //$staff = \App\Models\Access\User\User::where([
+                //['role', '=', '29184'],
 //                ['confirmed', '=', 1],
 //                ['payroll_export', '=', 1],
 //                ['payroll', '!=', 0]
-            ])->get();
+            //])->get();
+            $users = \App\Models\Access\User\User::with(['roles' => function($q){
+                $q->where('name', 'admin');
+            }])->get();
             //$staff= \App\Models\Access\User\User::where('app_status',1)->count();
 //            $staff->update(['dob'=>'1988-04-29']);
-            return $staff;
+            return $users;
 
 
 //            $staff = \App\Models\Access\User\User::where([
