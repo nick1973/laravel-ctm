@@ -365,6 +365,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('dashboard/manager/staff-report/non_approved', 'StaffReportController@staff_search_non_approved')->name('dashboard.manager.staff-report.staff_search_non_approved');
 
         Route::any('dashboard/manager/notes', 'ManagerController@update_notes')->name('dashboard.manager.notes');
+        Route::any('dashboard/manager/medicalnotes', 'ManagerController@update_medicalnotes')->name('dashboard.manager.medicalnotes');
         Route::get('dashboard/manager/notes/{id}', function ($id) {
             $user = \App\Models\Access\User\User::find($id);
             return $user;

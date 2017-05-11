@@ -31,10 +31,12 @@
                         <th>D1</th>
                         <th>UK Driving License</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -217,6 +219,20 @@
                                 'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
                                 'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
                         }
+                    },
+                    {
+                        "data": function (data) {
+                            if(data.medical_conditions == ''){
+                                return '<button type="button" class="btn btn-primary" ' +
+                                    'data-toggle="modal" data-target="#medicalModal" ' +
+                                    'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+                                    'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
+                            }
+                            return '<button type="button" class="btn btn-success" ' +
+                                'data-toggle="modal" data-target="#medicalModal" ' +
+                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
+                        }
                     }
                 ],
                 select: true,
@@ -240,6 +256,30 @@
                         modal.find('#not_suspended').prop('checked', true);
                     } else{
                         modal.find('#suspended').prop('checked', true);
+                        //table.find('.selected').addClass('red');
+                        //$('#staff_table .selected').addClass('red')
+                    }
+                });
+                var modal = $(this)
+                modal.find('.modal-title').text('Notes for ' + name)
+                modal.find('#user_id').val(id)
+            })
+
+            $('#medicalModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                //var notes //= button.data('notes') // Extract info from data-* attributes
+                var name = button.data('name') // Extract info from data-* attributes
+                var id = button.data('id') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                $.get("/dashboard/manager/notes/"+id, function(data, status){
+                    var notes = data.medical_conditions_info
+                    modal.find('.modal-body textarea').val(notes)
+                    console.log(data.app_status)
+                    if(data.medical_conditions == 'Yes'){
+                        modal.find('#medical_conditions').prop('checked', true);
+                    } else{
+                        modal.find('#medical_conditions').prop('checked', false);
                         //table.find('.selected').addClass('red');
                         //$('#staff_table .selected').addClass('red')
                     }
@@ -280,16 +320,29 @@
                 $('#exampleModal').modal('hide')
             });
             if(formData[1]['value']!='') {
-                $('#staff_table .selected').find('td:last-child button').removeClass('btn-primary').addClass('btn-success')
+                $('#staff_table .selected').find('td:last').prev('td').find('button').removeClass('btn-primary').addClass('btn-success')
             } else {
-                $('#staff_table .selected').find('td:last-child button').removeClass('btn-success').addClass('btn-primary')
+                $('#staff_table .selected').find('td:last').prev('td').find('button').removeClass('btn-success').addClass('btn-primary')
             }
             if(formData[2]['value']==8){
                 $('#staff_table .selected').addClass('red')
             } else{
                 $('#staff_table .selected').removeClass('red')
             }
+        }
 
+        function saveMedicalNotes(){
+            var formData = $('#medi_notes').serializeArray();
+            console.log(formData)
+            var url = '/dashboard/manager/medicalnotes'
+            $.post(url, formData).done(function (results) {
+                $('#medicalModal').modal('hide')
+            });
+            if(formData[1]['value']!='') {
+                $('#staff_table .selected').find('td:last-child button').removeClass('btn-primary').addClass('btn-success')
+            } else {
+                $('#staff_table .selected').find('td:last-child button').removeClass('btn-success').addClass('btn-primary')
+            }
         }
 
     </script>
@@ -335,6 +388,37 @@
                 <div class="modal-footer">
                     {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                     <button type="button" class="btn btn-primary" onclick="return saveNotes()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="medicalModal" tabindex="-1" role="dialog" aria-labelledby="medicalModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="medicalModalLabel">New</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="medi_notes">
+                        <div class="form-group">
+                            <input id="user_id" name="id" hidden>
+                            <label for="message-text" class="control-label">Notes:</label>
+                            <textarea name="medical_conditions_info" class="form-control" id="medical_conditions_info"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="medical_conditions" name="medical_conditions" type="checkbox" value="Yes"> Medical Condition?
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                    <button type="button" class="btn btn-primary" onclick="return saveMedicalNotes()">Save</button>
                 </div>
             </div>
         </div>

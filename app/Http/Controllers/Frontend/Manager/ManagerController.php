@@ -241,6 +241,16 @@ class ManagerController extends Controller
         //return $request->all();
     }
 
+    function update_medicalnotes(Request $request){
+        $id = $request->input('id');
+        $medical_conditions_info = $request->input('medical_conditions_info');
+        $medical_conditions = $request->input('medical_conditions');
+        $user = User::find($id);
+        $user->update(['medical_conditions_info'=>$medical_conditions_info,
+            'medical_conditions'=>$medical_conditions]);
+        return $request->all();
+    }
+
     function postcode(Request $request){
         $postcode = $request->input('postcodes');
         $event = $request->input('event');
