@@ -31,7 +31,7 @@
                         <th>D1</th>
                         <th>UK Driving License</th>
                         <th></th>
-                        <th></th>
+                        {{--<th></th>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -55,7 +55,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        {{--<td></td>--}}
 
 
                     </tr>
@@ -220,20 +220,20 @@
                                 'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
                         }
                     },
-                    {
-                        "data": function (data) {
-                            if(data.medical_conditions == ''){
-                                return '<button type="button" class="btn btn-primary" ' +
-                                    'data-toggle="modal" data-target="#medicalModal" ' +
-                                    'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
-                                    'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
-                            }
-                            return '<button type="button" class="btn btn-success" ' +
-                                'data-toggle="modal" data-target="#medicalModal" ' +
-                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
-                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
-                        }
-                    }
+//                    {
+//                        "data": function (data) {
+//                            if(data.medical_conditions == ''){
+//                                return '<button type="button" class="btn btn-primary" ' +
+//                                    'data-toggle="modal" data-target="#medicalModal" ' +
+//                                    'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+//                                    'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
+//                            }
+//                            return '<button type="button" class="btn btn-success" ' +
+//                                'data-toggle="modal" data-target="#medicalModal" ' +
+//                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+//                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
+//                        }
+//                    }
                 ],
                 select: true,
             });
