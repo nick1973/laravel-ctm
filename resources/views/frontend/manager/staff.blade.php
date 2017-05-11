@@ -4,9 +4,9 @@
 
     {{--<p>add staff</p>--}}
 
-    <div class="row">
+    {{--<div class="row">--}}
 
-        <div class="col-md-12 col-lg-12">
+        {{--<div class="col-md-12 col-lg-12">--}}
             {{--<h4>Add New Event <span style="vertical-align: middle"><i style="color: green" class="fa fa-plus-square fa-2x" aria-hidden="true"></i></span></h4>--}}
             <div class="table-responsive">
                 <table id="staff_table" class="table table-bordered table-hover table-striped">
@@ -31,7 +31,7 @@
                         <th>D1</th>
                         <th>UK Driving License</th>
                         <th></th>
-                        {{--<th></th>--}}
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,20 +55,18 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        {{--<td></td>--}}
-
-
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
+        {{--</div>--}}
 
 
 
-    </div><!-- col-md-10 -->
+    {{--</div><!-- col-md-10 -->--}}
 
-    </div><!-- row -->
+    {{--</div><!-- row -->--}}
     <script>
 
         $(document).ready( function () {
@@ -220,20 +218,20 @@
                                 'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
                         }
                     },
-//                    {
-//                        "data": function (data) {
-//                            if(data.medical_conditions == ''){
-//                                return '<button type="button" class="btn btn-primary" ' +
-//                                    'data-toggle="modal" data-target="#medicalModal" ' +
-//                                    'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
-//                                    'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
-//                            }
-//                            return '<button type="button" class="btn btn-success" ' +
-//                                'data-toggle="modal" data-target="#medicalModal" ' +
-//                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
-//                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical Notes</button>';
-//                        }
-//                    }
+                    {
+                        "data": function (data) {
+                            if(data.medical_conditions == 'Yes'){
+                                return '<button type="button" class="btn btn-success" ' +
+                                    'data-toggle="modal" data-target="#medicalModal" ' +
+                                    'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+                                    'data-name="'+data.name+ ' ' +data.lastname+'">Medical</button>';
+                            }
+                            return '<button type="button" class="btn btn-primary" ' +
+                                'data-toggle="modal" data-target="#medicalModal" ' +
+                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical</button>';
+                        }
+                    }
                 ],
                 select: true,
             });
