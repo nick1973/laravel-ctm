@@ -401,7 +401,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/id100', function () {
             $users = DB::table('users')->select('users.name', 'assigned_roles.role_id')
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 1)->get();
-            $count_admin_users = DB::table('users')->select('users.name', 'assigned_roles.role_id')
+            $count_admin_users = DB::table('users')->select('users.name', 'payroll', 'assigned_roles.role_id')
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 1)->count();
             return ['ADMIN'=>$users, 'COUNT'=>$count_admin_users];
 
