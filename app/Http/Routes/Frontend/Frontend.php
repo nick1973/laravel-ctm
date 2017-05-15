@@ -405,7 +405,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 2)->get();
             $count_admin_users = DB::table('users')->select('users.name', 'assigned_roles.role_id')
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 1)->count();
-            return ['ADMIN'=>$users, 'COUNT'=>$count_admin_users].['Executive'=>$executive];
+            return ['ADMIN'=>$users,'Executive'=>$executive, 'COUNT'=>$count_admin_users];
 
 //            $staff = \App\Models\Access\User\User::where([
 //                ['profile_confirmed', '=', 'Yes'],
