@@ -401,9 +401,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/id100', function () {
             $users = DB::table('users')->select('users.name', 'users.payroll', 'assigned_roles.role_id')
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 1)->get();
+            $executive = DB::table('users')->select('users.name', 'users.payroll', 'assigned_roles.role_id')
+                ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 2)->get();
             $count_admin_users = DB::table('users')->select('users.name', 'assigned_roles.role_id')
                 ->join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->where('assigned_roles.role_id', 1)->count();
-            return ['ADMIN'=>$users, 'COUNT'=>$count_admin_users];
+            return ['ADMIN'=>$users, 'COUNT'=>$count_admin_users].['Executive'=>$executive];
 
 //            $staff = \App\Models\Access\User\User::where([
 //                ['profile_confirmed', '=', 'Yes'],
