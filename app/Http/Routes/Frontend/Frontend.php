@@ -432,7 +432,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
-            $user = DB::table('users')->where('payroll', 37642)->get();
+            $user = DB::table('users')->where('payroll', 51747)->get();
                 return $user;
         });
 
