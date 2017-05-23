@@ -327,7 +327,7 @@ echo $arr[1];
             </div>
     </div>
 </div>
-<button onclick="save_tabs()">Save Tabs</button>
+{{--<button onclick="save_tabs()">Save Tabs</button>--}}
 <script>
     function save_tabs() {
         var formData = $("#tabs_form").serializeArray();
@@ -539,5 +539,68 @@ echo $arr[1];
         input3.trigger('input');
         //console.log(pay_grades[x]['id']);
     });
+    {{--var specApp = angular.module("specApp", []);--}}
+    {{--specApp.controller("MondayCtrl", function ($scope, $http) {--}}
 
+    {{--$http.get("/event/{{ $event->id }}")--}}
+    {{--.then(function (response) {--}}
+    {{--$scope.specs = response.data.data;--}}
+    {{--});--}}
+    {{--//console.log($scope.specs)--}}
+    {{--$scope.specs = [];--}}
+    {{--$scope.specs.week1 = {};--}}
+    {{--$scope.addRow = function(){--}}
+
+    {{--var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position, 'total':$scope.total,--}}
+    {{--'week1':{},'week2':{},'week3':{},'week4':{},'week5':{},'week6':{},'week7':{},'week8':{}, 'week9':{},--}}
+    {{--'week10':{},'week11':{},'week12':{},'week13':{},'week14':{},'week15':{},'week16':{},'week17':{},'week18':{},'week19':{},'week20':{},--}}
+    {{--};--}}
+    {{--<?php $week = 0; ?>--}}
+    {{--@for($i=0; $i <= $diffInDays; $i++)--}}
+    {{--@if($day_number_scope ==7)--}}
+    {{--<?php $day_number_scope=0 ?>--}}
+    {{--@endif--}}
+    {{--<?php--}}
+    {{--$x = dayOfWeek($day_number_scope);--}}
+    {{--$lower_day = strtolower($x);--}}
+    {{--$start =   "$lower_day$i"."_start";--}}
+    {{--$end = "$lower_day$i"."_end";--}}
+    {{--$sub_total = "$lower_day$i"."_sub_total";--}}
+    {{--if($i % 7 == 0){--}}
+    {{--$week++;--}}
+    {{--}--}}
+    {{--?>--}}
+    {{--//$scope = $scope.specs.week1;--}}
+    {{--myArray.week{{$week}}.{{ $start }} = $scope.{{ $start }},--}}
+    {{--myArray.week{{$week}}.{{ $end }} = $scope.{{ $end }},--}}
+    {{--myArray.week{{$week}}.{{ $sub_total }} = $scope.{{ $sub_total }}--}}
+    {{--<?php $day_number_scope++; ?>--}}
+    {{--@endfor--}}
+    {{--//console.log(myArray);--}}
+    {{--$scope.specs.push(myArray)--}}
+    {{--};--}}
+
+
+    {{--$scope.removeRow = function(index){--}}
+    {{--$scope.specs.splice(index, 1);--}}
+    {{--};--}}
+
+
+
+
+    {{--//            $scope.removeRow = function (grade) {--}}
+    {{--//                var index = 0;--}}
+    {{--//                var comArr = eval($scope.specs);--}}
+    {{--//                for (var i = 0; i < comArr.length; i++) {--}}
+    {{--//                    if (comArr[i].grade === grade) {--}}
+    {{--//                        index = i;--}}
+    {{--//                        break;--}}
+    {{--//                    }--}}
+    {{--//                }--}}
+    {{--//                if (index === -1) {--}}
+    {{--//                    alert("Something gone wrong");--}}
+    {{--//                }--}}
+    {{--//                $scope.specs.splice(index, 1);--}}
+    {{--//            };--}}
+    {{--});--}}
 </script>

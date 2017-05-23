@@ -239,7 +239,7 @@
                 }
             });
         })
-        
+
 
 
         $('#tabsModalRemove').on('show.bs.modal', function (e) {
@@ -269,7 +269,8 @@
                 //$("#tabs").find('li .csas').prop("href", "#"+inputVal)
                  $("#tabs").find('li').find('a[href$="'+boo+'"]').text(inputVal).attr("href", "#"+inputVal)
                     .closest('li').removeClass().addClass(inputVal)
-                $("#parking").attr("id",inputVal);
+                //change the modal id to match the tab.
+                $("#"+boo).attr('id', inputVal)
             } else {
 
             }
