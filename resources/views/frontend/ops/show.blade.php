@@ -68,6 +68,9 @@
         .highlighted{
             background-color: #EEEEEE;
         }
+        .tabs{
+            background-color:#ffff00;
+        }
     </style>
 
 </head>
@@ -231,17 +234,126 @@ echo $arr[1];
 </div>
 
 <!-- Nav tabs -->
-<ul id="tabs" class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active spec"><a href="#spec" aria-controls="spec" role="tab" data-toggle="tab">Spec</a></li>
-</ul>
-
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane fade in active" id="spec">
-        @include('frontend.ops.tables.ops_table1')
-    </div>
+<div style="padding-bottom: 10px">
+    <ul id="tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#event_summary" aria-controls="event_summary" role="tab" data-toggle="tab">Event Summary</a></li>
+        <li role="presentation" class="parking"><a href="#parking" aria-controls="parking" role="tab" data-toggle="tab">Parking</a></li>
+        <li role="presentation" class="audit"><a href="#audit" aria-controls="audit" role="tab" data-toggle="tab">Audit</a></li>
+        <li role="presentation" class="csas"><a href="#csas" aria-controls="csas" role="tab" data-toggle="tab">CSAS</a></li>
+    </ul>
 </div>
 
 
+<div id="three_tabs" class="tab-content">
+
+    <div role="tabpanel" class="tab-pane fade in active" id="event_summary">
+        Event Summary
+    </div>
+{{--PARKING--}}
+    <div role="tabpanel" class="tab-pane fade in" id="parking">
+        <ul id="parking_tabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#parking_summary" aria-controls="parking_summary" role="tab" data-toggle="tab">Summary</a></li>
+            <li role="presentation" class="spec"><a href="#parking_spec" aria-controls="parking_spec" role="tab" data-toggle="tab">Spec</a></li>
+            <li role="presentation" class=""><a href="#parking_costs" aria-controls="parking_costs" role="tab" data-toggle="tab">Costs</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="parking_summary">
+                summary
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="parking_spec">
+                @include('frontend.ops.tables.ops_table1')
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="parking_costs">
+                Costs
+            </div>
+        </div>
+    </div>
+{{--AUDIT--}}
+    <div role="tabpanel" class="tab-pane fade in" id="audit">
+        <ul id="audit_tabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#audit_summary" aria-controls="audit_summary" role="tab" data-toggle="tab">Summary</a></li>
+            <li role="presentation" class="spec"><a href="#audit_spec" aria-controls="audit_spec" role="tab" data-toggle="tab">Spec</a></li>
+            <li role="presentation" class=""><a href="#audit_costs" aria-controls="audit_costs" role="tab" data-toggle="tab">Costs</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="audit_summary">
+                summary
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="audit_spec">
+                {{--@include('frontend.ops.tables.ops_table1')--}}
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="audit_costs">
+                Costs
+            </div>
+        </div>
+    </div>
+    {{--CSAS--}}
+
+    <div role="tabpanel" class="tab-pane fade in" id="csas">
+        <ul id="csas_tabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#csas_summary" aria-controls="csas_summary" role="tab" data-toggle="tab">Summary</a></li>
+            <li role="presentation" class="spec"><a href="#csas_spec" aria-controls="csas_spec" role="tab" data-toggle="tab">Spec</a></li>
+            <li role="presentation" class=""><a href="#csas_costs" aria-controls="csas_costs" role="tab" data-toggle="tab">Costs</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="csas_summary">
+                summary
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="csas_spec">
+{{--                @include('frontend.ops.tables.ops_table1')--}}
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="csas_costs">
+                Costs
+            </div>
+        </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade in" id="extra_tab">
+            <ul id="csas_tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#csas_summary" aria-controls="csas_summary" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation" class="spec"><a href="#csas_spec" aria-controls="csas_spec" role="tab" data-toggle="tab">Spec</a></li>
+                <li role="presentation" class=""><a href="#csas_costs" aria-controls="csas_costs" role="tab" data-toggle="tab">Costs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="csas_summary">
+                    summary
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="csas_spec">
+                    {{--                @include('frontend.ops.tables.ops_table1')--}}
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="csas_costs">
+                    Costs
+                </div>
+            </div>
+    </div>
+</div>
+<button onclick="save_tabs()">Save Tabs</button>
+<script>
+    function save_tabs() {
+        var formData = $("#tabs_form").serializeArray();
+        var tab_href = []
+        var tab_title = []
+        var tabs_to_be_saved = $("#tabs li").find('a').each(function () {
+            tab_title.push($(this).text())
+            tab_href.push($(this).attr('href'))
+        })
+        var event_id = '{{ $event->id }}'
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+
+            }
+        });
+        $.post("/dashboard/ops/tabs/save",
+            { 'tab_title': tab_title,
+                'tab_href': tab_href,
+                'event_id': '<?= $event->id ?>',
+            },
+            function(data, status){
+                console.log(status);
+            });
+    }
+</script>
 
 <footer>
     {{--<div class="form-group col-md-3 col-lg-3">--}}
@@ -428,69 +540,4 @@ echo $arr[1];
         //console.log(pay_grades[x]['id']);
     });
 
-
-    {{--var specApp = angular.module("specApp", []);--}}
-    {{--specApp.controller("MondayCtrl", function ($scope, $http) {--}}
-
-        {{--$http.get("/event/{{ $event->id }}")--}}
-                {{--.then(function (response) {--}}
-                    {{--$scope.specs = response.data.data;--}}
-                {{--});--}}
-        {{--//console.log($scope.specs)--}}
-        {{--$scope.specs = [];--}}
-        {{--$scope.specs.week1 = {};--}}
-        {{--$scope.addRow = function(){--}}
-
-            {{--var myArray = {'grade':$scope.grade, 'qty':$scope.qty, 'position':$scope.position, 'total':$scope.total,--}}
-                {{--'week1':{},'week2':{},'week3':{},'week4':{},'week5':{},'week6':{},'week7':{},'week8':{}, 'week9':{},--}}
-                {{--'week10':{},'week11':{},'week12':{},'week13':{},'week14':{},'week15':{},'week16':{},'week17':{},'week18':{},'week19':{},'week20':{},--}}
-            {{--};--}}
-            {{--<?php $week = 0; ?>--}}
-            {{--@for($i=0; $i <= $diffInDays; $i++)--}}
-            {{--@if($day_number_scope ==7)--}}
-            {{--<?php $day_number_scope=0 ?>--}}
-            {{--@endif--}}
-            {{--<?php--}}
-            {{--$x = dayOfWeek($day_number_scope);--}}
-            {{--$lower_day = strtolower($x);--}}
-            {{--$start =   "$lower_day$i"."_start";--}}
-            {{--$end = "$lower_day$i"."_end";--}}
-            {{--$sub_total = "$lower_day$i"."_sub_total";--}}
-            {{--if($i % 7 == 0){--}}
-                {{--$week++;--}}
-            {{--}--}}
-            {{--?>--}}
-            {{--//$scope = $scope.specs.week1;--}}
-            {{--myArray.week{{$week}}.{{ $start }} = $scope.{{ $start }},--}}
-                    {{--myArray.week{{$week}}.{{ $end }} = $scope.{{ $end }},--}}
-                    {{--myArray.week{{$week}}.{{ $sub_total }} = $scope.{{ $sub_total }}--}}
-                {{--<?php $day_number_scope++; ?>--}}
-                {{--@endfor--}}
-                {{--//console.log(myArray);--}}
-            {{--$scope.specs.push(myArray)--}}
-        {{--};--}}
-
-
-        {{--$scope.removeRow = function(index){--}}
-            {{--$scope.specs.splice(index, 1);--}}
-        {{--};--}}
-
-
-
-
-{{--//            $scope.removeRow = function (grade) {--}}
-{{--//                var index = 0;--}}
-{{--//                var comArr = eval($scope.specs);--}}
-{{--//                for (var i = 0; i < comArr.length; i++) {--}}
-{{--//                    if (comArr[i].grade === grade) {--}}
-{{--//                        index = i;--}}
-{{--//                        break;--}}
-{{--//                    }--}}
-{{--//                }--}}
-{{--//                if (index === -1) {--}}
-{{--//                    alert("Something gone wrong");--}}
-{{--//                }--}}
-{{--//                $scope.specs.splice(index, 1);--}}
-{{--//            };--}}
-    {{--});--}}
 </script>

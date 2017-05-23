@@ -9,7 +9,6 @@ Route::get('/map', 'FrontendController@map')->name('frontend.map');
 Route::get('macros', 'FrontendController@macros')->name('frontend.macros');
 
 Route::post('/email', 'FrontendController@e_mail');
-
 Route::get('/users_sql', 'FrontendController@users_sql');
 
 Route::get('/spec-staff/{staff}', function ($staff) {
@@ -470,7 +469,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Ops'], function () {
         Route::resource('dashboard/ops', 'OpsController');
         Route::resource('dashboard/specs', 'SpecsController');
-
+        Route::post('dashboard/ops/tabs/save', 'OpsController@save_tabs')->name('dashboard.ops.tabs.save');
     });
 });
 

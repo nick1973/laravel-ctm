@@ -229,12 +229,14 @@
             $("#tabs").find('li').find('a').each(function(n, i) {
                 var href = this.href;
                 var tabs = (href.split("#").pop())
-                $(".existingTabs").append('<div class="checkbox">' +
+                if(tabs!="event_summary") {
+                    $(".existingTabs").append('<div class="checkbox">' +
                         '<label>' +
-                        '<input onchange="editTabs(this)" type="checkbox" name="'+tabs+'" value="'+tabs+'"> ' +
+                        '<input onchange="editTabs(this)" type="checkbox" name="' + tabs + '" value="' + tabs + '"> ' +
                         tabs +
                         '</label> ' +
                         '</div>')
+                }
             });
         })
         
@@ -245,12 +247,15 @@
             $("#tabs").find('li').find('a').each(function(n, i) {
                 var href = this.href;
                 var tabs = (href.split("#").pop())
-                $(".existingTabs").append('<div class="checkbox">' +
+                //console.log(tabs)
+                if(tabs!="event_summary"){
+                    $(".existingTabs").append('<div class="checkbox">' +
                         '<label>' +
                         '<input type="checkbox" name="'+tabs+'" value="'+tabs+'"> ' +
                         tabs +
                         '</label> ' +
                         '</div>')
+                }
             });
         })
 
@@ -260,7 +265,11 @@
             var inputVal = $(this).find("input."+boo).val()
             console.log(inputVal)
             if(inputVal != '') {
-                $("#tabs").find('li').find('a[href$="'+boo+'"]').text(inputVal)
+                //changes text but need to change both text and href
+                //$("#tabs").find('li .csas').prop("href", "#"+inputVal)
+                 $("#tabs").find('li').find('a[href$="'+boo+'"]').text(inputVal).attr("href", "#"+inputVal)
+                    .closest('li').removeClass().addClass(inputVal)
+                $("#parking").attr("id",inputVal);
             } else {
 
             }
@@ -273,40 +282,55 @@
             event.preventDefault();
             var boo = $(this).find("input:checked").val()
             console.log(boo)
-            if(boo == 'spec') {
-                alert("Can't remove this tab, but you can edit it!")
-                $('#tabsModalRemove').modal('hide')
-            } else {
+//            if(boo == 'spec') {
+//                alert("Can't remove this tab, but you can edit it!")
+//                $('#tabsModalRemove').modal('hide')
+//            } else {
                 $("#tabs").find('li.'+boo).remove()
                 $(".tab-content").find('#'+boo).remove()
                 $('#tabsModalRemove').modal('hide')
-            }
-
+//            }
         });
 
         $('#form_modal_tabs').on('submit', function(event){
             event.preventDefault();
             duplicateTabs($(this).find('input[name="new_text"]').val())
+            console.log('fired')
             $('#tabsModal').modal('hide')
         });
 
         function addTab(name) {
-            $("#tabs").append('<li class="'+name+'" role="presentation"><a href="#'+name+'" aria-controls="'+name+'" role="tab" data-toggle="tab">'+name+'</a></li>')
-            $(".tab-content").append('<div role="tabpanel" class="tab-pane fade" id="'+name+'">'+name+'</div>')
+            $("#tabs").append('<li class="'+name+'" role="presentation">' +
+                '<a href="#'+name+'" aria-controls="'+name+'" role="tab" data-toggle="tab">'+name+'</a>' +
+                '</li>')
+            //Clone the 3 tabs and rename accordingly
+            var clone_tabs = $('#extra_tab').clone();
+            $('#three_tabs').append(clone_tabs);
+                //alter the a href name dynamically
+                $('#three_tabs > div:last').attr('id', name)
+                $('#three_tabs > div:last ul li a:eq(0)').attr('href', '#'+name+'_summary')
+                $('#three_tabs > div:last ul li a:eq(1)').attr('href', '#'+name+'_spec')
+                $('#three_tabs > div:last ul li a:eq(2)').attr('href', '#'+name+'_costs')
+                //alter the div id's name dynamically
+                $('#three_tabs > div:last .tab-content > div:eq(0)').attr('id', name+'_summary')
+                $('#three_tabs > div:last .tab-content > div:eq(1)').attr('id', name+'_spec')
+                $('#three_tabs > div:last .tab-content > div:eq(2)').attr('id', name+'_costs')
+            save_tabs()
         }
 
         function duplicateTabs(input) {
+            console.log(input)
             var tabs = []
             $("#tabs").find('li').find('a').each(function(n, i) {
                 var href = this.href;
                 tabs.push(href.split("#").pop())
             });
             var foo = $.inArray( input, tabs );
-            console.log(foo)
+            console.log(tabs)
             if(foo=='-1'){
                 addTab(input)
             } else {
-                alert(input + ' Already Exists!')
+                //alert(input + ' Already Exists!')
             }
         }
     })

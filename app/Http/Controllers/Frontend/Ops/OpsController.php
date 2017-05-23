@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Ops;
 use App\Events\Event;
 use App\Models\Ops\Events;
 use App\Http\Controllers\Controller;
+use App\Models\Ops\Opstab;
 use App\Models\Ops\PayGrades;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -91,5 +92,20 @@ class OpsController extends Controller
         return view('frontend.ops.show', compact('event', 'pay_grades', 'ctm_start_date', 'ctm_end_date', 'diffInDays',
             'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy', 'event_start_date',
             'event_end_date', 'diffInDays_event'));
+    }
+
+    public function save_tabs(Request $request){
+        $event_id = $request->input('event_id');
+        $tab_title = $request->input('tab_title');
+        $tab_href = $request->input('tab_href');
+        $tab_title_array = implode(',', $tab_title);
+        $tab_href_array = implode(',', $tab_href);
+        if(Opstab::where('event_id', $event_id)->exists()){
+            Opstab::where('event_id', $event_id)->update(['tab_href'=>$tab_href_array, 'tab_title'=>$tab_title_array]);
+            return ['tab_href'=>$tab_href_array, 'tab_title'=>$tab_title_array];
+        } else{
+            Opstab::create(['tab_href'=>$tab_href_array, 'tab_title'=>$tab_title_array, 'event_id'=>$event_id]);
+        }
+
     }
 }

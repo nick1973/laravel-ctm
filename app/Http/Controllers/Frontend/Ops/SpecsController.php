@@ -55,63 +55,63 @@ class SpecsController extends Controller
                 $mon_endi = implode(',', $mon_end);
                 $mon_sub_totali = implode(',', $mon_sub_total);
             } else{
-                $mon_starti = '';
-                $mon_endi = '';
-                $mon_sub_totali = '';
+//                $mon_starti = ',';
+//                $mon_endi = ',';
+//                $mon_sub_totali = ',';
             }
             if($tues_start!== null){
                 $tues_starti = implode(',', $tues_start);
                 $tues_endi = implode(',', $tues_end);
                 $tues_sub_totali = implode(',', $tues_sub_total);
             } else{
-                $tues_starti = '';
-                $tues_endi = '';
-                $tues_sub_totali = '';
+//                $tues_starti = ',';
+//                $tues_endi = ',';
+//                $tues_sub_totali = ',';
             }
             if($wed_start!== null){
                 $wed_starti = implode(',', $wed_start);
                 $wed_endi = implode(',', $wed_end);
                 $wed_sub_totali = implode(',', $wed_sub_total);
             } else{
-                $wed_starti = '';
-                $wed_endi = '';
-                $wed_sub_totali = '';
+//                $wed_starti = ',';
+//                $wed_endi = ',';
+//                $wed_sub_totali = ',';
             }
             if($thur_start!== null){
                 $thur_starti = implode(',', $thur_start);
                 $thur_endi = implode(',', $thur_end);
                 $thur_sub_totali = implode(',', $thur_sub_total);
             } else{
-                $thur_starti = '';
-                $thur_endi = '';
-                $thur_sub_totali = '';
+//                $thur_starti = ',';
+//                $thur_endi = ',';
+//                $thur_sub_totali = ',';
             }
             if($fri_start!== null){
                 $fri_starti = implode(',', $fri_start);
                 $fri_endi = implode(',', $fri_end);
                 $fri_sub_totali = implode(',', $fri_sub_total);
             } else{
-                $fri_starti = '';
-                $fri_endi = '';
-                $fri_sub_totali = '';
+//                $fri_starti = ',';
+//                $fri_endi = ',';
+//                $fri_sub_totali = ',';
             }
             if($sat_start!== null){
                 $sat_starti = implode(',', $sat_start);
                 $sat_endi = implode(',', $sat_end);
                 $sat_sub_totali = implode(',', $sat_sub_total);
             } else{
-                $sat_starti = '';
-                $sat_endi = '';
-                $sat_sub_totali = '';
+//                $sat_starti = ',';
+//                $sat_endi = ',';
+//                $sat_sub_totali = ',';
             }
             if($sun_start!== null){
                 $sun_starti = implode(',', $sun_start);
                 $sun_endi = implode(',', $sun_end);
                 $sun_sub_totali = implode(',', $sun_sub_total);
             } else{
-                $sun_starti = '';
-                $sun_endi = '';
-                $sun_sub_totali = '';
+//                $sun_starti = ',';
+//                $sun_endi = ',';
+//                $sun_sub_totali = ',';
             }
 
             $totali = implode(',', $total);
