@@ -17,6 +17,7 @@
                         <th>First Name</th>
                         <th>Surname</th>
                         <th>DOB</th>
+                        <th>D1</th>
                         <th>Driver Paperwork Complete</th>
                         <th>Date Expires (dd-mm-yyyy)</th>
                         <th>Updated At</th>
@@ -24,6 +25,7 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -82,6 +84,7 @@
                                 return dd + '-' + mm + '-' + yyyy
                         }, className: "centre get"
                     },
+                    { "data": "d1" , className: "centre get" },
                     {
                         "data": function (data) {
                             if(data.driver_paper_work == 1){
