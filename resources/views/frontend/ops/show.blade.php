@@ -8,6 +8,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="/js/ops_scripts.js"></script>
     {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>--}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
@@ -234,12 +235,20 @@ echo $arr[1];
 </div>
 
 <!-- Nav tabs -->
+{{--NEED TO BE DYNAMIC FROM DB DATA--}}
 <div style="padding-bottom: 10px">
     <ul id="tabs" class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#event_summary" aria-controls="event_summary" role="tab" data-toggle="tab">Event Summary</a></li>
-        <li role="presentation" class="parking"><a href="#parking" aria-controls="parking" role="tab" data-toggle="tab">Parking</a></li>
-        <li role="presentation" class="audit"><a href="#audit" aria-controls="audit" role="tab" data-toggle="tab">Audit</a></li>
-        <li role="presentation" class="csas"><a href="#csas" aria-controls="csas" role="tab" data-toggle="tab">CSAS</a></li>
+        @if(empty($tab_array))
+            <li role="presentation" class=""><a href="#parking" aria-controls="Parking" role="tab" data-toggle="tab">Parking</a></li>
+            <li role="presentation" class=""><a href="#audit" aria-controls="Audit" role="tab" data-toggle="tab">Audit</a></li>
+            <li role="presentation" class=""><a href="#csas" aria-controls="Audit" role="tab" data-toggle="tab">CSAS</a></li>
+        @endif
+        @foreach($tab_array as $tab)
+            @if(strtolower($tab)!='event summary')
+                <li role="presentation" class="{{strtolower($tab)}}"><a href="#{{strtolower($tab)}}" aria-controls="{{strtolower($tab)}}" role="tab" data-toggle="tab">{{$tab}}</a></li>
+            @endif
+        @endforeach
     </ul>
 </div>
 
@@ -249,64 +258,125 @@ echo $arr[1];
     <div role="tabpanel" class="tab-pane fade in active" id="event_summary">
         Event Summary
     </div>
-{{--PARKING--}}
-    <div role="tabpanel" class="tab-pane fade in" id="parking">
-        <ul id="parking_tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#parking_summary" aria-controls="parking_summary" role="tab" data-toggle="tab">Summary</a></li>
-            <li role="presentation" class="spec"><a href="#parking_spec" aria-controls="parking_spec" role="tab" data-toggle="tab">Spec</a></li>
-            <li role="presentation" class=""><a href="#parking_costs" aria-controls="parking_costs" role="tab" data-toggle="tab">Costs</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="parking_summary">
-                summary
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="parking_spec">
-                @include('frontend.ops.tables.ops_table1')
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="parking_costs">
-                Costs
+
+    @if(empty($tab_array))
+        {{--PARKING--}}
+        <div role="tabpanel" class="tab-pane fade in" id="parking">
+            <ul id="audit_tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#parking_summary" aria-controls="parking_summary" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation" class="spec"><a href="#parking_spec" aria-controls="parking_spec" role="tab" data-toggle="tab">Spec</a></li>
+                <li role="presentation" class=""><a href="#parking_costs" aria-controls="parking_costs" role="tab" data-toggle="tab">Costs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="parking_summary">
+                    summary
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="parking_spec">
+                    @include('frontend.ops.tables.ops_table1')
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="parking_costs">
+                    Costs
+                </div>
             </div>
         </div>
-    </div>
+        {{--AUDIT--}}
+        <div role="tabpanel" class="tab-pane fade in" id="audit">
+            <ul id="audit_tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#audit_summary" aria-controls="audit_summary" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation" class="spec"><a href="#audit_spec" aria-controls="audit_spec" role="tab" data-toggle="tab">Spec</a></li>
+                <li role="presentation" class=""><a href="#audit_costs" aria-controls="audit_costs" role="tab" data-toggle="tab">Costs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="audit_summary">
+                    summary
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="audit_spec">
+                    @include('frontend.ops.tables.ops_table1')
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="audit_costs">
+                    Costs
+                </div>
+            </div>
+        </div>
+        {{--CSAS--}}
+        <div role="tabpanel" class="tab-pane fade in" id="csas">
+            <ul id="csas_tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#csas_summary" aria-controls="csas_summary" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation" class="spec"><a href="#csas_spec" aria-controls="csas_spec" role="tab" data-toggle="tab">Spec</a></li>
+                <li role="presentation" class=""><a href="#csas_costs" aria-controls="csas_costs" role="tab" data-toggle="tab">Costs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="csas_summary">
+                    summary
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="csas_spec">
+                    @include('frontend.ops.tables.ops_table1')
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="csas_costs">
+                    Costs
+                </div>
+            </div>
+        </div>
+    @endif
+    @foreach($tab_array as $tab)
+        <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}">
+            <ul id="{{strtolower($tab)}}_tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#{{strtolower($tab)}}_summary" aria-controls="parking_summary" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation" class="spec"><a href="#{{strtolower($tab)}}_spec" aria-controls="parking_spec" role="tab" data-toggle="tab">Spec</a></li>
+                <li role="presentation" class=""><a href="#{{strtolower($tab)}}_costs" aria-controls="parking_costs" role="tab" data-toggle="tab">Costs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="{{strtolower($tab)}}_summary">
+                    summary
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}_spec">
+                    {{--@include('frontend.ops.tables.ops_table1')--}}
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}_costs">
+                    Costs
+                </div>
+            </div>
+        </div>
+    @endforeach
 {{--AUDIT--}}
-    <div role="tabpanel" class="tab-pane fade in" id="audit">
-        <ul id="audit_tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#audit_summary" aria-controls="audit_summary" role="tab" data-toggle="tab">Summary</a></li>
-            <li role="presentation" class="spec"><a href="#audit_spec" aria-controls="audit_spec" role="tab" data-toggle="tab">Spec</a></li>
-            <li role="presentation" class=""><a href="#audit_costs" aria-controls="audit_costs" role="tab" data-toggle="tab">Costs</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="audit_summary">
-                summary
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="audit_spec">
+    {{--<div role="tabpanel" class="tab-pane fade in" id="audit">--}}
+        {{--<ul id="audit_tabs" class="nav nav-tabs" role="tablist">--}}
+            {{--<li role="presentation" class="active"><a href="#audit_summary" aria-controls="audit_summary" role="tab" data-toggle="tab">Summary</a></li>--}}
+            {{--<li role="presentation" class="spec"><a href="#audit_spec" aria-controls="audit_spec" role="tab" data-toggle="tab">Spec</a></li>--}}
+            {{--<li role="presentation" class=""><a href="#audit_costs" aria-controls="audit_costs" role="tab" data-toggle="tab">Costs</a></li>--}}
+        {{--</ul>--}}
+        {{--<div class="tab-content">--}}
+            {{--<div role="tabpanel" class="tab-pane fade in active" id="audit_summary">--}}
+                {{--summary--}}
+            {{--</div>--}}
+            {{--<div role="tabpanel" class="tab-pane fade in" id="audit_spec">--}}
                 {{--@include('frontend.ops.tables.ops_table1')--}}
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="audit_costs">
-                Costs
-            </div>
-        </div>
-    </div>
+            {{--</div>--}}
+            {{--<div role="tabpanel" class="tab-pane fade in" id="audit_costs">--}}
+                {{--Costs--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     {{--CSAS--}}
 
-    <div role="tabpanel" class="tab-pane fade in" id="csas">
-        <ul id="csas_tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#csas_summary" aria-controls="csas_summary" role="tab" data-toggle="tab">Summary</a></li>
-            <li role="presentation" class="spec"><a href="#csas_spec" aria-controls="csas_spec" role="tab" data-toggle="tab">Spec</a></li>
-            <li role="presentation" class=""><a href="#csas_costs" aria-controls="csas_costs" role="tab" data-toggle="tab">Costs</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="csas_summary">
-                summary
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="csas_spec">
+    {{--<div role="tabpanel" class="tab-pane fade in" id="csas">--}}
+        {{--<ul id="csas_tabs" class="nav nav-tabs" role="tablist">--}}
+            {{--<li role="presentation" class="active"><a href="#csas_summary" aria-controls="csas_summary" role="tab" data-toggle="tab">Summary</a></li>--}}
+            {{--<li role="presentation" class="spec"><a href="#csas_spec" aria-controls="csas_spec" role="tab" data-toggle="tab">Spec</a></li>--}}
+            {{--<li role="presentation" class=""><a href="#csas_costs" aria-controls="csas_costs" role="tab" data-toggle="tab">Costs</a></li>--}}
+        {{--</ul>--}}
+        {{--<div class="tab-content">--}}
+            {{--<div role="tabpanel" class="tab-pane fade in active" id="csas_summary">--}}
+                {{--summary--}}
+            {{--</div>--}}
+            {{--<div role="tabpanel" class="tab-pane fade in" id="csas_spec">--}}
 {{--                @include('frontend.ops.tables.ops_table1')--}}
-            </div>
-            <div role="tabpanel" class="tab-pane fade in" id="csas_costs">
-                Costs
-            </div>
-        </div>
-    </div>
+            {{--</div>--}}
+            {{--<div role="tabpanel" class="tab-pane fade in" id="csas_costs">--}}
+                {{--Costs--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <div role="tabpanel" class="tab-pane fade in" id="extra_tab">
             <ul id="csas_tabs" class="nav nav-tabs" role="tablist">

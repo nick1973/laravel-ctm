@@ -69,7 +69,11 @@ class OpsController extends Controller
     {
         $event = Events::find($id);
         $pay_grades = PayGrades::all();
-
+        $tabs = Opstab::where('event_id', $id)->get();
+        $tab_array = [];
+        foreach ($tabs as $tab){
+            $tab_array = explode(',', $tab->tab_title);
+        }
         $event_start_date = Carbon::createFromFormat('Y/m/d', $event->event_start_date);
         $event_start_date = Carbon::parse($event_start_date);
         $event_end_date = Carbon::createFromFormat('Y/m/d', $event->event_end_date);
@@ -91,7 +95,7 @@ class OpsController extends Controller
         $pay_grades = json_decode($pay_grades, true);
         return view('frontend.ops.show', compact('event', 'pay_grades', 'ctm_start_date', 'ctm_end_date', 'diffInDays',
             'day_number', 'day', 'day_number_table', 'day_number_ng', 'day_number_scope', 'day_number_copy', 'event_start_date',
-            'event_end_date', 'diffInDays_event'));
+            'event_end_date', 'diffInDays_event', 'tab_array'));
     }
 
     public function save_tabs(Request $request){
