@@ -36,12 +36,10 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -99,7 +97,7 @@
                         //action: false,
                         header: false,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7,8,17,18,19,20,21,22 ],
+                            columns: [ 0,1,2,3,4,5,6,7,8,17,18,19,20,21 ],
                             modifier: {
                                 selected: true,
                                 page: 'current'
@@ -214,11 +212,6 @@
                         "visible": false },
                     { "data": "uk_driving_license" , className: "centre",
                         "visible": false },
-                    {
-                        "data": function (data) {
-                            return '*';
-                        }
-                    },
                     { "data": "emergency_contact_name" , className: "centre",
                         "visible": false },
                     { "data": "emergency_contact_rel" , className: "centre",
