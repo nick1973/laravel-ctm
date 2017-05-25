@@ -411,7 +411,6 @@ echo $arr[1];
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '<?= csrf_token() ?>'
-
             }
         });
         $.post("/dashboard/ops/tabs/save",
