@@ -32,10 +32,14 @@
                 <th>UK Driving License</th>
                 <th></th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -89,7 +93,7 @@
                         //action: false,
                         header: false,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7,8,17 ],
+                            columns: [ 0,1,2,3,4,5,6,8,14,18,19,9,10,11,12 ],
                             modifier: {
                                 selected: true,
                                 page: 'current'
@@ -204,6 +208,16 @@
                         "visible": false },
                     { "data": "uk_driving_license" , className: "centre",
                         "visible": false },
+                    {
+                        "data": function (data) {
+                            return ""
+                        }, "visible": false
+                    },
+                    {
+                        "data": function (data) {
+                            return ""
+                        }, "visible": false
+                    },
                     {
                         "data": function (data) {
                             if(data.notes == ''){
