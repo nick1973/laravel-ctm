@@ -34,10 +34,12 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -93,7 +95,7 @@
                         //action: false,
                         header: false,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,8,14,18,19,9,10,11,12 ],
+                            columns: [ 0,1,2,3,4,5,6,20,8,15,18,19,9,10,11,12 ],
                             modifier: {
                                 selected: true,
                                 page: 'current'
@@ -218,6 +220,8 @@
                             return ""
                         }, "visible": false
                     },
+                    { "data": "medical_conditions" , className: "centre",
+                        "visible": false },
                     {
                         "data": function (data) {
                             if(data.notes == ''){
