@@ -6,69 +6,61 @@
 
     {{--<div class="row">--}}
 
-        {{--<div class="col-md-12 col-lg-12">--}}
-            {{--<h4>Add New Event <span style="vertical-align: middle"><i style="color: green" class="fa fa-plus-square fa-2x" aria-hidden="true"></i></span></h4>--}}
-            <div class="table-responsive">
-                <table id="staff_table" class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>Payroll number</th>
-                        <th>First Name</th>
-                        <th>Surname</th>
-                        <th>Driver paperwork complete</th>
-                        <th>Mobile</th>
-                        <th>Email</th>
-                        <th>RTW</th>
-                        <th>Medical notes</th>
-                        <th>Age</th>
-                        <th>Emergency contact name</th>
-                        <th>Emergency contact relationship</th>
-                        <th>Emergency contact number</th>
-                        <th>Emergency contact mobile</th>
-                        <th>Notes</th>
-                        <th>Postcode</th>
-                        <th>Land Line</th>
-                        <th>D1</th>
-                        <th>UK Driving License</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        {{--</div>--}}
+    {{--<div class="col-md-12 col-lg-12">--}}
+    {{--<h4>Add New Event <span style="vertical-align: middle"><i style="color: green" class="fa fa-plus-square fa-2x" aria-hidden="true"></i></span></h4>--}}
+    <div class="table-responsive">
+        <table id="staff_table" class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Payroll number</th>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>Driver paperwork complete</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>RTW</th>
+                <th>Medical notes</th>
+                <th>Age</th>
+                <th>Emergency contact name</th>
+                <th>Emergency contact relationship</th>
+                <th>Emergency contact number</th>
+                <th>Emergency contact mobile</th>
+                <th>Notes</th>
+                <th>Postcode</th>
+                <th>Land Line</th>
+                <th>D1</th>
+                <th>UK Driving License</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    {{--</div>--}}
 
 
 
@@ -97,7 +89,7 @@
                         //action: false,
                         header: false,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,7,8,17,18,19,20,21 ],
+                            columns: [ 0,1,2,3,4,5,6,7,8,17 ],
                             modifier: {
                                 selected: true,
                                 page: 'current'
@@ -212,40 +204,32 @@
                         "visible": false },
                     { "data": "uk_driving_license" , className: "centre",
                         "visible": false },
-                    { "data": "emergency_contact_name" , className: "centre",
-                        "visible": false },
-                    { "data": "emergency_contact_rel" , className: "centre",
-                        "visible": false },
-                    { "data": "emergency_contact_number" , className: "centre",
-                        "visible": false },
-                    { "data": "emergency_contact_mobile" , className: "centre",
-                        "visible": false },
                     {
                         "data": function (data) {
                             if(data.notes == ''){
                                 return '<button type="button" class="btn btn-primary" ' +
+                                        'data-toggle="modal" data-target="#exampleModal" ' +
+                                        'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
+                                        'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
+                            }
+                            return '<button type="button" class="btn btn-success" ' +
                                     'data-toggle="modal" data-target="#exampleModal" ' +
                                     'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
                                     'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
-                            }
-                            return '<button type="button" class="btn btn-success" ' +
-                                'data-toggle="modal" data-target="#exampleModal" ' +
-                                'data-notes="'+data.notes+'" data-id="'+data.id+'"' +
-                                'data-name="'+data.name+ ' ' +data.lastname+'">Notes</button>';
                         }
                     },
                     {
                         "data": function (data) {
                             if(data.medical_conditions == 'Yes'){
                                 return '<button type="button" class="btn btn-success" ' +
+                                        'data-toggle="modal" data-target="#medicalModal" ' +
+                                        'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
+                                        'data-name="'+data.name+ ' ' +data.lastname+'">Medical</button>';
+                            }
+                            return '<button type="button" class="btn btn-primary" ' +
                                     'data-toggle="modal" data-target="#medicalModal" ' +
                                     'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
                                     'data-name="'+data.name+ ' ' +data.lastname+'">Medical</button>';
-                            }
-                            return '<button type="button" class="btn btn-primary" ' +
-                                'data-toggle="modal" data-target="#medicalModal" ' +
-                                'data-notes="'+data.medical_conditions_info+'" data-id="'+data.id+'"' +
-                                'data-name="'+data.name+ ' ' +data.lastname+'">Medical</button>';
                         }
                     }
                 ],
