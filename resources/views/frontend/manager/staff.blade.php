@@ -95,7 +95,7 @@
                         //action: false,
                         header: false,
                         exportOptions: {
-                            columns: [ 0,1,2,3,4,5,6,20,8,15,18,19,9,10,11,12 ],
+                            columns: [ 0,1,2,3,4,5,6,20,8,13,18,19,9,10,11,12 ],
                             modifier: {
                                 selected: true,
                                 page: 'current'
