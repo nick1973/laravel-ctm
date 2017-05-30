@@ -59,6 +59,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'views' => [
+            'driver' => 'local',
+            'root' => base_path('resources/views/frontend/ops/tables'),
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'AKIAJ55IJY67EKI2TSJA',

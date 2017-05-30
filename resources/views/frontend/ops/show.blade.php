@@ -247,6 +247,11 @@ echo $arr[1];
         @foreach($tab_array as $tab)
             @if(strtolower($tab)!='event summary')
                 <li role="presentation" class="{{strtolower($tab)}}"><a href="#{{strtolower($tab)}}" aria-controls="{{strtolower($tab)}}" role="tab" data-toggle="tab">{{$tab}}</a></li>
+
+                <?php
+                $table = Storage::disk('public')->get('ops_table.blade.php');
+                Storage::disk('views')->put($event->id.'/'.strtolower($tab).'_table.blade.php', $table);
+                ?>
             @endif
         @endforeach
     </ul>
@@ -291,7 +296,7 @@ echo $arr[1];
                     summary
                 </div>
                 <div role="tabpanel" class="tab-pane fade in" id="audit_spec">
-                    @include('frontend.ops.tables.ops_table1')
+                    {{--@include('frontend.ops.tables.ops_table1')--}}
                 </div>
                 <div role="tabpanel" class="tab-pane fade in" id="audit_costs">
                     Costs
@@ -310,7 +315,7 @@ echo $arr[1];
                     summary
                 </div>
                 <div role="tabpanel" class="tab-pane fade in" id="csas_spec">
-                    @include('frontend.ops.tables.ops_table1')
+                    {{--@include('frontend.ops.tables.ops_table1')--}}
                 </div>
                 <div role="tabpanel" class="tab-pane fade in" id="csas_costs">
                     Costs
@@ -318,7 +323,7 @@ echo $arr[1];
             </div>
         </div>
     @endif
-    @foreach($tab_array as $tab)
+    @foreach($tab_array as $key=>$tab)
         <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}">
             <ul id="{{strtolower($tab)}}_tabs" class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#{{strtolower($tab)}}_summary" aria-controls="parking_summary" role="tab" data-toggle="tab">Summary</a></li>
@@ -328,10 +333,18 @@ echo $arr[1];
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="{{strtolower($tab)}}_summary">
                     summary
+                    {{ $tab }}
                 </div>
-                <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}_spec">
-                    {{--@include('frontend.ops.tables.ops_table1')--}}
-                </div>
+                @if($tab!="Event Summary")
+                    <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}_spec">
+                        @include('frontend.ops.tables.'.$event->id.'.'.strtolower($tab).'_table')
+                        <script>
+                            $("#hidden_tab_name").val('{{strtolower($tab)}}').attr("id",'{{strtolower($tab)}}'+"_tab_name")
+                            $("#firstTable").attr("id",'{{strtolower($tab)}}'+"_Table");
+                            $("#days").attr("id",'{{strtolower($tab)}}'+"_days");
+                        </script>
+                    </div>
+                @endif
                 <div role="tabpanel" class="tab-pane fade in" id="{{strtolower($tab)}}_costs">
                     Costs
                 </div>
@@ -433,81 +446,6 @@ echo $arr[1];
 </html>
 
 <script>
-
-//    function dragNdrop() {
-//        var foo = $("#days tbody, #firstTable tbody")
-//            $(foo).sortable({
-//                items: "> tr",//:not(:first)
-//                appendTo: "parent",
-//                helper: "clone",
-//                placeholder: 'ui-state-highlight',
-//                classes: {
-//                    "ui-sortable": "highlight"
-//                },
-//                update: function(event, ui) {
-//                    //addNote()
-//                }
-//            }).disableSelection();//.effect("bounce", "slow" );
-//    }
-//
-//    dragNdrop()
-
-
-//    function clearRow() {
-//        var $tr    = $('#firstTable').find('.highlighted')
-//        $tr.find(':text').val('');
-//        var $tr    = $('#days').find('.highlighted')
-//        $tr.find(':text').val('');
-//    }
-//
-//    function copyRow() {
-//        var $tr    = $('#firstTable').find('.highlighted')//.css('background-color', 'yellow')
-//        var $clone_roles = $tr.clone();
-//        var $tr_days    = $('#days').find('tr.tr_clone.highlighted')
-//        var $clone_days = $tr_days.clone();
-//        $clone_roles.find('td:eq(1)').find('input:checkbox').removeAttr('checked')
-//        $clone_roles.removeClass('highlighted')
-//
-//
-//        $clone_days.removeClass('highlighted')
-//
-//
-//
-//        $tr.after($clone_roles);
-//        $tr_days.after($clone_days);
-//    }
-//
-//    function addRows(el) {
-//        var $tr    = $(el).closest('.tr_clone');
-//        var $clone = $tr.clone();
-//        //var $trt    = $('#days').find('tr.tr_clone:first-child')
-//        var $trt    = $('#days').find('tr.tr_clone.highlighted')
-//        var $clonet = $trt.clone();
-//        $clone.find(':text').val('');
-//        var foo = $clone.find('td:eq(1)')
-//        $tr.after($clone);
-//        $trt.after($clonet);
-//        //console.log(num)
-//    };
-//
-//
-//        function check(el) {
-//            var index = $(el).closest('tr').index();
-//            console.log(index)
-//                if ($(el).is(":checked")) {
-//                    $(el).closest('tr').addClass("highlighted");
-//                    $('#days').find('tr.tr_clone:eq('+index+')').addClass("highlighted")
-//                } else {
-//                    $(el).closest('tr').removeClass("highlighted")
-//                    $('#days').find('tr.tr_clone:eq('+index+')').removeClass("highlighted")
-//                }
-//        }
-//
-//        function removeTableRow() {
-//            $('.highlighted').remove()
-//        }
-
-
     $('a').on('shown.bs.tab', function (e) {
         //console.log(e.relatedTarget)
         if (e.target.hasAttribute('data-hours')){

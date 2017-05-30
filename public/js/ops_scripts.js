@@ -131,14 +131,14 @@ $(function() {
 function clearRow() {
     var $tr    = $('#firstTable').find('.highlighted')
     $tr.find(':text').val('');
-    var $tr    = $('#days').find('.highlighted')
+    var $tr    = $('.days').find('.highlighted')
     $tr.find(':text').val('');
 }
 
 function copyRow() {
     var $tr    = $('#firstTable').find('.highlighted')//.css('background-color', 'yellow')
     var $clone_roles = $tr.clone();
-    var $tr_days    = $('#days').find('tr.tr_clone.highlighted')
+    var $tr_days    = $('.days').find('tr.tr_clone.highlighted')
     var $clone_days = $tr_days.clone();
     $clone_roles.find('td:eq(1)').find('input:checkbox').removeAttr('checked')
     $clone_roles.removeClass('highlighted')
@@ -147,17 +147,18 @@ function copyRow() {
     $tr_days.after($clone_days);
 }
 
-function addRows(el) {
+function addRows(id,el) {
+    var id = id.replace('_Table', '');
+    console.log(id);
     var $tr    = $(el).closest('.tr_clone');
     var $clone = $tr.clone();
-    var $trt    = $('#days').find('tr.tr_clone:first-child')
-    //var $trt    = $('#days').find('tr.tr_clone.highlighted')
+    var $trt    = $('#'+id+'_days').find('tr.tr_clone:first-child')
+    //var $trt    = $('tr.tr_clone')
     var $clonet = $trt.clone();
     $clone.find(':text').val('');
     var foo = $clone.find('td:eq(1)')
     $tr.after($clone);
     $trt.after($clonet);
-    //console.log(num)
 };
 
 function check(el) {
@@ -165,10 +166,10 @@ function check(el) {
     console.log(index)
     if ($(el).is(":checked")) {
         $(el).closest('tr').addClass("highlighted");
-        $('#days').find('tr.tr_clone:eq('+index+')').addClass("highlighted")
+        $('.days').find('tr.tr_clone:eq('+index+')').addClass("highlighted")
     } else {
         $(el).closest('tr').removeClass("highlighted")
-        $('#days').find('tr.tr_clone:eq('+index+')').removeClass("highlighted")
+        $('.days').find('tr.tr_clone:eq('+index+')').removeClass("highlighted")
     }
 }
 
