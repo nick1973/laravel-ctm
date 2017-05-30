@@ -61,6 +61,7 @@
                     @endforeach
                 </select>
             </td>
+
             <td width="70px">
                 <input name="qty[]" class="form-control" type="text"
                        value="">
