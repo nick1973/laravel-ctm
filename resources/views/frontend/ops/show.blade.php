@@ -249,7 +249,7 @@ echo $arr[1];
                 <li role="presentation" class="{{strtolower($tab)}}"><a href="#{{strtolower($tab)}}" aria-controls="{{strtolower($tab)}}" role="tab" data-toggle="tab">{{$tab}}</a></li>
 
                 <?php
-                $table = Storage::disk('public')->get('ops_table.blade.php');
+                $table = Storage::disk('table')->get('ops_table.blade.php');
                 Storage::disk('views')->put($event->id.'/'.strtolower($tab).'_table.blade.php', $table);
                 ?>
             @endif

@@ -1,4 +1,5 @@
 <div class="col-lg-12" style="padding: 10px">
+    <input id="hidden_tab_name">
     {{url()->current()}}
     <p>Row Functions: Select a row to use a function below.</p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
@@ -51,7 +52,7 @@
                 <input onchange="check(this)" type="checkbox" />
             </td>
             <td width="10" style="vertical-align: middle; text-align: center">
-                <span onclick="addRows(this)" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span onclick="addRows($(this).closest('table').attr('id'),this)" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </td>
             <td width="120px">
                 <select name="grade[]" class="form-control">

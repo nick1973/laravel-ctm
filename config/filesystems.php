@@ -59,6 +59,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'table' => [
+            'driver' => 'local',
+            'root' => storage_path(''),
+            'visibility' => 'public',
+        ],
+
         'views' => [
             'driver' => 'local',
             'root' => base_path('resources/views/frontend/ops/tables'),
