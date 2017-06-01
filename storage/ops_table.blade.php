@@ -1,7 +1,5 @@
 <div class="col-lg-12" style="padding: 10px">
-    <input id="hidden_tab_name">
-    {{url()->current()}}
-    <p>Row Functions: Select a row to use a function below.</p>
+    <p><b>Row Functions: Select a row to use a function below.</b></p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     </button>
