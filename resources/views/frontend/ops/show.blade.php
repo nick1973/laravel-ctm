@@ -147,7 +147,7 @@ echo $arr[1];
 <div style="padding: 5px">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h3>Spec for {{ $event->event_name }}, {{ $diffInDays+1 }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}
+            <h3>Spec ID {{ $event->id }}, {{ $diffInDays+1 }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}
              {{ $event_start_date->format('m/d/Y') }} {{ $diffInDays_event }}
             </h3>
             {{--<button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove</button>--}}
@@ -342,6 +342,7 @@ echo $arr[1];
                             $("#hidden_tab_name").val('{{strtolower($tab)}}').attr("id",'{{strtolower($tab)}}'+"_tab_name")
                             $("#firstTable").attr("id",'{{strtolower($tab)}}'+"_Table");
                             $("#days").attr("id",'{{strtolower($tab)}}'+"_days");
+                            $("#spec_name").attr("id",'{{strtolower($tab)}}'+"_spec").val('{{strtolower($tab)}}');
                         </script>
                     </div>
                 @endif

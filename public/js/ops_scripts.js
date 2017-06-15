@@ -148,8 +148,9 @@ function copyRow() {
 }
 
 function addRows(id,el) {
+    var fullId = id;
     var id = id.replace('_Table', '');
-    console.log(id);
+    console.log(fullId);
     var $tr    = $(el).closest('.tr_clone');
     var $clone = $tr.clone();
     var $trt    = $('#'+id+'_days').find('tr.tr_clone:first-child')
@@ -159,6 +160,11 @@ function addRows(id,el) {
     var foo = $clone.find('td:eq(1)')
     $tr.after($clone);
     $trt.after($clonet);
+    //give index value to row_id
+    var numItems = $('#'+fullId+' .row_id').length
+    console.log(numItems);
+
+    $('#'+fullId).append('<input name="row_id[]" class="form-control hidden" type="text" value="'+numItems+'">');
 };
 
 function check(el) {

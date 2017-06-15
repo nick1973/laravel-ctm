@@ -16,108 +16,112 @@ class SpecsController extends Controller
 
     public function store(Request $request)
     {
+        //return $request->all();
+        $spec_name = $request->input('spec_name');
         $events_id = $request->input('events_id');
         $row_id = $request->input('row_id');
         $grade = $request->input('grade');
         $qty = $request->input('qty');
         $position = $request->input('position');
-        $mon_start = $request->input('monday_start');
-        $mon_end = $request->input('monday_end');
-        $mon_sub_total = $request->input('monday_hours');
-        $tues_start = $request->input('tuesday_start');
-        $tues_end = $request->input('tuesday_end');
-        $tues_sub_total = $request->input('tuesday_hours');
-        $wed_start = $request->input('wednesday_start');
-        $wed_end = $request->input('wednesday_end');
-        $wed_sub_total = $request->input('wednesday_hours');
-        $thur_start = $request->input('thursday_start');
-        $thur_end = $request->input('thursday_end');
-        $thur_sub_total = $request->input('thursday_hours');
-        $fri_start = $request->input('friday_start');
-        $fri_end = $request->input('friday_end');
-        $fri_sub_total = $request->input('friday_hours');
-        $sat_start = $request->input('saturday_start');
-        $sat_end = $request->input('saturday_end');
-        $sat_sub_total = $request->input('saturday_hours');
-        $sun_start = $request->input('sunday_start');
-        $sun_end = $request->input('sunday_end');
-        $sun_sub_total = $request->input('sunday_hours');
+        $mon_start = $request->input('mon_start');
+        $mon_end = $request->input('mon_end');
+        $mon_sub_total = $request->input('mon_hours');
+        $tues_start = $request->input('tues_start');
+        $tues_end = $request->input('tues_end');
+        $tues_sub_total = $request->input('tues_hours');
+        $wed_start = $request->input('wed_start');
+        $wed_end = $request->input('wed_end');
+        $wed_sub_total = $request->input('wed_hours');
+        $thur_start = $request->input('thur_start');
+        $thur_end = $request->input('thur_end');
+        $thur_sub_total = $request->input('thur_hours');
+        $fri_start = $request->input('fri_start');
+        $fri_end = $request->input('fri_end');
+        $fri_sub_total = $request->input('fri_hours');
+        $sat_start = $request->input('sat_start');
+        $sat_end = $request->input('sat_end');
+        $sat_sub_total = $request->input('sat_hours');
+        $sun_start = $request->input('sun_start');
+        $sun_end = $request->input('sun_end');
+        $sun_sub_total = $request->input('sun_hours');
         $total = $request->input('total');
 
-
+        //return dd($wed_start);
         if ($grade != "") {
             $gradei = implode(',', $grade);
             $row_idi = implode(',', $row_id);
             $qtyi = implode(',', $qty);
             $positioni = implode(',', $position);
+
             if($mon_start!== null){
                 $mon_starti = implode(',', $mon_start);
                 $mon_endi = implode(',', $mon_end);
                 $mon_sub_totali = implode(',', $mon_sub_total);
             } else{
-//                $mon_starti = ',';
-//                $mon_endi = ',';
-//                $mon_sub_totali = ',';
+                $mon_starti = "";
+                $mon_endi = "";
+                $mon_sub_totali = "";
             }
             if($tues_start!== null){
                 $tues_starti = implode(',', $tues_start);
                 $tues_endi = implode(',', $tues_end);
                 $tues_sub_totali = implode(',', $tues_sub_total);
             } else{
-//                $tues_starti = ',';
-//                $tues_endi = ',';
-//                $tues_sub_totali = ',';
+                $tues_starti = "";
+                $tues_endi = "";
+                $tues_sub_totali = "";
             }
             if($wed_start!== null){
                 $wed_starti = implode(',', $wed_start);
                 $wed_endi = implode(',', $wed_end);
                 $wed_sub_totali = implode(',', $wed_sub_total);
             } else{
-//                $wed_starti = ',';
-//                $wed_endi = ',';
-//                $wed_sub_totali = ',';
+                $wed_starti = "";
+                $wed_endi = "";
+                $wed_sub_totali = "";
             }
             if($thur_start!== null){
                 $thur_starti = implode(',', $thur_start);
                 $thur_endi = implode(',', $thur_end);
                 $thur_sub_totali = implode(',', $thur_sub_total);
             } else{
-//                $thur_starti = ',';
-//                $thur_endi = ',';
-//                $thur_sub_totali = ',';
+                $thur_starti = "";
+                $thur_endi = "";
+                $thur_sub_totali = "";
             }
             if($fri_start!== null){
                 $fri_starti = implode(',', $fri_start);
                 $fri_endi = implode(',', $fri_end);
                 $fri_sub_totali = implode(',', $fri_sub_total);
             } else{
-//                $fri_starti = ',';
-//                $fri_endi = ',';
-//                $fri_sub_totali = ',';
+                $fri_starti = "";
+                $fri_endi = "";
+                $fri_sub_totali = "";
             }
             if($sat_start!== null){
                 $sat_starti = implode(',', $sat_start);
                 $sat_endi = implode(',', $sat_end);
                 $sat_sub_totali = implode(',', $sat_sub_total);
             } else{
-//                $sat_starti = ',';
-//                $sat_endi = ',';
-//                $sat_sub_totali = ',';
+                $sat_starti = "";
+                $sat_endi = "";
+                $sat_sub_totali = "";
             }
             if($sun_start!== null){
                 $sun_starti = implode(',', $sun_start);
                 $sun_endi = implode(',', $sun_end);
                 $sun_sub_totali = implode(',', $sun_sub_total);
             } else{
-//                $sun_starti = ',';
-//                $sun_endi = ',';
-//                $sun_sub_totali = ',';
+                $sun_starti = "";
+                $sun_endi = "";
+                $sun_sub_totali = "";
             }
 
             $totali = implode(',', $total);
 
             $rows = [
                 'events_id' => $events_id,
+                'spec_name' => $spec_name,
                 'row_id' => $row_idi,
                 'grade' => $gradei,
                 'qty' => $qtyi,
@@ -151,6 +155,7 @@ class SpecsController extends Controller
             }
 
             Specs::create($rows);
+            return "Saved";
             return redirect()->back();
         }
 
