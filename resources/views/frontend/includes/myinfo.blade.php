@@ -104,6 +104,12 @@
             <th>Do you have any medical conditions we should be aware of?</th>
             <td class="required">{{ $user->medical_conditions }}</td>
         </tr>
+        @if($user->medical_conditions=="Yes")
+            <tr>
+                <th>Your medical conditions are:</th>
+                <td class="required">{{ $user->medical_conditions_info }}</td>
+            </tr>
+        @endif
         <tr>
             <th>{{ trans('labels.frontend.user.profile.created_at') }}</th>
             <td>{{ $user->created_at }} ({{ $user->created_at->diffForHumans() }})</td>
