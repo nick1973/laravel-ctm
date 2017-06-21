@@ -433,7 +433,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/medical', function () {
             //$user = DB::table('users')->where('payroll', 50659)->get();
             $user = \App\Models\Access\User\UserSnapshot::where('payroll', 50644)->get();
-                return $user;
+
+                dd($user->account_number) ;
         });
 
 
