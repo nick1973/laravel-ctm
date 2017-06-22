@@ -109,10 +109,9 @@ Route::get('/staffname', function (){
 Route::get('/event/{event}', function ($id) {
 
     $event = \App\Models\Ops\Events::find($id);
-    $ctm_start_date = \Carbon\Carbon::createFromFormat('Y/m/d', $event->ctm_start_date);
-    $ctm_start_date = \Carbon\Carbon::parse($ctm_start_date);
-    $ctm_end_date = \Carbon\Carbon::createFromFormat('Y/m/d', $event->ctm_end_date);
-    $ctm_end_date = \Carbon\Carbon::parse($ctm_end_date);
+    $ctm_start_date = \Carbon\Carbon::parse($event->ctm_start_date);
+    $ctm_start_date2 = \Carbon\Carbon::parse($event->ctm_start_date);
+    $ctm_end_date = \Carbon\Carbon::parse($event->ctm_end_date);
     $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
     $day_number = $ctm_start_date->dayOfWeek;
     $day_numbers = $ctm_start_date->dayOfWeek;
@@ -179,11 +178,14 @@ Route::get('/event/{event}', function ($id) {
 
             //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
             $row_id = explode(',', $specs[0]->row_id)[$i];
-            array_push($day_array,['date' => $date, 'row_id' => $row_id, 'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i], 'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            array_push($day_array,['date' => $date, 'row_id' => $row_id,
+                'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i],
+                'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
 
             //DAY NUMBER LOOP
             $week = 0;
-            $day_number = $ctm_start_date->dayOfWeek;
+            $day_number = $ctm_start_date2->dayOfWeek;
+
             for ($x = 0; $x <= $diffInDays; $x++) {
                 if ($day_number == 7) {
                     $day_number = 0;
@@ -193,20 +195,22 @@ Route::get('/event/{event}', function ($id) {
                     $week++;
                     //$day++;
                 }
+
                 //CREATES THE WEEK
                 $lower = strtolower(dayOfWeek($day_number));
                 $start = $lower.'_start';
                 $end = $lower.'_end';
                 $sub_total = $lower.'_hours';
+
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
                 // PREVENT OFFSETS
                     //$day_array[$i] = explode(',', $specs[0]->row_id)[$i];
 
 //                if(count(explode(',', $specs[0]->$start)) == $day_number ){
-                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$i];
+                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$week-1];
                 //}
                 //if(count(explode(',', $specs[0]->$end)) == $day_number ){
-                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$i];
+                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$week-1];
                 //}
                 //if(count(explode(',', $specs[0]->$sub_total)) == $day_number ){
                     //$day_array[$i]['week'.$week]['date'] = $date[$i];

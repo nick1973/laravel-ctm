@@ -32,9 +32,9 @@ class SpecsController extends Controller
         $wed_start = $request->input('wed_start');
         $wed_end = $request->input('wed_end');
         $wed_sub_total = $request->input('wed_hours');
-        $thur_start = $request->input('thur_start');
-        $thur_end = $request->input('thur_end');
-        $thur_sub_total = $request->input('thur_hours');
+        $thur_start = $request->input('thurs_start');
+        $thur_end = $request->input('thurs_end');
+        $thur_sub_total = $request->input('thurs_hours');
         $fri_start = $request->input('fri_start');
         $fri_end = $request->input('fri_end');
         $fri_sub_total = $request->input('fri_hours');
