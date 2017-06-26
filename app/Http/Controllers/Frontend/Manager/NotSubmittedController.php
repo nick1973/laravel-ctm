@@ -23,10 +23,10 @@ class NotSubmittedController extends Controller
             ->where('users.updated_at', '!=', null)
             ->where('user_snapshot.updated_at', '!=', null)
             ->where('users.updated_at', '>', 'user_snapshot.updated_at')
-            ->select('users.name', 'users.payroll', 'users.updated_at as user_updated', 'user_snapshot.updated_at as snapshot_created')
+            ->select('users.name', 'users.payroll', 'users.updated_at as user_updated', 'users.mobile', 'user_snapshot.updated_at as snapshot_created')
             ->get();
         //dd($application_updated);
-        return $users;
-        return view('frontend.manager.not_submitted.index');
+        //return $users;
+        return view('frontend.manager.not_submitted.index', compact('users'));
     }
 }
