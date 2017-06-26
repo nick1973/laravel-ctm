@@ -6,6 +6,7 @@
         <tr>
             <th>Payroll</th>
             <th>Name</th>
+            <th>Surname</th>
             <th>Tel No</th>
             <th>User Updated</th>
             <th>Snapshot Created</th>
@@ -19,6 +20,7 @@
                         <tr>
                             <td>{{ $user->payroll }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->lastname }}</td>
                             <td>{{ $user->mobile }}</td>
                             <td>{{ $user_updated }}</td>
                             <td>{{ $snapshot_created }}</td>

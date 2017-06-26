@@ -20,7 +20,7 @@ class NotSubmittedController extends Controller
             ->where('users.markAsp45', '=' ,0)
             ->where('user_snapshot.updated_at', '!=', null)
             ->where('users.updated_at', '>', 'user_snapshot.updated_at')
-            ->select('users.name', 'users.payroll', 'users.updated_at as user_updated', 'users.mobile', 'user_snapshot.updated_at as snapshot_created')
+            ->select('users.name', 'users.lastname', 'users.payroll', 'users.updated_at as user_updated', 'users.mobile', 'user_snapshot.updated_at as snapshot_created')
             ->get();
         $unique = collect($users);
         //$unique->whereIn('payroll');
