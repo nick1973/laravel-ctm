@@ -20,8 +20,8 @@
                             <td>{{ $user->payroll }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->mobile }}</td>
-                            <td>{{ $user->user_updated }}</td>
-                            <td>{{ $user->snapshot_created }}</td>
+                            <td>{{ $user_updated }}</td>
+                            <td>{{ $snapshot_created }}</td>
                         </tr>
 
 
