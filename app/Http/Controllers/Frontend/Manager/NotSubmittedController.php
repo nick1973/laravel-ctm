@@ -13,7 +13,7 @@ class NotSubmittedController extends Controller
 {
     function index(){
         //$snapshot_created = UserSnapshot::all();
-        $snapshot_created = DB::table('user_snapshot')->select('name', 'payroll', 'updated_at')->get();
+        //$snapshot_created = DB::table('user_snapshot')->select('name', 'payroll', 'updated_at')->get();
         //$application_updated = DB::table('users')->select('name', 'payroll', 'updated_at')->get();
 //        $collection = collect($application_updated)->each(function ($item, $key) {
 //            //
@@ -23,13 +23,8 @@ class NotSubmittedController extends Controller
             ->where('users.updated_at', '!=', null)
             ->where('user_snapshot.updated_at', '!=', null)
             ->where('users.updated_at', '>', 'user_snapshot.updated_at')
-            ->select('users.name', 'users.payroll', 'users.updated_at', 'user_snapshot.updated_at')
+            ->select('users.name', 'users.payroll', 'users.updated_at as user_updated', 'user_snapshot.updated_at as snapshot_created')
             ->get();
-//        foreach ($snapshot_created as $snapshot){
-//            $user_collection = collect(User::where('payroll', $snapshot->payroll)->select('name', 'payroll', 'updated_at')->get());
-//            //$snapshot_collection = collect($snapshot_created);
-//
-//        }
         //dd($application_updated);
         return $users;
         return view('frontend.manager.not_submitted.index');
