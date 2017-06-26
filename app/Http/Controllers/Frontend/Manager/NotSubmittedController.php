@@ -16,7 +16,7 @@ class NotSubmittedController extends Controller
             ->join('user_snapshot', 'users.payroll', '=', 'user_snapshot.payroll')
             ->where('users.updated_at', '!=', null)
             ->where('users.confirmed', '=', 1)
-            ->where('users.app_status', '=', [3,8])
+            ->where('users.app_status', '=', 3)
             ->where('users.markAsp45', '=' ,0)
             ->where('user_snapshot.updated_at', '!=', null)
             ->where('users.updated_at', '>', 'user_snapshot.updated_at')
