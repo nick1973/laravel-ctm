@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
+    <h3>{{ count($users) }} Users</h3>
     <table class="table">
         <tr>
             <th>Payroll</th>
