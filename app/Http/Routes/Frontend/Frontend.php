@@ -468,6 +468,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('dashboard/manager/text', 'ManagerController@text')->name('dashboard.manager.text');
         Route::post('dashboard/manager/postcode', 'ManagerController@postcode')->name('dashboard.manager.postcode');
         Route::post('dashboard/manager/postcode_with_event', 'ManagerController@postcode_with_event')->name('dashboard.manager.postcode_with_event');
+
+        Route::resource('dashboard/not_submitted', 'NotSubmittedController');
     });
 });
 

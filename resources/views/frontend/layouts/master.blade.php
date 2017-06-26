@@ -212,6 +212,9 @@
                             <li><a href="/dashboard/events">Event List</a></li>
                         </ul>
                     </div>
+                    @if(Auth::user()->email=="manager@manager.com")
+                        <a href="/dashboard/not_submitted" class="btn btn-default">Not Submitted</a>
+                    @endif
                 @endif
                 {{--<a href="/dashboard/manager" class="btn btn-warning">New Applicants</a>--}}
                 {{--<a href="/dashboard/sbf" class="btn btn-info">Staff Booking Form</a>--}}
