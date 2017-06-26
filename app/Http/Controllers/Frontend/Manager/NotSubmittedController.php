@@ -21,6 +21,7 @@ class NotSubmittedController extends Controller
         $users = DB::table('users')
             ->leftJoin('user_snapshot', 'users.payroll', '=', 'user_snapshot.payroll')
             ->where('users.updated_at', '!=', null)
+            ->where('users.markAsp45', '=' ,0)
             ->where('user_snapshot.updated_at', '!=', null)
             ->where('users.updated_at', '>', 'user_snapshot.updated_at')
             ->select('users.name', 'users.payroll', 'users.updated_at as user_updated', 'users.mobile', 'user_snapshot.updated_at as snapshot_created')
