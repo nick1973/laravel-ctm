@@ -436,7 +436,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('dashboard/manager/staff/search/medical', function () {
             //$user = DB::table('users')->where('payroll', 50659)->get();
-            $user = \App\Models\Access\User\UserSnapshot::where('payroll', 50644)->get();
+            $user = \App\Models\Access\User\UserSnapshot::where('payroll', 39982)->get();
             return $user;
                 return Crypt::decrypt($user->account_sort_code) . ' ' .Crypt::decrypt($user->account_number);
         });
