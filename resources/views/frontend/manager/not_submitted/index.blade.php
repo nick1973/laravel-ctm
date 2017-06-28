@@ -16,8 +16,8 @@
         </tr>
             @foreach($unique_payroll as $user)
             <?php
-                    $user_updated = \Carbon\Carbon::parse($user->user_updated)->format('d-m-Y');
-                    $snapshot_created = \Carbon\Carbon::parse($user->snapshot_created)->format('d-m-Y');
+                    $user_updated = \Carbon\Carbon::parse($user->user_updated)->format('d-m-Y h:i:s A');
+                    $snapshot_created = \Carbon\Carbon::parse($user->snapshot_created)->format('d-m-Y h:i:s A');
                     ?>
 
                         <tr>
