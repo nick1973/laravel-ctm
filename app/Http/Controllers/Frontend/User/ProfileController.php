@@ -175,7 +175,7 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         if($user->app_status!=8){
-            $user->update(['app_status'=>1]);
+            $user->update(['app_status'=>1, 'profile_confirmed'=>'no']);
         }
         $input = $request->all();
         $user->update($input);
