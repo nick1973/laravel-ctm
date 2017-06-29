@@ -15,7 +15,7 @@ class NotSubmittedController extends Controller
         $users = DB::table('users')
             ->join('user_snapshot', 'users.payroll', '=', 'user_snapshot.payroll')
             ->where('users.updated_at', '!=', null)
-            //->where('users.profile_confirmed', '=', 'no')
+            ->where('users.profile_confirmed', '=', 'no')
             ->where('users.confirmed', '=', 1)
             ->where('users.app_status', '=', 3)
             ->where('users.markAsp45', '=' ,0)
