@@ -115,112 +115,115 @@ Route::get('/event/{event}', function ($id) {
     $diffInDays = $ctm_start_date->diffInDays($ctm_end_date);
     $day_number = $ctm_start_date->dayOfWeek;
     $day_numbers = $ctm_start_date->dayOfWeek;
-
+    $day_array = [];
     $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
-    $grade = explode(',', $specs[0]->grade);
 
+    //dd($specs);
     //return $ctm_start_date->dayOfWeek;
 
-    function dayOfWeek($day){
-        switch ($day) {
-            case 1:
-                return "Monday";
-                break;
-            case 2:
-                return "Tuesday";
-                break;
-            case 3:
-                return "Wednesday";
-                break;
-            case 4:
-                return "Thursday";
-                break;
-            case 5:
-                return "Friday";
-                break;
-            case 6:
-                return "Saturday";
-                break;
-            case 0:
-                return "Sunday";
-                break;
-            default:
-                return "Oops!";
+
+        function dayOfWeek($day)
+        {
+            switch ($day) {
+                case 1:
+                    return "Monday";
+                    break;
+                case 2:
+                    return "Tuesday";
+                    break;
+                case 3:
+                    return "Wednesday";
+                    break;
+                case 4:
+                    return "Thursday";
+                    break;
+                case 5:
+                    return "Friday";
+                    break;
+                case 6:
+                    return "Saturday";
+                    break;
+                case 0:
+                    return "Sunday";
+                    break;
+                default:
+                    return "Oops!";
+            }
         }
-    }
-    $qty = explode(',', $specs[0]->qty);
-    $position = explode(',', $specs[0]->position);
-    $total = explode(',', $specs[0]->total);
-    $array = [];
-    $day_array= [];
-    $lower_day = strtolower(dayOfWeek($day_number));
-    $start = $lower_day.'_start';
-    $start_count = explode(',', $specs[0]->$start);
-    $max_days = count($start_count);
-    $day = -1;
+        //return $specs[0];
+    for ($s = 0; $s < $specs->count(); $s++) {
+        $qty = explode(',', $specs[$s]->qty);
+        $position = explode(',', $specs[$s]->position);
+        $monday_start = explode(',', $specs[$s]->monday_start);
+        $total = explode(',', $specs[$s]->total);
+        $array = [];
 
-
-    //dd (count(explode(',', $specs[0]->$start)) !==0 );
-
-
-        for($i=0; $i <= $diffInDays; $i++) {
+        $lower_day = strtolower(dayOfWeek($day_number));
+        $start = $lower_day . '_start';
+        $start_count = explode(',', $specs[$s]->$start);
+        $max_days = count($start_count);
+        $day = -1;
+        //dd (count(explode(',', $specs[0]->$start)) !==0 );
+        $grade = explode(',', $specs[$s]->grade);
+        //echo $specs[$s];
+        for ($i = 0; $i <= $diffInDays; $i++) {
             if ($day_numbers == 7) {
                 $day_numbers = 0;
             }
             //echo dayOfWeek($day_number) . $ctm_start_date->day;
             $date[] = dayOfWeek($day_numbers) . $ctm_start_date->day;
-
-            $day_numbers++; $ctm_start_date->addDay();
+            $day_numbers++;
+            $ctm_start_date->addDay();
         }
         //array_push($day_array,['date' => $date]);
         //return count($grade)-1;
-        for($i=0; $i < count($grade); $i++) {
 
+        for ($i = 0; $i < count($grade); $i++) {
             //$array = array_add($json, 'sunday0_start', $sunday_start[$i]);
-            $row_id = explode(',', $specs[0]->row_id)[$i];
-            array_push($day_array,['date' => $date, 'row_id' => $row_id,
-                'id' => $specs[0]->id, 'events_id' => $event->id, 'grade' => $grade[$i],
-                'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]);
+            $row_id = explode(',', $specs[$s]->row_id)[$i];
+            array_push($day_array, ['date' => $date, 'row_id' => $row_id, 'tab_name' => $specs[$s]->spec_name,
+                'id' => $specs[$s]->id, 'events_id' => $event->id, 'grade' => $grade[$i],
+                'position' => $position[$i], 'qty' => $qty[$i], 'total' => $total[$i]]
+            );
+
 
             //DAY NUMBER LOOP
             $week = 0;
             $day_number = $ctm_start_date2->dayOfWeek;
-
             for ($x = 0; $x <= $diffInDays; $x++) {
                 if ($day_number == 7) {
                     $day_number = 0;
                 }
                 //EVERY WEEK +1
-                if($x % 7 == 0){
+                if ($x % 7 == 0) {
                     $week++;
                     //$day++;
                 }
-
                 //CREATES THE WEEK
                 $lower = strtolower(dayOfWeek($day_number));
-                $start = $lower.'_start';
-                $end = $lower.'_end';
-                $sub_total = $lower.'_hours';
-
+                $start = $lower . '_start';
+                $end = $lower . '_end';
+                $sub_total = $lower . '_hours';
                 // LOOP THROUGH THE MAX_DAYS IN THAT WEEK
-                // PREVENT OFFSETS
-                    //$day_array[$i] = explode(',', $specs[0]->row_id)[$i];
-
-//                if(count(explode(',', $specs[0]->$start)) == $day_number ){
-                    $day_array[$i]['week'.$week][$lower.$x.'_start'] = explode(',', $specs[0]->$start)[$week-1];
-                //}
-                //if(count(explode(',', $specs[0]->$end)) == $day_number ){
-                    $day_array[$i]['week'.$week][$lower.$x.'_end'] = explode(',', $specs[0]->$end)[$week-1];
-                //}
-                //if(count(explode(',', $specs[0]->$sub_total)) == $day_number ){
-                    //$day_array[$i]['week'.$week]['date'] = $date[$i];
-                //}
-
+                //echo $start . explode(',', $specs[0]->$start)[1] . ' ';
+                //$day_array[$i][$i] = $start[$i];
+                //$day_array[$i]['week' . $week][$lower . $x . '_start'] = $specs[$s]->$start[$i];
+                $day_array[$i]['week' . $week][$lower . $x . '_start'] = explode(',', $specs[$s]->$start)[$i];
+                array_push($array, ['spec' => explode(',', $specs[$s]->$start)[$i]]);
+                //$array = explode(',', $specs[$s]->$start)[$i];
+                //$day_array[$i]['week' . $week][$lower . $x . '_end'] = explode(',', $specs[$s]->$end)[$week - 1];
+                //$day_array[$i]['week'.$week]['date'] = $date[$i];
                 $day_number++;
             }
+
+
             //$day = $i;
         }
-    return ['data'=>$day_array];
+
+        //dd($specs);
+        //echo count($grade);
+    }
+    dd( ['data'=>$day_array, 'array'=>$array] );
 });
 
 
