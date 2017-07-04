@@ -171,7 +171,8 @@
                                 var mm = Number(dob.substr(5,2))
                                 var dd = Number(dob.substr(8,2))
                                 var d = new Date();
-                                d.setFullYear(yyyy, mm, dd);
+                                var now = new Date().toLocaleString()
+                                d.setFullYear(yyyy, mm-1, dd);
                                 var ageDifMs = Date.now() - d.getTime();
                                 var ageDate = new Date(ageDifMs); // miliseconds from epoch
                                 var age = Math.abs(ageDate.getUTCFullYear() - 1970);
