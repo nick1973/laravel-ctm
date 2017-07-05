@@ -439,6 +439,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('dashboard/manager/staff/search/medical', function () {
             $staff = DB::table('users')->find(35930);
+            $staff->update(['dob'=>'1999-01-18']);
             dd($staff);
             //$user = DB::table('users')->where('payroll', 50659)->get();
             $user = \App\Models\Access\User\User::where('payroll', 39982)->get();
