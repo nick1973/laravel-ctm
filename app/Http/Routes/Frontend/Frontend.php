@@ -438,7 +438,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
-            $staff = User::where([
+            $staff = DB::table('users')->where([
                 ['profile_confirmed', '=', 'Yes'],
                 ['confirmed', '=', 1],
                 ['payroll_export', '=', 1],
