@@ -16,7 +16,7 @@ class SpecsController extends Controller
 
     public function store(Request $request)
     {
-        //return $request->all();
+        //return $request->input('wed_hours');
         $spec_name = $request->input('spec_name');
         $events_id = $request->input('events_id');
         $row_id = $request->input('row_id');
@@ -46,121 +46,145 @@ class SpecsController extends Controller
         $sun_sub_total = $request->input('sun_hours');
         $total = $request->input('total');
 
-        //return dd($wed_start);
         if ($grade != "") {
-            $gradei = implode(',', $grade);
-            $row_idi = implode(',', $row_id);
-            $qtyi = implode(',', $qty);
-            $positioni = implode(',', $position);
-
-            if($mon_start!== null){
-                $mon_starti = implode(',', $mon_start);
-                $mon_endi = implode(',', $mon_end);
-                $mon_sub_totali = implode(',', $mon_sub_total);
-            } else{
-                $mon_starti = "";
-                $mon_endi = "";
-                $mon_sub_totali = "";
-            }
-            if($tues_start!== null){
-                $tues_starti = implode(',', $tues_start);
-                $tues_endi = implode(',', $tues_end);
-                $tues_sub_totali = implode(',', $tues_sub_total);
-            } else{
-                $tues_starti = "";
-                $tues_endi = "";
-                $tues_sub_totali = "";
-            }
-            if($wed_start!== null){
-                $wed_starti = implode(',', $wed_start);
-                $wed_endi = implode(',', $wed_end);
-                $wed_sub_totali = implode(',', $wed_sub_total);
-            } else{
-                $wed_starti = "";
-                $wed_endi = "";
-                $wed_sub_totali = "";
-            }
-            if($thur_start!== null){
-                $thur_starti = implode(',', $thur_start);
-                $thur_endi = implode(',', $thur_end);
-                $thur_sub_totali = implode(',', $thur_sub_total);
-            } else{
-                $thur_starti = "";
-                $thur_endi = "";
-                $thur_sub_totali = "";
-            }
-            if($fri_start!== null){
-                $fri_starti = implode(',', $fri_start);
-                $fri_endi = implode(',', $fri_end);
-                $fri_sub_totali = implode(',', $fri_sub_total);
-            } else{
-                $fri_starti = "";
-                $fri_endi = "";
-                $fri_sub_totali = "";
-            }
-            if($sat_start!== null){
-                $sat_starti = implode(',', $sat_start);
-                $sat_endi = implode(',', $sat_end);
-                $sat_sub_totali = implode(',', $sat_sub_total);
-            } else{
-                $sat_starti = "";
-                $sat_endi = "";
-                $sat_sub_totali = "";
-            }
-            if($sun_start!== null){
-                $sun_starti = implode(',', $sun_start);
-                $sun_endi = implode(',', $sun_end);
-                $sun_sub_totali = implode(',', $sun_sub_total);
-            } else{
-                $sun_starti = "";
-                $sun_endi = "";
-                $sun_sub_totali = "";
+            $mon_start = collect($mon_start)->chunk(count($mon_start)/count($row_id))->toArray();
+            $mon_end = collect($mon_end)->chunk(count($mon_end)/count($row_id))->toArray();
+            $mon_sub_total = collect($mon_sub_total)->chunk(count($mon_sub_total)/count($row_id))->toArray();
+            $tues_start = collect($tues_start)->chunk(count($tues_start)/count($row_id))->toArray();
+            $tues_end = collect($tues_end)->chunk(count($tues_end)/count($row_id))->toArray();
+            $tues_sub_total = collect($tues_sub_total)->chunk(count($tues_sub_total)/count($row_id))->toArray();
+            $wed_start = collect($wed_start)->chunk(count($wed_start)/count($row_id))->toArray();
+            $wed_end = collect($wed_end)->chunk(count($wed_end)/count($row_id))->toArray();
+            $wed_sub_total = collect($wed_sub_total)->chunk(count($wed_sub_total)/count($row_id))->toArray();
+            $thur_start = collect($thur_start)->chunk(count($thur_start)/count($row_id))->toArray();
+            $thur_end = collect($thur_end)->chunk(count($thur_end)/count($row_id))->toArray();
+            $thur_sub_total = collect($thur_sub_total)->chunk(count($thur_sub_total)/count($row_id))->toArray();
+            $fri_start = collect($fri_start)->chunk(count($fri_start)/count($row_id))->toArray();
+            $fri_end = collect($fri_end)->chunk(count($fri_end)/count($row_id))->toArray();
+            $fri_sub_total = collect($fri_sub_total)->chunk(count($fri_sub_total)/count($row_id))->toArray();
+            $sat_start = collect($sat_start)->chunk(count($sat_start)/count($row_id))->toArray();
+            $sat_end = collect($sat_end)->chunk(count($sat_end)/count($row_id))->toArray();
+            $sat_sub_total = collect($sat_sub_total)->chunk(count($sat_sub_total)/count($row_id))->toArray();
+            $sun_start = collect($sun_start)->chunk(count($sun_start)/count($row_id))->toArray();
+            $sun_end = collect($sun_end)->chunk(count($sun_end)/count($row_id))->toArray();
+            $sun_sub_total = collect($sun_sub_total)->chunk(count($sun_sub_total)/count($row_id))->toArray();
+            $day_array = [];
+            //DELETES EXISTING RECORDS
+            if(Specs::where('events_id', $events_id)->where('spec_name', $spec_name)->exists()){
+                Specs::where('events_id', $events_id)->where('spec_name', $spec_name)->delete();
             }
 
-            $totali = implode(',', $total);
+            for ($i = 0; $i < count($row_id); $i++) {
+                $day_array[$i]['events_id'] = $events_id;
+                $day_array[$i]['spec_name'] = $spec_name;
+                $day_array[$i]['row_id'] = $row_id[$i];
+                $day_array[$i]['grade'] = $grade[$i];
+                $day_array[$i]['qty'] = $qty[$i];
+                $day_array[$i]['position'] = $position[$i];
+                $day_array[$i]['total'] = $total[$i];
+                //MONDAY
+                if($request->input('mon_start') != null) {
+                    $mon_starti = implode(',', $mon_start[$i]);
+                    $mon_endi = implode(',', $mon_end[$i]);
+                    $mon_sub_totali = implode(',', $mon_sub_total[$i]);
 
-            $rows = [
-                'events_id' => $events_id,
-                'spec_name' => $spec_name,
-                'row_id' => $row_idi,
-                'grade' => $gradei,
-                'qty' => $qtyi,
-                'position' => $positioni,
-                'monday_start' => $mon_starti,
-                'monday_end' => $mon_endi,
-                'monday_hours' => $mon_sub_totali,
-                'tuesday_start' => $tues_starti,
-                'tuesday_end' => $tues_endi,
-                'tuesday_hours' => $tues_sub_totali,
-                'wednesday_start' => $wed_starti,
-                'wednesday_end' => $wed_endi,
-                'wednesday_hours' => $wed_sub_totali,
-                'thursday_start' => $thur_starti,
-                'thursday_end' => $thur_endi,
-                'thursday_hours' => $thur_sub_totali,
-                'friday_start' => $fri_starti,
-                'friday_end' => $fri_endi,
-                'friday_hours' => $fri_sub_totali,
-                'saturday_start' => $sat_starti,
-                'saturday_end' => $sat_endi,
-                'saturday_hours' => $sat_sub_totali,
-                'sunday_start' => $sun_starti,
-                'sunday_end' => $sun_endi,
-                'sunday_hours' => $sun_sub_totali,
-                'total' => $totali,
-            ];
-            if(Specs::where('events_id', $events_id)->exists())
-            {
-                Specs::where('events_id', $events_id)->delete();
+                    $day_array[$i]['monday_start'] = $mon_starti;
+                    $day_array[$i]['monday_end'] = $mon_endi;
+                    $day_array[$i]['monday_hours'] = $mon_sub_totali;
+                } else{
+                    $day_array[$i]['monday_start'] = "";
+                    $day_array[$i]['monday_end'] = "";
+                    $day_array[$i]['monday_hours'] = "";
+                }
+                //TUESDAY
+                if($request->input('tues_start') != null) {
+                    $tues_starti = implode(',', $tues_start[$i]);
+                    $tues_endi = implode(',', $tues_end[$i]);
+                    $tues_sub_totali = implode(',', $tues_sub_total[$i]);
+
+                    $day_array[$i]['tuesday_start'] = $tues_starti;
+                    $day_array[$i]['tuesday_end'] = $tues_endi;
+                    $day_array[$i]['tuesday_hours'] = $tues_sub_totali;
+                } else{
+                    $day_array[$i]['tuesday_start'] = "";
+                    $day_array[$i]['tuesday_end'] = "";
+                    $day_array[$i]['tuesday_hours'] = "";
+                }
+                //WEDNESDAY
+                if($request->input('wed_start') != null) {
+                    $wed_starti = implode(',', $wed_start[$i]);
+                    $wed_endi = implode(',', $wed_end[$i]);
+                    $wed_sub_totali = implode(',', $wed_sub_total[$i]);
+
+                    $day_array[$i]['wednesday_start'] = $wed_starti;
+                    $day_array[$i]['wednesday_end'] = $wed_endi;
+                    $day_array[$i]['wednesday_hours'] = $wed_sub_totali;
+                } else{
+                    $day_array[$i]['wednesday_start'] = "";
+                    $day_array[$i]['wednesday_end'] = "";
+                    $day_array[$i]['wednesday_hours'] = "";
+                }
+                //THURSDAY
+                if($request->input('thurs_start') != null) {
+                    $thur_starti = implode(',', $thur_start[$i]);
+                    $thur_endi = implode(',', $thur_end[$i]);
+                    $thur_sub_totali = implode(',', $thur_sub_total[$i]);
+
+                    $day_array[$i]['thursday_start'] = $thur_starti;
+                    $day_array[$i]['thursday_end'] = $thur_endi;
+                    $day_array[$i]['thursday_hours'] = $thur_sub_totali;
+                } else{
+                    $day_array[$i]['thursday_start'] = "";
+                    $day_array[$i]['thursday_end'] = "";
+                    $day_array[$i]['thursday_hours'] = "";
+                }
+                //FRIDAY
+                if($request->input('fri_start') != null) {
+                    $fri_starti = implode(',', $fri_start[$i]);
+                    $fir_endi = implode(',', $fri_end[$i]);
+                    $fri_sub_totali = implode(',', $fri_sub_total[$i]);
+
+                    $day_array[$i]['friday_start'] = $fri_starti;
+                    $day_array[$i]['friday_end'] = $fir_endi;
+                    $day_array[$i]['friday_hours'] = $fri_sub_totali;
+                } else{
+                    $day_array[$i]['friday_start'] = "";
+                    $day_array[$i]['friday_end'] = "";
+                    $day_array[$i]['friday_hours'] = "";
+                }
+                //SATURDAY
+                if($request->input('fri_start') != null) {
+                    $sat_starti = implode(',', $sat_start[$i]);
+                    $sat_endi = implode(',', $sat_end[$i]);
+                    $sat_sub_totali = implode(',', $sat_sub_total[$i]);
+
+                    $day_array[$i]['saturday_start'] = $sat_starti;
+                    $day_array[$i]['saturday_end'] = $sat_endi;
+                    $day_array[$i]['saturday_hours'] = $sat_sub_totali;
+                } else{
+                    $day_array[$i]['saturday_start'] = "";
+                    $day_array[$i]['saturday_end'] = "";
+                    $day_array[$i]['saturday_hours'] = "";
+                }
+                //SUNDAY
+                if($request->input('fri_start') != null) {
+                    $sun_starti = implode(',', $sun_start[$i]);
+                    $sun_endi = implode(',', $sun_end[$i]);
+                    $sun_sub_totali = implode(',', $sun_sub_total[$i]);
+
+                    $day_array[$i]['sunday_start'] = $sun_starti;
+                    $day_array[$i]['sunday_end'] = $sun_endi;
+                    $day_array[$i]['sunday_hours'] = $sun_sub_totali;
+                } else{
+                    $day_array[$i]['sunday_start'] = "";
+                    $day_array[$i]['sunday_end'] = "";
+                    $day_array[$i]['sunday_hours'] = "";
+                }
+                Specs::create($day_array[$i]);
             }
-
-            Specs::create($rows);
-            return "Saved";
-            return redirect()->back();
+            //dd($day_array);
+                return redirect()->back();
         }
-
-        Specs::where('events_id', $events_id)->delete();
-        return redirect()->back();
     }
 
 

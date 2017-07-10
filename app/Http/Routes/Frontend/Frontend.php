@@ -208,8 +208,8 @@ Route::get('/event/{event}', function ($id) {
                 //echo $start . explode(',', $specs[0]->$start)[1] . ' ';
                 //$day_array[$i][$i] = $start[$i];
                 //$day_array[$i]['week' . $week][$lower . $x . '_start'] = $specs[$s]->$start[$i];
-                $day_array[$i]['week' . $week][$lower . $x . '_start'] = explode(',', $specs[$s]->$start)[$i];
-                array_push($array, ['spec' => explode(',', $specs[$s]->$start)[$i]]);
+                //$day_array[$i]['week' . $week][$lower . $x . '_start'] = explode(',', $specs[$s]->$start)[$i];
+                //array_push($array, ['spec' => explode(',', $specs[$s]->$start)[$i]]);
                 //$array = explode(',', $specs[$s]->$start)[$i];
                 //$day_array[$i]['week' . $week][$lower . $x . '_end'] = explode(',', $specs[$s]->$end)[$week - 1];
                 //$day_array[$i]['week'.$week]['date'] = $date[$i];
@@ -223,7 +223,8 @@ Route::get('/event/{event}', function ($id) {
         //dd($specs);
         //echo count($grade);
     }
-    dd( ['data'=>$day_array, 'array'=>$array] );
+    return ['data'=>$specs];
+    dd( ['data'=>$specs] );
 });
 
 

@@ -1,3 +1,24 @@
+<div>
+
+    <p>Today's welcome message is:</p>
+
+    <h1>@{{ grade }}</h1>
+
+</div>
+
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $http.get("/event/1")
+                .then(function(response) {
+                    $scope.grade = response.data.data[0].grade;
+                    $scope.qty = response.data.data[0].qty;
+                    console.log(response.data.data[0].grade)
+                });
+    });
+</script>
 <div class="col-lg-12" style="padding: 10px">
     <p><b>Row Functions: Select a row to use a function below.</b></p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
@@ -66,6 +87,7 @@
             </td>
             <td width="120px">
                 <select name="grade[]" class="form-control">
+                    <option>@{{ grade }}</option>
                     @foreach($pay_grades as $roles)
                         <option>{{ $roles['role'] }}</option>
                     @endforeach
@@ -73,7 +95,7 @@
             </td>
 
             <td width="70px">
-                <input name="qty[]" class="form-control" type="text"
+                <input ng-model="qty" name="qty[]" class="form-control" type="text"
                        value="">
             </td>
             <td width="150">
