@@ -106,7 +106,7 @@ Route::get('/staffname', function (){
     return \App\Models\Access\User\User::all();
 });
 
-Route::get('/event/{event}', function ($id) {
+Route::get('/event/{event}/{spec_name}', function ($id,$spec_name) {
 
     $event = \App\Models\Ops\Events::find($id);
     $ctm_start_date = \Carbon\Carbon::parse($event->ctm_start_date);
@@ -116,7 +116,7 @@ Route::get('/event/{event}', function ($id) {
     $day_number = $ctm_start_date->dayOfWeek;
     $day_numbers = $ctm_start_date->dayOfWeek;
     $day_array = [];
-    $specs = \App\Models\Ops\Specs::where('events_id', $id)->get();
+    $specs = \App\Models\Ops\Specs::where('events_id', $id)->where('spec_name', $spec_name)->get();
 
     //dd($specs);
     //return $ctm_start_date->dayOfWeek;

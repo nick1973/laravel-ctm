@@ -61,8 +61,11 @@ class OpsController extends Controller
     {
         $event = Events::find($id);
         $input = $request->except('event_start_date','event_end_date','ctm_start_date','ctm_end_date');
+        $all = $request->all();
+        //return $all;
         $event_start_date = $request->input('event_start_date');
         $event_start_date_formated = date_create($event_start_date);
+        //dd($event_start_date_formated) ;
         $event_start_date_formated = date_format($event_start_date_formated,"Y/d/m");
 
         $event_end_date = $request->input('event_end_date');

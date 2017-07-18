@@ -1,21 +1,24 @@
 <div>
 
-    <p>Today's welcome message is:</p>
+    <h4>@{{ specData }}</h4>
 
-    <h1>@{{ grade }}</h1>
+    <ul>
+        <li ng-repeat="x in myData">
+            @{{ x.grade + ', ' + x.spec_name }}
+        </li>
+    </ul>
 
 </div>
 
-<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
-
 <script>
+
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
-        $http.get("/event/1")
+
+        $http.get("/event/5/garden")
                 .then(function(response) {
-                    $scope.grade = response.data.data[0].grade;
-                    $scope.qty = response.data.data[0].qty;
-                    console.log(response.data.data[0].grade)
+                    $scope.specData = response.data.data;
+                    console.log($scope.specData)
                 });
     });
 </script>
