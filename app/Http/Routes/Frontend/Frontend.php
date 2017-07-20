@@ -444,7 +444,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['confirmed', '=', 1],
                 ['payroll_export', '=', 1],
                 ['payroll', '!=', 0]
-            ])->count();
+            ])->get();
             //$staff->update(['dob'=>'1999-01-18']);
             //dd($staff);
             return $staff;
