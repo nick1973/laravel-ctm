@@ -524,7 +524,7 @@
                 }
             }).done(function(data) {
                 //$( this ).addClass( "done" );
-                //console.log(data)
+                console.log(data)
                 $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
             });
             //location.reload();
