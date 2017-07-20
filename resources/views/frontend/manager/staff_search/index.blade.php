@@ -529,7 +529,8 @@
 //            });
             //location.reload();
             //$("#confirm_form").submit();
-            alert('Text been sent to ' + mobile_selected);
+            //alert('Text been sent to ' + mobile_selected);
+            alert(mobile_selected.length);
             $('#textModal').modal('hide')
         }
 
