@@ -1,6 +1,5 @@
 <div class="col-lg-12" style="padding: 10px">
-    {{url()->current()}}
-    <p>Row Functions: Select a row to use a function below.</p>
+    <p><b>Row Functions: Select a row to use a function below.</b></p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     </button>
@@ -10,9 +9,21 @@
     <button type="button" class="btn btn-info" onclick="clearRow()">Clear
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     </button>
+    <button type="button" class="btn btn-default" onclick="">Save
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+    </button>
 </div>
+{!! Form::model($event,[
+                            'method' => 'POST',
+                            'route' => ['dashboard.specs.store'],
+                            'class' => 'form-horizontal',
+                            'id'    => ''])
+                            !!}
+
 <div class="col-lg-3" style="padding: 0">
-    <table id="firstTable" class="table">
+    <table id="csas_Table" class="table">
+        <input name="row_id[]" class="row_id" class="form-control" type="text" value="1" hidden>
+        <input name="spec_name" id="csas_spec" class="form-control hidden" type="text" value="csas">
         <thead>
         <tr class="info">
             <th style="color:#d9edf7 ;">Role</th>
@@ -44,14 +55,14 @@
             {{--ng-click="removeRow($index)"/>--}}
             {{--</td>--}}
             <td width="" hidden>
-                <input name="row_id[]" class="form-control" type="text"
-                       value="">
+                <input class="row_id" class="form-control" type="text">
             </td>
             <td width="10" style="vertical-align: middle; text-align: center">
                 <input onchange="check(this)" type="checkbox" />
             </td>
             <td width="10" style="vertical-align: middle; text-align: center">
-                <span onclick="addRows(this)" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span onclick="addRows($(this).closest('table').attr('id'),this)" class="glyphicon glyphicon-plus" aria-hidden="true"
+                      style="cursor: pointer"></span>
             </td>
             <td width="120px">
                 <select name="grade[]" class="form-control">
@@ -60,6 +71,7 @@
                     @endforeach
                 </select>
             </td>
+
             <td width="70px">
                 <input name="qty[]" class="form-control" type="text"
                        value="">
@@ -74,15 +86,9 @@
 </div>
 
 <div id="spec_table" class="search-table-outter wrapper col-lg-9" style="padding: 0">
-    {!! Form::model($event,[
-                            'method' => 'POST',
-                            'route' => ['dashboard.specs.store'],
-                            'class' => 'form-horizontal',
-                            'id'    => 'spec_rows'])
-                            !!}
     {{--<form id="spec_rows">--}}
     <input class="hidden" name="events_id" value="{{ $event->id }}">
-    <table id="days" class="table search-table inner days">
+    <table id="csas_days" class="table search-table inner days">
         <thead>
         <tr>
             <?php
@@ -168,6 +174,8 @@
                 $end = "{{ spec.week$week." . $lower_day . $i . "_end}}";
                 $sub_total = "{{ spec.week$week." . $lower_day . $i . "_sub_total }}";
                 $red = '';
+                $lower_day_start = $lower_day.'_start[]';
+                $lower_day_end = $lower_day.'_end[]';
                 ?>
 
 
@@ -177,14 +185,14 @@
                     @endif
                 @endif
                 <td class="times {{$red}}">
-                    <select class="form-control">
+                    <select class="form-control" name="{{ $lower_day_start }}">
                         @foreach($arr as $time)
                             <option>{{ $time }}</option>
                         @endforeach
                     </select>
                 </td>
                 <td class="times {{$red}}">
-                    <select class="form-control">
+                    <select class="form-control" name="{{ $lower_day_end }}">
                         @foreach($arr as $time)
                             <option>{{ $time }}</option>
                         @endforeach
@@ -193,21 +201,19 @@
                     {{--value="{{ $end }}">--}}
                 </td>
                 <td class="times {{$red}}">
-                    <input style="background-color: #e0f1f9" name="{{ $lower_day }}_hours[]" class="form-control users" type="text"
-                           value="">
+                    <input style="background-color: #e0f1f9" name="{{ $lower_day }}_hours[]" class="form-control users" type="text">
                 </td>
                 <?php $day_number_ng++; $ctm_start_date_table->addDay();  ?>
             @endfor
-
             <td>
                 <div class="has-success has-feedback">
-                    <input name="total[]" class="form-control users" type="text"
-                           value="" readonly>
+                    <input name="total[]" class="form-control" type="text">
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
-    </form>
+    <button type="submit">Save</button>
 </div>
+</form>
 

@@ -231,7 +231,7 @@ class ManagerController extends Controller
         $responseArray = json_decode($response, true);
         $response = $responseArray;
         $cost = $responseArray['balance'];
-        return $response;
+        return ['message'=>$response, 'number_count'=>count($numbers)];
     }
 
     function update_notes(Request $request){
