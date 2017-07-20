@@ -441,7 +441,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/manager/staff/search/payroll_export', function () {
             $staff = \App\Models\Access\User\User::where('payroll_export',1)->get();
             //$staff->update(['dob'=>'1999-01-18']);
-            dd($staff);
+            //dd($staff);
+            return $staff;
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
