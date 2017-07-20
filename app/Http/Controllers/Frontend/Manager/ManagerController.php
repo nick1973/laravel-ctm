@@ -214,6 +214,7 @@ class ManagerController extends Controller
         // Textlocal account details
         $apiKey = 'ccUfPpurJas-sUlwgsQwtus4X7WNaUXdcam3jMKL1L';
         // Message details
+        $number_array = $request->input('numbers');
         $numbers = $request->input('numbers');
         $sender = urlencode('CTM');
         $message = rawurlencode($request->input('message'));
@@ -231,7 +232,7 @@ class ManagerController extends Controller
         $responseArray = json_decode($response, true);
         $response = $responseArray;
 //        $cost = $responseArray['balance'];
-        return ['message'=>$response, 'number_count'=>count($numbers)];
+        return ['message'=>$response, 'number_count'=>count($number_array)];
     }
 
     function update_notes(Request $request){
