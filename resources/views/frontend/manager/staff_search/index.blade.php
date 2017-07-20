@@ -527,7 +527,7 @@
                 console.log(data)
                 $("#bal").append('<p>Text Local Credits:= ' + data.message.status + '</p>'
                     + '<p>App Text sent: ' + data.number_count + '</p>'
-                    + '<p>API Text sent: ' + data.num_messages.length + '</p>')
+                    + '<p>API Text sent: ' + data.num_messages + '</p>')
             });
             //location.reload();
             //$("#confirm_form").submit();
