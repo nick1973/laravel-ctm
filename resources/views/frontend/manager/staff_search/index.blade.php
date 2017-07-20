@@ -525,7 +525,9 @@
             }).done(function(data) {
                 //$( this ).addClass( "done" );
                 console.log(data)
-                $("#bal").append('<p>Text Local Credits:= ' + data.message.status + '</p>' + '<p>Text sent: ' + data.number_count + '</p>')
+                $("#bal").append('<p>Text Local Credits:= ' + data.message.status + '</p>'
+                    + '<p>Text sent: ' + data.number_count + '</p>'
+                    + '<p>API sent: ' + data.num_messages + '</p>')
             });
             //location.reload();
             //$("#confirm_form").submit();
