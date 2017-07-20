@@ -230,7 +230,7 @@ class ManagerController extends Controller
         // Process your response here
         $responseArray = json_decode($response, true);
         $response = $responseArray;
-        $cost = $responseArray['balance'];
+//        $cost = $responseArray['balance'];
         return ['message'=>$response, 'number_count'=>count($numbers)];
     }
 
