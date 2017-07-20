@@ -448,7 +448,7 @@ Route::group(['middleware' => 'auth'], function () {
             $user = App\Models\Access\User\User::find(32628);
             //$staff->update(['dob'=>'1999-01-18']);
             //dd($staff);
-            return $user;
+            return $staff;
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
