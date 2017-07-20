@@ -446,7 +446,7 @@ Route::group(['middleware' => 'auth'], function () {
                 ['payroll', '!=', 0]
             ])->get();
             $user = App\Models\Access\User\User::find(30098);
-            //$staff->update(['dob'=>'1999-01-18']);
+            $user->update(['payroll_export'=>0]);
             //dd($staff);
             return $user;
         });
