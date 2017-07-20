@@ -439,7 +439,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/payroll_export', function () {
-            $staff = User::where([
+            $staff = \App\Models\Access\User\User::where([
                 ['profile_confirmed', '=', 'Yes'],
                 ['confirmed', '=', 1],
                 ['payroll_export', '=', 1],
