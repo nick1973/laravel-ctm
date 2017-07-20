@@ -439,7 +439,12 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::get('dashboard/manager/staff/search/payroll_export', function () {
-            $staff = \App\Models\Access\User\User::where('payroll_export',1)->get();
+            $staff = User::where([
+                ['profile_confirmed', '=', 'Yes'],
+                ['confirmed', '=', 1],
+                ['payroll_export', '=', 1],
+                ['payroll', '!=', 0]
+            ])->get();
             //$staff->update(['dob'=>'1999-01-18']);
             //dd($staff);
             return $staff;
