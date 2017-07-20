@@ -516,21 +516,20 @@
             // Get the HTML contents of the currently active editor
             //console.debug(tinyMCE.activeEditor.getContent());
             //method1 getting the content of the active editor
-//            $.ajax({
-//                type: "POST",
-//                url: '/dashboard/manager/text',
-//                data: {numbers: mobile_selected,
-//                    message: tinyMCE.get('textcomments').getContent({ format: 'text' })
-//                }
-//            }).done(function(data) {
-//                //$( this ).addClass( "done" );
-//                //console.log(data)
-//                $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
-//            });
+            $.ajax({
+                type: "POST",
+                url: '/dashboard/manager/text',
+                data: {numbers: mobile_selected,
+                    message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                }
+            }).done(function(data) {
+                //$( this ).addClass( "done" );
+                //console.log(data)
+                $("#bal").append('<p>Text Local Credits:= ' + data + '</p>')
+            });
             //location.reload();
             //$("#confirm_form").submit();
-            //alert('Text been sent to ' + mobile_selected);
-            alert(mobile_selected.length);
+            alert(mobile_selected.length + ' Texts been sent to ' + mobile_selected);
             $('#textModal').modal('hide')
         }
 
