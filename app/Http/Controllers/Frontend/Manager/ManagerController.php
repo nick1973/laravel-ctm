@@ -229,8 +229,9 @@ class ManagerController extends Controller
         curl_close($ch);
         // Process your response here
         $responseArray = json_decode($response, true);
+        $response = $responseArray;
         $cost = $responseArray['balance'];
-        return $cost;
+        return $response;
     }
 
     function update_notes(Request $request){
