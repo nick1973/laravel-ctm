@@ -514,11 +514,13 @@
             }
 
 
-            if(mobile_selected >= 900){
+            if(mobile_selected.length >= 900){
                 var mobile_selected_spliced = mobile_selected.splice(0,900);
+                console.log(mobile_selected)
+                console.log(mobile_selected_spliced)
             }
-            console.log(mobile_selected)
-            console.log(mobile_selected_spliced)
+
+
 
             // Get the HTML contents of the currently active editor
             //console.debug(tinyMCE.activeEditor.getContent());
