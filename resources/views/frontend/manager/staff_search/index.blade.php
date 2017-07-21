@@ -516,32 +516,57 @@
 
             if(mobile_selected.length >= 900){
                 var mobile_selected_spliced = mobile_selected.splice(0,900);
-                console.log(mobile_selected)
-                console.log(mobile_selected_spliced)
-            }
-
-
-
-            // Get the HTML contents of the currently active editor
-            //console.debug(tinyMCE.activeEditor.getContent());
-            //method1 getting the content of the active editor
-            $.ajax({
-                type: "POST",
-                url: '/dashboard/manager/text',
-                data: {numbers: mobile_selected,
-                    message: tinyMCE.get('textcomments').getContent({ format: 'text' })
-                }
-            }).done(function(data) {
-                //$( this ).addClass( "done" );
-                console.log(data)
-                $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
+                //console.log(mobile_selected)
+                //console.log(mobile_selected_spliced)
+                $.ajax({
+                    type: "POST",
+                    url: '/dashboard/manager/text',
+                    data: {numbers: mobile_selected,
+                        message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                    }
+                }).done(function(data) {
+                    console.log(data)
+                    $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
                     + '<p>posted numbers: ' + data.number_count + '</p>'
                     + '<p>imploded numbers: ' + data.message + '</p>')
-            });
-            //location.reload();
-            //$("#confirm_form").submit();
-            alert(mobile_selected.length + ' Texts been sent to ' + mobile_selected);
-            $('#textModal').modal('hide')
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '/dashboard/manager/text',
+                    data: {numbers: mobile_selected_spliced,
+                        message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                    }
+                }).done(function(data) {
+                    console.log(data)
+                    $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
+                    + '<p>posted numbers: ' + data.number_count + '</p>'
+                    + '<p>imploded numbers: ' + data.message + '</p>')
+                });
+                alert((mobile_selected.length+mobile_selected_spliced.length) + ' Texts been sent to ' + mobile_selected + mobile_selected_spliced);
+                $('#textModal').modal('hide')
+            } else{
+                // Get the HTML contents of the currently active editor
+                //console.debug(tinyMCE.activeEditor.getContent());
+                //method1 getting the content of the active editor
+                $.ajax({
+                    type: "POST",
+                    url: '/dashboard/manager/text',
+                    data: {numbers: mobile_selected,
+                        message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                    }
+                }).done(function(data) {
+                    //$( this ).addClass( "done" );
+                    console.log(data)
+                    $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
+                    + '<p>posted numbers: ' + data.number_count + '</p>'
+                    + '<p>imploded numbers: ' + data.message + '</p>')
+                });
+                //location.reload();
+                //$("#confirm_form").submit();
+                alert(mobile_selected.length + ' Texts been sent to ' + mobile_selected);
+                $('#textModal').modal('hide')
+            }
+
         }
 
         function content() {
