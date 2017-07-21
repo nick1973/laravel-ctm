@@ -449,14 +449,14 @@
         function select(table) {
             var dataTable = $('#'+table).dataTable()
             $(".user:input", dataTable.fnGetNodes()).each(function(){
-                console.log($(this))
+                //console.log($(this))
                 $(this).prop('checked',true)
             })
         }
                 function deselect(table) {
                     var dataTable = $('#'+table).dataTable()
                     $(".user:input:checked", dataTable.fnGetNodes()).each(function(){
-                        console.log($(this))
+                        //console.log($(this))
                         $(this).prop('checked',false)
                     })
                 }
@@ -510,7 +510,7 @@
                 var mobile = [];
                 var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g, '').split(',')
                 mobile_selected = mobileArray
-                console.log(mobile_selected.length)
+                //console.log(mobile_selected)
             }
 
             // Get the HTML contents of the currently active editor
