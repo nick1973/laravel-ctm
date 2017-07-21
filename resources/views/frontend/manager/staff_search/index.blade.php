@@ -519,7 +519,7 @@
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/text',
-                data: {numbers: mobile_selected,
+                data: {numbers: mobile_selected.replace(/\s/g, ''),
                     message: tinyMCE.get('textcomments').getContent({ format: 'text' })
                 }
             }).done(function(data) {

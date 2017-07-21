@@ -219,7 +219,7 @@ class ManagerController extends Controller
         $sender = urlencode('CTM');
         $message = rawurlencode($request->input('message'));
         $numbersi = implode(',', $numbers);
-        return ['message'=>print_r($numbersi), 'number_count'=>count($number_array)];
+        return ['message'=>$numbersi, 'number_count'=>count($number_array)];
         // Prepare data for POST request
         $data = array('apiKey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
         // Send the POST request with cURL
