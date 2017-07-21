@@ -526,9 +526,9 @@
                     }
                 }).done(function(data) {
                     console.log(data)
-                    $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
+                    $("#bal").append('<p>Text Local Credits:= ' + data.message.balance + '</p>'
                     + '<p>posted numbers: ' + data.number_count + '</p>'
-                    + '<p>imploded numbers: ' + data.message + '</p>')
+                    + '<p>Texts Sent?: ' + data.message.status + '</p>')
                 });
                 $.ajax({
                     type: "POST",
