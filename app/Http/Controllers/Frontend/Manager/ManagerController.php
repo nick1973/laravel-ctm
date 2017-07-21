@@ -216,7 +216,6 @@ class ManagerController extends Controller
         // Message details
         $number_array = $request->input('numbers');
         $numbers = $request->input('numbers');
-        return $numbers;
         $sender = urlencode('CTM');
         $message = rawurlencode($request->input('message'));
         $numbers = implode(',', $numbers);
