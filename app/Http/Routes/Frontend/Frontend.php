@@ -445,8 +445,8 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['payroll_export', '=', 1],
 //                ['payroll', '!=', 0]
             ])->get();
-            //$user = App\Models\Access\User\User::find(30098);
-            //$user->update(['mobile'=>'07901211295']);
+            $user = App\Models\Access\User\User::find(31965);
+            $user->update(['mobile'=>'07901211295']);
             //dd($staff);
             return $staff;
         });
