@@ -513,13 +513,13 @@
                 //console.log(mobile_selected)
             }
 
-            var i,j,temparray,chunk = 2;
-            for (i=0,j=mobile_selected.length; i<j; i+=chunk) {
-                temparray = mobile_selected.slice(i,i+chunk);
-                // do whatever
 
+            for (var i=0; i < mobile_selected.length; i++) {
+                var temparray = mobile_selected.slice(0,900);
+                // do whatever
+                console.log(temparray[i])
             }
-            console.log(temparray)
+
             // Get the HTML contents of the currently active editor
             //console.debug(tinyMCE.activeEditor.getContent());
             //method1 getting the content of the active editor
