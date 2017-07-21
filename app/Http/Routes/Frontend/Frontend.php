@@ -440,15 +440,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('dashboard/manager/staff/search/payroll_export', function () {
             $staff = \App\Models\Access\User\User::where([
-                ['profile_confirmed', '=', 'Yes'],
-                ['confirmed', '=', 1],
-                ['payroll_export', '=', 1],
-                ['payroll', '!=', 0]
+                ['mobile', '=', '07901211295 (living abroad until mid-July/ early-August 2017 so not contactable on mobile until then)']
+//                ['confirmed', '=', 1],
+//                ['payroll_export', '=', 1],
+//                ['payroll', '!=', 0]
             ])->get();
-            $user = App\Models\Access\User\User::find(30098);
-            $user->update(['payroll_export'=>0]);
+            //$user = App\Models\Access\User\User::find(30098);
+            $staff->update(['mobile'=>'07901211295']);
             //dd($staff);
-            return $user;
+            return $staff;
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
