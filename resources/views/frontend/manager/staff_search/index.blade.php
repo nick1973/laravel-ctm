@@ -508,7 +508,7 @@
         function textcontent() {
             if(mobile_selected.length == 0){
                 var mobile = [];
-                var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g,.split(',')
+                var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g, '').split(',')
                 mobile_selected = mobileArray
                 //console.log(mobile_selected)
             }
