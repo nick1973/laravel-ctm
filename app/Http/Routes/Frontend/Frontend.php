@@ -448,7 +448,7 @@ Route::group(['middleware' => 'auth'], function () {
             $user = App\Models\Access\User\User::find(31110);
             $user->update(['mobile'=>'07411471927']);
             //dd($staff);
-            return $staff;
+            return $user;
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
