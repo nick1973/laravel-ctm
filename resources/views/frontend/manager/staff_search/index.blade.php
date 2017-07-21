@@ -506,38 +506,40 @@
         }
 
         function textcontent() {
-            if (mobile_selected.length == 0) {
+            if(mobile_selected.length == 0){
                 var mobile = [];
                 var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g, '').split(',')
                 mobile_selected = mobileArray
                 //console.log(mobile_selected)
             }
 
-            while (mobile_selected.length) {
-                console.log(mobile_selected.splice(0, 900));
-                // Get the HTML contents of the currently active editor
-                //console.debug(tinyMCE.activeEditor.getContent());
-                //method1 getting the content of the active editor
-                $.ajax({
-                    type: "POST",
-                    url: '/dashboard/manager/text',
-                    data: {
-                        numbers: mobile_selected,
-                        message: tinyMCE.get('textcomments').getContent({format: 'text'})
-                    }
-                }).done(function (data) {
-                    //$( this ).addClass( "done" );
-                    console.log(data)
-                    $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
+            var i,j,temparray,chunk = 10;
+            for (i=0,j=mobile_selected.length; i<j; i+=chunk) {
+                temparray = mobile_selected.slice(i,i+chunk);
+                // do whatever
+                console.log(temparray)
+            }
+
+            // Get the HTML contents of the currently active editor
+            //console.debug(tinyMCE.activeEditor.getContent());
+            //method1 getting the content of the active editor
+            $.ajax({
+                type: "POST",
+                url: '/dashboard/manager/text',
+                data: {numbers: mobile_selected,
+                    message: tinyMCE.get('textcomments').getContent({ format: 'text' })
+                }
+            }).done(function(data) {
+                //$( this ).addClass( "done" );
+                console.log(data)
+                $("#bal").append('<p>Text Local Credits:= ' + data.message + '</p>'
                     + '<p>posted numbers: ' + data.number_count + '</p>'
                     + '<p>imploded numbers: ' + data.message + '</p>')
-                });
-            }
-                //location.reload();
-                //$("#confirm_form").submit();
-                alert(mobile_selected.length + ' Texts been sent to ' + mobile_selected);
-                $('#textModal').modal('hide')
-
+            });
+            //location.reload();
+            //$("#confirm_form").submit();
+            alert(mobile_selected.length + ' Texts been sent to ' + mobile_selected);
+            $('#textModal').modal('hide')
         }
 
         function content() {
