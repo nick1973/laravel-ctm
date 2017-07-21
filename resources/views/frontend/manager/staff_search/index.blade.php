@@ -514,11 +514,11 @@
             }
 
 
-            for (var i=0; i < mobile_selected.length; i++) {
-                var temparray = mobile_selected.slice(0,900);
-                // do whatever
-                console.log(temparray[i])
+            if(mobile_selected >= 900){
+                var mobile_selected_spliced = mobile_selected.splice(0,900);
             }
+            console.log(mobile_selected)
+            console.log(mobile_selected_spliced)
 
             // Get the HTML contents of the currently active editor
             //console.debug(tinyMCE.activeEditor.getContent());
