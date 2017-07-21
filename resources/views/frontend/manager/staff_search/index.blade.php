@@ -508,7 +508,7 @@
         function textcontent() {
             if(mobile_selected.length == 0){
                 var mobile = [];
-                var mobileArray = $("input[name=mobile_numbers]").val().split(',')
+                var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g, '').split(',')
                 mobile_selected = mobileArray
                 console.log(mobile_selected)
             }
@@ -519,7 +519,7 @@
             $.ajax({
                 type: "POST",
                 url: '/dashboard/manager/text',
-                data: {numbers: mobile_selected.replace(/\s/g, ''),
+                data: {numbers: mobile_selected,
                     message: tinyMCE.get('textcomments').getContent({ format: 'text' })
                 }
             }).done(function(data) {
