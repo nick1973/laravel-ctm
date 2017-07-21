@@ -510,7 +510,7 @@
                 var mobile = [];
                 var mobileArray = $("input[name=mobile_numbers]").val().replace(/\s/g, '').split(',')
                 mobile_selected = mobileArray
-                console.log(mobile_selected)
+                console.log(mobile_selected.length)
             }
 
             // Get the HTML contents of the currently active editor
