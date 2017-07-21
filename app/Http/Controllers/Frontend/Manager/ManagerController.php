@@ -223,17 +223,17 @@ class ManagerController extends Controller
         // Prepare data for POST request
         $data = array('apiKey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
         // Send the POST request with cURL
-//        $ch = curl_init('http://api.txtlocal.com/send/');
-//        curl_setopt($ch, CURLOPT_POST, true);
-//        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//        $response = curl_exec($ch);
-//        curl_close($ch);
-//        // Process your response here
-//        $responseArray = json_decode($response, true);
-//        $response = $responseArray;
+        $ch = curl_init('http://api.txtlocal.com/send/');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        // Process your response here
+        $responseArray = json_decode($response, true);
+        $response = $responseArray;
 //        $cost = $responseArray['balance'];
-        return ['message'=>'', 'number_count'=>count($number_array)];
+        return ['message'=>$response, 'number_count'=>count($number_array)];
     }
 
     function update_notes(Request $request){

@@ -445,10 +445,10 @@ Route::group(['middleware' => 'auth'], function () {
 //                ['payroll_export', '=', 1],
 //                ['payroll', '!=', 0]
             ])->get();
-            $user = App\Models\Access\User\User::find(31110);
-            $user->update(['mobile'=>'07411471927']);
+            //$user = App\Models\Access\User\User::find(31110);
+            //$user->update(['mobile'=>'07411471927']);
             //dd($staff);
-            return $user;
+            return $staff;
         });
 
         Route::get('dashboard/manager/staff/search/medical', function () {
