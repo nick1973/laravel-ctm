@@ -662,7 +662,7 @@
 
         function pasted() {
             if($("#mobile_numbers").val()!=''){
-                $("#mobile_numbers").val($("#mobile_numbers").val() + ',')
+                //$("#mobile_numbers").val($("#mobile_numbers").val() + ',')
             }
         }
     </script>
