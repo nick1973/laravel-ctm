@@ -1,26 +1,50 @@
-<div>
-
-    <h4>@{{ specData }}</h4>
-
-    <ul>
-        <li ng-repeat="x in myData">
-            @{{ x.grade + ', ' + x.spec_name }}
-        </li>
-    </ul>
-
-</div>
-
 <script>
-
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
 
         $http.get("/event/5/garden")
                 .then(function(response) {
                     $scope.specData = response.data.data;
-                    console.log($scope.specData)
+
+                    for (i = 0; i < $scope.specData.length; i++) {
+                        //if(i>0)
+                        //$("#add_row")[0].onclick();
+                        if($scope.specData[i].monday_start.split(',').length > 0){
+                            spiltDays('monday', $scope.specData[i].monday_start, $scope.specData[i].monday_end);
+                        }
+                        if($scope.specData[i].tuesday_start.split(',').length > 0){
+                            spiltDays('tuesday', $scope.specData[i].tuesday_start, $scope.specData[i].tuesday_end);
+                        }
+                        if($scope.specData[i].wednesday_start.split(',').length > 0){
+                            spiltDays('wednesday', $scope.specData[i].wednesday_start, $scope.specData[i].wednesday_end);
+                        }
+                        if($scope.specData[i].thursday_start.split(',').length > 0){
+                            spiltDays('thursday', $scope.specData[i].thursday_start, $scope.specData[i].thursday_end);
+                        }
+                        if($scope.specData[i].friday_start.split(',').length > 0){
+                            spiltDays('friday', $scope.specData[i].friday_start, $scope.specData[i].friday_end);
+                        }
+                        if($scope.specData[i].saturday_start.split(',').length > 0){
+                            spiltDays('saturday', $scope.specData[i].saturday_start, $scope.specData[i].saturday_end);
+                        }
+                        if($scope.specData[i].sunday_start.split(',').length > 0){
+                            spiltDays('sunday', $scope.specData[i].sunday_start, $scope.specData[i].sunday_end);
+                        }
+
+                        console.log($scope.specData[i])
+                    }
                 });
+
+                function spiltDays(day, dayStart, dayEnd) {
+                    for (w = 0; w < dayStart.split(',').length; w++) {
+                        var start = dayStart.split(',')[w]
+                        var end = dayEnd.split(',')[w]
+                        $scope.specData[i][day+'_start'+(w+1)] = start
+                        $scope.specData[i][day+'_end'+(w+1)] = end
+                    }
+                }
     });
+
 </script>
 <div class="col-lg-12" style="padding: 10px">
     <p><b>Row Functions: Select a row to use a function below.</b></p>
@@ -72,7 +96,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="tr_clone">
+        <tr class="tr_clone" ng-repeat="x in specData">
             {{--<td>--}}
             {{--<input type="button" value="Remove"--}}
             {{--class="btn btn-danger addproduct"--}}
@@ -85,12 +109,12 @@
                 <input onchange="check(this)" type="checkbox" />
             </td>
             <td width="10" style="vertical-align: middle; text-align: center">
-                <span onclick="addRows($(this).closest('table').attr('id'),this)" class="glyphicon glyphicon-plus" aria-hidden="true"
+                <span id="add_row" onclick="addRows($(this).closest('table').attr('id'),this)" class="glyphicon glyphicon-plus" aria-hidden="true"
                 style="cursor: pointer"></span>
             </td>
             <td width="120px">
                 <select name="grade[]" class="form-control">
-                    <option>@{{ grade }}</option>
+                    <option>@{{ x.grade }}</option>
                     @foreach($pay_grades as $roles)
                         <option>{{ $roles['role'] }}</option>
                     @endforeach
@@ -98,12 +122,12 @@
             </td>
 
             <td width="70px">
-                <input ng-model="qty" name="qty[]" class="form-control" type="text"
-                       value="">
+                <input name="qty[]" class="form-control" type="text"
+                       value="@{{ x.qty }}">
             </td>
             <td width="150">
                 <input name="position[]" class="form-control" type="text"
-                       value="">
+                       value="@{{ x.position }}">
             </td>
         </tr>
         </tbody>
@@ -179,7 +203,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="tr_clone">
+        <tr class="tr_clone" ng-repeat="x in specData">
             <?php
             $week = 0;
             ?>
@@ -194,13 +218,18 @@
                 @endif
                 <?php
                 $x = dayOfWeek($day_number_ng);
+                $fd = fullDayOfWeek($day_number_ng);
                 $lower_day = strtolower($x);
+                $lower_full_day = strtolower($fd);
                 $start = "{{ spec.week$week." . $lower_day . $i . "_start }}";
                 $end = "{{ spec.week$week." . $lower_day . $i . "_end}}";
                 $sub_total = "{{ spec.week$week." . $lower_day . $i . "_sub_total }}";
                 $red = '';
                 $lower_day_start = $lower_day.'_start[]';
                 $lower_day_end = $lower_day.'_end[]';
+                $day_start = $lower_full_day.'_start'.$week;
+                $day_end = $lower_full_day.'_end'.$week;
+                $p = 'position';
                 ?>
 
 
@@ -210,14 +239,16 @@
                     @endif
                 @endif
                 <td class="times {{$red}}">
-                    <select class="form-control" name="{{ $lower_day_start }}">
+                    <select id="{{ $day_start }}" class="form-control" name="{{ $lower_day_start }}">
+                        <option><?php echo "{{x.".$day_start."}}"; ?></option>
                         @foreach($arr as $time)
                             <option>{{ $time }}</option>
                         @endforeach
                     </select>
                 </td>
                 <td class="times {{$red}}">
-                    <select class="form-control" name="{{ $lower_day_end }}">
+                    <select id="{{ $day_end }}" class="form-control" name="{{ $lower_day_end }}">
+                        <option><?php echo "{{x.".$day_end."}}"; ?></option>
                         @foreach($arr as $time)
                             <option>{{ $time }}</option>
                         @endforeach
