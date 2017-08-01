@@ -154,7 +154,10 @@
                         return 'No'
                     }
                     },
-                    { "data": "mobile" , className: "centre get" },
+                    //{ "data": "mobile" , className: "centre get" },
+                    { "data": function (data) {
+                        return data.mobile+','
+                    } , className: "centre get" },
                     { "data": "email" , className: "centre get" },
                     { "data": function (data) {
                         if(data.rtw_docs==1){
