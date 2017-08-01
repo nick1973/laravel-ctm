@@ -53,12 +53,12 @@ class SpecsController extends Controller
              return collect($array)->chunk(count($start)/count($rowid))->toArray();
         }
         if ($grade != "") {
-            $mon_start = makeCollection($mon_start, $mon_start, $row_id);
-            $mon_end = makeCollection($mon_end, $mon_end, $row_id);
-            $mon_sub_total = makeCollection($mon_sub_total, $mon_sub_total, $row_id);
-            //$mon_start = collect($mon_start)->chunk(count($mon_start)/count($row_id))->toArray();
-            //$mon_end = collect($mon_end)->chunk(count($mon_end)/count($row_id))->toArray();
-            //$mon_sub_total = collect($mon_sub_total)->chunk(count($mon_sub_total)/count($row_id))->toArray();
+            //$mon_start = makeCollection($mon_start, $mon_start, $row_id);
+            //$mon_end = makeCollection($mon_end, $mon_end, $row_id);
+            //$mon_sub_total = makeCollection($mon_sub_total, $mon_sub_total, $row_id);
+            $mon_start = collect($mon_start)->chunk(count($mon_start)/count($row_id))->toArray();
+            $mon_end = collect($mon_end)->chunk(count($mon_end)/count($row_id))->toArray();
+            $mon_sub_total = collect($mon_sub_total)->chunk(count($mon_sub_total)/count($row_id))->toArray();
             $tues_start = collect($tues_start)->chunk(count($tues_start)/count($row_id))->toArray();
             $tues_end = collect($tues_end)->chunk(count($tues_end)/count($row_id))->toArray();
             $tues_sub_total = collect($tues_sub_total)->chunk(count($tues_sub_total)/count($row_id))->toArray();
