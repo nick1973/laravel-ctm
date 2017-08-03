@@ -16,10 +16,11 @@ class SpecsController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         //return $request->input('wed_hours');
         $spec_name = $request->input('spec_name');
         $events_id = $request->input('events_id');
-        $row_id = $request->input('row_id');
+        //$row_id = $request->input('row_id');
         $grade = $request->input('grade');
         $qty = $request->input('qty');
         $position = $request->input('position');
@@ -56,37 +57,37 @@ class SpecsController extends Controller
             //$mon_start = makeCollection($mon_start, $mon_start, $row_id);
             //$mon_end = makeCollection($mon_end, $mon_end, $row_id);
             //$mon_sub_total = makeCollection($mon_sub_total, $mon_sub_total, $row_id);
-            $mon_start = collect($mon_start)->chunk(count($mon_start)/count($row_id))->toArray();
-            $mon_end = collect($mon_end)->chunk(count($mon_end)/count($row_id))->toArray();
-            $mon_sub_total = collect($mon_sub_total)->chunk(count($mon_sub_total)/count($row_id))->toArray();
-            $tues_start = collect($tues_start)->chunk(count($tues_start)/count($row_id))->toArray();
-            $tues_end = collect($tues_end)->chunk(count($tues_end)/count($row_id))->toArray();
-            $tues_sub_total = collect($tues_sub_total)->chunk(count($tues_sub_total)/count($row_id))->toArray();
-            $wed_start = collect($wed_start)->chunk(count($wed_start)/count($row_id))->toArray();
-            $wed_end = collect($wed_end)->chunk(count($wed_end)/count($row_id))->toArray();
-            $wed_sub_total = collect($wed_sub_total)->chunk(count($wed_sub_total)/count($row_id))->toArray();
-            $thur_start = collect($thur_start)->chunk(count($thur_start)/count($row_id))->toArray();
-            $thur_end = collect($thur_end)->chunk(count($thur_end)/count($row_id))->toArray();
-            $thur_sub_total = collect($thur_sub_total)->chunk(count($thur_sub_total)/count($row_id))->toArray();
-            $fri_start = collect($fri_start)->chunk(count($fri_start)/count($row_id))->toArray();
-            $fri_end = collect($fri_end)->chunk(count($fri_end)/count($row_id))->toArray();
-            $fri_sub_total = collect($fri_sub_total)->chunk(count($fri_sub_total)/count($row_id))->toArray();
-            $sat_start = collect($sat_start)->chunk(count($sat_start)/count($row_id))->toArray();
-            $sat_end = collect($sat_end)->chunk(count($sat_end)/count($row_id))->toArray();
-            $sat_sub_total = collect($sat_sub_total)->chunk(count($sat_sub_total)/count($row_id))->toArray();
-            $sun_start = collect($sun_start)->chunk(count($sun_start)/count($row_id))->toArray();
-            $sun_end = collect($sun_end)->chunk(count($sun_end)/count($row_id))->toArray();
-            $sun_sub_total = collect($sun_sub_total)->chunk(count($sun_sub_total)/count($row_id))->toArray();
+            $mon_start = collect($mon_start)->chunk(count($mon_start)/count($grade))->toArray();
+            $mon_end = collect($mon_end)->chunk(count($mon_end)/count($grade))->toArray();
+            $mon_sub_total = collect($mon_sub_total)->chunk(count($mon_sub_total)/count($grade))->toArray();
+            $tues_start = collect($tues_start)->chunk(count($tues_start)/count($grade))->toArray();
+            $tues_end = collect($tues_end)->chunk(count($tues_end)/count($grade))->toArray();
+            $tues_sub_total = collect($tues_sub_total)->chunk(count($tues_sub_total)/count($grade))->toArray();
+            $wed_start = collect($wed_start)->chunk(count($wed_start)/count($grade))->toArray();
+            $wed_end = collect($wed_end)->chunk(count($wed_end)/count($grade))->toArray();
+            $wed_sub_total = collect($wed_sub_total)->chunk(count($wed_sub_total)/count($grade))->toArray();
+            $thur_start = collect($thur_start)->chunk(count($thur_start)/count($grade))->toArray();
+            $thur_end = collect($thur_end)->chunk(count($thur_end)/count($grade))->toArray();
+            $thur_sub_total = collect($thur_sub_total)->chunk(count($thur_sub_total)/count($grade))->toArray();
+            $fri_start = collect($fri_start)->chunk(count($fri_start)/count($grade))->toArray();
+            $fri_end = collect($fri_end)->chunk(count($fri_end)/count($grade))->toArray();
+            $fri_sub_total = collect($fri_sub_total)->chunk(count($fri_sub_total)/count($grade))->toArray();
+            $sat_start = collect($sat_start)->chunk(count($sat_start)/count($grade))->toArray();
+            $sat_end = collect($sat_end)->chunk(count($sat_end)/count($grade))->toArray();
+            $sat_sub_total = collect($sat_sub_total)->chunk(count($sat_sub_total)/count($grade))->toArray();
+            $sun_start = collect($sun_start)->chunk(count($sun_start)/count($grade))->toArray();
+            $sun_end = collect($sun_end)->chunk(count($sun_end)/count($grade))->toArray();
+            $sun_sub_total = collect($sun_sub_total)->chunk(count($sun_sub_total)/count($grade))->toArray();
             $day_array = [];
             //DELETES EXISTING RECORDS
             if(Specs::where('events_id', $events_id)->where('spec_name', $spec_name)->exists()){
                 Specs::where('events_id', $events_id)->where('spec_name', $spec_name)->delete();
             }
 
-            for ($i = 0; $i < count($row_id); $i++) {
+            for ($i = 0; $i < count($grade); $i++) {
                 $day_array[$i]['events_id'] = $events_id;
                 $day_array[$i]['spec_name'] = $spec_name;
-                $day_array[$i]['row_id'] = $row_id[$i];
+                //$day_array[$i]['row_id'] = $row_id[$i];
                 $day_array[$i]['grade'] = $grade[$i];
                 $day_array[$i]['qty'] = $qty[$i];
                 $day_array[$i]['position'] = $position[$i];

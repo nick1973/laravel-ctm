@@ -176,8 +176,8 @@ echo $arr[1];
 <div style="padding: 5px">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h3>Spec ID {{ $event->id }}, {{ $diffInDays+1 }} Day Event, {{ $day_number }} Day Number, next day-{{next_day(0)}}
-             {{ $event_start_date->format('m/d/Y') }} {{ $diffInDays_event }}
+            <h3>Spec ID {{ $event->id }}, {{ $diffInDays+1 }} Day Event, CTM start: {{ $ctm_start->format("d-m-Y") }}
+                CTM start day: {{dayOfWeek($day_number)}} day: {{$ctm_start->day}}
             </h3>
             {{--<button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove</button>--}}
             {{--<button type="button" class="btn btn-warning" onclick="copyRow()">Copy</button>--}}

@@ -67,10 +67,11 @@
                             'class' => 'form-horizontal',
                             'id'    => ''])
                             !!}
+<ng-form>
 
 <div class="col-lg-3" style="padding: 0">
     <table id="firstTable" class="table">
-        <input name="row_id[]" class="row_id" class="form-control" type="text" value="1" hidden>
+        {{--<input name="row_id[]" class="row_id" class="form-control" type="text" value="" hidden>--}}
         <input name="spec_name" id="spec_name" class="form-control hidden" type="text">
         <thead>
         <tr class="info">
@@ -97,13 +98,14 @@
         </thead>
         <tbody>
         <tr class="tr_clone" ng-repeat="x in specData">
+
             {{--<td>--}}
             {{--<input type="button" value="Remove"--}}
             {{--class="btn btn-danger addproduct"--}}
             {{--ng-click="removeRow($index)"/>--}}
             {{--</td>--}}
             <td width="" hidden>
-                <input class="row_id" class="form-control" type="text">
+                <input name="row_id[]" class="row_id" class="form-control" type="text" value="@{{ x.row_id }}">
             </td>
             <td width="10" style="vertical-align: middle; text-align: center">
                 <input onchange="check(this)" type="checkbox" />
@@ -273,5 +275,6 @@
     </table>
     <button type="submit">Save</button>
 </div>
+</ng-form>
 </form>
 
