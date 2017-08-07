@@ -45,6 +45,7 @@
     <script>
 
         $(document).ready( function () {
+            function pad(s) { return (s < 10) ? '0' + s : s; }
             var table = $('#events').DataTable( {
 
                 initComplete: function () {
@@ -77,10 +78,38 @@
                     { "data": "event_name" , className: "centre" },
                     { "data": "contract_manager" , className: "centre" },
                     { "data": "operation_manager" , className: "centre" },
-                    { "data": "event_start_date" , className: "centre" },
-                    { "data": "event_end_date" , className: "centre" },
-                    { "data": "ctm_start_date" , className: "centre" },
-                    { "data": "ctm_end_date" , className: "centre" },
+                    {
+                        "data": function (data) {
+                            var date = new Date(data.event_start_date);
+                            return(pad(date.getDate()) + '-' + pad(date.getMonth()+1) + '-' +  date.getFullYear());
+                            //return '<a href="/dashboard/ops/' + data.id + '/edit" class="btn btn-primary">Edit</a>';
+                        }, className: "centre"
+                    },
+                    //{ "data": "event_start_date" , className: "centre" },
+                    {
+                        "data": function (data) {
+                            var date = new Date(data.event_end_date);
+                            return(pad(date.getDate()) + '-' + pad(date.getMonth()+1) + '-' +  date.getFullYear());
+                            //return '<a href="/dashboard/ops/' + data.id + '/edit" class="btn btn-primary">Edit</a>';
+                        }, className: "centre"
+                    },
+                    //{ "data": "event_end_date" , className: "centre" },
+                    {
+                        "data": function (data) {
+                            var date = new Date(data.ctm_start_date);
+                            return(pad(date.getDate()) + '-' + pad(date.getMonth()+1) + '-' +  date.getFullYear());
+                            //return '<a href="/dashboard/ops/' + data.id + '/edit" class="btn btn-primary">Edit</a>';
+                        }, className: "centre"
+                    },
+                    //{ "data": "ctm_start_date" , className: "centre" },
+                    {
+                        "data": function (data) {
+                            var date = new Date(data.ctm_end_date);
+                            return(pad(date.getDate()) + '-' + pad(date.getMonth()+1) + '-' +  date.getFullYear());
+                            //return '<a href="/dashboard/ops/' + data.id + '/edit" class="btn btn-primary">Edit</a>';
+                        }, className: "centre"
+                    },
+                    //{ "data": "ctm_end_date" , className: "centre" },
                     {
                         "data": function (data) {
                             return '<a href="/dashboard/ops/' + data.id + '/edit" class="btn btn-primary">Edit</a>';

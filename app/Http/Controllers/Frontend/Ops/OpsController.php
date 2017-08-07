@@ -80,11 +80,11 @@ class OpsController extends Controller
         $ctm_end_date_formated = date_create($ctm_end_date);
         $ctm_end_date_formated = date_format($ctm_end_date_formated,"Y/d/m");
 
-        $event->update($input);
-        $event->update(['event_start_date'=>$event_start_date_formated,
-                        'event_end_date'=>$event_end_date_formated,
-                        'ctm_start_date'=>$ctm_start_date_formated,
-                        'ctm_end_date'=>$ctm_end_date_formated]);
+        $event->update($all);
+//        $event->update(['event_start_date'=>$event_start_date_formated,
+//                        'event_end_date'=>$event_end_date_formated,
+//                        'ctm_start_date'=>$ctm_start_date_formated,
+//                        'ctm_end_date'=>$ctm_end_date_formated]);
         return redirect()->route('dashboard.ops.index');
     }
 
