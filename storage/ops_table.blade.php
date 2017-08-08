@@ -50,6 +50,13 @@
 
 
 </script>
+{!! Form::model($event,[
+                            'method' => 'POST',
+                            'route' => ['dashboard.specs.store'],
+                            'class' => 'form-horizontal save_specs',
+                            'id'    => ''])
+                            !!}
+<ng-form>
 <div class="col-lg-12" style="padding: 10px">
     <p><b>Row Functions: Select a row to use a function below.</b></p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
@@ -61,17 +68,11 @@
     <button type="button" class="btn btn-info" onclick="clearRow()">Clear
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     </button>
-    <button type="button" class="btn btn-default" onclick="save_specs()">Save
+    <button type="submit" class="btn btn-default">Save
         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
     </button>
 </div>
-{!! Form::model($event,[
-                            'method' => 'POST',
-                            'route' => ['dashboard.specs.store'],
-                            'class' => 'form-horizontal save_specs',
-                            'id'    => ''])
-                            !!}
-<ng-form>
+
 <div class="animation">
 <div class="col-lg-3" style="padding: 0">
     <table id="firstTable" class="table">
