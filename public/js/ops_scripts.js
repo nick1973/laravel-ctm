@@ -136,6 +136,7 @@ function clearRow() {
 }
 
 function copyRow() {
+    //get the table id associated with the selected/highlighted tr
     var $tr    = $('#firstTable').find('.highlighted')//.css('background-color', 'yellow')
     var $clone_roles = $tr.clone();
     var $tr_days    = $('.days').find('tr.tr_clone.highlighted')
