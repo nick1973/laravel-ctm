@@ -179,6 +179,7 @@ echo $arr[1];
 <div style="padding: 5px">
     <div class="row">
         <div class="col-md-12 col-lg-12">
+            <h2>Event: {{ $event->event_name }}</h2>
             <h3>Spec ID {{ $event->id }}, {{ $diffInDays+1 }} Day Event, CTM start: {{ $ctm_start->format("d-m-Y") }}
                 CTM start day: {{dayOfWeek($day_number)}} day: {{$ctm_start->day}}
             </h3>

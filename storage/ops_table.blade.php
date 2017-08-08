@@ -277,7 +277,6 @@
         </tr>
         </tbody>
     </table>
-    <button type="submit">Save</button>
 </div>
 </div>
 </ng-form>
