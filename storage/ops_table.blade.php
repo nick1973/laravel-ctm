@@ -61,18 +61,18 @@
     <button type="button" class="btn btn-info" onclick="clearRow()">Clear
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     </button>
-    <button type="button" class="btn btn-default">Save
+    <button type="button" class="btn btn-default" onclick="save_specs()">Save
         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
     </button>
 </div>
 {!! Form::model($event,[
                             'method' => 'POST',
                             'route' => ['dashboard.specs.store'],
-                            'class' => 'form-horizontal',
+                            'class' => 'form-horizontal save_specs',
                             'id'    => ''])
                             !!}
 <ng-form>
-
+<div class="animation">
 <div class="col-lg-3" style="padding: 0">
     <table id="firstTable" class="table">
         {{--<input name="row_id[]" class="row_id" class="form-control" type="text" value="" hidden>--}}
@@ -278,6 +278,7 @@
         </tbody>
     </table>
     <button type="submit">Save</button>
+</div>
 </div>
 </ng-form>
 </form>

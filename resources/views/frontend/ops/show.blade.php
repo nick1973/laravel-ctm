@@ -12,6 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     {{--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>--}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <style>
         /*.search-table-outter {border:2px solid red;}*/
         /*.search-table{table-layout: fixed; margin:40px auto 0px auto; }*/
@@ -27,6 +29,7 @@
             background-color:#428bca;
             color: white;
         }
+
         .DocumentList
         {
             overflow-x:scroll;
@@ -404,12 +407,26 @@ echo $arr[1];
 </div>
 {{--<button onclick="save_tabs()">Save Tabs</button>--}}
 <script>
+    function save_specs() {
+        //alert("mksdlmksfgdfgd")
+        $(".save_specs").submit();
+    }
+    
     var tabName
     $(function() {
         $('#tabs a').click(function (e) {
             tabName = $(this).text()
             angular.element(document.getElementById('app-layout')).scope().firstMethod();
             console.log(tabName)
+            $('.animation').removeClass('animated jello');
+            $("body").css({'position':'fixed',
+            //'background-image':'url("/img/waiting.gif")',
+            //'background-repeat':'no-repeat',
+            'width':'100%',
+            'height':'100%',
+            'top':'0',
+            'left':'0',
+            'opacity':'0.6'})
         })
     })
     var app = angular.module('myApp', []);
@@ -418,7 +435,13 @@ echo $arr[1];
             $http.get("/event/{{ $event->id }}/" + tabName + "")
                 .then(function (response) {
                     $scope.specData = response.data.data;
-
+                    $("body").css({'position':'',
+                        'width':'',
+                        'height':'',
+                        'top':'',
+                        'left':'',
+                        'opacity':'1'});
+                    $('.animation').addClass('animated jello');
                     for (i = 0; i < $scope.specData.length; i++) {
                         //if(i>0)
                         //$("#add_row")[0].onclick();
@@ -480,6 +503,7 @@ echo $arr[1];
             },
             function(data, status){
                 console.log(status);
+                location.reload()
             });
     }
 </script>

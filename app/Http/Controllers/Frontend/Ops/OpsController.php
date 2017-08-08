@@ -128,6 +128,5 @@ class OpsController extends Controller
         } else{
             Opstab::create(['tab_href'=>$tab_href_array, 'tab_title'=>$tab_title_array, 'event_id'=>$event_id]);
         }
-
     }
 }
