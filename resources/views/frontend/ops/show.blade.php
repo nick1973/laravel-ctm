@@ -372,6 +372,7 @@ echo $arr[1];
                             $("#firstTable").attr("id",'{{strtolower($tab)}}'+"_Table");
                             $("#days").attr("id",'{{strtolower($tab)}}'+"_days");
                             $("#spec_name").attr("id",'{{strtolower($tab)}}'+"_spec").val('{{strtolower($tab)}}');
+                            var tabName = '{{strtolower($tab)}}'
                         </script>
                     </div>
                 @endif
@@ -403,6 +404,61 @@ echo $arr[1];
 </div>
 {{--<button onclick="save_tabs()">Save Tabs</button>--}}
 <script>
+    var tabName
+    $(function() {
+        $('#tabs a').click(function (e) {
+            tabName = $(this).text()
+            angular.element(document.getElementById('app-layout')).scope().firstMethod();
+            console.log(tabName)
+        })
+    })
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $scope.firstMethod = function() {
+            $http.get("/event/{{ $event->id }}/" + tabName + "")
+                .then(function (response) {
+                    $scope.specData = response.data.data;
+
+                    for (i = 0; i < $scope.specData.length; i++) {
+                        //if(i>0)
+                        //$("#add_row")[0].onclick();
+                        if ($scope.specData[i].monday_start.split(',').length > 0) {
+                            spiltDays('monday', $scope.specData[i].monday_start, $scope.specData[i].monday_end);
+                        }
+                        if ($scope.specData[i].tuesday_start.split(',').length > 0) {
+                            spiltDays('tuesday', $scope.specData[i].tuesday_start, $scope.specData[i].tuesday_end);
+                        }
+                        if ($scope.specData[i].wednesday_start.split(',').length > 0) {
+                            spiltDays('wednesday', $scope.specData[i].wednesday_start, $scope.specData[i].wednesday_end);
+                        }
+                        if ($scope.specData[i].thursday_start.split(',').length > 0) {
+                            spiltDays('thursday', $scope.specData[i].thursday_start, $scope.specData[i].thursday_end);
+                        }
+                        if ($scope.specData[i].friday_start.split(',').length > 0) {
+                            spiltDays('friday', $scope.specData[i].friday_start, $scope.specData[i].friday_end);
+                        }
+                        if ($scope.specData[i].saturday_start.split(',').length > 0) {
+                            spiltDays('saturday', $scope.specData[i].saturday_start, $scope.specData[i].saturday_end);
+                        }
+                        if ($scope.specData[i].sunday_start.split(',').length > 0) {
+                            spiltDays('sunday', $scope.specData[i].sunday_start, $scope.specData[i].sunday_end);
+                        }
+
+                        console.log($scope.specData[i])
+                    }
+                });
+        }
+
+        function spiltDays(day, dayStart, dayEnd) {
+            for (w = 0; w < dayStart.split(',').length; w++) {
+                var start = dayStart.split(',')[w]
+                var end = dayEnd.split(',')[w]
+                $scope.specData[i][day+'_start'+(w+1)] = start
+                $scope.specData[i][day+'_end'+(w+1)] = end
+            }
+        }
+    });
+
     function save_tabs() {
         var formData = $("#tabs_form").serializeArray();
         var tab_href = []

@@ -1,49 +1,53 @@
 <script>
-    var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope, $http) {
+    {{--var tabName = ""--}}
 
-        $http.get("/event/5/garden")
-                .then(function(response) {
-                    $scope.specData = response.data.data;
+    {{--var app = angular.module('myApp', []);--}}
+    {{--app.controller('myCtrl', function($scope, $http) {--}}
+        {{--console.log("From app "+tabName)--}}
+        {{--$http.get("/event/{{ $event->id }}/"+tabName+"")--}}
+                {{--.then(function(response) {--}}
+                    {{--$scope.specData = response.data.data;--}}
 
-                    for (i = 0; i < $scope.specData.length; i++) {
-                        //if(i>0)
-                        //$("#add_row")[0].onclick();
-                        if($scope.specData[i].monday_start.split(',').length > 0){
-                            spiltDays('monday', $scope.specData[i].monday_start, $scope.specData[i].monday_end);
-                        }
-                        if($scope.specData[i].tuesday_start.split(',').length > 0){
-                            spiltDays('tuesday', $scope.specData[i].tuesday_start, $scope.specData[i].tuesday_end);
-                        }
-                        if($scope.specData[i].wednesday_start.split(',').length > 0){
-                            spiltDays('wednesday', $scope.specData[i].wednesday_start, $scope.specData[i].wednesday_end);
-                        }
-                        if($scope.specData[i].thursday_start.split(',').length > 0){
-                            spiltDays('thursday', $scope.specData[i].thursday_start, $scope.specData[i].thursday_end);
-                        }
-                        if($scope.specData[i].friday_start.split(',').length > 0){
-                            spiltDays('friday', $scope.specData[i].friday_start, $scope.specData[i].friday_end);
-                        }
-                        if($scope.specData[i].saturday_start.split(',').length > 0){
-                            spiltDays('saturday', $scope.specData[i].saturday_start, $scope.specData[i].saturday_end);
-                        }
-                        if($scope.specData[i].sunday_start.split(',').length > 0){
-                            spiltDays('sunday', $scope.specData[i].sunday_start, $scope.specData[i].sunday_end);
-                        }
+                    {{--for (i = 0; i < $scope.specData.length; i++) {--}}
+                        {{--//if(i>0)--}}
+                        {{--//$("#add_row")[0].onclick();--}}
+                        {{--if($scope.specData[i].monday_start.split(',').length > 0){--}}
+                            {{--spiltDays('monday', $scope.specData[i].monday_start, $scope.specData[i].monday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].tuesday_start.split(',').length > 0){--}}
+                            {{--spiltDays('tuesday', $scope.specData[i].tuesday_start, $scope.specData[i].tuesday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].wednesday_start.split(',').length > 0){--}}
+                            {{--spiltDays('wednesday', $scope.specData[i].wednesday_start, $scope.specData[i].wednesday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].thursday_start.split(',').length > 0){--}}
+                            {{--spiltDays('thursday', $scope.specData[i].thursday_start, $scope.specData[i].thursday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].friday_start.split(',').length > 0){--}}
+                            {{--spiltDays('friday', $scope.specData[i].friday_start, $scope.specData[i].friday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].saturday_start.split(',').length > 0){--}}
+                            {{--spiltDays('saturday', $scope.specData[i].saturday_start, $scope.specData[i].saturday_end);--}}
+                        {{--}--}}
+                        {{--if($scope.specData[i].sunday_start.split(',').length > 0){--}}
+                            {{--spiltDays('sunday', $scope.specData[i].sunday_start, $scope.specData[i].sunday_end);--}}
+                        {{--}--}}
 
-                        console.log($scope.specData[i])
-                    }
-                });
+                        {{--console.log($scope.specData[i])--}}
+                    {{--}--}}
+                {{--});--}}
 
-                function spiltDays(day, dayStart, dayEnd) {
-                    for (w = 0; w < dayStart.split(',').length; w++) {
-                        var start = dayStart.split(',')[w]
-                        var end = dayEnd.split(',')[w]
-                        $scope.specData[i][day+'_start'+(w+1)] = start
-                        $scope.specData[i][day+'_end'+(w+1)] = end
-                    }
-                }
-    });
+                {{--function spiltDays(day, dayStart, dayEnd) {--}}
+                    {{--for (w = 0; w < dayStart.split(',').length; w++) {--}}
+                        {{--var start = dayStart.split(',')[w]--}}
+                        {{--var end = dayEnd.split(',')[w]--}}
+                        {{--$scope.specData[i][day+'_start'+(w+1)] = start--}}
+                        {{--$scope.specData[i][day+'_end'+(w+1)] = end--}}
+                    {{--}--}}
+                {{--}--}}
+    {{--});--}}
+
+
 
 </script>
 <div class="col-lg-12" style="padding: 10px">
@@ -57,7 +61,7 @@
     <button type="button" class="btn btn-info" onclick="clearRow()">Clear
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     </button>
-    <button type="button" class="btn btn-default" onclick="">Save
+    <button type="button" class="btn btn-default">Save
         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
     </button>
 </div>
@@ -277,4 +281,3 @@
 </div>
 </ng-form>
 </form>
-
