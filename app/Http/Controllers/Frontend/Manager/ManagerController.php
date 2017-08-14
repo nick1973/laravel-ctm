@@ -87,10 +87,10 @@ class ManagerController extends Controller
             }
 
             //SEND A SUCCESS EMAIL
-//            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
-//                $m->from('admin@ctm.uk.com', 'CTM Application');
-//                $m->to($user->email, $user->name)->subject('Your CTM Application!');
-//            });
+            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
+                $m->from('admin@ctm.uk.com', 'CTM Application');
+                $m->to($user->email, $user->name)->subject('Your CTM Application!');
+            });
 
             //SNAPSHOT OF USER
             $user = User::find($id);
