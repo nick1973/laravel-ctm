@@ -333,6 +333,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manager'], function () {
         Route::resource('dashboard/manager', 'ManagerController');
+        Route::resource('logs', 'SubmittedLogsController');
 
         Route::resource('dashboard/rtw', 'RTWController');
         Route::get('dashboard/rtw/search/rtw', function () {

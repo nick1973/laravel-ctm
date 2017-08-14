@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Frontend\Manager;
 
 use App\Models\Dropdowns\Tag;
+use App\Models\Logs\SubmittedLogs;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Mail;
 use App\Models\Access\User\References;
 use App\Models\Access\User\RTWork;
@@ -84,18 +87,34 @@ class ManagerController extends Controller
             }
 
             //SEND A SUCCESS EMAIL
-            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
-                $m->from('admin@ctm.uk.com', 'CTM Application');
-                $m->to($user->email, $user->name)->subject('Your CTM Application!');
-            });
+//            Mail::send('emails.success', ['user'=>$user], function ($m) use ($user) {
+//                $m->from('admin@ctm.uk.com', 'CTM Application');
+//                $m->to($user->email, $user->name)->subject('Your CTM Application!');
+//            });
+
             //SNAPSHOT OF USER
             $user = User::find($id);
+
+            //MAKE A LOG OF WHO SUBMITTED.
+            if(Schema::hasTable('submission_logs')) {
+                DB::table('submission_logs')->insert(
+                    ['staff_payroll' => $user->payroll, 'staff_name' => $user->name . ' ' . $user->lastname,
+                        'who_was_it' => Auth::user()->name, 'accepted_application' => 'Yes']
+                );
+            }
             //$user->update(['app_status'=>3]);
             $collection = collect($user);
             $collection->forget('id');
             UserSnapshot::insertGetId($collection->all());
             return redirect('dashboard/manager')->withFlashSuccess($user->name . ' has been emailed!');
         } else {
+            //MAKE A LOG OF WHO SUBMITTED.
+            if(Schema::hasTable('submission_logs')) {
+                DB::table('submission_logs')->insert(
+                    ['staff_payroll' => $user->payroll, 'staff_name' => $user->name . ' ' . $user->lastname,
+                        'who_was_it' => Auth::user()->name, 'accepted_application' => 'No']
+                );
+            }
             //User::find($id)->update(['payroll_export'=>0]);
         }
         //return $this->index();
