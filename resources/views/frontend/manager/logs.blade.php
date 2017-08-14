@@ -24,7 +24,7 @@
                                 @else
                                     <td>{{ $user->staff_payroll }}</td>
                                 @endif
-                                <td><a href="/dashboard/manager/{{ $user->id }}">{{ $user->staff_name }}</a></td>
+                                <td>{{ $user->staff_name }}</td>
                                 <td>{{ $user->accepted_application }}</td>
                                 <td>{{ $user->who_was_it }}</td>
                                 <td>{{ $user->created_at }}</td>
