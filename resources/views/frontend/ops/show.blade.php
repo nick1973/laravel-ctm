@@ -275,7 +275,7 @@ echo $arr[1];
         @if(empty($tab_array))
             <li role="presentation" class=""><a href="#parking" aria-controls="Parking" role="tab" data-toggle="tab">Parking</a></li>
             <li role="presentation" class=""><a href="#audit" aria-controls="Audit" role="tab" data-toggle="tab">Audit</a></li>
-            <li role="presentation" class=""><a href="#csas" aria-controls="Audit" role="tab" data-toggle="tab">CSAS</a></li>
+            <li role="presentation" class=""><a href="#csas" aria-controls="CSAS" role="tab" data-toggle="tab">CSAS</a></li>
         @endif
         @foreach($tab_array as $tab)
             @if(strtolower($tab)!='event summary')
