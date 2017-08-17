@@ -1,3 +1,4 @@
+<?php $ctm_start_date_table = new \Carbon\Carbon($ctm_start_date); ?>
 {!! Form::model($event,[
                             'method' => 'POST',
                             'route' => ['dashboard.specs.store'],

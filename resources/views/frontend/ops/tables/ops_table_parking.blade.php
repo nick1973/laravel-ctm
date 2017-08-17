@@ -1,3 +1,4 @@
+<?php $ctm_start_date_table = new \Carbon\Carbon($ctm_start_date); ?>
 <div class="col-lg-12" style="padding: 10px">
     <p><b>Row Functions: Select a row to use a function below.</b></p>
     <button type="button" class="btn btn-danger" onclick="removeTableRow()">Remove
