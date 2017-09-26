@@ -9,9 +9,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>Create Your New CTM Account.
-                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                New to CTM? Learn more &raquo;
-                            </button>
+                            {{--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">--}}
+                                {{--New to CTM? Learn more &raquo;--}}
+                            {{--</button>--}}
                         </h2>
                         {{--<a href="/login" class="btn btn-success"style="margin-left: 500px">Login to Staff Area </a>--}}
                         </div>
